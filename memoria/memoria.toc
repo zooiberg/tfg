@@ -32,10 +32,10 @@
 \contentsline {paragraph}{Ejemplo Jinja2}{22}{section*.11}
 \contentsline {subsection}{\numberline {4.2.4}\LaTeX {}}{22}{subsection.4.2.4}
 \contentsline {paragraph}{Ejemplo de informe WEP.}{23}{figure.4.5}
-\contentsline {chapter}{\numberline {5}Estructura del Informe}{24}{chapter.5}
+\contentsline {chapter}{\numberline {5}Estructura del informe de pentest}{24}{chapter.5}
 \contentsline {section}{\numberline {5.1}Introducci\'on}{24}{section.5.1}
 \contentsline {subsection}{\numberline {5.1.1}Auditor\IeC {\'\i }a}{24}{subsection.5.1.1}
-\contentsline {subsection}{\numberline {5.1.2}Objectivo y alcance}{24}{subsection.5.1.2}
+\contentsline {subsection}{\numberline {5.1.2}Objectivo y alcance}{25}{subsection.5.1.2}
 \contentsline {subsection}{\numberline {5.1.3}Audiencia}{25}{subsection.5.1.3}
 \contentsline {section}{\numberline {5.2}Pruebas de seguridad y examen general}{25}{section.5.2}
 \contentsline {subsection}{\numberline {5.2.1}Metodolog\IeC {\'\i }a de evaluaci\'on de seguridad de la informaci\'on}{25}{subsection.5.2.1}

@@ -94,13 +94,13 @@ $\ $
 \lettrine{E}ste proyecto consiste en la implementación de un dispositivo para que genere un informe de forma automatizada, sobre las vulnerabilidades de una red WiFi. En la actualidad  compartir datos en la red forma parte de nuestro día a día, y es una acción que realizamos desde nuestra infancia. Realmente, y a pesar de los numerosos ejemplos de la vulnerabilidad de estos datos, la sociedad aún no está lo suficientemente concienciada del fácil acceso a nuestra información.  Es por ello, que no se le da la importancia necesaria a este tema como debería, teniendo contratado a personal especializado en este ámbito y haciendo auditorias de seguridad de forma periódica.
 Por lo tanto, desde hace años se ha ido intentando concienciar a la población de este serio problema que nos afecta a todos, desde los pequeños empresarios y la protección de bases de datos empresariales, hasta particulares y su información almacenada en sus dispositivos móviles. Nos encontramos en un momento en el que la información privada de las personas cada vez tiende a ser mas pública. 
 
-Este proyecto se pensó, para fomentar y facilitar la venta de auditorias de seguridad. Por tanto, un comercial sin conocimientos previos de informática, deberá poder ejecutar mi dispositivo, iniciando un ataque a vulnerabilidades básicas y conocidas, así se intentara concienciar a las empresas de la facilidad de encontrar información confidencial (sensible) y la posibilidad de ralentizar e incluso llegar a parar la producción de la mayoría de las empresas. Esto serviría como paso previo a una auditoria como tal, nunca como sustituto. 
+Este proyecto se pensó, para fomentar y facilitar la venta de auditorias de seguridad. Por tanto, un comercial sin conocimientos previos de informática, deberá poder ejecutar mi dispositivo, aprovechando o un ataque a vulnerabilidades básicas y conocidas, así se intentara concienciar a las empresas de la facilidad de encontrar información confidencial (sensible) y la posibilidad de ralentizar e incluso llegar a parar la producción de la mayoría de las empresas. Esto serviría como paso previo a una auditoria como tal, nunca como sustituto. 
 
 Mi aplicación se centrara en las vulnerabilidades de las redes inalámbricas, estas redes  están en continuo crecimiento, ya que disponen de muchas ventajas frente a las cableadas. No solo  por la comodidad en la instalación sino por la movilidad que te brinda. No todo son ventajas, ya que en las redes cableadas el medio físico por el que va la información es algún tipo de cable y por lo tanto si alguien quisiera interceptar la información tendría que ``pinchar'' el cable, algo un poco más complejo de conseguir, mientras que en las comunicaciones inalámbricas la información se ``propaga'' por el aire. Por tanto ninguna red inalámbrica es completamente segura pues todos los mecanismos o protocolos tienen vulnerabilidades. Aun así podremos conseguir niveles de seguridad aceptables con los avances actuales.
 %%%%%%%%%%%%%%%%%%CAPITULO 1: INTRODUCCION%%%%%%%%%%%%%%%
 \chapter{Introducción}\label{cap.introduccion}
 \pagenumbering{arabic}
-\lettrine{D}esde que la tecnología forma parte de nuestra vida cotidiana, se encuentra cada vez más presente en las empresas, la perdida o robo de información de datos electrónicos. Esto conlleva un importante agujero de seguridad, debido a  una falta de previsión en la implantación de los métodos de seguridad y el descuido de muchos de los responsables o directivos de la empresa. Con esto me refiero a los extravíos o hurtos de ordenadores, móviles o PDAs (entre otros muchos sistemas electrónicos de trabajo) de empresa de donde se puede extraer mucha información sin ningún tipo de cifrado. No obstante, hace años el cifrado o la encriptación resultaba una gran medida de seguridad, pero poco a poco se han ido descubriendo varios errores de seguridad que limitan su uso.
+\lettrine{D}esde que la tecnología forma parte de nuestra vida cotidiana, se encuentra cada vez más presente en las empresas, la perdida o robo de información de datos electrónicos. Esto conlleva un importante agujero de seguridad, debido a  una falta de previsión en la implantación de los métodos de seguridad y el descuido de muchos de los responsables o directivos de la empresa. Con esto me refiero a los extravíos o hurtos de ordenadores, móviles o PDAs (entre otros muchos sistemas electrónicos de trabajo) de empresa de donde se puede extraer mucha información sin ningún tipo de cifrado. No obstante, hace años el cifrado resultaba una gran medida de seguridad, pero poco a poco se han ido descubriendo varios errores de seguridad que limitan su uso.
 
 Para cualquier empresa plantear un buen uso de las TIC (Tecnologías de la Información y la Comunicación) es un punto clave que se debe tener en cuenta y aprovechar al máximo  para aumentar la productividad y la eficiencia. Existe una gran inversión en cuanto a equipamiento informático y servicios básicos de comunicación que emplean las empresas, para su posible interconexión.
 
@@ -156,17 +156,16 @@ Gracias al estudio citado con anterioridad, sabemos que las empresas no suelen t
 \chapter{Objetivos e Hipótesis}\label{cap.Objetivos}
 \lettrine{E}n cuanto a los objetivos de mi proyecto destacare un objetivo principal, para entender el desarrollo de mi aplicación al que se subordinaran una serie de objetivos secundarios.
 \section{Objetivo general}
-El objetivo principal es la automatización de un dispositivo para realizar una serie de  ataques conocidos, a redes inalámbricas y así analizar algunas de las posibles vulnerabilidades de dichas redes, generando un informe con las posibles amenazas.
+El objetivo principal es la automatización la realización de un informe de pentesting ...de un dispositivo para realizar una serie de  ataques conocidos, a redes inalámbricas y así analizar algunas de las posibles vulnerabilidades de dichas redes, generando un informe con las posibles amenazas.
 \section{Objetivos secundarios}
 En un segundo lugar pero no por ello menos importante, dispongo de una serie de requisitos que tengo que solucionar.
-\begin{itemize}
-	\item Recogida sistematizada de información de todos los datos del análisis.
-	\item Generación de un informe con un gran numero de posibles vulnerabilidades, según el estándar NIST SP 800-115\cite{SP}. Como comentare mas adelante, este informe no va dirigido al personal de seguridad de la empresa. Esta pensado exclusivamente para el responsable de la empresa, por lo tanto no tiene porque tener conocimientos previos informáticos. Se desarrollara con un lenguaje claro y no debe exceder de información muy técnica.
-	\item Creación de una aplicación de detección de dichas vulnerabilidades que funcione mediante un dispositivo de fácil uso y accesibilidad económica.
+\begin{enumerate}
+	\item Recoger.... sistematizada de información de todos los datos del análisis.
+	\item Generación de un informe con un numero de posibles vulnerabilidades, según el estándar NIST SP 800-115\cite{SP}. Como comentare mas adelante, este informe no va dirigido al personal de seguridad de la empresa. Esta pensado exclusivamente para el responsable de la empresa, por lo tanto no tiene porque tener conocimientos previos informáticos. Se desarrollara con un lenguaje claro y no debe tener información muy técnica.
+	\item Creación de una aplicación de detección de dichas vulnerabilidades que funcione mediante un dispositivo de fácil uso y barato.
 	%\item Debe se una aplicación personalizable , se tiene que poder modificar el entorno gráfico dependiendo de su posible contratación. También tiene que ser de fácil ampliación en cuanto a su flexibilidad.
 	\item Dotación de una interfaz simple e intuitiva que facilite el desarrollo de una manera rápida.
-	\item Portable y de fácil movilidad.
-\end{itemize}
+\end{enumerate}
 
 
 %%%%%%%%%%%%%%%% CAPITULO 3 ANTECEDENTES%%%%%%%%%%%
@@ -283,10 +282,10 @@ En esta imagen se puede apreciar el proceso que se lleva acabo para formar la tr
 
 
 \subsection{Protocolo WPA/WPA2}
-WPA, \textit{Wi-Fi Protected Access}, surgió como una solución temporal de la Wi-Fi Alliance para hacer las redes más seguras. Ambas soluciones WPA y WPA2 soportan el protocolo 802.11 para la autentificación en ámbitos empresariales y la autentificación mediante clave compartida PSK (\textit{Pre-Shared Key}) para los entornos SOHO \textit{Small Office and Home Office}, y ámbitos  domésticos.\\
-\par
-Estos dos métodos de cifrado se diferencian en muy poco y su diferencia principal es en el algoritmo de cifrado que emplean. Mientras que WPA basa el cifrado de las comunicaciones en el uso del algoritmo TKIP (\textit{Temporary Key Integrity Protocol}), que esta basado en RC4 al igual WEP, WPA2 utiliza CCMP (\textit{Counter-mode/CBC-MAC Protocol}) basado en AES/\textit{Advanced Encrytion System.} \\
-\par
+WPA, \textit{Wi-Fi Protected Access}, surgió como una solución temporal de la Wi-Fi Alliance para hacer las redes más seguras. Ambas soluciones WPA y WPA2 soportan el protocolo 802.11 para la autentificación en ámbitos empresariales y la autentificación mediante clave compartida PSK (\textit{Pre-Shared Key}) para los entornos SOHO \textit{Small Office and Home Office}, y ámbitos  domésticos.
+
+Estos dos métodos de cifrado se diferencian en muy poco y su diferencia principal es en el algoritmo de cifrado que emplean. Mientras que WPA basa el cifrado de las comunicaciones en el uso del algoritmo TKIP (\textit{Temporary Key Integrity Protocol}), que esta basado en RC4 al igual WEP, WPA2 utiliza CCMP (\textit{Counter-mode/CBC-MAC Protocol}) basado en AES/\textit{Advanced Encrytion System.}
+
 Otra diferencia a tener en cuenta es el algoritmo que utiliza para controlar la integridad del mensaje. Mientras WPA usa una versión más pobre para generar el código MIC (\textit{Message Integryty Code}), WPA2 emplea una versión mejorada de MIC.
 En la fase de intercambio de claves el cliente y el punto de acceso emplean las PSK para generar una clave llamada PMK(\textit{Pairwise Master Key}). Ésta es una derivada cuando el sistema es WPA/WPA2 empresarial pero es la misma PSK en los entornos WPA/WPA2 PSK.
 \begin{figure}
@@ -300,6 +299,7 @@ Con la PMK se genera una clave de cifrado para cada proceso de autentificación d
 
 Cuando el cliente está autenticado , el protocolo TKIP utiliza seis claves de cifrado por cada sesión , 4 de ellas son utilizadas para comunicaciones \textit{unicast} y dos para comunicaciones \textit{multicast}. Estas claves son únicas para cliente y sesión y se cambian periódicamente. Estas son generadas de las direcciones MAC, ESSID y la PTK.
 Un atacante que quiera vulnerar una red WPA-PSK va a tratar de capturar ese intercambio de números aleatorios, para que una vez conocidos éstos, junto al SSID y la direcciones MAC del cliente y del punto de acceso de la red, obtener la frase o secreto compartido que se empleó.
+
 \subsubsection{WPA2 Personal}
 Como ya ha sido explicado anteriormente, es utilizar WPA2 con clave precompartida por los terminales y el punto de acceso.
 Por tanto es lo mismo WPA2 personal que WPA2-PSK.
@@ -310,7 +310,7 @@ Este método es más utilizado para empresas, ya que su configuración es de mayor 
 Estos usuarios no tratan con el código de encriptación. Son asignados de forma segura por sesiones de usuario en un segundo plano, no obstante el usuario ha tenido que dar sus credenciales de acceso con anterioridad. Así, se evita que los empleados dispongan de las claves de red.
 
 \paragraph{WPS} 
-\textit{Wi-Fi Protected Setup} es un estándar 2007 , promovido por la Wi-Fi Alliance\cite{wifi} para facilitar al usuario  doméstico la configuración y creación de redes WLAN.  WPS no es un mecanismo de seguridad por sí mismo, sino que se trata de la definición de diversos mecanismos para facilitar la configuración de una red WLAN segura con el protocolo WPA2. Los métodos que utilizan WPS son:
+\textit{Wi-Fi Protected Setup} es un estándar 2007 , promovido por la Wi-Fi Alliance~\cite{wifi} para facilitar al usuario  doméstico la configuración y creación de redes WLAN.  WPS no es un mecanismo de seguridad por sí mismo, sino que se trata de la definición de diversos mecanismos para facilitar la configuración de una red WLAN segura con el protocolo WPA2. Los métodos que utilizan WPS son:
 \begin{itemize}
 	\item PIN(código numérico): La credencial se intercambia después de introducir un PIN. Este método es de los más distribuidos con WPS y el más inseguro.
 	\item PBC(Push-Button Configuration) La generación e intercambio de las credenciales ocurren después de que el usuario ejecute una acción física, como es presionar un botón incluido en el dispositivo.
@@ -318,7 +318,7 @@ Estos usuarios no tratan con el código de encriptación. Son asignados de forma s
 	\item USB. Las credenciales se transfieren por un dispositivo de memoria flash.
 \end{itemize}
 \paragraph{Reaver}
-Se planteó como un ataque sólido y muy conveniente contra WPS . Se ejecuta un ataque de fuerza bruta contra el punto de acceso, creando todas las combinaciones posibles, para adivinar el numero PIN de 8 dígitos del Punto de Acceso. Si fuera una red WPA, sabemos que la combinación son mucho mayores, ya que puede haber letras, números y a veces incluso símbolos, por lo tanto el ataque será mucho mas difícil y largos de ejecutar. Sin embargo en WPS sabemos que el último dígito es un valor de suma de control que podría ser calculada en base a los 7 dígitos anteriores, por lo que las combinaciones se reducirían mucho. Podemos reducir mas el tiempo ya que el numero de PIN para la verificación va en dos mitades, por lo que se puede comprobar independientemente los 4 primeros y los últimos 4 dígitos."
+Se planteó como un ataque sólido y muy conveniente contra WPS . Se ejecuta un ataque de fuerza bruta contra el punto de acceso, creando todas las combinaciones posibles, para adivinar el numero PIN de 8 dígitos del Punto de Acceso. Si fuera una red WPA, sabemos que la combinación son mucho mayores, ya que puede haber letras, números y a veces incluso símbolos, por lo tanto el ataque será mucho mas difícil y largos de ejecutar. Sin embargo en WPS sabemos que el último dígito es un valor de suma de control que podría ser calculada en base a los 7 dígitos anteriores, por lo que las combinaciones se reducirían mucho. Podemos reducir mas el tiempo ya que el numero de PIN para la verificación va en dos mitades, por lo que se puede comprobar independientemente los 4 primeros y los últimos 4 dígitos.
 
 %%%%%%%%%%%%%%%% CAPITULO  4 METODOS%%%%%%%%%%%
 
@@ -357,19 +357,15 @@ RAM de 1 GB: Es un sistema-en-chip diseñado específicamente para este modelo de 
 	\item Puerto CSI para conectar una cámara Raspberry Pi
 	\item Puerto de visualización DSI para conectar una pantalla táctil Raspberry Pi
 	\item Puerto Micro SD para carga del sistema operativo y almacenamiento de datos
-	\item Fuente de alimentación Micro USB actualizada con interruptor de hasta 2.5 A
+	\item Fuente de alimentación Micro USB de hasta 2.5 A
 \end{itemize}
  
 \subsection{Soporte de tarjetas inalámbricas}
 Como ya sabemos, el modelo de Raspberry Pi con el que he contado para mi proyecto ya dispone de una tarjeta inalámbrica entre sus componente. El problema lo tuve al desarrollar mis supuestos ataques, ya que esta tarjeta no soportaba el modo monitor que explicaré en capítulos posteriores. 
-Comparando en el mercado con varios posibles Chipset (Ralink RT3070, Ralink RT3572, Realtek 8187L, Ralink RT5370), me decante por el Atheros AR9271L, ya que no era excesivamente caro y me proporcionaba una ganancia de 5 dbi y un rango de frecuencia de 2.412-2.483.
+Comparando en el mercado con varios posibles Chipset (Ralink RT3070, Ralink RT3572, Realtek 8187L, Ralink RT5370), me decante por el Atheros AR9271L, ya que no era excesivamente caro y me proporcionaba una ganancia de 5 dbi y un rango de frecuencia de 2.412-2.483.madwifi
 \begin{itemize}
 \item Estandar Wi-Fi: IEEE 802.11b/g/n
-\item 802.11g: UP to 54Mbps
-\item 802.11n: UP to 150Mbps
-\item OS que soporta: Linux,  Windows 2000, XP, Vista, 7
-\item Interfaz USB 2.0 mini USB
-\item Antena tipo1 x 2.4Ghz RP-SMA 
+\item Conector r-SMA. 
 \item Chipset Atheros AR9271
 \end{itemize}
 \begin{figure}[H]
@@ -490,8 +486,9 @@ Se puede ejecutar en la mayoría de las versiones de Python. Esta biblioteca la u
 %%%%%%%%%%%%%%CAPITULO 5%%%%%%%%%%
 
 
-\chapter{Estructura del informe de pentest}
-Para la generación de mi informe, me guiare del modelo NIST SP 800-115\footnote{\url{http://csrc.nist.gov/publications/nistpubs/800-115/SP800-115.pdf}}. El NIST es una agencia de la administración de tecnológia de Estados Unidos, que se encarga de promover la innovación y la competencia industrial. La estructura que seguiré será la siguiente:
+\chapter{Metodologia de la auditoría}
+
+Para la generación de MIIIIII informe, me guiare del modelo NIST SP 800-115\footnote{\url{http://csrc.nist.gov/publications/nistpubs/800-115/SP800-115.pdf}}. El NIST es una agencia de la administración de tecnológia de Estados Unidos, que se encarga de promover la innovación y la competencia industrial. La estructura que seguiré será la siguiente:
 
 \section{Introducción}
 El estudio, ofrece un diagnóstico evolutivo del uso que las PYMES realizan de las tecnologías inalámbricas, así como las medidas de seguridad utilizadas y las incidencias sufridas. En concreto, se estudian la extensión, los hábitos de uso, las medidas de seguridad adoptadas y las incidencias de intrusión wifi declaradas por las empresas en las redes inalámbricas.
