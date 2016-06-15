@@ -1,0 +1,20 @@
+\subsection{Ataque Reaver (Pixiewps)}
+Mediante la utilizción de reaver llevamos a cabo un ataque de fuerza bruta contra el número pin de la configuración protegida del punto de acceso wifi. Una vez que el pin WPS es encontrado, la WPA PSK puede ser recuperada y alternativamente la configuración inalámbrica del AP puede ser reconfigurada.\\
+
+Además de reaver también utilizaremos la herramientas pixiewps para realizar análisis de fuerza bruta del PIN WPS en el dispositivo seleccionado con una entropía nula o débil.
+
+Iniciamos el ataque, el cual no es por pines donde el sistema testea todas las combinaciones posibles de un grupo de 8 dígitos en caso de haber otra combinación se demora de 1 a 2 horas) que necesita para acceder a la clave.\\
+
+10\\
+
+El resultado del análisis es el siguiente:
+
+\begingroup
+        \fontsize{7pt}{7pt}=\selectfont
+        \verbatiminput{20}
+\endgroup
+
+
+Luego del análisis realizado en 30 segundos, 40 ha logrado encontrar las cadenas necesarias para utilizarlo con pixiewps.
+
+\input{INF-PIXIEWPS}

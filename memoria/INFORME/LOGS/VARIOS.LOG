@@ -1,0 +1,15 @@
+Copyright (c) 2011, Tactical Network Solutions, Craig Heffner <cheffner@tacnetsol.com>
+mod by t6_x <t6_x@hotmail.com> & DataHead & Soxrok2212
+
+BSSID                  Channel       RSSI       WPS Version       WPS Locked        ESSID
+---------------------------------------------------------------------------------------------------------------
+EC:43:F6:91:CF:59       1            00        1.0               No                WLAN_CF58
+DC:53:7C:8F:AB:D3      13            00        1.0               Yes               Hostal Los Guerreros
+60:E3:27:39:89:D2      13            00        1.0               No                TP-LINK_2.4GHz_3989D2
+90:67:1C:79:0E:E0       2            00        1.0               Yes               vodafone0EDA
+DC:53:7C:7B:3A:88       9            00        1.0               Yes               ONO92F3
+30:B5:C2:F4:16:F3       4            00        1.0               No                Orange-DC500
+E0:41:36:40:47:6C       6            00        1.0               No                MOVISTAR_476C
+5C:DC:96:4E:26:C0       6            00        1.0               No                Orange-26BE
+B8:05:AB:F4:E8:60       1            00        1.0               No                MARCELO
+

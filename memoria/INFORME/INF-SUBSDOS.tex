@@ -1,0 +1,25 @@
+\subsection {Denegacion de Servicios (DoS).} 
+Las redes WLAN son propensas a los ataques de denegación de servicio (DoS) usando varias técnicas, incluyendo pero no limitadas a: 
+ \begin{itemize}
+   	\item Ataque de de-autenticación 
+	\item Ataque de desasociación.
+	\item Ataque CTS-RTS.
+	\item Ataque de interferencia del espectro de la señal. 
+ \end{itemize}
+
+El objetivo de una Denegación de Servicio a una Red Wi-fi es dejar a los usuarios legítimos de una red Wi-fi sin poder acceder a Internet, esto se logra inundando con paquetes de deautenticación al punto de acceso y/o al cliente.
+Cuando se quiere realizar un ataque DoS a una Red Wi-fi, se puede atacar de 2 formas, una es atacando al punto de acceso y dejar sin acceso a ningún cliente o atacando solamente a un cliente específico.\\
+
+Trabajando con la tarjeta en modo monitor y asignando el canal de la red en la cual vamos a anaizar.\\
+
+\textbf{airmon-ng start wlan0 11}\\
+
+A continuación realizamos el envío de difusión de de-autenticación de paquetes (broadcast de-authentication packet) hacia el punto de acceso de la red inalámbrica, intentamos desconectar a todos los clientes.\\
+
+\textbf{aireplay-ng -0 0 -a 80:B6:86:D5:F9:4B wlan0mon}\\
+
+\textbf{aireplay-ng -0 0 -a 80:B6:86:D5:F9:4B -c 00:13:EF:71:02:DD wlan0mon}\\
+
+Si hemos conseguido enviar con éxito frames de de-autenticación al punto de acceso y el cliente. Esto se ha traducido en conseguir que se desconecte y una pérdida completa de comunicación entre ellos.
+También hemos enviado paquetes de difusión de de-autenticación, que asegurará que ningún cliente en las cercanías se pueda conectar correctamente al punto de acceso.
+Es importante tener en cuenta que tan pronto como el cliente se desconecta, intentará volver a conectarse de nuevo al punto de acceso y por lo tanto el ataque de de-autenticación tiene que llevarse a cabo de manera sostenida para tener un efecto de ataque de denegación de servicio completo. 

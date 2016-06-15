@@ -1,0 +1,7 @@
+
+Station MAC, First time seen, Last time seen, Power, # packets, BSSID, Probed ESSIDs
+D0:5B:A8:7A:DF:63, 2016-06-13 19:25:42, 2016-06-13 19:26:07, -79,        3, (not associated) ,
+BC:20:10:9D:12:CF, 2016-06-13 19:26:17, 2016-06-13 19:26:18, -79,        2, (not associated) ,
+10:0B:A9:C6:D9:4C, 2016-06-13 19:25:49, 2016-06-13 19:25:49, -39,       18, (not associated) ,vodafone0EDA
+AC:38:70:25:ED:62, 2016-06-13 19:25:45, 2016-06-13 19:26:14, -31,       80, (not associated) ,80:B6:86:D5:F9:4B
+

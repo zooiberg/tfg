@@ -1,0 +1,781 @@
+\documentclass[a4paper,openright,10pt]{report}
+\usepackage[spanish]{babel} 
+\usepackage[latin1]{inputenc}
+\usepackage{graphicx} % graficos
+\usepackage{hyperref}%hipervinculos
+\usepackage{multirow} % para las tablas
+\usepackage[spanish,es-tabla]{babel}%tablas en español
+\usepackage{lettrine}%letras capitales
+\usepackage{float}%comando [H]
+\usepackage { verbatim }%introducir .txt
+
+\begin{document}
+%PORTADA%
+\pagestyle{empty}       %Pagina sin encabezado ni pie
+
+\begin{center}
+    \includegraphics[scale=0.85]{escudo.png}     %Escudo de la Universidad
+\end{center}
+
+\begin{center}
+ \LARGE{\bf{UNIVERSIDAD DE CASTILLA-LA MANCHA}}
+\end{center}
+
+\begin{center}
+ \LARGE{ESCUELA DE INGENIERÍA INDUSTRIAL DE}
+\end{center}
+
+\begin{center}
+ \LARGE{TOLEDO}
+\end{center}
+
+\vspace{4mm}
+
+\begin{center}
+ \LARGE{TRABAJO FIN DE GRADO Nº 16-B-225031}
+\end{center}
+
+\vspace{4mm}
+
+\begin{center}
+ \LARGE{SEGURIDAD INFORMATICA EN REDES WIRELESS}
+\end{center}
+
+\vspace{10mm}
+
+\begin{tabular}{cccl}
+ \multirow{11}{*}{\includegraphics[scale=0.75]{escudo2.png}}
+ &  & & Autor:\\
+ &  &  & \\
+ &  &  & LUIS RAMIREZ DE DIEGO \\
+ &  &  & \\
+ &  &  & Director: \\
+ &  &  & \\
+ &  &  & FRANCISCO MOYA \\
+ &  &  & \\
+ &  &  & \\
+ &  &  & \\
+ &  &  & JULIO DE 2016
+\end{tabular}
+
+\newpage
+$\ $
+\thispagestyle{empty}
+
+%TITULO%
+
+\begin{titlepage}
+\begin{center}
+\begin{Huge}
+\textsc{Seguridad y vulnerabilidad de redes inalámbricas en PYMEs}
+\end{Huge}
+\end{center}
+\end{titlepage}
+%pagina en blanco%
+%\newpage
+%$\ $
+\thispagestyle{empty} % para que no se numere esta pagina
+\pagenumbering{Roman}  % para comenzar la numeración de paginas en números romanos
+
+% INDICE DE CONTENIDOS.FIGURAS Y TABLAS.
+\tableofcontents % indice de contenidos
+%\cleardoublepage
+%\thispagestyle{empty} % para que no se numere esta pagina
+\addcontentsline{toc}{chapter}{Lista de figuras} % para que aparezca en el indice de contenidos
+\listoffigures % indice de figuras
+%\thispagestyle{empty} % para que no se numere esta pagina
+%\cleardoublepage
+\addcontentsline{toc}{chapter}{Lista de tablas} % para que aparezca en el indice de contenidos
+\listoftables % indice de tablas
+\newpage
+%RESUMEN
+\addcontentsline{toc}{section}{Resumen} % si queremos que aparezca en el índice
+\markboth{RESUMEN}{RESUMEN} % encabezado
+\lettrine{E}ste proyecto consiste en la implementación de un dispositivo para que genere un informe de forma automatizada, sobre las vulnerabilidades de una red wifi. En la actualidad  compartir datos en la red forma parte de nuestro día a día, y es una acción que realizamos desde nuestra infancia. Realmente, y a pesar de los numerosos ejemplos de la vulnerabilidad de estos datos, la sociedad aún no está lo suficientemente concienciada del fácil acceso a nuestra información.  Es por ello, que no se le da la importancia necesaria a este tema como debería, teniendo contratado a personal especializado en este ámbito y haciendo auditorias de seguridad de forma periódica.
+Por lo tanto, desde hace años se ha ido intentando concienciar a la población de este serio problema que nos afecta a todos, desde los pequeños empresarios y la protección de bases de datos empresariales, hasta particulares y su información almacenada en sus dispositivos móviles. Nos encontramos en un momento en el que la información privada de las personas cada vez tiende a ser mas pública. 
+
+Este proyecto se pensó, para fomentar y facilitar la venta de auditorias de seguridad. Por tanto, un comercial sin conocimientos previos de informática, deberá poder ejecutar mi dispositivo, iniciando un ataque a vulnerabilidades básicas y conocidas, así se intentara concienciar a las empresas de la facilidad de encontrar información confidencial (sensible) y la posibilidad de ralentizar e incluso llegar a parar la producción de la mayoría de las empresas. Esto serviría como paso previo a una auditoria como tal, nunca como sustituto. 
+
+Mi aplicación se centrara en las vulnerabilidades de las redes inalámbricas, estas redes  están en continuo crecimiento, ya que disponen de muchas ventajas frente a las cableadas. No solo  por la comodidad en la instalación sino por la movilidad que te brinda. No todo son ventajas, ya que en las redes cableadas el medio físico por el que va la información es algún tipo de cable y por lo tanto si alguien quisiera interceptar la información tendría que ``pinchar'' el cable, algo un poco más complejo de conseguir, mientras que en las comunicaciones inalámbricas la información se ``propaga'' por el aire. Por tanto ninguna red inalámbrica es completamente segura pues todos los mecanismos o protocolos tienen vulnerabilidades. Aun así podremos conseguir niveles de seguridad aceptables con los avances actuales.
+%%%%%%%%%%%%%%%%%%CAPITULO 1: INTRODUCCION%%%%%%%%%%%%%%%
+\chapter{Introducción}\label{cap.introduccion}
+\pagenumbering{arabic}
+\lettrine{D}esde que la tecnología forma parte de nuestra vida cotidiana, se encuentra cada vez más presente en las empresas, la perdida o robo de información de datos electrónicos. Esto conlleva un importante agujero de seguridad, debido a  una falta de previsión en la implantación de los métodos de seguridad y el descuido de muchos de los responsables o directivos de la empresa. Con esto me refiero a los extravíos o hurtos de ordenadores, móviles o PDAs (entre otros muchos sistemas electrónicos de trabajo) de empresa de donde se puede extraer mucha información sin ningún tipo de cifrado. No obstante, hace años el cifrado o la encriptación resultaba una gran medida de seguridad, pero poco a poco se han ido descubriendo varios errores de seguridad que limitan su uso.
+
+Para cualquier empresa plantear un buen uso de las TIC (Tecnologías de la Información y la Comunicación) es un punto clave que se debe tener en cuenta y aprovechar al máximo  para aumentar la productividad y la eficiencia. Existe una gran inversión en cuanto a equipamiento informático y servicios básicos de comunicación que emplean las empresas, para su posible interconexión.
+
+En la actualidad las tecnologías inalámbricas y móviles tienen cada vez más peso en las empresas. Según un informe de 2012 realizado conjuntamente por Fundetec y el ONTSI\cite{ipyme}\footnote{\url{http://www.ipyme.org/Publicaciones/informe-epyme-2012.pdf}} sobre el análisis de implantación de las TIC en las pyme españolas, el 99,9\% de ellas disponen de ordenadores.   
+\begin{figure}[H]
+  \centering
+   \includegraphics[width=1\textwidth]{equipamiento.png}
+  \caption{Equipamiento informático presente en las empresas.}
+  \label{figura:eq}
+\end{figure}
+
+En esta Figura \ref{figura:eq} apreciamos el gran uso por parte de las empresas de las nuevas tecnologías, tanto en ordenadores como en dispositivos móviles. Estos últimos están teniendo un crecimiento exponencial; Su difusión conlleva la necesidad de asegurar su protección. Por ello, debemos aplicar medidas básicas, como el empleo de código PIN o contraseñas de desbloqueo, y utilizar copias de seguridad de la información, Bluetooth oculto con contraseña o actualizaciones automáticas del software.
+ Por esta razón he querido estudiar el nivel de protección con el que cuentan, así como los recursos técnicos y humanos que emplean en su seguridad.\\
+
+
+\section{Herramientas de seguridad}
+
+Gracias a la INTECO\cite{INTECO}\footnote{\url{https://www.incibe.es/file/Sp61c9ljOlMT7jcjbxYNVQ}} , la cual realizo una encuesta a mas de 1000 empresas para posteriormente elaborar un informe sobre que tipo de herramientas disponían para proteger sus equipos, podemos destacar un notable grado de implicación en cuanto a las medidas básicas aplicables. Un gran número de las empresas encuestadas afirmaban la utilización de medidas paquetizadas, conocidas por todos ( antivirus, antiespias, cortafuegos). No obstante, no deberían conformarse con estas soluciones tan elementales, ya que un gasto inicial en seguridad puede paliar futuros gastos de perdida de información. Sin personalizar en una empresa, ni en su posible capital, cualquier robo de información por un fallo en la seguridad, obligará a invertir tiempo y dinero en la investigación de las posibles causas y la magnitud de los daños causados, tanto a nivel económico como en la reputación de la empresa.
+\begin{figure}[H]
+  \centering
+   \includegraphics[width=1\textwidth]{inteco1.png}
+  \caption{Nivel de implantación declarado de soluciones de seguridad en la empresa.}
+  \label{fig:ej}
+\end{figure}
+
+\section{Limitaciones de seguridad.}
+El nivel de importancia de la seguridad de las empresas también esta reflejado en este estudio. En él se resumen las principales razones aportadas por las pymes para justificar  la falta de herramientas de seguridad, que se emplean en su día a día.
+La gran mayoría de las empresas que acusan no disponer de  alguna de las soluciones,lo justifican exponiendo no disponer de la necesidad o del desconocimiento de ellas. También  exponen una falta de presupuesto o la impresión de ineficiencia, aunque en menor medida.
+Aún así,en las pymes se muestran inconsciencia, desinterés y falta de capital a la hora de aplicar medidas que no sean las tradicionales. Es por ello que se debe trabajar en ampliar estas medidas, sensibilizando los organismos que trabajan con las empresas.
+
+\begin{figure}[H]
+  \centering
+   \includegraphics[width=1\textwidth]{inteco2.png}
+  \caption{Motivos señalados por las empresas para no utilizar las herramientas y soluciones de seguridad.}
+  \label{fig:limitaciones}
+\end{figure}
+En la Figura \ref{fig:limitaciones} se enumeran una serie de posibles soluciones básicas y los posibles motivos por los que las empresas no se decantan por alguno de ellos. En mayor medida se encuentran los que piensan que el empleo de antivirus/antiespía no son necesarios en su empresa o atribuyen un desconocimiento de los sistemas de control de intrusos.\\
+
+\section{Personal encargado de la seguridad de la información.}
+No se debe delegar toda la responsabilidad de los datos o de la información en una sola persona, ni si quiera en un grupo de empleados. Todos los individuos deben estar concienciados y trabajar para una mejora en este ámbito. No obstante siempre es importante contar con profesionales , que sepan manejar las herramientas de seguridad, y saber actuar ante un posible ataque.
+
+
+\begin{figure}[H]
+  \centering
+   \includegraphics[width=1\textwidth]{inteco3.png}
+  \caption{Disponibilidad de personal dedicado a la seguridad de la información.}
+  \label{fig:eje}
+\end{figure}
+
+Gracias al estudio citado con anterioridad, sabemos que las empresas no suelen tener contratado profesionales internos que se dediquen exclusivamente a la seguridad. Normalmente  externalizan estas funciones o en menor medida compatibilizan las tareas de seguridad con tareas relacionadas con la informática. Entre todas ellas apreciamos un 43,1\% las cuales ni siquiera consideran importante la contratación de algún tipo de profesional que se encargue de temas relacionados con la seguridad de la información. 
+
+%%%%%%%%%%%%%%%% CAPITULO 2 OBJETIVOS%%%%%%%%%%%%%%
+\chapter{Objetivos e Hipótesis}\label{cap.Objetivos}
+\lettrine{E}n cuanto a los objetivos de mi proyecto destacare un objetivo principal, para entender el desarrollo de mi aplicación al que se subordinaran una serie de objetivos secundarios.
+\section{Objetivo general}
+El objetivo principal es la automatización de un dispositivo para realizar una serie de  ataques conocidos, a redes inalámbricas y así analizar algunas de las posibles vulnerabilidades de dichas redes, generando un informe con las posibles amenazas.
+\section{Objetivos secundarios}
+En un segundo lugar pero no por ello menos importante, dispongo de una serie de requisitos que tengo que solucionar.
+\begin{itemize}
+	\item Recogida sistematizada de información de todos los datos del análisis.
+	\item Generación de un informe con un gran numero de posibles vulnerabilidades, según el estándar NIST SP 800-115\cite{SP}. Como comentare mas adelante, este informe no va dirigido al personal de seguridad de la empresa. Esta pensado exclusivamente para el responsable de la empresa, por lo tanto no tiene porque tener conocimientos previos informáticos. Se desarrollara con un lenguaje claro y no debe exceder de información muy técnica.
+	\item Creación de una aplicación de detección de dichas vulnerabilidades que funcione mediante un dispositivo de fácil uso y accesibilidad económica.
+	%\item Debe se una aplicación personalizable , se tiene que poder modificar el entorno gráfico dependiendo de su posible contratación. También tiene que ser de fácil ampliación en cuanto a su flexibilidad.
+	\item Dotación de una interfaz simple e intuitiva que facilite el desarrollo de una manera rápida.
+	\item Portable y de fácil movilidad.
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%% CAPITULO 3 ANTECEDENTES%%%%%%%%%%%
+\chapter{Antecedentes}\label{cap.antecedentes}
+
+\lettrine{H}ace años cuando se empezaron a utilizar las redes inalámbricas existía un error de incompatibilidad, debido a que cada fabricante usaba un estándar distinto, fue en ese momento cuando las empresas punteras se reunieron para crear WECA (Wireless Ethernet Compability Aliance) que en la actualidad lo llamamos como WIFI Alliance\cite{wifi}.
+\begin{figure}[H]
+  \centering
+    \includegraphics{wifi}
+  \caption{Imagen wifi}
+  \label{fig:wifi}
+\end{figure}
+
+En el año 2000 se implanta la interoperabilidad que permite operar entre todos los dispositivos Wi-Fi bajo la especificación IEE 802.11b. Es por ello que sabemos que todos equipos que dispongan del sello de Wi-Fi pueden interactuar independientemente del fabricante.
+La tecnología que contiene el estándar (802.11) es el Espectro de Dispersión de Secuencia Directa (DSSS). 
+Gracias a Wi-Fi se pueden crear redes de área local inalámbricas y conectar multitud de equipos mientras no estén muy alejados del punto de acceso a una velocidad elevada.
+
+\section{Estandares WI-FI}
+El estándar original se ha ido modificando con el objetivo de ir mejorando la seguridad y la compatibilidad. Esta tabla nos enseña las distintas modificaciones del estándar 802.11 y a lo que se refiere.\cite{802.11}
+%%%TABLAAAAA%%%
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| p{2.2cm} | p{4cm} | p{6.6 cm} | }
+\hline
+Nombre del estándar & Nombre& Descripción \\
+\hline \hline
+802.11a & Wifi5  & El estándar 802.11a (llamado WiFi 5) admite un ancho de banda superior (el rendimiento total máximo es de 54 Mbps aunque en la práctica es de 30 Mpbs). El estándar 802.11a provee ocho canales de radio en la banda de frecuencia de 5  \\ \hline
+802.11b  & WiFi & El estándar 802.11b es el más utilizado actualmente. Ofrece un rendimiento total máximo de 11 Mpbs (6 Mpbs en la práctica) y tiene un alcance de hasta 300 metros en un espacio abierto. Utiliza el rango de frecuencia de 2,4 GHz con tres canales de radio disponibles. \\ \hline
+802.11c &Combinación del 802.11 y el 802.1d  & El estándar combinado 802.11c no ofrece ningún interés para el público general. Es solamente una versión modificada del estándar 802.1d que permite combinar el 802.1d con dispositivos compatibles 802.11 (en el nivel de enlace de datos). \\ \hline
+802.11d & Internacionalización & El estándar 802.11d es un complemento del estándar 802.11 que está pensado para permitir el uso internacional de las redes 802.11 locales. Permite que distintos dispositivos intercambien información en rangos de frecuencia según lo que se permite en el país de origen del dispositivo. \\ \hline
+802.11e & Mejora de la calidad del servicio  & El estándar 802.11e está destinado a mejorar la calidad del servicio en el nivel de la capa de enlace de datos. El objetivo del estándar es definir los requisitos de diferentes paquetes en cuanto al ancho de banda y al retardo de transmisión para permitir mejores transmisiones de audio y vídeo. \\ \hline
+802.11f & Itinerancia  & El 802.11f es una recomendación para proveedores de puntos de acceso que permite que los productos sean más compatibles. Utiliza el protocolo IAPP que le permite a un usuario itinerante cambiarse claramente de un punto de acceso a otro mientras está en movimiento sin importar qué marcas de puntos de acceso se usan en la infraestructura de la red. También se conoce a esta propiedad simplemente como itinerancia.  \\ \hline
+\end{tabular}
+\caption{Estandar 802.11.}
+\label{tabla:802.11}
+\end{center}
+\end{table}
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{| p{2.2cm} | p{4cm} | p{6.6 cm} | }
+%\hline
+%Nombre del estándar & Nombre& Descripción \\
+\hline \hline
+802.11g & & El estándar 802.11g ofrece un ancho de banda elevado (con un rendimiento total máximo de 54 Mbps pero de 30 Mpbs en la práctica) en el rango de frecuencia de 2,4 GHz. El estándar 802.11g es compatible con el estándar anterior, el 802.11b, lo que significa que los dispositivos que admiten el estándar 802.11g también pueden funcionar con el 802.11b. \\ \hline
+802.11h & & El estándar 802.11h tiene por objeto unir el estándar 802.11 con el estándar europeo (HiperLAN 2, de ahí la h de 802.11h) y cumplir con las regulaciones europeas relacionadas con el uso de las frecuencias y el rendimiento energético.\\ \hline
+802.11i & &El estándar 802.11i está destinado a mejorar la seguridad en la transferencia de datos (al administrar y distribuir claves, y al implementar el cifrado y la autenticación). Este estándar se basa en el AES (estándar de cifrado avanzado) y puede cifrar transmisiones que se ejecutan en las tecnologías 802.11a, 802.11b y 802.11g.  \\ \hline
+802.11Ir &  & El estándar 802.11r se elaboró para que pueda usar señales infrarrojas. Este estándar se ha vuelto tecnológicamente obsoleto. \\ 
+\par
+\hline
+802.11j &  & El estándar 802.11j es para la regulación japonesa lo que el 802.11h es para la regulación europea. \\ \hline
+802.11k & & El 802.11k ayuda a gestionar las redes. El estándar IEEE 802.11k permite a los conmutadores y puntos de acceso inalámbricos calcular y valorar los recursos de radiofrecuencia de los clientes de una red WLAN, mejorando así su gestión. \\ \hline
+802.11m & & El estándar 802.11m ha sido propuesto para el mantenimiento de las redes inalámbricas. \\ \hline
+802.11n &  & El estándar 802.11n trabaja tanto en la banda de 2.4GHz como en la de 5GHz, que es mucho más estable y segura, pero de momento mucho más cara de implementar. Además aumenta la velocidad máxima de transmisión de 54 Mbps a un máximo de 600 Mbps. \\ 
+\par
+\hline
+\end{tabular}
+\caption{Estándar 802.11.}
+\label{tabla:802.11}
+\end{center}
+\end{table}
+
+%\section{TCP-IP}
+%Es un protocolo para comunicaciones por red de datos para sistemas UNIX. A veces se pueden referir a el como conjunto de protocolos TCP/IP (\textit{Transmission Control Protocol/ Internet Protocol}). Es un protocolo DARPA que facilita transmision fiable y paquetes de datos sobre red. Este protocolo es la base del Internet con el que comunicamos varios dispositivos con diferente sistema operativos . Este protocolo fue desarrollado en Estados Unidos en 1972, ejecutandolo en ARPANET un departamento de defensa.
+%\subsection{Modelo OSI}
+%En la década de 1980 se obtuvo un gran crecimiento en la cantidad y el tamaño de las redes. Las empresas se dieron cuenta de las ventajas que estas redes ofrecían
+
+
+%VPN. (\textit{Virtual Private Network}) se utiliza para conectar uno o varios dispositivos a una red privada utilizando internet. Normalmente lo utilizan las empresas para conectarse desde otros lugares que no son su puesto de trabajo a base de datos o recursos corporativos de su empresa.  Para que esta red asegure la confidencialidad y la integridad de la información que estamos consultando, debemos utilizar protocolos de cifrado.(IPsec, PPTP, L2TP). Con esto sabemos que los datos transmitidos por la red no podrán ser interceptados por un atacante, ya que son ilegibles hasta que lleguen a su destino.
+
+\section{Comunicaciones Inalámbricas}
+
+Las comunicaciones inalámbricas  se han extendido de forma exponencial estos años, tanto en ambientes de empresa, como en los hogares y espacios públicos. Gracias al crecimiento desmesurado de los teléfonos inteligentes (smartphones), ordenadores portátiles y otros dispositivos se ha fomentado la propagación de este tecnología en diferentes frentes.
+Sabemos que en la actualidad estas redes se comercializan como reclamo de usuarios, pudiendo utilizarse en cafeterías, parques y hoteles.
+
+Estas redes tienen una dualidad enfrentada. Todos vemos los beneficios que tienen en cuanto a su flexibilidad, movilidad en los puestos de trabajo e incluso una reducción de costes, pero estos beneficios pueden convertirse en su principal problema, ya que puede haber fugas de información, contraseñas y otros datos personales.
+Disponer de una red inalámbrica segura y de cierta calidad es sin duda una obligación para todo tipo de empresa y puede suponer un gran reto en las pymes, donde no suelen contar con un responsable tecnológico o tienen presupuestos reducidos.
+Las redes inalámbricas pueden acoger distintas topologías.
+\begin{itemize}
+	\item Modo Ad-Hoc.
+	Es una conexión que comunica una serie de dispositivos entre si, sin usar ningún tipo de Punto de Acceso. Ésta, es una configuración tipo punto a punto (peer-to-peer), así, el área de cobertura se limita por el alcance de cada tarjeta de red propia. Deben trabajar en el mismo rango de frecuencias, de lo contrario no podrán interactuar entre ellas.
+	\item Modo Infraestructura.
+	Éste modo es del tipo cliente-servidor, en el que el cliente son los dispositivos que suelen conectarse al servidor, el punto de acceso. Tiene que haber como mínimo un servidor, por lo tanto los dispositivos no se pueden comunicar entre si y toda la información pasara primero por el Punto de Acceso. Para que varios dispositivos puedan comunicarse entre sí, deben estar todos conectados al mismo punto de acceso, por lo que pueden estar comunicandose entre los dispositivos sin saber nada entre ellos, ya que toda la información que se necesita para la conexión, la tiene el punto de acceso.
+\end{itemize}
+
+La encriptación WLAN desde sus orígenes ha estado ligado a vulnerabilidades y ataques varios. En el año 2000 y con la aparición del protocolo 802.11 comenzó el cifrado WEP, aunque pocos años más tarde se percataron de la facilidad para vulnerarlo. En la actualidad, los ataques van más dirigidos a WPA o WPA2 ya que WEP debería estar completamente en desuso, aunque tristemente no es así.
+
+
+\subsection{Protocolo WEP}
+ WEP (Wired Equivalenet Privacy) fué el primer protocolo de encriptación que se implanto con el primer estándar  IEEE 802.11. Es un protocolo que no ofrece mucha seguridad en una red inalámbrica , ya que esta seguridad esta obsoleta y se conocen muchas maneras de descifrar el contenido de las tramas que van cifradas con WEP. Para entender bien estos términos debemos diferenciar bien entre autentificación, confidencialidad y integridad.
+\begin{itemize}
+	\item Open System:(Autentificación de Sistema Abierto)
+	\item Shared Key:(Autentificación por clave compartida)
+\par
+En cuanto a la autentificación, \textit{Open system} deja a todos los clientes que se lo pidan, autentificarse al punto de acceso , mientras que \textit{Shared key} necesita un mensaje solicitando conexión previa. Este (punto de acceso) contesta con un paquete cifrado por el cliente y se reenvía al punto de acceso que intenta descifrar la autentificación para que sea valida.
+La fase de confidencialidad se encarga de que nadie que estuviera \textit{escuchando} y \textit{capturando} la transmisión  puedan entender la información, por ello dispone de varios elementos a tener en cuenta:
+	\begin{itemize}
+		\item RC4, es el algoritmo de cifrado de la información, el cual emplea un sistema que consiste, que el emisor y el receptor deben saber la clave con anterioridad, y por tanto generar el \textit{keystream.} Así, recibe un flujo de bits que debe cifrar, y por otro sitio un flujo de bits codificados. Juntando estos dos flujos y por medio de una operación binaria XOR entre ellos, nos dará un único flujo ya cifrado. El problema es que estos bits codificados son generados por medio de operaciones matemáticas complejas sobre una secuencia de bits que se le llama la "semilla", que es de un único tamaño. Por ello al utilizar siempre la misma "semilla", se demuestra matemáticamente que una persona mal intencionada capturando un numero suficientes de tramas, puede adivinarla. Por tanto, ésta, crea con una clave generada por el usuario e implementando una secuencia aleatoria de 24 bits generada por el mismo protocolo WEP, esta secuencia son los famosos vectores de iniciación (IV) que explicaremos mas adelante. 
+	Este protocolo (WEP) te da la opción de utilizar claves de distintos tamaños:  64 bits(40 de la clave del usuario más 24 de los vectores de iniciación) o de 128(104 de la clave del usuario más 24 de los vectores de iniciación)
+		\item IV, son los vectores de inicialización , son la parte dinámica de los \textit{keystream.} Cada trama lleva un IV distinto, aunque al ser generados de forma aleatoria no siempre es posible. Los IV van en la parte que no se cifra de la trama WEP.
+		\item Para crear la \textit{keystream} se dispone de dos fases: KSA y PRGA
+	\end{itemize}
+\end{itemize}
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=1\textwidth]{WEP1.png}
+  \caption{Algoritmo de Encriptación WEP\cite{WEP}}
+  \label{fig:wep}
+\end{figure}
+En esta imagen se puede apreciar el proceso que se lleva acabo para formar la trama WEP, ya sea del punto de acceso al cliente, o del cliente al punto de acceso. La \textit{shared key} es estática, es la que configura el dueño de la red en el punto de acceso , o si fuera en la casa de un particular en el router wi-fi (5 caracteres o 10 hexadecimales) o (13 caracteres o 26 hexadecimales). Los IV como he mencionado  van cambiando aleatoriamente en cada trama. Esta cadena junto con la clave estática es introducida en el algoritmo RC4 como entrada. La salida de este produce el \textit{keystream.}
+ Por último, la integridad de los datos, pretende garantizar que el mensaje que recibimos es exactamente el que se envió. WEP emplea un algoritmo de comprobación de integridad CRC32. Éste, es un algoritmo de control de errores que empleando operaciones matemáticas sobre una secuencia de bits de datos, obtiene unos bits de control. Posteriormente los añade otra vez a los bits de datos formando una secuencia "protegida". El receptor sabrá de que tipo es cada bits, por lo que si alguno de ellos ha cambiado por el camino, tendrá una secuencia errónea y la descartará. 
+ 
+ Por tanto el problemas del cifrado WEP es el uso de las clave estática, ya que se pueden realizar ataques de observación y gracias a la estadística conseguir sacar el patrón de la clave, y así conseguir descifrarla.
+
+
+\subsection{Protocolo WPA/WPA2}
+WPA, \textit{Wi-Fi Protected Access}, surgió como una solución temporal de la Wi-Fi Alliance para hacer las redes más seguras. Ambas soluciones WPA y WPA2 soportan el protocolo 802.11 para la autentificación en ámbitos empresariales y la autentificación mediante clave compartida PSK (\textit{Pre-Shared Key}) para los entornos SOHO \textit{Small Office and Home Office}, y ámbitos  domésticos.\\
+\par
+Estos dos métodos de cifrado se diferencian en muy poco y su diferencia principal es en el algoritmo de cifrado que emplean. Mientras que WPA basa el cifrado de las comunicaciones en el uso del algoritmo TKIP (\textit{Temporary Key Integrity Protocol}), que esta basado en RC4 al igual WEP, WPA2 utiliza CCMP (\textit{Counter-mode/CBC-MAC Protocol}) basado en AES/\textit{Advanced Encrytion System.} \\
+\par
+Otra diferencia a tener en cuenta es el algoritmo que utiliza para controlar la integridad del mensaje. Mientras WPA usa una versión más pobre para generar el código MIC (\textit{Message Integryty Code}), WPA2 emplea una versión mejorada de MIC.
+En la fase de intercambio de claves el cliente y el punto de acceso emplean las PSK para generar una clave llamada PMK(\textit{Pairwise Master Key}). Ésta es una derivada cuando el sistema es WPA/WPA2 empresarial pero es la misma PSK en los entornos WPA/WPA2 PSK.
+\begin{figure}
+  \centering
+     \includegraphics[width=1\textwidth]{WPA.png}
+  \caption{Ilustración del saludo a cuatro vías\cite{backtrack5}}
+  \label{fig:wpa}
+\end{figure}
+
+Con la PMK se genera una clave de cifrado para cada proceso de autentificación de un cliente llamada PTK que básicamente se genera a partir de dos números aleatorios, uno de ellos obtenidos del cliente y el otro por el punto de acceso para obtener ambos la misma clave PTK. Esto es el famoso \textit{4-way-Handshake}\\
+
+Cuando el cliente está autenticado , el protocolo TKIP utiliza seis claves de cifrado por cada sesión , 4 de ellas son utilizadas para comunicaciones \textit{unicast} y dos para comunicaciones \textit{multicast}. Estas claves son únicas para cliente y sesión y se cambian periódicamente. Estas son generadas de las direcciones MAC, ESSID y la PTK.
+Un atacante que quiera vulnerar una red WPA-PSK va a tratar de capturar ese intercambio de números aleatorios, para que una vez conocidos éstos, junto al SSID y la direcciones MAC del cliente y del punto de acceso de la red, obtener la frase o secreto compartido que se empleó.
+\subsubsection{WPA2 Personal}
+Como ya ha sido explicado anteriormente, es utilizar WPA2 con clave precompartida por los terminales y el punto de acceso.
+Por tanto es lo mismo WPA2 personal que WPA2-PSK.
+
+
+\subsubsection{WPA2 Enterprise}
+Este método es más utilizado para empresas, ya que su configuración es de mayor complejidad y proporciona un control individualizado sobre el acceso a la red. Para su conexión es necesario unas credenciales de acceso al sistema. Este modo es aconsejable cuando se utiliza un servidor RADIUS.
+Estos usuarios no tratan con el código de encriptación. Son asignados de forma segura por sesiones de usuario en un segundo plano, no obstante el usuario ha tenido que dar sus credenciales de acceso con anterioridad. Así, se evita que los empleados dispongan de las claves de red.
+
+\paragraph{WPS} 
+\textit{Wi-Fi Protected Setup} es un estándar 2007 , promovido por la Wi-Fi Alliance\cite{wifi} para facilitar al usuario  doméstico la configuración y creación de redes WLAN.  WPS no es un mecanismo de seguridad por sí mismo, sino que se trata de la definición de diversos mecanismos para facilitar la configuración de una red WLAN segura con el protocolo WPA2. Los métodos que utilizan WPS son:
+\begin{itemize}
+	\item PIN(código numérico): La credencial se intercambia después de introducir un PIN. Este método es de los más distribuidos con WPS y el más inseguro.
+	\item PBC(Push-Button Configuration) La generación e intercambio de las credenciales ocurren después de que el usuario ejecute una acción física, como es presionar un botón incluido en el dispositivo.
+	\item NFC Intercambio de credenciales a través de comunicación NFC.
+	\item USB. Las credenciales se transfieren por un dispositivo de memoria flash.
+\end{itemize}
+\paragraph{Reaver}
+Se planteó como un ataque sólido y muy conveniente contra WPS . Se ejecuta un ataque de fuerza bruta contra el punto de acceso, creando todas las combinaciones posibles, para adivinar el numero PIN de 8 dígitos del Punto de Acceso. Si fuera una red WPA, sabemos que la combinación son mucho mayores, ya que puede haber letras, números y a veces incluso símbolos, por lo tanto el ataque será mucho mas difícil y largos de ejecutar. Sin embargo en WPS sabemos que el último dígito es un valor de suma de control que podría ser calculada en base a los 7 dígitos anteriores, por lo que las combinaciones se reducirían mucho. Podemos reducir mas el tiempo ya que el numero de PIN para la verificación va en dos mitades, por lo que se puede comprobar independientemente los 4 primeros y los últimos 4 dígitos."
+
+%%%%%%%%%%%%%%%% CAPITULO  4 METODOS%%%%%%%%%%%
+
+\chapter{Métodos del Proceso}\label{Procesos}
+\lettrine{E}n los métodos del proyecto, al tratarse de un proceso informático explicaré los sistemas hardware y software utilizados.
+
+\section{Detalles del Hardware}
+El hardware que he empleado en el desarrollo de mi aplicación ha sido reducido al máximo, teniendo en cuenta que uno de los objetivos es que fuera una aplicación flexible y fácil de transportar.
+\subsection{Raspberry Pi}
+La Raspberry Pi es un mini-ordenador  que se desarrolló en el Reino Unido, por un grupo del Computer Lab que empezó a preocuparse por el nivel de conocimientos sobre tecnologías informáticas con los que los estudiantes llegaban a la universidad.
+Por ello, apareció Raspberry como una iniciativa para fomentar el aprendizaje de la programación desde edades más tempranas.\cite{Raspberry}
+En los pocos años que lleva en funcionamiento \textit{Raspberry Pi Foundation} se han creado distintos modelos:
+\begin{figure}[H]
+  \centering
+	\includegraphics[width=1\textwidth]{Raspberry.png}
+  \caption{Diferentes modelos de Raspberry Pi }
+  \label{fig:Ras}
+\end{figure}
+
+En mi proyecto, utilizare  la Raspberry Pi 3 Modelo B, que como podemos comprobar en la imagen anterior (Figura \ref{fig:Ras}), mejora las características de sus predecesoras con un nuevo procesador más rápido integrado para incrementar su velocidad. Cuenta también con funciones de WiFi y Bluetooth BLE para mejorar su funcionalidad y la capacidad de alimentar dispositivos más potentes mediante los puertos USB.
+\begin{figure}[H]
+  \centering
+	\includegraphics[width=0.8\textwidth]{RaspberryPi.png}
+  \caption{Imagen Raspberry Pi 3 \url{https://www.raspberrypi.org/wp-content/uploads/2016/03/pi3.jpg} }
+  \label{fig:RaspberryPi2}
+\end{figure}
+
+\begin{itemize}
+	\item CPU BCM2837 de 64 Bits de Núcleo Cuádruple de 1.2 GHz de Broadcom
+RAM de 1 GB: Es un sistema-en-chip diseñado específicamente para este modelo de Raspberry Pi. Cuenta con cuatro cores Cortex-A53 de 64 bits, y una GPU Videocore IV. Esto, es una gran ventaja porque se trata de una de las pocas GPUs con documentación pública del fabricante.
+	\item BCM43143 con WiFi y Bluetooth BLE incorporados
+	\item GPIO ampliado de 40 pines
+	\item 4x puertos USB 2
+	\item Salida estéreo de 4 polos y puerto de vídeo compuesto
+	\item HDMI de tamaño completo
+	\item Puerto CSI para conectar una cámara Raspberry Pi
+	\item Puerto de visualización DSI para conectar una pantalla táctil Raspberry Pi
+	\item Puerto Micro SD para carga del sistema operativo y almacenamiento de datos
+	\item Fuente de alimentación Micro USB actualizada con interruptor de hasta 2.5 A
+\end{itemize}
+ 
+\subsection{Soporte de tarjetas inalámbricas}
+Como ya sabemos, el modelo de Raspberry Pi con el que he contado para mi proyecto ya dispone de una tarjeta inalámbrica entre sus componente. El problema lo tuve al desarrollar mis supuestos ataques, ya que esta tarjeta no soportaba el modo monitor que explicaré en capítulos posteriores. 
+Comparando en el mercado con varios posibles Chipset (Ralink RT3070, Ralink RT3572, Realtek 8187L, Ralink RT5370), me decante por el Atheros AR9271L, ya que no era excesivamente caro y me proporcionaba una ganancia de 5 dbi y un rango de frecuencia de 2.412-2.483.
+\begin{itemize}
+\item Estandar Wi-Fi: IEEE 802.11b/g/n
+\item 802.11g: UP to 54Mbps
+\item 802.11n: UP to 150Mbps
+\item OS que soporta: Linux,  Windows 2000, XP, Vista, 7
+\item Interfaz USB 2.0 mini USB
+\item Antena tipo1 x 2.4Ghz RP-SMA 
+\item Chipset Atheros AR9271
+\end{itemize}
+\begin{figure}[H]
+  \centering
+	\includegraphics[width=0.2\textwidth]{alfa.png}
+  \caption{Tarjeta Inalámbrica alfa  \cite{alfa}}
+   \label{fig:Raspberry}
+\end{figure}
+\section{Detalles del Software}
+En cuanto al software me refiero a los programas informáticos que han echo posible la realización de este proyecto.
+\subsection{GNU/Linux}
+Las siglas GNU quiere decir GNU's Not Unix, es decir GNU no es Unix. Se refiere a que no contiene ni una linea del código de Unix, el cual es un sistema operativo portable, multitarea y multiusuario de AT\&T,  y que vendió a SCO (Santa Cruz Operation) en 1995.
+El sufijo Linux se refiere al kernel (núcleo) que utiliza del sistema operativo. GNU esta desarrollando su propio kernel pero todavía no lo tienen disponible.
+\subsubsection{Kali Linux}
+Sabemos que el mundo de la seguridad informática avanza cada día a gran velocidad. Es por ello que es necesario que las personas que se dedican a ello siempre estén siempre ampliando conocimiento. 
+\textit{BlackTrack}  era una gran distribución de seguridad y la distribución de pruebas de penetración mas popular, ya que contenía cientos de herramientas de seguridad. La empresa que gestionaba esta distribución, Offensive Security\cite{offensive security}\footnote{Página oficial de la empresa offensive security \url{https://www.offensive-security.com/}}, evoluciono su distribución para proporcionar mejoras importantes. Kali linux siguió con los pasos creando una distribución Linux basada en Debian orientado a las auditorias de seguridad a pruebas de penetración en el 2013.Ésta ofrece al usuario un gran número de herramientas para cada rama del pentesting, como análisis forense , explotación de vulnerabilidades del sistema web o wireless . 
+Segun \cite{kali} Kali Linux 2.0 contiene un nuevo kernel en su version 4.0 y esta basada en Debian Jessie, mejorando la integracion con el hardware y el uso de los drivers Wireless. Tiene soporte actualizado para un mayor número de escritorios(gnome,kde,xfce,mate,e17,lxde o i3wm).Una de las grandes mejoras fue el sistema de actualizaciones  que presenta. La nueva version de aplicaciones es una realidad. Generalmente, las actualizaciones serán llevadas a cabo via Git. El \textit{script} se ejecuta diariamente sobre un listado de herramientas comunes en la distribución y mantendrá alerta al usuario ante posibles nuevas actualizaciones.
+\begin{figure}[H]
+  \centering
+	\includegraphics[width=0.7\textwidth]{kali_linux.jpg}%%ajusta el tamaño de la imagen.  %\caption{Logo de Kali Linux}
+  \caption{Logotipo de kali linux\cite{kali1}.}
+  \label{fig:kali}
+\end{figure}
+ARM (Advanced RISC Machine) se ha visto favorecido con el lanzamiento de Kali Linux 2.0 ya que sigue proporcionando soporte para Rasberry Pi, Chomebooks, Odroids,etc. Esto es importante ya que utilizaré una Rasberry Pi para automatizar todos los ataques.\\
+\paragraph{Suite aircrack-ng}
+La suite de herramientas \textit{air} proporciona todo lo necesario para llevar a cabo auditorias a redes wireless. También disponemos de más herramientas , como son GUIs o \textit{sripts}, que por debajo utilizan las propias herramientas de la suite. 
+Las mas utilizadas  en mi proyecto son:
+\begin{itemize}
+	\item Airmon-ng : Sirve para cambiar el modo de trabajo de la tarjeta inalámbrica, siempre y cuando el chipset lo permita. Este modo de trabajo cambiara a modo monitor.
+	\item Airodump-ng : Es la encargada de esnifar(\textit{sniffing}) o escuchar todo lo que circula por el aire, independientemente de su cifrado  o su red. Evidentemente si el trafico va sin cifrar, es decir redes abiertas se puede visualizar dicho tráfico y se podrá capturar información sensible que circula por el aire.
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| p{2.2cm} | p{4cm} | p{6.6 cm} | }
+\hline
+Parámetros & Descripción \\
+\hline \hline
+\\ \hline
+Bssid & Identifica la dirección MAC de un punto de acceso. \\ \hline
+PWR &Intensidad de la señal   \\ \hline
+\#/s & Número de paquetes de datos por segundos.  \\ \hline
+Data &  Número de paquetes de datos. En WEP solo cuentan los IVS. \\ \hline
+CH & Canal   \\ \hline
+MB & Velocidad minima soportada por el punto de acceso.   \\ \hline
+ENC & Algoritmo de cifrado en uso por el punto de acceso. Puede ser OPN, WEP, WPA o WPA2.  \\ \hline
+CIPHER & Tipo de cifrado de datos. Puede ser WEP, TKIP (WPA) o CCMP (WPA2) \\ \hline
+AUTH & Método de autenticación. Generalmente suele visualizarse PSK en entornos de clave compartida.  \\ \hline
+ESSID & Nombre de la red Wireless   \\ \hline
+Station & Dirección MAC de un cliente asociado al punto de acceso.  \\ \hline
+Probe & Paquetes en los que el cliente intenta identificar una red wireless. Por lo que se puede obtener el nombre de redes que un cliente esta buscando e intenta verificar que se encuentran en su radio de ación.   \\ \hline
+\end{tabular}
+\caption{Parámetros básicos Aerodump-ng.}
+\label{Airodump}
+\end{center}
+\end{table}
+	
+	
+	\item Airbase-ng: Esta herramienta sirve para atacar a los clientes asociados a un punto de acceso. Es una aplicación versátil y flexible , disponiendo de distintos modos de trabajo.Con ella también es posible habilitar un punto de acceso normal. Esto sirve para engañar a un usuario para que se conecte al punto de acceso falso y capturar así todo el tráfico. \\
+	\par
+	\item Aircrack-ng: Sirve para realizar ataques de fuerza bruta, diccionario. En función del tipo de cifrado de la red que se quiera crackear se realizara un tipo de ataque u otro. El problema de realizar este tipo de ataques es la cantidad de tiempo y de recursos que se emplean para conseguir descifrar una clave WPA, llegando a quedar inutilizado este dispositivo mientras se realiza el ataque. Para intentar reducir estos tiempos podemos hablar de:
+	\begin{itemize}
+	\item pyrit: Es un herramienta muy potente que facilita la creación de bases de datos para precalcular las claves PSK y así acelerar el pre-procesamiento, aprovechando al máximo las plataformas del mercado(Nvidia CUDA, OpenCL) y así poder descifrar claves WPA o WPA2 mediante ataques de fuerza bruta o diccionario. 
+	\end{itemize}
+	\item Aireplay-ng: Nos permite desautentificar e inyectar paquetes ARP a clientes asociados y así generar tráfico. 
+	
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{| p{2.5cm} | p{4cm} | }
+\hline
+Parámetros & Descripción \\
+\hline \hline
+\\ \hline
+-0, --deauth & Desautentifica. \\ \hline
+-1, --fakeauth  & Falsa autenticación con el Punto de Acceso.  \\ \hline
+-2, --interactive &   \\ \hline
+-3, --arpreplay & Estandar de repetición ARP. \\ \hline
+-4, --chopchop & Ataque Chopchop.   \\ \hline
+-5, --fragment & Genera una cadena de claves válidas.  \\ \hline
+-9, --test & Pruebas de inyección.   \\ \hline
+\end{tabular}
+\caption{Parámetros Aireplay-ng.}
+\label{Airodump}
+\end{center}
+\end{table}	
+
+	
+\end{itemize}
+
+\subsection{Lenguaje Bash}
+El lenguaje Bash, es un lenguaje de programación en linea de comandos y además se trata de uno de los lenguajes que emplearé para el desarrollo de mi aplicación. Normalmente es utilizado para la gestión de archivos, y la consola de linux fomenta su desarrollo, permitiendo programar \textit{scrips} dependiendo de las necesidades. Me refiero con \textit{script} a un archivo que contiene código escrito en un lenguaje de programación que nuestro dispositivo usa para un cometido establecido.
+Además este lenguaje utiliza como intérprete, la \textit{shell}, que es un entorno de trabajo que nos permite ejecutar programas por medio de órdenes. Dichas órdenes deben formarse con el nombre de un programa y una serie de parámetros.
+A pesar del conocimiento de múltiples lenguajes de programación informática, me decanté por este lenguaje porque es el lenguaje de programación utilizado en linux, y por tanto, me brindaba la oportunidad de aprenderlo, esto fue uno de mis objetivos propuestos desde el inicio.
+Este lenguaje interpretado cuenta con muchas ventajas  en cuanto; rapidez de ejecución, sintaxis clara, sencilla y su portabilidad puediéndose ejecutar en múltiples plataformas. Bash no solo reconoce comandos, nos ayuda agruparlos para realizar programas completos sobretodo para la automatización (como es mi caso). Uno de los principales problemas, vino a la hora de depurar errores, ya que no dispone de algún tipo de compilador, por lo que a la hora de realizar el código hay que tener mucha precaución.
+\subsection{Python}
+Utilizaré este lenguaje de programación como herramienta de enlace entre mi informe, generado en \LaTeX{} y los \textit{Templates} empleando una librería de python:  \textit{jinja2}.
+Python es un lenguaje de programación creado por Guido van Rossum a comienzo de los 90. Es un lenguaje interpretado o de script, es decir necesita un intérprete. Existen multitud de intérpretes, que pueden ser utilizados en la mayoría de plataformas (UNIX, Linux, Windows, MAC OS,etc), por lo que se podría decir que es multiplataforma. 
+Python destaca entre otros lenguajes de programación por su sencillez, legibilidad y su precisión de sintaxis. 
+
+\subsubsection{Jinja2}
+Jinja2 es una biblioteca de Python diseñada para ser flexible, rápida y segura. Se emplea como un lenguaje de plantillas y es de fácil uso. Es uno de los sistemas de plantillas más utilizados para Python. Se inspira en el sistema de plantillas de Django. 
+Se puede ejecutar en la mayoría de las versiones de Python. Esta biblioteca la utilice para generar los \textit{templates} de mi informe automatizado. 
+\paragraph{Ejemplo Jinja2}
+\begingroup{}
+	\fontsize{7pt}{7pt}=\selectfont
+	\verbatiminput {ejemplojinja2.txt}
+\endgroup{}
+
+\subsection{\LaTeX{}}
+\LaTeX{} es un sistema de preparación de documentos. Sirve para organizar y preparar artículos de revistas, libros, cartas, revistas, tesis y cualquier tipo de documento. Se desarrollo con el fin de facilitar y mejorar los textos científicos, sobre todo los matemáticos, y que estos se puedan utilizar entre distintas plataformas. Con el desarrolle la memoria de mi proyecto y lo emplee para generar mi informe. 
+\paragraph{Ejemplo de informe WEP.}
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=1\textwidth]{ejemplo_latex.png}
+  \caption{Ejemplo \LaTeX{}.}
+  \label{fig:ejemplolatex}
+\end{figure}
+
+
+%%%%%%%%%%%%%%CAPITULO 5%%%%%%%%%%
+
+
+\chapter{Estructura del informe de pentest}
+Para la generación de mi informe, me guiare del modelo NIST SP 800-115\footnote{\url{http://csrc.nist.gov/publications/nistpubs/800-115/SP800-115.pdf}}. El NIST es una agencia de la administración de tecnológia de Estados Unidos, que se encarga de promover la innovación y la competencia industrial. La estructura que seguiré será la siguiente:
+
+\section{Introducción}
+El estudio, ofrece un diagnóstico evolutivo del uso que las PYMES realizan de las tecnologías inalámbricas, así como las medidas de seguridad utilizadas y las incidencias sufridas. En concreto, se estudian la extensión, los hábitos de uso, las medidas de seguridad adoptadas y las incidencias de intrusión wifi declaradas por las empresas en las redes inalámbricas.
+
+\subsection{Auditoría}\index{Auditoría etiqueta}
+Una auditoría de seguridad informática es una evaluación de los sistemas informáticos cuyo fin es detectar errores y fallas y que mediante un informe detallado entregamos al responsable con el propósito de garantizar el buen funcionamiento de los sistemas ,  en esta auditoria nos centraremos en los posibles fallos de la red wifi que seleccionemos y así descubrir:
+\begin{itemize}
+    	\item Redes disponibles a nuestro alcance.
+	\item Tipo de cifrado de estas redes y en canal que se encuentras.
+	\item Vulnerabilidades que pudieran presentarse en una revisión de las estaciones de trabajo, redes sin ningún tipo de cifrado, puntos de acceso falso.
+\end{itemize}
+     Además, una buena auditoría de seguridad, si es llevada a cabo por una consultora externa, señalará las brechas en sus defensas existentes.
+
+\subsection{Objectivo y alcance}\index{Objectivo y alcance}
+
+El propósito de este documento es proporcionar unas serie de pautas y directrices para la mayoría de las organizaciones en la planificación y la realización de la seguridad de la información y así comprender la situación aproximada de sus activos de información en cuanto a protección , control y medidas de seguridad. Uno de los objetivos principales es la búsqueda de vulnerabilidades en las redes wifi y verificar el cumplimiento de algún tipo de política de seguridad.
+Este informe no pretende presentar una seguridad de la información completa , sino más bien una visión general de los elementos  de seguridad técnica y la posibles fallas de seguridad y recomendaciones para su uso.
+Con este informe no pretendo que se tome como medida de seguridad, ni para remplazar algún tipo de auditoria de seguridad, sino más bien como medida para comprobar posibles vulnerabilidades importante en la red inalámbrica.
+
+
+\subsection{Audiencia}\index{Audiencia}
+
+El informe que se pretende generar irá dirigido al responsable de la empresa o al personal contratante de esta aplicación, siempre y cuando el mayor responsable esté de acuerdo.
+El material contenido en el documento no presentará un lenguaje muy específico y será de fácil comprensión para cualquier persona, aunque no disponga de conocimientos previos en este ámbito.
+
+%----------------------------------------------------------------------------------------
+%	seccion2
+%----------------------------------------------------------------------------------------
+
+\section{Pruebas de seguridad y examen general}
+Hay que tener en cuenta que una evaluación de seguridad de la información es el proceso de determinar la eficacia con que se evalúa una entidad. Según el modelo que estoy siguiendo,  se pueden encontrar tres tipos de métodos de evaluación para lograr esto : pruebas, el examen o la entrevista.
+\subsection{Metodología de evaluación de seguridad de la información}\index{Metodología de evaluación de seguridad de la información}
+Una metodología de evaluación de seguridad y documentación es muy beneficiosa, ya que gracias a ella se pueden :
+ \begin{itemize}
+   	\item Reducir al mínimo los riesgos de la prueba.
+	%\item Acelerar la transición del nuevo personal de evolución.
+	\item Limitar los recursos de direcciones asociadas con dicha evaluación.
+ \end{itemize}
+ Estas evaluaciones requieren de una serie de recursos como pueden ser el tiempo, el personal, el hardware y el software, y por tanto la disponibilidad de ellos a menudo es un factor limitante.
+
+\subsection{Técnicas de evaluación}\index{Técnicas de evaluación}
+Podemos contar con una gran cantidad de técnicas de evaluación, exámenes técnicos que se pueden utilizar para evaluar distintos niveles de seguridad de los sistemas o redes.
+\begin{itemize}
+   	\item Técnicas de revisión. 
+	\item Identificación de objetivos y técnicas de análisis.
+	\item Técnicas de vulnerabilidad. Estas técnicas de prueba corroboran la existencia de vulnerabilidades, y se pueden realizar de forma manual o como en este caso con herramientas automatizadas. Pueden ser pruebas de penetración, crackeo de contraseñas, ingeniería social \ldots
+\end{itemize}
+%----------------------------------------------------------------------------------------
+%	seccion3
+%----------------------------------------------------------------------------------------
+
+
+\section{Técnicas de Identificación y objetivos de vulnerabilidad}
+
+Con las técnicas de identificación me refiero al análisis de dispositivos activos, servicios asociados y analizarlos en busca de vulnerabilidades potenciales. Las empresas o organizaciones suelen utilizar técnicas, no técnicos para identificar los activos que deben ser analizados.
+
+\subsection{Análisis de vulnerabilidad}
+Muchos escáneres de vulnerabilidad están equipados para aceptar resultados de descubrimiento de red y el puerto de la red y la identificación del servicio, lo que reduce la
+cantidad de trabajo necesaria para el análisis de vulnerabilidades. Analizándolas, se puede ayudar a identificar versiones de software obsoletas, parches faltantes y errores de configuración, y validar el cumplimiento o desviaciones
+de la política de seguridad de una organización. Esto se realiza mediante la identificación de los sistemas operativos y las principales aplicaciones de software que se ejecutan en los hosts y emparejarlos con información sobre vulnerabilidades conocidas almacenadas en bases de datos de vulnerabilidad de los escáneres.
+Gracias a la búsqueda de vulnerabilidades podemos:
+ \begin{itemize}
+	 \item Verificar el cumplimiento del uso de las aplicaciones host y las políticas de seguridad.
+	\item Proporcionar información sobre los objetivos de las pruebas de penetración.
+	\item Proporcionar información sobre la manera de mitigar las vulnerabilidades descubiertas.
+   \end{itemize}
+    	
+\subsection{Escaneo inalámbrico}
+Las tecnologías inalámbricas, en su sentido más simple, permiten a uno o más dispositivos para comunicarse sin la
+la necesidad de conexiones físicas, tales como cables de red o periféricos. Se extienden de tecnologías sencillas como teclados y ratones inalámbricos a las redes de telefonía  y redes de área local inalámbrica. Como ya hemos dicho, disponer de una red inalámbrica segura debería de ser una obligación  para cualquier empresa. Las exploraciones inalámbricos pueden ayudar a las organizaciones a determinar las acciones correctivas para mitigar los riesgos y posibles futuros ataques.
+A la hora de planificar las evaluaciones técnicas de seguridad inalámbrica debemos tener en cuenta:
+ \begin{itemize}
+	\item La ubicación de la instalación que está siendo escaneada, ya que las proximidades de algún edificio colindante puede llevar a equivoco. 
+	\item La zona pública (por ejemplo, calles y áreas públicas comunes) o su ubicación en un área metropolitana ocupado puede aumentar el riesgo de amenazas inalámbricas
+	\item El nivel de seguridad de los datos que se transmiten a través de tecnologías inalámbricas.
+	\item Con qué frecuencia los dispositivos inalámbricos se conecten y desconecten, y los niveles de tráfico.
+ \end{itemize}
+ 
+\subsubsection{Escaneo pasivo inalámbrico}
+
+Este tipo de exploración pasiva se debe llevar a cabo periódicamente y así aumentar las medidas de seguridad inalámbricas que no transmiten datos, estas herramientas no afectaran al correcto funcionamiento de los dispositivos inalámbricos que estén en funcionamiento. Este examen dispone de una gran ventaja, al ser un escaneo pasivo no es detectado por algún tipo  de persona malintencionada u otros dispositivos. Esto reduce la probabilidad de que los individuos puedan evitar la detección mediante la desconexión o desactivación de los dispositivos inalámbricos no autorizados.
+
+\subsubsection{Escaneo activo inalámbrico}
+La información se recoge durante las exploraciones pasivas, buscando acoplarse a los dispositivos descubiertos donde pudiera haber algún tipo de vulnerabilidad. Estas técnicas de exploración deben realizarse con sumo cuidado, ya que se debe garantizar que no se analizaran dispositivos de organizaciones distintas que están dentro del alcance.
+Es importante evaluar la ubicación física de los dispositivos antes de empezar el escaneo activamente. Las organizaciones también deben tener cuidado en realizar búsquedas activas de dispositivos no autorizados que parecen estar operando dentro de las instalaciones de la organización.
+Tales dispositivos podrían pertenecer a un visitante a dicha empresa que sin darse cuenta con acceso inalámbrico habilitado,o para una organización vecina con un dispositivo que está cerca, pero no dentro, instalaciones de la organización.
+
+\subsubsection{Escaneo inalámbrico de localización}
+El personal de seguridad debe intentar localizar dispositivos sospechosos. Las señales de RF se propagan por el espacio, lo que es importante para entender cómo la tecnología inalámbrica es compatible con este proceso. Las capacidades de identificar procesos son útiles aquí, pero los principales factores necesarios para soportar esta capacidad son un operador experto y una adecuada antena inalámbrica.
+
+\subsection{Contraseña Cracking}
+
+Al introducir cualquier tipo de contraseña, debemos saber que se genera un hash de esta contraseña introducida para su posterior comprobación con un hash almacenado de las contraseñas del usuario. Al coincidir es cuando se autentica. Podemos decir, que el descifrado de contraseñas es un proceso de recuperar los hash de contraseñas almacenadas en algún sistema informático. Por lo general, se lleva a cabo durante las evaluaciones para saber si cuentas con contraseñas débiles.
+\subsection{Pruebas de Penetración}
+Las pruebas de penetración es la prueba de seguridad en el que los evaluadores imitan los posibles ataques del mundo real para identificar posibles métodos. Analizando así, las características de seguridad de una aplicación, sistema o red. A menudo implica el lanzamiento de algunos ataques a los sistemas reales y los datos que utilizan.
+ \subsubsection {Fases de la prueba de penetración.}
+ Podemos distinguir cuatro fases importantes:
+ \begin{itemize}
+	\item Planificación.
+	\item Descubrimiento
+	\item Ataque
+	\item Informe
+  \end{itemize}
+ 
+\subsubsection {Logística de Penetración} 
+Estas pruebas deben centrarse  y orientarse en cuanto a posibles defectos explotables en la implementación de la red inalámbrica, en mi caso, como a la gestión de aplicaciones,sistemas o redes. Estas pruebas reproducirán ataques dirigidos de una forma externa. Un escenario de prueba de penetración puede ser diseñado para simular un ataque en el interior, un ataque exterior, o ambos, se consideran métodos de pruebas de seguridad externas e internas.  
+
+
+%----------------------------------------------------------------------------------------
+%	seccion 4
+%----------------------------------------------------------------------------------------
+
+
+\section{Planificación de la evaluación de seguridad}
+Una planificación adecuada es fundamental para una evaluación de seguridad exitosa. En esta sección se proporciona orientación sobre la creación de una política de evaluación, priorización y programación de las evaluaciones, y hacer frente a las consideraciones logísticas. También proporciona recomendaciones para desarrollar una plan de evaluación y describe las consideraciones legales relacionadas con la evaluación de que las organizaciones pueden necesitar de la dirección.
+
+\subsection{Desarrollo de una política de evaluación}
+Las organizaciones deben desarrollar una política de evaluación de seguridad de la información para proporcionar la dirección y orientación para las evaluaciones de seguridad. Esta política debe identificar los requisitos de evaluación de la seguridad,
+y obedecer a los individuos responsables de garantizar que las evaluaciones cumplen con los requisitos. Debe abordar:
+ \begin{itemize}
+	\item Requisitos de la organización con la que las evaluaciones deben cumplir.	
+	\item Los roles y responsabilidades apropiadas (como mínimo, para aquellas personas que se aprueba y la ejecución de las evaluaciones)
+	\item Tiempos fijados de evaluación
+  \end{itemize}
+\subsection{Consideraciones legales}
+Los posibles problemas legales deben abordarse antes de que dicha evaluación comience. Si la organización correspondiente autoriza a una entidad externa llevar a cabo una evaluación de seguridad, los departamentos legales de cada organización deben estar involucrados y fijar las pautas correspondientes.
+%----------------------------------------------------------------------------------------
+%	seccion 5
+%----------------------------------------------------------------------------------------
+\section{Ejecución de la evaluación de seguridad}
+
+\subsection{Análisis y Ataque}
+\begin{figure}[H]
+  \centering
+   \includegraphics[width=0.6\textwidth]{esquema1.jpg}
+  \caption{Pasos a seguir para el ataque.}
+  \label{fig:esquema2}
+\end{figure}
+
+\subsubsection{Ataque red WEP}.
+
+Como ya he comentado, las redes WEP tienen muchas debilidades criptográficas, por lo que se ha utilizando las herramientas necesarias para intentare romper la encriptación WEP.
+Lo primero, será configurar la tarjeta como modo monitor para un posterior escaneo de las redes cercanas utilizando el comando \textit{airodum-ng}. Así, se comenzara a volcar  todo el tráfico que hay e el aire en un archivo determinado(LOG\_CAP). En este punto,  se detectará el cifrado WEP de la red seleccionada y si existe cliente asociado a dicha red. Si existe cliente asociado, el crackeo será mas sencillo, sino, se hará una falsa autenticación con una MAC aleatoria.
+Una vez elegida la red, se comienza a inyectar con dos objetivos distintos, el primero será deautenticar el cliente asociado con el fin de que vuelva a autenticarse y genere un paquete ARP válido, y el segundo para capturar el paquete ARP y reinyectarlo para generar un gran volumen de paquetes de datos. Como ya comente en la parte teórica, es importante obtener una gran cantidad de IVs y así poder predecir y atacar la clave que descifran los paquetes, obteniendo la clave de red.
+
+\begingroup{}
+	\fontsize{7pt}{7pt}=\selectfont
+	\verbatiminput {aircrack-ng.txt}
+\endgroup{}
+
+\subsubsection{Denegación de servicios.}
+El objetivo de este ataque es dejar a los usuarios legítimos de una red Wi-Fi sin poder acceder a internet. Por lo tanto, se inunda con paquetes de deautenticación al punto de acceso o al cliente que decida.
+Como siempre, la tarjeta inalámbrica debe estar en modo monitor y escuchando en el canal específico. Ahora empezaré a deautenticar en un bucle infinito (-0 0) al cliente o al punto de acceso que seleccione.
+
+\begingroup{}
+	\fontsize{7pt}{7pt}=\selectfont
+	\verbatiminput {denegacion_servicios.txt}
+\endgroup{}
+
+\subsubsection{Extraer datos.(Ataque WPA con WPS activado.)}
+Una vez que sabemos que la red seleccionada tiene un cifrado WPA y cuenta con el WPS activado, realizo:
+\paragraph{reaver:}
+Como siempre, se activará el modo monitor de la tarjeta inalámbrica y se empezará a capturar el tráfico en el aire con \textit{airodump-ng} para obtener los \textit{beacons} de información del punto de accesos, y así comprobar que el dicho punto esta utilizando WPS.
+Una vez que he detectado WPS en el punto de acceso se prueba mediante la herramienta \textit{reaver} si el punto es vulnerable. Ésta, realizará fuerza bruta sobre el punto de acceso, enviando distintos PIN hasta encontrar el que le devuelva la credencial de la red con cifrado WPA2.
+\begingroup{}
+	\fontsize{7pt}{7pt}=\selectfont
+	\verbatiminput {reaver.txt}
+\endgroup{}
+\paragraph{Pixiewps:}
+Este ataque \textit{Pixiewps} también conocido como \textit{polvo mágico}.Lo primero será comprobar si el router al que se le realiza el ataque es vulnerable. Si así lo fuera, se podrá obtener la clave en segundos. Continuando los pasos de los ataques anteriores y utilizando la tarjeta en modo monitor y escaneando el tráfico, atacamos a una de las redes disponibles que disponga de WPS activado. Primero utilizaremos el comando \textit{reaver} para recoger la PKE (clave pública de la persona inscrita), PKR (clave pública del registrador),e-hash 1 (hash  de la primera mitad del PIN WPS, fuerza bruta) y E-2 de hash (hash  de la segunda mitad del PIN WPS, fuerza bruta), E-nonce/ R-nonce y la authkey. Una vez se obtenga toda la información, se podrá aplicar pixiewps, para reducir tiempos.
+\begingroup{}
+	\fontsize{7pt}{7pt}=\selectfont
+	\verbatiminput {pixiewps.txt}
+\endgroup{}
+
+
+\subsubsection{Ataque WPA/WPA2 (pyrit)}
+
+
+\subsection{Pautas y seguimiento para la creación del informe} 
+Partiendo de un lenguaje de programación desde el cual se ha desarrollado el código para automatizar mi dispositivo, contaré con otro lenguaje de programación (\textit{Python}) para que interactúe, y por medio de una de sus bibliotecas \textit{Jinja2}, genere unas plantillas (templates) donde se irán introduciendo los datos variables. Como se muestra en el gráfico una vez obtengamos el informeWEP.tex o informeWPA.tex dependiendo del protocolo de la red, se utilizara la aplicación \textit{pdflatex} para generar el informe final.pdf.
+\begin{figure}[H]
+  \centering
+   \includegraphics[width=1\textwidth]{esquema3.jpg}
+  \caption{Pasos a seguir para generar el informe.}
+  \label{fig:esquema3}
+\end{figure}
+
+%\subsubsection{Recopilación  de datos}
+%\subsubsection{Almacenamiento de datos}
+%\subsubsection{Datos Transmitidos}
+
+
+\chapter{Conclusiones y propuestas}
+
+Como expuse al comienzo de mi memoria las principales ventajas de las redes inalámbricas son la movilidad que te proporcionan y su facilidad acceso. Esto será su principal inconveniente, ya que las ondas de radiofrecuencia no se pueden detener, y la información viaje en todas las direcciones.  
+La seguridad en las redes inalámbricas debería ser un objetivo imprescindible para cualquier empresa, dando así la importancia que se merece la seguridad de la información. 
+Se debe concienciar a la población de la importancia que tiene este tema.
+
+\section{Recomendaciones.}
+\begin{itemize}
+	\item Se debe tener en cuenta el alcance de nuestra red, ya que cuanto menos señal se propague fuera de las instalaciones menor será las posibilidades de que se acceda desde fuera.
+	\item Por muy simple que parezca, es importante cambiar los datos de accesos al router que vienen por defecto.(No olvidar cambiar la contraseña)
+	\item Ocultar el nombre de la red (SSID), de forma que no se difunda el nombre de la red.
+ 	\item Se deben usar los protocolos de seguridad, WPA o WPA2. Ya que, el protocolo WEP no nos aporta ningún tipo de seguridad.
+	\item Es recomendable que se apague el router o punto de acceso una vez que ya no vaya a utilizarse.
+	\item Hacer listas de control de acceso con las direcciones MAC de aquellos dispositivos que quieras que tengan acceso a la red.
+	\item Utilizar IP estáticas, deshabilitando el DHCP (asignación dinámica IP) 
+	\item Realizar auditorias periódicamente ayudará a prevenir ataques, evitando posibles errores.
+	\item Contratar profesionales en la seguridad informática. 
+
+Estas medidas no harán que tu red sea invulnerable a cualquier ataque, pues eso es imposible, pero garantizará unos niveles altos de seguridad.
+
+
+
+
+
+
+
+
+
+%%Para hacer apendices%%
+\appendix
+
+\chapter{Informe WEP}\label{anexo.A}
+%\input{informe.tex}
+\chapter{Informe WPA}\label{anexo.B}
+%\chapter{Código}\label{anexo.C}
+\cleardoublepage
+%%BiBLIOGRAFIA%%
+%\addcontentsline{toc}{chapter}{Bibliografía}
+%\bibliographystyle{acm} % estilo de la bibliografía.
+%\bibliography{yyyy} % yyyy.bib es el fichero donde está salvada la bibliografía.
+
+\begin{thebibliography}{X}
+
+\bibitem{ipyme} \textsc{Fundetec y el ONTSI, equipamiento informático}  \textsc{\url{http://www.ipyme.org/Publicaciones/informe-epyme-2012.pdf}},
+España 2012,pag 105
+
+\bibitem{INTECO} \textsc{INTECO, Pablo Pérez San-José (dirección), Cristina Gutérrez(coordinación, Eduardo Alvarez Alonso, Laura García Pérez, Susana de la Fuente Rodríguez)}  \textsc{\url{https://www.incibe.es/file/Sp61c9ljOlMT7jcjbxYNVQ}},\textit{ Estudio sobre seguridad de la información}, 
+España  Semptiembre 2012,
+
+\bibitem{SP} \textsc{National Institute of Standards and Techonology, Karen Scarfone, Murugiah Souppaya, Amanda Cody, Angela Orebaugh}  \textsc{\url{http://csrc.nist.gov/publications/nistpubs/800-115/SP800-115.pdf}},,\textit{NIST SP 800-115}, 
+Estados Unidos, Semptiembre 2008.
+
+\bibitem{WEP} \textsc{monografias.com, Protocolo de Seguridad WEP}  \textsc{\url{http://www.monografias.com/trabajos18/protocolo-wep/protocolo-wep.shtml}}, Figura 1. Algoritmo de Encriptación WEP
+
+\bibitem{backtrack5} \textsc{Vivek Ramachandran, Beginner's Guide}  \textsc{BackTrack 5 Wireless Penetration Testing}, 
+
+\bibitem{offensive security} \textsc{página oficial offensive security}  \textsc{\url{https://www.offensive-security.com/}},
+
+\bibitem{kali} \textsc{Pablo González Pérez,Germán Sánchez Garecés,Jose Miguel Soriano de la Cámara} y \textsc{0xWORD},\textit{Pentesting con kali 2.0}, 
+Madrid, España, 2015.
+
+\bibitem{Raspberry} \textsc{Taller de Raspberry.}  \textsc{\url{https://www.gitbook.com/book/franciscomoya/taller-de-raspberry-pi/details}},
+
+\bibitem{wifi} \textsc{Página oficial de wi-fi alliance.}  \textsc{\url{http://www.wi-fi.org/}},
+
+\bibitem{IEEE} \textsc{Estándares de asociación del Instituto de Ingeniería Eléctrica y Electrónica. }  \textsc{\url{http://standards.ieee.org/about/get/802/802.11.html}},
+
+\bibitem{802.11} \textsc{ccm, Introducción a wi-fi(802.11)}  \textsc{\url{http://standards.ieee.org/about/get/802/802.11.html}},
+
+\bibitem{alfa} \textsc{Tarjeta Inalámbrica, alfa}  \textsc{\url{http://www.tienda-alfanetwork.com/AWUS036NHA-informacion.php}},
+
+\bibitem{kali1} \textsc{offensive security, Página oficial Kali Linux.}  \textsc{\url{https://www.kali.org/}},
+
+\bibitem{kali2} \textsc{offensive security, Página oficial Kali Linux, Instalación del sistema operativo.}  \textsc{\url{http://docs.kali.org/kali-on-arm/install-kali-arm-on-a-beaglebone-black}},
+
+\bibitem{RaspberryPi} \textsc{Richard Wentk}  \textsc{Teach Yourself Visually}, \textit{Raspberry Pi. The fast and easy way learn}, 
+
+\bibitem{GNU} \textsc{El manifesto de GNU.}  \textsc{\url{http://www.gnu.org/gnu/manifesto.html}}, 
+
+\bibitem{TechTarget} \textsc{Búsqueda de la Seguridad.}  \textsc{\url{http://searchsecurity.techtarget.com/}}, 
+
+\bibitem{Jinja2} \textsc{Lenguaje de plantillas Jinja2.}  \textsc{\url{http://jinja.pocoo.org/docs/dev/}}, 
+
+\bibitem{RaspberryPi.co} \textsc{Tutoriales de Raspberry Pi}.  \textsc{\url{http://www.frambuesapi.co/tutoriales-raspberry-pi/}}, 
+
+\bibitem{Python1} \textsc{Tutorial Python.}  \textsc{\url{https://docs.python.org/3/tutorial/index.html}}, 
+
+
+\end{thebibliography}
+
+
+\end{document}
+
+
