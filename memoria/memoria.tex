@@ -8,7 +8,7 @@
 \usepackage{lettrine}%letras capitales
 \usepackage{float}%comando [H]
 \usepackage { verbatim }%introducir .txt
-
+\usepackage{setspace}
 \begin{document}
 %PORTADA%
 \pagestyle{empty}       %Pagina sin encabezado ni pie
@@ -78,8 +78,7 @@ $\ $
 \thispagestyle{empty}
 
 %\noindent Copyright \copyright\ \\ % Copyright notice
-
-\noindent \textsc{Seguridad y vulnerabilidad de redes inalámbricas}\\
+\doublespace\noindent \textsc{Seguridad y vulnerabilidad de redes inalámbricas}\\
 
 %\noindent \textsc{github.com/.......}\\ % URL
 
@@ -109,18 +108,24 @@ $\ $
 \markboth{RESUMEN}{RESUMEN} % encabezado
 \lettrine{E}{}ste proyecto consiste en la implementación de un dispositivo para generar posibles ataques básicos y conocidos a una red WiFi determinada, con el fin de generar un informe de manera automatizada con algunas de las posibles vulnerabilidades.
 
-Ésto se pensó, para fomentar y facilitar la venta de auditorias de seguridad. Por tanto, el dispositivo debe poder ejecutarse por un comercial sin conocimientos previos de informática, iniciando los ataque a la red inalámbrica, así se intentara concienciar a las empresas de la facilidad de encontrar información confidencial  y la posibilidad de ralentizar e incluso llegar a parar la producción de la mayoría de las empresas. Esto serviría como paso previo a una auditoria como tal, nunca como sustituto. 
+Se centrará en las vulnerabilidades de las redes inalámbricas, las cuales están en continuo crecimiento, y disponen de algunas ventajas frente a las cableadas. No solo por la comodidad en la instalación sino por la movilidad que te brinda. No todo son ventajas, ya que en las comunicaciones inalámbricas la información se ``propaga'' por el aire, siendo posible capturar o escuchar dicha información. Ninguna red inalámbrica es completamente segura ya que todos los mecanismos o protocolos tienen vulnerabilidades, pero se puede trabajar para conseguir niveles aceptables de seguridad.
 
-Al referimos a una auditoria técnica de seguridad, se trata de un examen cuyo objetivo es evaluar la eficacia y eficiencia de los recursos informáticos y destacar posibles errores o fallos del sistema, pueden abarcar un gran numero de posibilidades (internas, externas, web\ldots). Centrándonos en las auditorias \emph{wireless}, se podrían tratar como auditorias internas o externas, dependiendo el nivel de información previa. 
-En la actualidad  compartir datos en la red forma parte de nuestro día a día, y es una acción que realizamos desde nuestra infancia. Realmente, y a pesar de los numerosos ejemplos de la vulnerabilidad de estos datos, la sociedad aún no está lo suficientemente concienciada del fácil acceso a nuestra información. Por ello, no se le da la importancia necesaria a éste tema como debería, teniendo contratado a personal especializado en este ámbito y haciendo auditorias de seguridad de forma periódica.
+El proyecto fue pensado para fomentar y facilitar la venta de auditorías de seguridad. Por tanto, el dispositivo debe poder ejecutarse por un comercial sin conocimientos previos de informática, utilizando por esta razón un lenguaje sencillo. Su funcionamiento se basa en iniciar los ataques a la red inalámbrica, detectando así algunos de los puntos débiles de seguridad de la misma.
 
-Desde hace años se ha intentando concienciar a la población de éste serio problema que nos afecta a todos, desde los pequeños empresarios y la protección de bases de datos empresariales, hasta particulares y su información almacenada en sus dispositivos móviles. Nos encontramos en un momento en el que la información privada de las personas cada vez tiende a ser mas pública. 
+Con la ejecución de la aplicación y la posterior generación del informe por parte del comercial, la empresa tendrá conocimiento de algunas de las vulnerabilidades de su red inalámbrica. De esta manera, se intentará concienciar a las empresas de la facilidad  de intrusión en sus redes, encontrando así información confidencial y la posibilidad de ralentizar e incluso llegar a parar la producción de la mayoría de las empresas si no se toman unas medidas de seguridad informática adecuadas. 
 
-Mi aplicación se centrara en las vulnerabilidades de las redes inalámbricas, estas redes están en continuo crecimiento, y disponen de algunas ventajas frente a las cableadas. No solo  por la comodidad en la instalación sino por la movilidad que te brinda. No todo son ventajas, ya que en las comunicaciones inalámbricas la información se ``propaga'' por el aire, siendo posible capturar o escuchar dicha información. Ninguna red inalámbrica es completamente segura ya que todos los mecanismos o protocolos tienen vulnerabilidades, pero se puede trabajar para conseguir niveles aceptables de seguridad. 
+De cualquier modo, el objeto del proyecto es el paso previo a la posterior venta de una auditoría de seguridad completa (que se llevaría a cabo por un experto), por lo que la aplicación, simplemente servirá como método de detección de vulnerabilidades, no como solución de los mismos. Este proceso nunca debería utilizarse como sustituto a una auditoría, tan sólo debe plantearse de modo informativo.
+
+El desarrollo completo del proceso culminaría con una auditoria técnica de seguridad, es decir un examen cuyo objetivo es evaluar la eficacia y eficiencia de los recursos informáticos y destacar posibles errores o fallos del sistema, pudiendo abarcar un gran número de posibilidades (internas, externas, web\ldots). Del mismo modo que en la fase previa, se centrará en las auditorias tipo \emph{wireless}, que se podrán tratar como auditorias internas o externas, dependiendo el nivel de información previa. 
+
+Dentro de la multitud de vulnerabilidades de la seguridad informática, el proyecto se centra en las redes WiFi. Estas redes son cada vez más utilizadas por gran parte de la sociedad en su día a día; por esto, y por su fácil instalación y conectividad, crecen en número diariamente. A pesar de los numerosos ejemplos de intrusión de estas redes, la sociedad aún no está lo suficientemente concienciada del fácil acceso a nuestra información y de la necesidad de la protección de los datos en la red. Nos encontramos en un momento en el que la información privada de las personas cada vez tiende a ser más pública. 
+
+Desde hace años se ha intentando concienciar a la población de este serio problema que nos afecta a todos, desde particulares y la información almacenada en sus dispositivos hasta empresarios y la protección de sus bases de datos. Se pretende, con la materialización de los posibles fallos de la red a través del informe, alertar y poner de manifiesto la necesidad de la toma de medidas adecuadas para la protección, como la contratación de personal especializado y la realización de auditorías de forma periódica.
+ 
 %%%%%%%%%%%%%%%%%%CAPITULO 1: INTRODUCCION%%%%%%%%%%%%%%%
 \chapter{Introducción}\label{cap.introduccion}
 \pagenumbering{arabic}
-\lettrine{D}{}esde que la tecnología forma parte de nuestra vida cotidiana, se encuentra cada vez más presente en las empresas, la perdida o robo de información de datos electrónicos. Esto conlleva un importante agujero de seguridad, debido a  una falta de previsión en la implantación de los métodos de seguridad y el descuido de muchos de los responsables o directivos de la empresa. Con esto me refiero a los extravíos o hurtos de ordenadores, móviles o PDAs (entre otros muchos sistemas electrónicos de trabajo) de empresa de donde se puede extraer mucha información sin ningún tipo de cifrado. No obstante, hace años el cifrado o la encriptación resultaba una gran medida de seguridad, pero poco a poco se han ido descubriendo varios errores de seguridad que limitan su uso.
+\lettrine{D}{}esde que la tecnología forma parte de nuestra vida cotidiana, se encuentra cada vez más presente en las empresas, la pérdida o robo de información de datos electrónicos. Esto conlleva un importante agujero de seguridad, debido a una falta de previsión en la implantación de los métodos de seguridad.
 
 Para cualquier empresa plantear un buen uso de las TIC (Tecnologías de la Información y la Comunicación) es un punto clave que se debe tener en cuenta y aprovechar al máximo  para aumentar la productividad y la eficiencia. Existe una gran inversión en cuanto a equipamiento informático y servicios básicos de comunicación que emplean las empresas, para su posible interconexión.
 
@@ -132,13 +137,22 @@ En la actualidad las tecnologías inalámbricas y móviles tienen cada vez más peso
   \label{figura:eq}
 \end{figure}
 
-En esta Figura \ref{figura:eq} apreciamos el gran uso por parte de las empresas de las nuevas tecnologías, tanto en ordenadores como en dispositivos móviles. Estos últimos están teniendo un crecimiento exponencial; Su difusión conlleva la necesidad de asegurar su protección. Por ello, debemos aplicar medidas básicas, como el empleo de código PIN o contraseñas de desbloqueo, y utilizar copias de seguridad de la información, Bluetooth oculto con contraseña o actualizaciones automáticas del software.
- Por esta razón he querido estudiar el nivel de protección con el que cuentan, así como los recursos técnicos y humanos que emplean en su seguridad.\\
+En esta Figura \ref{figura:eq} apreciamos el gran uso por parte de las empresas de las nuevas tecnologías, tanto en ordenadores como en dispositivos móviles. Estos últimos están teniendo un crecimiento exponencial; Su difusión conlleva la necesidad de asegurar su protección. 
 
+A medida que aumentan la implementación de dispositivos informáticos individuales en las empresas como método de trabajo, es necesaria la conexión entre ellos para compartir los datos y poder llevar a cabo un trabajo colectivo. La interconexión de estos dispositivos se lleva a cabo mediante la creación de una red interna, pudiendo ser inalámbrica o cableada. Asegurar la red es de igual importancia que la protección de los dispositivos.
+
+\begin{figure}[H]
+  \centering
+   \includegraphics[width=1\textwidth]{servicios.png}
+  \caption{Servicios de red inalámbrica o wifi declarados por las empresas (\%)}
+  \label{figura:servicios}
+\end{figure}
+
+Como indica el gráfico anterior, a pesar de la disponibilidad de varios tipos de redes, la mayoría de las empresas optan por las redes inalámbricas. Y además, un 13\% de ellas no restringe el acceso.
 
 \section{Herramientas de seguridad}
 
-Gracias a la INTECO\cite{INTECO}\footnote{\url{https://www.incibe.es/file/Sp61c9ljOlMT7jcjbxYNVQ}} , la cual realizo una encuesta a mas de 1000 empresas para posteriormente elaborar un informe sobre que tipo de herramientas disponían para proteger sus equipos, podemos destacar un notable grado de implicación en cuanto a las medidas básicas aplicables. Un gran número de las empresas encuestadas afirmaban la utilización de medidas paquetizadas, conocidas por todos ( antivirus, antiespias, cortafuegos). No obstante, no deberían conformarse con estas soluciones tan elementales, ya que un gasto inicial en seguridad puede paliar futuros gastos de perdida de información. Sin personalizar en una empresa, ni en su posible capital, cualquier robo de información por un fallo en la seguridad, obligará a invertir tiempo y dinero en la investigación de las posibles causas y la magnitud de los daños causados, tanto a nivel económico como en la reputación de la empresa.
+Gracias a la INTECO\cite{INTECO}\footnote{\url{https://www.incibe.es/file/Sp61c9ljOlMT7jcjbxYNVQ}} , la cual realizo una encuesta a mas de 1000 empresas para posteriormente elaborar un informe, que incluye que tipo de herramientas disponían para proteger sus equipos, podemos destacar un notable grado de implicación en cuanto a las medidas básicas aplicables. Un gran número de las empresas encuestadas afirmaban la utilización de medidas paquetizadas, conocidas por todos ( antivirus, antiespias, cortafuegos). No obstante, no deberían conformarse con estas soluciones tan elementales, ya que un gasto inicial en seguridad puede paliar futuros gastos de perdida de información. Sin personalizar en una empresa, ni en su posible capital, cualquier robo de información por un fallo en la seguridad, obligará a invertir tiempo y dinero en la investigación de las posibles causas y la magnitud de los daños causados, tanto a nivel económico como en la reputación de la empresa.
 \begin{figure}[H]
   \centering
    \includegraphics[width=1\textwidth]{inteco1.png}
@@ -146,9 +160,21 @@ Gracias a la INTECO\cite{INTECO}\footnote{\url{https://www.incibe.es/file/Sp61c9
   \label{fig:ej}
 \end{figure}
 
+Como ha sido comentado anteriormente, igual de importante que la protección de los dispositivos, es la seguridad de las redes que lo conectan. También podemos extraer del informe de la INTECO, que frente al dato de casi el 100\% de los dispositivos se encuentran protegidos por algún posible método, por muy básico que sea, todavía un 13\% de las redes no cuentan con ningún tipo de protección. Tan importante es, el gasto de seguridad en la red, al mismo tiempo que su instalación, es decir desde un principio, como revisiones periódicas de la misma. Ya que la implantación de un cifrado o sistema de seguridad en un inicio, no garantiza una seguridad permanente. En la actualidad podemos elegir entre distintos protocolos de seguridad para las redes WiFi (WEP, WPA,WPA/WPA2), de los que se deben elegir WPA/WPA2 por los niveles de robustez en su cifrado. Hoy en día son usados indistintamente estos protocolos (27,4\%), debido a la falta de información de la diferencia de niveles de seguridad que aportan cada uno de ellos. 
+
+
+Debido a los avances tecnológicos e informáticos, tanto los ataques como las protecciones evolucionan a diario, por ello es igual de importante que la buena elección de un protocolo de seguridad, llevar a cabo un control periódico, que podría tratarse de auditorías informáticas.
+\begin{figure}[H]
+  \centering
+   \includegraphics[width=1\textwidth]{medidas.png}
+  \caption{Medidas de seguridad de las redes WiFi}
+  \label{fig:medidas}
+\end{figure}
+
 \section{Limitaciones de seguridad.}
+
 El nivel de importancia de la seguridad de las empresas también esta reflejado en este estudio. En él se resumen las principales razones aportadas por las pymes para justificar  la falta de herramientas de seguridad, que se emplean en su día a día.
-La gran mayoría de las empresas que acusan no disponer de  alguna de las soluciones,lo justifican exponiendo no disponer de la necesidad o del desconocimiento de ellas. También  exponen una falta de presupuesto o la impresión de ineficiencia, aunque en menor medida.
+La gran mayoría de las empresas que acusan no disponer de  alguna de las soluciones, lo justifican exponiendo no disponer de la necesidad o del desconocimiento de ellas. También  exponen una falta de presupuesto o la impresión de ineficiencia, aunque en menor medida.
 Aún así,en las pymes se muestran inconsciencia, desinterés y falta de capital a la hora de aplicar medidas que no sean las tradicionales. Es por ello que se debe trabajar en ampliar estas medidas, sensibilizando los organismos que trabajan con las empresas.
 
 \begin{figure}[H]
@@ -157,11 +183,10 @@ Aún así,en las pymes se muestran inconsciencia, desinterés y falta de capital a 
   \caption{Motivos señalados por las empresas para no utilizar las herramientas y soluciones de seguridad.}
   \label{fig:limitaciones}
 \end{figure}
-En la Figura \ref{fig:limitaciones} se enumeran una serie de posibles soluciones básicas y los posibles motivos por los que las empresas no se decantan por alguno de ellos. En mayor medida se encuentran los que piensan que el empleo de antivirus/antiespía no son necesarios en su empresa o atribuyen un desconocimiento de los sistemas de control de intrusos.\\
+En la Figura \ref{fig:limitaciones} se enumeran una serie de posibles soluciones básicas y los posibles motivos por los que las empresas no se decantan por alguno de ellos. En mayor medida se encuentran los que piensan que el empleo de antivirus/antiespía no son necesarios en su empresa o atribuyen un desconocimiento de los sistemas de control de intrusos.
 
 \section{Personal encargado de la seguridad de la información.}
-No se debe delegar toda la responsabilidad de los datos o de la información en una sola persona, ni si quiera en un grupo de empleados. Todos los individuos deben estar concienciados y trabajar para una mejora en este ámbito. No obstante siempre es importante contar con profesionales , que sepan manejar las herramientas de seguridad, y saber actuar ante un posible ataque.
-
+No se debería delegar toda la responsabilidad de los datos o de la información en una sola persona, ni si quiera en un grupo de empleados. Todos los individuos deberían estar concienciados y formados para una mejora en este ámbito. No obstante siempre es importante contar con profesionales, que sepan manejar las herramientas de seguridad, y sepan actuar ante un posible ataque.
 
 \begin{figure}[H]
   \centering
@@ -172,21 +197,36 @@ No se debe delegar toda la responsabilidad de los datos o de la información en u
 
 Gracias al estudio citado con anterioridad, sabemos que las empresas no suelen tener contratado profesionales internos que se dediquen exclusivamente a la seguridad. Normalmente  externalizan estas funciones o en menor medida compatibilizan las tareas de seguridad con tareas relacionadas con la informática. Entre todas ellas apreciamos un 43,1\% las cuales ni siquiera consideran importante la contratación de algún tipo de profesional que se encargue de temas relacionados con la seguridad de la información. 
 
+\begin{figure}[H]
+  \centering
+   \includegraphics[width=1\textwidth]{personal.png}
+  \caption{Disponibilidad de personal dedicado a la seguridad según tamaño de empresa (\%).}
+  \label{fig:personal}
+\end{figure}
+
+Como podemos extraer de los resultados anteriores, los recursos dedicados a personal específico de seguridad de la información tienen mucha relación con el tamaño de la empresa, ya que empresas de mayor tamaño se encuentran más preocupadas y cuentan con personal específico, mientras que las medianas y pequeñas empresas no lo consideran tan importante, y por ello compatibilizan o externalizan esta función. Contando también con un alto porcentaje (44\% en la microempresa y reduciéndose según aumenta el tamaño de la misma, hasta el 7\% en la mediana empresa) de empresas en las que no esta considerado ni siquiera el personal de seguridad. Como apoyo a este dato, las empresas responsables de seguridad, indican que tienen como principal prioridad la implementación de sistemas informáticos, y de forma secundaria la protección de los mismos mediante un sistema de seguridad de la información.
+
+
+Una razón de peso para las empresas, en la que apoyan la externalización del personal dedicado a la seguridad informática es la consideración de que una persona externa a la empresa garantiza un conocimiento más profundo y actualizado.
+De todos estos datos, extraemos que este proyecto se encontrará más enfocado y contará con mayor demanda en las pequeñas y medianas empresas, ya que se encuentran menos concienciadas de la falta de seguridad y recurren con mayor frecuencia a personal externo. 
+
 %%%%%%%%%%%%%%%% CAPITULO 2 OBJETIVOS%%%%%%%%%%%%%%
 \chapter{Objetivos e Hipótesis}\label{cap.Objetivos}
 \lettrine{E}{}n cuanto a los objetivos de mi proyecto destacare un objetivo principal, para entender el desarrollo de mi aplicación al que se subordinaran una serie de objetivos secundarios.
 \section{Objetivo general}
-El objetivo principal es la automatización de un dispositivo para realizar una serie de  ataques conocidos, a redes inalámbricas y así analizar algunas de las posibles vulnerabilidades de dichas redes, generando un informe con las posibles amenazas.
+El objetivo principal es realizar una pre-auditoria de caja negra automática, que sirva como argumento de venta de auditorias completas.
+%es decir, sin conocimientos previos de la infraestructura. Esto permite simular ataques realizados por parte de personal externo a la organización.
+%la automatización de un dispositivo para realizar una serie de  ataques conocidos, a redes inalámbricas y así analizar algunas de las posibles vulnerabilidades de dichas redes, generando un informe con las posibles amenazas.
 \section{Objetivos secundarios}
 En un segundo lugar pero no por ello menos importante, dispongo de una serie de requisitos que tengo que solucionar.
-\begin{itemize}
+\begin{enumerate}
 	\item Recogida sistematizada de información de todos los datos del análisis.
-	\item Generación de un informe con un gran numero de posibles vulnerabilidades, según el estándar NIST SP 800-115\cite{SP}. Como comentare mas adelante, este informe no va dirigido al personal de seguridad de la empresa. Esta pensado exclusivamente para el responsable de la empresa, por lo tanto no tiene porque tener conocimientos previos informáticos. Se desarrollara con un lenguaje claro y no debe exceder de información muy técnica.
-	\item Creación de una aplicación de detección de dichas vulnerabilidades que funcione mediante un dispositivo de fácil uso y accesibilidad económica.
+	\item Generación de un informe con posibles vulnerabilidades, según el estándar NIST SP 800-115\cite{SP}. Como comentare mas adelante, este informe no va dirigido al personal de seguridad de la empresa. Esta pensado exclusivamente para el responsable de la empresa, por lo tanto no tiene porque tener conocimientos previos informáticos. Se desarrollara con un lenguaje claro y no debe exceder de información muy técnica.
+	\item Creación de una aplicación de detección de dichas vulnerabilidades que funcione mediante un dispositivo de fácil uso y de bajo coste.
 	%\item Debe se una aplicación personalizable , se tiene que poder modificar el entorno gráfico dependiendo de su posible contratación. También tiene que ser de fácil ampliación en cuanto a su flexibilidad.
 	\item Dotación de una interfaz simple e intuitiva que facilite el desarrollo de una manera rápida.
 	\item Portable y de fácil movilidad.
-\end{itemize}
+\end{enumerate}
 
 
 %%%%%%%%%%%%%%%% CAPITULO 3 ANTECEDENTES%%%%%%%%%%%
@@ -284,10 +324,9 @@ La encriptación WLAN desde sus orígenes ha estado ligado a vulnerabilidades y at
 En cuanto a la autentificación, \textit{Open system} deja a todos los clientes que se lo pidan, autentificarse al punto de acceso , mientras que \textit{Shared key} necesita un mensaje solicitando conexión previa. Este (punto de acceso) contesta con un paquete cifrado por el cliente y se reenvía al punto de acceso que intenta descifrar la autentificación para que sea valida.
 La fase de confidencialidad se encarga de que nadie que estuviera \textit{escuchando} y \textit{capturando} la transmisión  puedan entender la información, por ello dispone de varios elementos a tener en cuenta:
 	\begin{itemize}
-		\item RC4, es el algoritmo de cifrado de la información, el cual emplea un sistema que consiste, que el emisor y el receptor deben saber la clave con anterioridad, y por tanto generar el \textit{keystream.} Así, recibe un flujo de bits que debe cifrar, y por otro sitio un flujo de bits codificados. Juntando estos dos flujos y por medio de una operación binaria XOR entre ellos, nos dará un único flujo ya cifrado. El problema es que estos bits codificados son generados por medio de operaciones matemáticas complejas sobre una secuencia de bits que se le llama la "semilla", que es de un único tamaño. Por ello al utilizar siempre la misma "semilla", se demuestra matemáticamente que una persona mal intencionada capturando un numero suficientes de tramas, puede adivinarla. Por tanto, ésta, crea con una clave generada por el usuario e implementando una secuencia aleatoria de 24 bits generada por el mismo protocolo WEP, esta secuencia son los famosos vectores de iniciación (IV) que explicaremos mas adelante. 
+		\item RC4, es el algoritmo de cifrado de la información, el cual emplea un sistema que consiste, que el emisor y el receptor deben saber la clave con anterioridad, y por tanto generar el \textit{keystream} (dos fases: KSA y PRGA). Así, recibe un flujo de bits que debe cifrar, y por otro sitio un flujo de bits codificados. Juntando estos dos flujos y por medio de una operación binaria XOR entre ellos, nos dará un único flujo ya cifrado. El problema es que estos bits codificados son generados por medio de operaciones matemáticas complejas sobre una secuencia de bits que se le llama la "semilla", que es de un único tamaño. Por ello al utilizar siempre la misma "semilla", se demuestra matemáticamente que una persona mal intencionada capturando un numero suficientes de tramas, puede adivinarla. Por tanto, ésta, crea con una clave generada por el usuario e implementando una secuencia aleatoria de 24 bits generada por el mismo protocolo WEP, esta secuencia son los famosos vectores de iniciación (IV) que explicaremos mas adelante. 
 	Este protocolo (WEP) te da la opción de utilizar claves de distintos tamaños:  64 bits(40 de la clave del usuario más 24 de los vectores de iniciación) o de 128(104 de la clave del usuario más 24 de los vectores de iniciación)
 		\item IV, son los vectores de inicialización , son la parte dinámica de los \textit{keystream.} Cada trama lleva un IV distinto, aunque al ser generados de forma aleatoria no siempre es posible. Los IV van en la parte que no se cifra de la trama WEP.
-		\item Para crear la \textit{keystream} se dispone de dos fases: KSA y PRGA
 	\end{itemize}
 \end{itemize}
 \begin{figure}[H]
@@ -346,7 +385,7 @@ Se planteó como un ataque sólido y muy conveniente contra WPS . Se ejecuta un at
 \lettrine{E}n los métodos del proyecto, al tratarse de un proceso informático explicaré los sistemas hardware y software utilizados.
 
 \section{Detalles del Hardware}
-El hardware que he empleado en el desarrollo de mi aplicación ha sido reducido al máximo, teniendo en cuenta que uno de los objetivos es que fuera una aplicación flexible y fácil de transportar.
+Se ha intentado ir reduciendo al máximo el precioso y por ende todos los sistemas hardware para el desarrollo de mi aplicación, teniendo en cuenta que uno de los objetivos es que fuera una aplicación flexible y fácil de transportar.
 \subsection{Raspberry Pi}
 La Raspberry Pi es un mini-ordenador  que se desarrolló en el Reino Unido, por un grupo del Computer Lab que empezó a preocuparse por el nivel de conocimientos sobre tecnologías informáticas con los que los estudiantes llegaban a la universidad.
 Por ello, apareció Raspberry como una iniciativa para fomentar el aprendizaje de la programación desde edades más tempranas.\cite{Raspberry}
@@ -357,7 +396,7 @@ En los pocos años que lleva en funcionamiento \textit{Raspberry Pi Foundation} s
   \caption{Diferentes modelos de Raspberry Pi }
   \label{fig:Ras}
 \end{figure}
-
+Me 
 En mi proyecto, utilizare  la Raspberry Pi 3 Modelo B, que como podemos comprobar en la imagen anterior (Figura \ref{fig:Ras}), mejora las características de sus predecesoras con un nuevo procesador más rápido integrado para incrementar su velocidad. Cuenta también con funciones de WiFi y Bluetooth BLE para mejorar su funcionalidad y la capacidad de alimentar dispositivos más potentes mediante los puertos USB.
 \begin{figure}[H]
   \centering
@@ -385,11 +424,8 @@ Como ya sabemos, el modelo de Raspberry Pi con el que he contado para mi proyect
 Comparando en el mercado con varios posibles Chipset (Ralink RT3070, Ralink RT3572, Realtek 8187L, Ralink RT5370), me decante por el Atheros AR9271L, ya que no era excesivamente caro y me proporcionaba una ganancia de 5 dbi y un rango de frecuencia de 2.412-2.483.
 \begin{itemize}
 \item Estandar Wi-Fi: IEEE 802.11b/g/n
-\item 802.11g: UP to 54Mbps
-\item 802.11n: UP to 150Mbps
 \item OS que soporta: Linux,  Windows 2000, XP, Vista, 7
-\item Interfaz USB 2.0 mini USB
-\item Antena tipo1 x 2.4Ghz RP-SMA 
+\item Conector r-SMA 
 \item Chipset Atheros AR9271
 \end{itemize}
 \begin{figure}[H]
@@ -708,8 +744,10 @@ Partiendo de un lenguaje de programación desde el cual se ha desarrollado el cód
 \chapter{Conclusiones y propuestas}
 
 Como expuse al comienzo de mi memoria las principales ventajas de las redes inalámbricas son la movilidad que te proporcionan y su facilidad acceso. Esto será su principal inconveniente, ya que las ondas de radiofrecuencia no se pueden detener, y la información viaje en todas las direcciones.  
-La seguridad en las redes inalámbricas debería ser un objetivo imprescindible para cualquier empresa, dando así la importancia que se merece la seguridad de la información. 
-Se debe concienciar a la población de la importancia que tiene este tema.
+La seguridad en las redes inalámbricas debería ser un objetivo imprescindible para cualquier empresa, dando así la importancia que se merece la seguridad de la información.La motivación de este proyecto, es conseguir concienciar al mayor número posible de empresas, del fácil acceso y las posibles causas económicas e incluso jurídicas que le puede ocasionar un posible ataque. Por ello se  ..
+
+
+Como posible estudios futuros, me gustaría seguir desarrollando mi aplicación, ampliando el número de ataques y recogiendo mayor información en el informe automático.
 
 \section{Recomendaciones.}
 \begin{itemize}
@@ -722,6 +760,7 @@ Se debe concienciar a la población de la importancia que tiene este tema.
 	\item Utilizar IP estáticas, deshabilitando el DHCP (asignación dinámica IP) 
 	\item Realizar auditorias periódicamente ayudará a prevenir ataques, evitando posibles errores.
 	\item Contratar profesionales en la seguridad informática. 
+	\item Hacer auditorias de seguridad de forma periódica.
 
 Estas medidas no harán que tu red sea invulnerable a cualquier ataque, pues eso es imposible, pero garantizará unos niveles altos de seguridad.
 
