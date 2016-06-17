@@ -148,7 +148,7 @@ A medida que aumentan la implementación de dispositivos informáticos individuale
   \label{figura:servicios}
 \end{figure}
 
-Como indica el gráfico anterior, a pesar de la disponibilidad de varios tipos de redes, la mayoría de las empresas optan por las redes inalámbricas. Y además, un 13\% de ellas no restringe el acceso.
+Como indica el gráfico anterior, a pesar de la disponibilidad de varios tipos de redes, un gran numero de las empresas optan por las redes inalámbricas. Y además, un 13\% de ellas no restringe el acceso.
 
 \section{Herramientas de seguridad}
 
@@ -212,17 +212,18 @@ De todos estos datos, extraemos que este proyecto se encontrará más enfocado y c
 
 %%%%%%%%%%%%%%%% CAPITULO 2 OBJETIVOS%%%%%%%%%%%%%%
 \chapter{Objetivos e Hipótesis}\label{cap.Objetivos}
-\lettrine{E}{}n cuanto a los objetivos de mi proyecto destacare un objetivo principal, para entender el desarrollo de mi aplicación al que se subordinaran una serie de objetivos secundarios.
+
+\lettrine{E}{}n cuanto a los objetivos del proyecto se destacará un objetivo principal, para entender el desarrollo de la aplicación al que se subordinaran una serie de objetivos secundarios.
 \section{Objetivo general}
-El objetivo principal es realizar una pre-auditoria de caja negra automática, que sirva como argumento de venta de auditorias completas.
+El objetivo principal será introducir a las empresas en la importancia de contar con un red inalambrica segura,realizando una pre-auditoria de caja negra automática, que sirva como argumento de venta de auditorias completas.
 %es decir, sin conocimientos previos de la infraestructura. Esto permite simular ataques realizados por parte de personal externo a la organización.
 %la automatización de un dispositivo para realizar una serie de  ataques conocidos, a redes inalámbricas y así analizar algunas de las posibles vulnerabilidades de dichas redes, generando un informe con las posibles amenazas.
 \section{Objetivos secundarios}
 En un segundo lugar pero no por ello menos importante, dispongo de una serie de requisitos que tengo que solucionar.
 \begin{enumerate}
-	\item Recogida sistematizada de información de todos los datos del análisis.
-	\item Generación de un informe con posibles vulnerabilidades, según el estándar NIST SP 800-115\cite{SP}. Como comentare mas adelante, este informe no va dirigido al personal de seguridad de la empresa. Esta pensado exclusivamente para el responsable de la empresa, por lo tanto no tiene porque tener conocimientos previos informáticos. Se desarrollara con un lenguaje claro y no debe exceder de información muy técnica.
-	\item Creación de una aplicación de detección de dichas vulnerabilidades que funcione mediante un dispositivo de fácil uso y de bajo coste.
+	\item Recogida sistematizada de información de todos los datos del análisis, que se plasmara en un informe de manera automatizada. 
+	\item Generación de un informe con posibles vulnerabilidades, según el estándar NIST SP 800-115\cite{SP}. Como comentare mas adelante, este informe no va dirigido al personal de seguridad de la empresa. %Esta pensado exclusivamente para el responsable de la empresa, por lo tanto no tiene porque tener conocimientos previos informáticos. Se desarrollara con un lenguaje claro y no debe exceder de información muy técnica.
+	\item Creación de una aplicación de detección de dichas vulnerabilidades que funcione mediante un dispositivo de fácil uso y de bajo coste. Empleando una Raspberry Pi, por 
 	%\item Debe se una aplicación personalizable , se tiene que poder modificar el entorno gráfico dependiendo de su posible contratación. También tiene que ser de fácil ampliación en cuanto a su flexibilidad.
 	\item Dotación de una interfaz simple e intuitiva que facilite el desarrollo de una manera rápida.
 	\item Portable y de fácil movilidad.
@@ -382,7 +383,7 @@ Se planteó como un ataque sólido y muy conveniente contra WPS . Se ejecuta un at
 %%%%%%%%%%%%%%%% CAPITULO  4 METODOS%%%%%%%%%%%
 
 \chapter{Métodos del Proceso}\label{Procesos}
-\lettrine{E}n los métodos del proyecto, al tratarse de un proceso informático explicaré los sistemas hardware y software utilizados.
+\lettrine{E}n los métodos del proyecto, al tratarse de un proceso informático se compone de tres componentes importantes como hardware, software y los datos. 
 
 \section{Detalles del Hardware}
 Se ha intentado ir reduciendo al máximo el precioso y por ende todos los sistemas hardware para el desarrollo de mi aplicación, teniendo en cuenta que uno de los objetivos es que fuera una aplicación flexible y fácil de transportar.
@@ -396,7 +397,6 @@ En los pocos años que lleva en funcionamiento \textit{Raspberry Pi Foundation} s
   \caption{Diferentes modelos de Raspberry Pi }
   \label{fig:Ras}
 \end{figure}
-Me 
 En mi proyecto, utilizare  la Raspberry Pi 3 Modelo B, que como podemos comprobar en la imagen anterior (Figura \ref{fig:Ras}), mejora las características de sus predecesoras con un nuevo procesador más rápido integrado para incrementar su velocidad. Cuenta también con funciones de WiFi y Bluetooth BLE para mejorar su funcionalidad y la capacidad de alimentar dispositivos más potentes mediante los puertos USB.
 \begin{figure}[H]
   \centering
@@ -411,12 +411,12 @@ RAM de 1 GB: Es un sistema-en-chip diseñado específicamente para este modelo de 
 	\item BCM43143 con WiFi y Bluetooth BLE incorporados
 	\item GPIO ampliado de 40 pines
 	\item 4x puertos USB 2
-	\item Salida estéreo de 4 polos y puerto de vídeo compuesto
-	\item HDMI de tamaño completo
-	\item Puerto CSI para conectar una cámara Raspberry Pi
-	\item Puerto de visualización DSI para conectar una pantalla táctil Raspberry Pi
-	\item Puerto Micro SD para carga del sistema operativo y almacenamiento de datos
-	\item Fuente de alimentación Micro USB actualizada con interruptor de hasta 2.5 A
+	%\item Salida estéreo de 4 polos y puerto de vídeo compuesto
+	%\item HDMI de tamaño completo
+	%\item Puerto CSI para conectar una cámara Raspberry Pi
+	%\item Puerto de visualización DSI para conectar una pantalla táctil Raspberry Pi
+	\item Puerto Micro SD para carga del sistema operativo y almacenamiento de datos: 
+	%\item Fuente de alimentación Micro USB actualizada con interruptor de hasta 2.5 A
 \end{itemize}
  
 \subsection{Soporte de tarjetas inalámbricas}
@@ -547,8 +547,7 @@ Se puede ejecutar en la mayoría de las versiones de Python. Esta biblioteca la u
 
 
 \chapter{Estructura del informe de pentest}
-Para la generación de mi informe, me guiare del modelo NIST SP 800-115\footnote{\url{http://csrc.nist.gov/publications/nistpubs/800-115/SP800-115.pdf}}. El NIST es una agencia de la administración de tecnológia de Estados Unidos, que se encarga de promover la innovación y la competencia industrial. La estructura que seguiré será la siguiente:
-
+Para la generación de mi informe, me guiare del modelo NIST SP 800-115\footnote{\url{http://csrc.nist.gov/publications/nistpubs/800-115/SP800-115.pdf}}. El NIST es una agencia de la administración de tecnológia de Estados Unidos, que se encarga de promover la innovación y la competencia industrial. Este informe no obliga de la utilización de ninguna estructura en concreto.
 \section{Introducción}
 El estudio, ofrece un diagnóstico evolutivo del uso que las PYMES realizan de las tecnologías inalámbricas, así como las medidas de seguridad utilizadas y las incidencias sufridas. En concreto, se estudian la extensión, los hábitos de uso, las medidas de seguridad adoptadas y las incidencias de intrusión wifi declaradas por las empresas en las redes inalámbricas.
 
@@ -787,49 +786,49 @@ Estas medidas no harán que tu red sea invulnerable a cualquier ataque, pues eso 
 
 \begin{thebibliography}{X}
 
-\bibitem{ipyme} \textsc{Fundetec y el ONTSI, equipamiento informático}  \textsc{\url{http://www.ipyme.org/Publicaciones/informe-epyme-2012.pdf}},
-España 2012,pag 105
+\bibitem{ipyme} \textsc{Fundetec y el ONTSI. (2012), Urueña, Alberto., P. Ballestero,  María. Valdecasa, Elena.}  \textsc{Recuperado de \url{http://www.ipyme.org/Publicaciones/informe-epyme-2012.pdf}},\textit{Análisis sectorial de implantación de las TIC en la pyme española.}
+España 2012, pag 105.
 
-\bibitem{INTECO} \textsc{INTECO, Pablo Pérez San-José (dirección), Cristina Gutérrez(coordinación, Eduardo Alvarez Alonso, Laura García Pérez, Susana de la Fuente Rodríguez)}  \textsc{\url{https://www.incibe.es/file/Sp61c9ljOlMT7jcjbxYNVQ}},\textit{ Estudio sobre seguridad de la información}, 
-España  Semptiembre 2012,
+\bibitem{INTECO} \textsc{INTECO. (2012),Pablo Pérez San-José (dirección), Cristina Gutérrez(coordinación), Eduardo Alvarez Alonso, Laura García Pérez, Susana de la Fuente Rodríguez}\textsc{Recuperado de \url{https://www.incibe.es/file/Sp61c9ljOlMT7jcjbxYNVQ}},\textit{ Estudio sobre seguridad de la información y continuidad de negocio en las pymes españolas.}
+España, Semptiembre 2012,
 
-\bibitem{SP} \textsc{National Institute of Standards and Techonology, Karen Scarfone, Murugiah Souppaya, Amanda Cody, Angela Orebaugh}  \textsc{\url{http://csrc.nist.gov/publications/nistpubs/800-115/SP800-115.pdf}},,\textit{NIST SP 800-115}, 
-Estados Unidos, Semptiembre 2008.
+\bibitem{SP} \textsc{National Institute of Standards and Techonology (2008), Scarfone, Karen., Souppaya, Murugiah., Cody, Amanda., Orebaugh, Angela  }  \textsc{Recuperado de \url{http://csrc.nist.gov/publications/nistpubs/800-115/SP800-115.pdf}},\textit{Technical Guide to Information Security Testing and Assessment}, 
+Estados Unidos, Septiembre 2008.
 
-\bibitem{WEP} \textsc{monografias.com, Protocolo de Seguridad WEP}  \textsc{\url{http://www.monografias.com/trabajos18/protocolo-wep/protocolo-wep.shtml}}, Figura 1. Algoritmo de Encriptación WEP
+\bibitem{WEP} \textsc{admin. (2011, Agosto 09). Protocolos de seguridad. Académica cursos libres Web }  \textsc{\url{http://cursoslibres.academica.mx/206/seguridad-en-redes/3-protecciones-y-herramientas-de-seguridad/protocolos-de-seguridad.}}, Figura 1. Algoritmo de Encriptación WEP
 
-\bibitem{backtrack5} \textsc{Vivek Ramachandran, Beginner's Guide}  \textsc{BackTrack 5 Wireless Penetration Testing}, 
+\bibitem{backtrack5} \textsc{Ramachandran,Vivek. (2011)}  \textit{BackTrack 5 Wireless Penetration Testing}, Beginner's Guide, Open source.
 
-\bibitem{offensive security} \textsc{página oficial offensive security}  \textsc{\url{https://www.offensive-security.com/}},
+\bibitem{offensive security} \textsc{Página oficial offensive security, (2016)}  \textsc{Recuperado de \url{https://www.offensive-security.com/}},
 
-\bibitem{kali} \textsc{Pablo González Pérez,Germán Sánchez Garecés,Jose Miguel Soriano de la Cámara} y \textsc{0xWORD},\textit{Pentesting con kali 2.0}, 
-Madrid, España, 2015.
+\bibitem{kali} \textsc{González Pérez,Pablo., Sánchez Garecés, Germán., Soriano de la Cámara, Jose Miguel. (2015) } y \textsc{0xWORD},\textit{Pentesting con kali 2.0}, 
+Madrid, España.
 
-\bibitem{Raspberry} \textsc{Taller de Raspberry.}  \textsc{\url{https://www.gitbook.com/book/franciscomoya/taller-de-raspberry-pi/details}},
+\bibitem{Raspberry} \textsc{Moya Fernández, Francisco. (2016)}\textit{Taller de Raspberry.}  \textsc{Recuperado de\url{https://www.gitbook.com/book/franciscomoya/taller-de-raspberry-pi/details}},3 edición.
 
-\bibitem{wifi} \textsc{Página oficial de wi-fi alliance.}  \textsc{\url{http://www.wi-fi.org/}},
+\bibitem{wifi} \textsc{Página oficial de wi-fi alliance. (2016)}  \textsc{Recuperado de \url{http://www.wi-fi.org/}},
 
-\bibitem{IEEE} \textsc{Estándares de asociación del Instituto de Ingeniería Eléctrica y Electrónica. }  \textsc{\url{http://standards.ieee.org/about/get/802/802.11.html}},
+\bibitem{IEEE} \textsc{Estándares de asociación del Instituto de Ingeniería Eléctrica y Electrónica.(2016) }  \textsc{Recuperado de \url{http://standards.ieee.org/about/get/802/802.11.html}},
 
-\bibitem{802.11} \textsc{ccm, Introducción a wi-fi(802.11)}  \textsc{\url{http://standards.ieee.org/about/get/802/802.11.html}},
+\bibitem{802.11} \textsc{ccm Benchmark group, Introducción a las redes inalámbricas WiFi (802.11)}  \textsc{Recuperado de \url{http://es.ccm.net/faq/56-curso-de-introduccion-a-las-redes-inalambricas-wi-fi}},
 
 \bibitem{alfa} \textsc{Tarjeta Inalámbrica, alfa}  \textsc{\url{http://www.tienda-alfanetwork.com/AWUS036NHA-informacion.php}},
 
-\bibitem{kali1} \textsc{offensive security, Página oficial Kali Linux.}  \textsc{\url{https://www.kali.org/}},
+\bibitem{kali1} \textsc{offensive security, Página oficial Kali Linux.(2016)}  \textsc{Recuperado de \url{https://www.kali.org/}},
 
-\bibitem{kali2} \textsc{offensive security, Página oficial Kali Linux, Instalación del sistema operativo.}  \textsc{\url{http://docs.kali.org/kali-on-arm/install-kali-arm-on-a-beaglebone-black}},
+\bibitem{kali2} \textsc{offensive security, Página oficial Kali Linux, Instalación del sistema operativo.}  \textsc{Recuperado de \url{http://docs.kali.org/kali-on-arm/install-kali-arm-on-a-beaglebone-black}},
 
-\bibitem{RaspberryPi} \textsc{Richard Wentk}  \textsc{Teach Yourself Visually}, \textit{Raspberry Pi. The fast and easy way learn}, 
+\bibitem{RaspberryPi} \textsc{Robinson, Andrew., Cook, Mike., Evans, Jonathan., McManus, Sean. (Primera edición 2014.)}  \textsc{Teach Yourself Visually}, \textit{Raspberry Pi Projects}, 
 
-\bibitem{GNU} \textsc{El manifesto de GNU.}  \textsc{\url{http://www.gnu.org/gnu/manifesto.html}}, 
+\bibitem{GNU} \textsc{Free Software Foundation, El manifesto de GNU.}  \textsc{Recuperado de \url{http://www.gnu.org/gnu/manifesto.html}}, 
 
-\bibitem{TechTarget} \textsc{Búsqueda de la Seguridad.}  \textsc{\url{http://searchsecurity.techtarget.com/}}, 
+\bibitem{TechTarget} \textsc{TechTarget , Búsqueda de la Seguridad.(2016)}  \textsc{Recuperado de \url{http://searchsecurity.techtarget.com/}}, 
 
-\bibitem{Jinja2} \textsc{Lenguaje de plantillas Jinja2.}  \textsc{\url{http://jinja.pocoo.org/docs/dev/}}, 
+\bibitem{Jinja2} \textsc{Ronacher, Armin. (2008).}\textit{ Lenguaje de plantillas Jinja2.}  \textsc{Recuperado de \url{http://jinja.pocoo.org/docs/dev/}}, 
 
-\bibitem{RaspberryPi.co} \textsc{Tutoriales de Raspberry Pi}.  \textsc{\url{http://www.frambuesapi.co/tutoriales-raspberry-pi/}}, 
+\bibitem{RaspberryPi.co} \textsc{ G. Bejarano, Mario.Tutoriales de Raspberry Pi (2016)}.\textsc{\url{Recuperado de http://www.frambuesapi.co/tutoriales-raspberry-pi/}}, 
 
-\bibitem{Python1} \textsc{Tutorial Python.}  \textsc{\url{https://docs.python.org/3/tutorial/index.html}}, 
+\bibitem{Python1} \textsc{Python SoftwareFoundation, Tutorial Python,. }  \textsc{Recuperado de \url{https://docs.python.org/3/tutorial/index.html}}, 
 
 
 \end{thebibliography}
