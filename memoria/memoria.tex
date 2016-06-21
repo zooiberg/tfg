@@ -49,7 +49,7 @@
  \multirow{11}{*}{\includegraphics[scale=0.75]{escudo2.png}}
  &  & & Autor:\\
  &  &  & \\
- &  &  & LUIS RAMIREZ DE DIEGO \\
+ &  &  & LUIS RAMÍREZ DE DIEGO \\
  &  &  & \\
  &  &  & Director: \\
  &  &  & \\
@@ -103,9 +103,13 @@ $\ $
 \addcontentsline{toc}{chapter}{Lista de tablas} % para que aparezca en el indice de contenidos
 \listoftables % indice de tablas
 \newpage
-%RESUMEN
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%RESUMEN%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \addcontentsline{toc}{section}{Resumen} % si queremos que aparezca en el índice
 \markboth{RESUMEN}{RESUMEN} % encabezado
+
 \lettrine{E}{}ste proyecto consiste en la implementación de un dispositivo para generar posibles ataques básicos y conocidos a una red WiFi determinada, con el fin de generar un informe de manera automatizada con algunas de las posibles vulnerabilidades.
 
 Se centrará en las vulnerabilidades de las redes inalámbricas, las cuales están en continuo crecimiento, y disponen de algunas ventajas frente a las cableadas. No solo por la comodidad en la instalación sino por la movilidad que te brinda. No todo son ventajas, ya que en las comunicaciones inalámbricas la información se ``propaga'' por el aire, siendo posible capturar o escuchar dicha información. Ninguna red inalámbrica es completamente segura ya que todos los mecanismos o protocolos tienen vulnerabilidades, pero se puede trabajar para conseguir niveles aceptables de seguridad.
@@ -124,7 +128,7 @@ Desde hace años se ha intentando concienciar a la población de este serio proble
  
 %%%%%%%%%%%%%%%%%%CAPITULO 1: INTRODUCCION%%%%%%%%%%%%%%%
 \chapter{Introducción}\label{cap.introduccion}
-Desde el inicio del nuevo siglo, el uso de las tecnologías forma parte de nuestra actividad cotidiana, lo que implica que cada vez se tiende más, y con mayor frecuencia, a compartir en red todo tipo de datos.
+\lettrine{D}{}esde el inicio del nuevo siglo, el uso de las tecnologías forma parte de nuestra actividad cotidiana, lo que implica que cada vez se tiende más, y con mayor frecuencia, a compartir en red todo tipo de datos.
 Durante todos estos años de evolución tecnológica han aparecido cada vez más y novedosos métodos de intrusión, pérdida o robo de datos e información personal (spam, virus, troyanos, intrusiones en red, etc).
 Por otro lado, cada vez resulta más común la implantación de redes inalámbricas tanto por la comodidad de instalación, y reducción de costes, como la ausencia de cableado. Pero lo que se presenta como ventaja, también conforma su principal inconveniente, ya que al viajar a través del espacio, y no por un medio físico, permite que prácticamente cualquier persona con mínimos conocimientos informáticos pueda captar la información transmitida.
 
@@ -133,7 +137,7 @@ Por otro lado, cada vez resulta más común la implantación de redes inalámbricas 
 
 En la actualidad, no se ha conseguido una solución que erradique por completo las intrusiones de las redes, tanto por la falta de concienciación de la sociedad de este problema, como por la dificultad de controlar todas las vulnerabilidades y medidas de control de una red. Por ello, con este documento, se pretende por una parte intentar mejorar la conciencia social sobre la seguridad informática, y presentar y detectar algunas de las vulnerabilidades que podemos encontrar en las redes inalámbricas.
 
-%%%%%%%%%%%%%%%% SECTIOMOBJETIVOS%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%% OBJETIVOS%%%%%%%%%%%%%%
 \section{Objetivos}\label{cap.Objetivos}
 
 %\lettrine{E}{}
@@ -153,15 +157,16 @@ En un segundo lugar, pero no por ello menos importante, dispongo de una serie de
 	
 	
 \end{enumerate}
-
+%%%%%%%ESTRUCTURA DE LA MEMORIA%%%%%%%%
 \section{Estructura de la memoria}
 
 
-%%%%%%%%%%%%%%%% CAPITULO 3 ANTECEDENTES%%%%%%%%%%%
+%%%%%%%%%%%%%%%% CAPITULO 2 ANTECEDENTES%%%%%%%%%%%
 \chapter{Antecedentes}\label{cap.antecedentes}
+%%%%ANTECEDENTES PYMES%%%%
 \section{Antecedentes de la seguridad informática en pequeñas y medianas empresas (PYMEs)}
 
-Desde que la tecnología forma parte de nuestra vida cotidiana, se encuentra cada vez más presente en las empresas, la pérdida o robo de información de datos electrónicos. Esto conlleva un importante agujero de seguridad, debido a una falta de previsión en la implantación de los métodos de seguridad.
+\lettrine{D}{}esde que la tecnología forma parte de nuestra vida cotidiana, se encuentra cada vez más presente en las empresas, la pérdida o robo de información de datos electrónicos. Esto conlleva un importante agujero de seguridad, debido a una falta de previsión en la implantación de los métodos de seguridad.
 
 Para cualquier empresa plantear un buen uso de las TIC (Tecnologías de la Información y la Comunicación) es un punto clave que se debe tener en cuenta y aprovechar al máximo  para aumentar la productividad y la eficiencia. Existe una gran inversión en cuanto a equipamiento informático y servicios básicos de comunicación que emplean las empresas, para su posible interconexión.
 
@@ -245,7 +250,7 @@ Como podemos extraer de los resultados anteriores, los recursos dedicados a pers
 
 Una razón de peso para las empresas, en la que apoyan la externalización del personal dedicado a la seguridad informática es la consideración de que una persona externa a la empresa garantiza un conocimiento más profundo y actualizado.
 De todos estos datos, extraemos que este proyecto se encontrará más enfocado y contará con mayor demanda en las pequeñas y medianas empresas, ya que se encuentran menos concienciadas de la falta de seguridad y recurren con mayor frecuencia a personal externo. 
-
+%%%%%%%ANTECEDENTES WIFI%%%%
 \section{Antecedentes de la seguridad informatica en redes WiFi}
 
 Hace años cuando se empezaron a utilizar las redes inalámbricas existía un error de incompatibilidad, debido a que cada fabricante usaba un estándar distinto, fue en ese momento cuando las empresas punteras se reunieron para crear WECA (Wireless Ethernet Compability Aliance) que en la actualidad lo llamamos como WIFI Alliance\cite{wifi}.
@@ -404,7 +409,7 @@ Estos usuarios no tratan con el código de encriptación. Son asignados de forma s
 	\item NFC: Intercambio de credenciales a través de comunicación NFC.
 	\item USB: Las credenciales se transfieren por un dispositivo de memoria flash.
 \end{itemize}
-
+%%%%%ANTECEDENTES DEL PENTEST%%%%
 \section{Antecedentes de pentest de WiFi}
 Cuando se habla de pentest de WiFi, se trata de atacar distintos entornos con el fin de descubrir fallos o vulnerabilidades de seguridad y así prevenir futuros ataques externos en los equipos o sistemas. Estas pruebas suelen concentrar sus esfuerzos en adivinar las contraseñas o tratar de acceder a una red, ya sea  para analizar datos que ésta contiene o para utilizar esta red como origen de futuros ataques.
 
@@ -427,7 +432,7 @@ Un pentesting de forma continua permite que los procesos de las auditorias de se
 
 ``\textit{El pentesting no debería ser un proceso puntual que se contrata, sino un servicio de ataque 24x7 durante todo el ciclo de vida de tu sistema.}'' \cite{elladodelmal}
 
-
+%%%%%ANTECEDENTES DEL PROYECTO%%%%
 \section{Antecedentes de proyecto}
 
 \subsection{Automatización de dispositivos}
@@ -443,7 +448,7 @@ El perfeccionamiento de los programas y dispositivos es lo que esta permitiendo 
 Cualquier elemento electrónico que puede ser programado, pude trabajar de forma automatizada si así se implementa. 
 
 \paragraph{Raspberry Pi}
- Raspberry Pi es un hardware que nos permite con gran facilidad automatizarlo y emplearlo para multiples fines. Se trata de un mini-ordenador  que se desarrolló en el Reino Unido, por un grupo del Computer Lab que empezó a preocuparse por el nivel de conocimientos sobre tecnologías informáticas con los que los estudiantes llegaban a la universidad.
+ Raspberry Pi es un hardware que nos permite con gran facilidad automatizarlo y emplearlo para múltiples fines. Se trata de un mini-ordenador  que se desarrolló en el Reino Unido, por un grupo del Computer Lab que empezó a preocuparse por el nivel de conocimientos sobre tecnologías informáticas con los que los estudiantes llegaban a la universidad.
 Apareció como una iniciativa para fomentar el aprendizaje de la programación desde edades más tempranas.\cite{Raspberry}
 En los pocos años que lleva en funcionamiento \textit{Raspberry Pi Foundation} se han creado distintos modelos:
 \begin{figure}[H]
@@ -453,33 +458,33 @@ En los pocos años que lleva en funcionamiento \textit{Raspberry Pi Foundation} s
   \label{fig:Ras}
 \end{figure}
 
-La gran ventaja de este dispositivo radica en la gran comunidad que presentan, así dispone de mucha información y ayuda. En cuanto al sistema operativo, dispone de la gran ventaja que al instalarse en la tarjeta SD, se podrá contar con varios SO en distintas tarjetas. El más utilizado será ``Raspbian'' que se trata de un Debian(Linux) optimizado para este dispositivo.
-La gran comunidad que se comento con anterioridad, ha permitido la interoperabilidad con otros productos. Se han creado periféricos específicos para Raspberry Pi (camaras, paneles tactiles con pantalla  TFT,etc). 
+La gran ventaja de este dispositivo radica en la gran comunidad que presentan, así dispone de mucha información y ayuda. En cuanto al sistema operativo, dispone de una gran utilidad ya que al instalarse en la tarjeta SD, se podrá contar con varios SO en distintas tarjetas. El más utilizado será ``Raspbian'' que se trata de un Debian(Linux) optimizado para este dispositivo.
+La gran comunidad que se comento con anterioridad, ha permitido la interoperabilidad con otros productos. Se han creado periféricos específicos para Raspberry Pi (cámaras, paneles táctiles con pantalla  TFT, teclados, etc). 
 
 
 
 \subsubsection{Detalles del Software}
-En cuanto al software se empleará una serie de programas informáticos, que harán posible la realización de este proyecto.
+En cuanto al software pueden se empleará una serie de programas informáticos, que harán posible la realización de este proyecto.
 \paragraph{GNU/Linux}
 Las siglas GNU quiere decir GNU's Not Unix, es decir GNU no es Unix. Se refiere a que no contiene ni una linea del código de Unix, el cual es un sistema operativo portable, multitarea y multiusuario de AT\&T,  y que vendió a SCO (Santa Cruz Operation) en 1995.
 El sufijo Linux se refiere al kernel (núcleo) que utiliza del sistema operativo. GNU esta desarrollando su propio kernel pero todavía no lo tienen disponible.
 \subparagraph{Kali Linux}
 Sabemos que el mundo de la seguridad informática avanza cada día a gran velocidad. Es por ello que es necesario que las personas que se dedican a ello siempre estén siempre ampliando conocimiento. 
-\textit{BlackTrack}  era una gran distribución de seguridad y la distribución de pruebas de penetración mas popular, ya que contenía cientos de herramientas de seguridad. La empresa que gestionaba esta distribución, Offensive Security\cite{offensive security}\footnote{Página oficial de la empresa offensive security \url{https://www.offensive-security.com/}}, evoluciono su distribución para proporcionar mejoras importantes. Kali linux siguió con los pasos creando una distribución Linux basada en Debian orientado a las auditorias de seguridad a pruebas de penetración en el 2013.Ésta ofrece al usuario un gran número de herramientas para cada rama del pentesting, como análisis forense, explotación de vulnerabilidades del sistema web o wireless. 
-Según \cite{kali} Kali Linux 2.0 contiene un nuevo kernel en su versión 4.0 y esta basada en Debian Jessie, mejorando la integración con el hardware y el uso de los drivers Wireless. Tiene soporte actualizado para un mayor número de escritorios(gnome,kde,xfce,mate,e17,lxde o i3wm).Una de las grandes mejoras fue el sistema de actualizaciones que presenta. La nueva versión de aplicaciones es una realidad. Generalmente, las actualizaciones serán llevadas a cabo vía \textit{Git}. El \textit{script} se ejecuta diariamente sobre un listado de herramientas comunes en la distribución y mantendrá alerta al usuario ante posibles nuevas actualizaciones.
+\textit{BlackTrack}  era una gran distribución de seguridad y la distribución de pruebas de penetración mas popular, ya que contenía cientos de herramientas de seguridad. La empresa que gestionaba esta distribución, Offensive Security\cite{offensive security}\footnote{Página oficial de la empresa offensive security \url{https://www.offensive-security.com/}}, evoluciono su distribución para proporcionar mejoras importantes. Kali Linux siguió con los pasos creando una distribución Linux basada en Debian orientado a las auditorias de seguridad a pruebas de penetración en el 2013.Ésta ofrece al usuario un gran número de herramientas para cada rama del pentesting, como análisis forense, explotación de vulnerabilidades del sistema web o wireless. 
+Según \cite{kali} Kali Linux 2.0 contiene un nuevo kernel en su versión 4.0 y esta basada en Debian Jessie, mejorando la integración con el hardware y el uso de los drivers Wireless. Tiene soporte actualizado para un mayor número de escritorios (gnome, kde ,xfce ,mate ,e17 ,lxde o i3wm). Una de las grandes mejoras fue el sistema de actualizaciones que presenta. La nueva versión de aplicaciones es una realidad. Generalmente, las actualizaciones serán llevadas a cabo vía \textit{Git}. El \textit{script} se ejecuta diariamente sobre un listado de herramientas comunes en la distribución y mantendrá alerta al usuario ante posibles nuevas actualizaciones.
 \begin{figure}[H]
   \centering
 	\includegraphics[width=0.7\textwidth]{kali_linux.jpg}%%ajusta el tamaño de la imagen.  %\caption{Logo de Kali Linux}
   \caption{Logotipo de kali linux\cite{kali1}.}
   \label{fig:kali}
 \end{figure}
-ARM (Advanced RISC Machine) se ha visto favorecido con el lanzamiento de Kali Linux 2.0 ya que sigue proporcionando soporte para Rasberry Pi, Chomebooks, Odroids,etc. Esto es importante ya que utilizaré una Rasberry Pi para automatizar todos los ataques.\\
+ARM (Advanced RISC Machine) se ha visto favorecido con el lanzamiento de Kali Linux 2.0 ya que sigue proporcionando soporte para Rasberry Pi, Chomebooks, Odroids,etc. Esto es importante ya que se utilizará una Rasberry Pi para automatizar todos los ataques.\\
 \paragraph{Suite aircrack-ng}
 La suite de herramientas \textit{``air''} proporciona todo lo necesario para llevar a cabo auditorias a redes wireless. También disponemos de más herramientas, como son GUIs o \textit{sripts}, que por debajo utilizan las propias herramientas de la suite. 
-Las mas utilizadas  en mi proyecto son:
+Las mas utilizadas  en el proyecto son:
 \begin{itemize}
-	\item Airmon-ng : Sirve para cambiar el modo de trabajo de la tarjeta inalámbrica, siempre y cuando el chipset lo permita. Este modo de trabajo cambiara a modo monitor.
-	\item Airodump-ng : Es la encargada de esnifar(\textit{sniffing}) o escuchar todo lo que circula por el aire, independientemente de su cifrado  o su red. Evidentemente si el trafico va sin cifrar, es decir redes abiertas se puede visualizar dicho tráfico y se podrá capturar información sensible que circula por el aire.
+	\item Airmon-ng: Sirve para cambiar el modo de trabajo de la tarjeta inalámbrica, siempre y cuando el chipset lo permita. Este modo de trabajo cambiara a modo monitor.
+	\item Airodump-ng: Es la encargada de esnifar(\textit{sniffing}) o escuchar todo lo que circula por el aire, independientemente de su cifrado  o su red. Evidentemente si el trafico va sin cifrar, es decir redes abiertas se puede visualizar dicho tráfico y se podrá capturar información sensible que circula por el aire.
 \begin{table}[H]
 \begin{center}
 \begin{tabular}{| p{2.2cm} | p{6.6cm} | }
@@ -543,7 +548,7 @@ Además este lenguaje utiliza como intérprete, la \textit{shell}, que es un entor
 A pesar del conocimiento de múltiples lenguajes de programación informática, se empleó este lenguaje porque es el lenguaje de programación utilizado en linux, y por tanto, nos brinda la oportunidad de aprender, esto fue uno de objetivos propuestos desde el inicio.
 Este lenguaje interpretado cuenta con muchas ventajas  en cuanto; rapidez de ejecución, sintaxis clara, sencilla y su portabilidad puediéndose ejecutar en múltiples plataformas. Bash no solo reconoce comandos, nos ayuda agruparlos para realizar programas completos sobretodo para la automatización (como es el caso de esta aplicación). 
 
-
+%%%%%%ANTECEDENTES INFORME ATOMATIZADO%%%%
 \subsection{Sistemas de generación automática de informes}
 Para la generación de un informe automatizado se debe contar con un dispositivo previamente programado, que realice algún tipo de acción que pueda recolectar la información para una posterior implementación en algún tipo de informe. Se pueden emplear la mayoría de los lenguajes de programación, pero \textit{Python} cuenta con varias bibliotecas de plantillas facilitando el trabajo.
 
@@ -585,12 +590,12 @@ Se puede ejecutar en la mayoría de las versiones de Python. Esta biblioteca se u
 
 
 
-%%%%%%%%%CAPITULO NUEVO%%%%%%%%%%
+%%%%%%%%%PROYECTO%%%%%%%%%%
 
 
-\chapter{Detalles de configuración de la Raspberry Pi}
+\chapter{Proyecto}
 
-En el proyecto, utilizare la Raspberry Pi 3 Modelo B, que como podemos comprobar en la imagen anterior (Figura \ref{fig:Ras}), mejora las características de sus predecesoras con un nuevo procesador más rápido integrado para incrementar su velocidad. Cuenta también con funciones de WiFi y Bluetooth BLE para mejorar su funcionalidad y la capacidad de alimentar dispositivos más potentes mediante los puertos USB. Se ha utilizado este dispositivo por la facilidad que tiene a la hora de instalar un sistema operativo y la movilidad que te proporciona, pudiendo transportarlo sin ningún tipo de impedimento.
+\lettrine{E}{}n el proyecto, se utilizará la Raspberry Pi 3 Modelo B, que como se aprecia en la imagen anterior (Figura \ref{fig:Ras}), mejora las características de sus predecesoras con un nuevo procesador más rápido integrado para incrementar su velocidad. Cuenta también con funciones de WiFi y Bluetooth BLE para mejorar su funcionalidad y la capacidad de alimentar dispositivos más potentes mediante los puertos USB. Se optó por  este dispositivo por la facilidad que tiene a la hora de instalar un sistema operativo y la movilidad que te proporciona, pudiendo transportarlo sin ningún tipo de impedimento. Contando por supuesto con su gran comunidad y las ventajas de esto a la hora de buscar información y de solucionar los errores. 
 \begin{figure}[H]
   \centering
 	\includegraphics[width=0.8\textwidth]{RaspberryPi.png}
@@ -652,8 +657,70 @@ Para las actualizaciones se emplearanlos siguientes comandos:
 \end{enumerate}
 
 
-\section{Programación y funcionamiento de la Raspberry Pi}
-Como ya se comento, la programación se ha desarrollado utilizando bash, 
+\section{Programación y ataques}
+El leguaje empleado para la automatización de los ataques es bash, 
+\subsection{Análisis y Ataque}
+\begin{figure}[H]
+  \centering
+   \includegraphics[width=0.6\textwidth]{esquema1.jpg}
+  \caption{Pasos a seguir para el ataque.}
+  \label{fig:esquema2}
+\end{figure}
+
+\subsubsection{Ataque red WEP}.
+
+Como ya he comentado, las redes WEP tienen muchas debilidades criptográficas, por lo que se ha utilizando las herramientas necesarias para intentare romper la encriptación WEP.
+Lo primero, será configurar la tarjeta como modo monitor para un posterior escaneo de las redes cercanas utilizando el comando \textit{airodum-ng}. Así, se comenzara a volcar  todo el tráfico que hay e el aire en un archivo determinado(LOG\_CAP). En este punto,  se detectará el cifrado WEP de la red seleccionada y si existe cliente asociado a dicha red. Si existe cliente asociado, el crackeo será mas sencillo, sino, se hará una falsa autenticación con una MAC aleatoria.
+Una vez elegida la red, se comienza a inyectar con dos objetivos distintos, el primero será deautenticar el cliente asociado con el fin de que vuelva a autenticarse y genere un paquete ARP válido, y el segundo para capturar el paquete ARP y reinyectarlo para generar un gran volumen de paquetes de datos. Como ya comente en la parte teórica, es importante obtener una gran cantidad de IVs y así poder predecir y atacar la clave que descifran los paquetes, obteniendo la clave de red.
+
+\begingroup{}
+	\fontsize{7pt}{7pt}=\selectfont
+	\verbatiminput {aircrack-ng.txt}
+\endgroup{}
+
+\subsubsection{Denegación de servicios.}
+El objetivo de este ataque es dejar a los usuarios legítimos de una red Wi-Fi sin poder acceder a internet. Por lo tanto, se inunda con paquetes de deautenticación al punto de acceso o al cliente que decida.
+Como siempre, la tarjeta inalámbrica debe estar en modo monitor y escuchando en el canal específico. Ahora empezaré a deautenticar en un bucle infinito (-0 0) al cliente o al punto de acceso que seleccione.
+
+\begingroup{}
+	\fontsize{7pt}{7pt}=\selectfont
+	\verbatiminput {denegacion_servicios.txt}
+\endgroup{}
+
+\subsubsection{Extraer datos.(Ataque WPA con WPS activado.)}
+Una vez que sabemos que la red seleccionada tiene un cifrado WPA y cuenta con el WPS activado, realizo:
+\paragraph{reaver:}
+Como siempre, se activará el modo monitor de la tarjeta inalámbrica y se empezará a capturar el tráfico en el aire con \textit{airodump-ng} para obtener los \textit{beacons} de información del punto de accesos, y así comprobar que el dicho punto esta utilizando WPS.
+Una vez que he detectado WPS en el punto de acceso se prueba mediante la herramienta \textit{reaver} si el punto es vulnerable. Ésta, realizará fuerza bruta sobre el punto de acceso, enviando distintos PIN hasta encontrar el que le devuelva la credencial de la red con cifrado WPA2.
+\begingroup{}
+	\fontsize{7pt}{7pt}=\selectfont
+	\verbatiminput {reaver.txt}
+\endgroup{}
+\paragraph{Pixiewps:}
+Este ataque \textit{Pixiewps} también conocido como \textit{polvo mágico}.Lo primero será comprobar si el router al que se le realiza el ataque es vulnerable. Si así lo fuera, se podrá obtener la clave en segundos. Continuando los pasos de los ataques anteriores y utilizando la tarjeta en modo monitor y escaneando el tráfico, atacamos a una de las redes disponibles que disponga de WPS activado. Primero utilizaremos el comando \textit{reaver} para recoger la PKE (clave pública de la persona inscrita), PKR (clave pública del registrador),e-hash 1 (hash  de la primera mitad del PIN WPS, fuerza bruta) y E-2 de hash (hash  de la segunda mitad del PIN WPS, fuerza bruta), E-nonce/ R-nonce y la authkey. Una vez se obtenga toda la información, se podrá aplicar pixiewps, para reducir tiempos.
+\begingroup{}
+	\fontsize{7pt}{7pt}=\selectfont
+	\verbatiminput {pixiewps.txt}
+\endgroup{}
+
+
+\subsubsection{Ataque WPA/WPA2 (pyrit)}
+
+
+\subsection{Pautas y seguimiento para la creación del informe} 
+Partiendo de un lenguaje de programación desde el cual se ha desarrollado el código para automatizar el dispositivo, se contará con otro lenguaje de programación (\textit{Python}) para que interactúe, y por medio de una de sus bibliotecas \textit{Jinja2}, genere unas plantillas (templates) donde se irán introduciendo los datos variables. Como se muestra en el gráfico, una vez obtengamos el informeWEP.tex o informeWPA.tex dependiendo del protocolo de la red, se utilizara la aplicación \textit{pdflatex} para generar el informe final.pdf.
+\begin{figure}[H]
+  \centering
+   \includegraphics[width=1\textwidth]{esquema3.jpg}
+  \caption{Pasos a seguir para generar el informe.}
+  \label{fig:esquema3}
+\end{figure} 
+
+
+
+
+
+
 \section{Aplicación para el análisis de vulnerabilidad}
 La herramienta con la que se ha desarrollado la aplicación ha sido realizada en código bash linux. Utiliza la librería \textit{GTK dialog} para la gestión de pantalla, como interfaz gráfica. Pudiendo interactuar con diferentes botones que realizaran la tarea de análisis. 
 \subsection{Descripción del la interfaz}
@@ -729,206 +796,12 @@ Si se escoge ATACAR WPA se invocan las siguientes funciones:
 	\item CrearInformeWPA()
 \end{itemize}
 
-%%%%%%%%%%%%%%CAPITULO 5%%%%%%%%%%
-
-
-\chapter{Estructura del informe de pentest}
-Para la generación del informe,  del modelo NIST SP 800-115\footnote{\url{http://csrc.nist.gov/publications/nistpubs/800-115/SP800-115.pdf}}. El NIST es una agencia de la administración de tecnológia de Estados Unidos, que se encarga de promover la innovación y la competencia industrial. Este informe no obliga la utilización de ninguna estructura en concreto. 
-\section{Introducción}
-intriducción de la estrctura del informe.
-
-\subsection{Auditoría}\index{Auditoría etiqueta}
-Una auditoría de seguridad informática es una evaluación de los sistemas informáticos cuyo fin es detectar errores y fallas y que mediante un informe detallado entregamos al responsable con el propósito de garantizar el buen funcionamiento de los sistemas ,  en esta auditoria nos centraremos en los posibles fallos de la red wifi que seleccionemos y así descubrir:
-\begin{itemize}
-    	\item Redes disponibles a nuestro alcance.
-	\item Tipo de cifrado de estas redes y en canal que se encuentras.
-	\item Vulnerabilidades que pudieran presentarse en una revisión de las estaciones de trabajo, redes sin ningún tipo de cifrado, puntos de acceso falso.
-\end{itemize}
-     Además, una buena auditoría de seguridad, si es llevada a cabo por una consultora externa, señalará las brechas en sus defensas existentes.
-
-\subsection{Objectivo y alcance}\index{Objectivo y alcance}
-
-El propósito de este documento es proporcionar unas serie de pautas y directrices para la mayoría de las organizaciones en la planificación y la realización de la seguridad de la información y así comprender la situación aproximada de sus activos de información en cuanto a protección , control y medidas de seguridad. Uno de los objetivos principales es la búsqueda de vulnerabilidades en las redes wifi y verificar el cumplimiento de algún tipo de política de seguridad.
-Este informe no pretende presentar una seguridad de la información completa , sino más bien una visión general de los elementos  de seguridad técnica y la posibles fallas de seguridad y recomendaciones para su uso.
-Con este informe no pretendo que se tome como medida de seguridad, ni para remplazar algún tipo de auditoria de seguridad, sino más bien como medida para comprobar posibles vulnerabilidades importante en la red inalámbrica.
-
-
-\subsection{Audiencia}\index{Audiencia}
-
-El informe que se pretende generar irá dirigido al responsable de la empresa o al personal contratante de esta aplicación, siempre y cuando el mayor responsable esté de acuerdo.
-El material contenido en el documento no presentará un lenguaje muy específico y será de fácil comprensión para cualquier persona, aunque no disponga de conocimientos previos en este ámbito.
-
-%----------------------------------------------------------------------------------------
-%	seccion2
-%----------------------------------------------------------------------------------------
-
-\section{Pruebas de seguridad y examen general}
-Hay que tener en cuenta que una evaluación de seguridad de la información es el proceso de determinar la eficacia con que se evalúa una entidad. Según el modelo que estoy siguiendo,  se pueden encontrar tres tipos de métodos de evaluación para lograr esto : pruebas, el examen o la entrevista.
-\subsection{Metodología de evaluación de seguridad de la información}\index{Metodología de evaluación de seguridad de la información}
-Una metodología de evaluación de seguridad y documentación es muy beneficiosa, ya que gracias a ella se pueden :
- \begin{itemize}
-   	\item Reducir al mínimo los riesgos de la prueba.
-	%\item Acelerar la transición del nuevo personal de evolución.
-	\item Limitar los recursos de direcciones asociadas con dicha evaluación.
- \end{itemize}
- Estas evaluaciones requieren de una serie de recursos como pueden ser el tiempo, el personal, el hardware y el software, y por tanto la disponibilidad de ellos a menudo es un factor limitante.
-
-\subsection{Técnicas de evaluación}\index{Técnicas de evaluación}
-Podemos contar con una gran cantidad de técnicas de evaluación, exámenes técnicos que se pueden utilizar para evaluar distintos niveles de seguridad de los sistemas o redes.
-\begin{itemize}
-   	\item Técnicas de revisión. 
-	\item Identificación de objetivos y técnicas de análisis.
-	\item Técnicas de vulnerabilidad. Estas técnicas de prueba corroboran la existencia de vulnerabilidades, y se pueden realizar de forma manual o como en este caso con herramientas automatizadas. Pueden ser pruebas de penetración, crackeo de contraseñas, ingeniería social \ldots
-\end{itemize}
-%----------------------------------------------------------------------------------------
-%	seccion3
-%----------------------------------------------------------------------------------------
-
-
-\section{Técnicas de Identificación y objetivos de vulnerabilidad}
-
-Con las técnicas de identificación me refiero al análisis de dispositivos activos, servicios asociados y analizarlos en busca de vulnerabilidades potenciales. Las empresas o organizaciones suelen utilizar técnicas, no técnicos para identificar los activos que deben ser analizados.
-
-\subsection{Análisis de vulnerabilidad}
-Muchos escáneres de vulnerabilidad están equipados para aceptar resultados de descubrimiento de red y el puerto de la red y la identificación del servicio, lo que reduce la
-cantidad de trabajo necesaria para el análisis de vulnerabilidades. Analizándolas, se puede ayudar a identificar versiones de software obsoletas, parches faltantes y errores de configuración, y validar el cumplimiento o desviaciones
-de la política de seguridad de una organización. Esto se realiza mediante la identificación de los sistemas operativos y las principales aplicaciones de software que se ejecutan en los hosts y emparejarlos con información sobre vulnerabilidades conocidas almacenadas en bases de datos de vulnerabilidad de los escáneres.
-Gracias a la búsqueda de vulnerabilidades podemos:
- \begin{itemize}
-	 \item Verificar el cumplimiento del uso de las aplicaciones host y las políticas de seguridad.
-	\item Proporcionar información sobre los objetivos de las pruebas de penetración.
-	\item Proporcionar información sobre la manera de mitigar las vulnerabilidades descubiertas.
-   \end{itemize}
-    	
-\subsection{Escaneo inalámbrico}
-Las tecnologías inalámbricas, en su sentido más simple, permiten a uno o más dispositivos para comunicarse sin la
-la necesidad de conexiones físicas, tales como cables de red o periféricos. Se extienden de tecnologías sencillas como teclados y ratones inalámbricos a las redes de telefonía  y redes de área local inalámbrica. Como ya hemos dicho, disponer de una red inalámbrica segura debería de ser una obligación  para cualquier empresa. Las exploraciones inalámbricos pueden ayudar a las organizaciones a determinar las acciones correctivas para mitigar los riesgos y posibles futuros ataques.
-A la hora de planificar las evaluaciones técnicas de seguridad inalámbrica debemos tener en cuenta:
- \begin{itemize}
-	\item La ubicación de la instalación que está siendo escaneada, ya que las proximidades de algún edificio colindante puede llevar a equivoco. 
-	\item La zona pública (por ejemplo, calles y áreas públicas comunes) o su ubicación en un área metropolitana ocupado puede aumentar el riesgo de amenazas inalámbricas
-	\item El nivel de seguridad de los datos que se transmiten a través de tecnologías inalámbricas.
-	\item Con qué frecuencia los dispositivos inalámbricos se conecten y desconecten, y los niveles de tráfico.
- \end{itemize}
- 
-\subsubsection{Escaneo pasivo inalámbrico}
-
-Este tipo de exploración pasiva se debe llevar a cabo periódicamente y así aumentar las medidas de seguridad inalámbricas que no transmiten datos, estas herramientas no afectaran al correcto funcionamiento de los dispositivos inalámbricos que estén en funcionamiento. Este examen dispone de una gran ventaja, al ser un escaneo pasivo no es detectado por algún tipo  de persona malintencionada u otros dispositivos. Esto reduce la probabilidad de que los individuos puedan evitar la detección mediante la desconexión o desactivación de los dispositivos inalámbricos no autorizados.
-
-\subsubsection{Escaneo activo inalámbrico}
-La información se recoge durante las exploraciones pasivas, buscando acoplarse a los dispositivos descubiertos donde pudiera haber algún tipo de vulnerabilidad. Estas técnicas de exploración deben realizarse con sumo cuidado, ya que se debe garantizar que no se analizaran dispositivos de organizaciones distintas que están dentro del alcance.
-Es importante evaluar la ubicación física de los dispositivos antes de empezar el escaneo activamente. Las organizaciones también deben tener cuidado en realizar búsquedas activas de dispositivos no autorizados que parecen estar operando dentro de las instalaciones de la organización.
-Tales dispositivos podrían pertenecer a un visitante a dicha empresa que sin darse cuenta con acceso inalámbrico habilitado,o para una organización vecina con un dispositivo que está cerca, pero no dentro, instalaciones de la organización.
-
-\subsubsection{Escaneo inalámbrico de localización}
-El personal de seguridad debe intentar localizar dispositivos sospechosos. Las señales de RF se propagan por el espacio, lo que es importante para entender cómo la tecnología inalámbrica es compatible con este proceso. Las capacidades de identificar procesos son útiles aquí, pero los principales factores necesarios para soportar esta capacidad son un operador experto y una adecuada antena inalámbrica.
-
-\subsection{Contraseña Cracking}
-
-Al introducir cualquier tipo de contraseña, debemos saber que se genera un hash de esta contraseña introducida para su posterior comprobación con un hash almacenado de las contraseñas del usuario. Al coincidir es cuando se autentica. Podemos decir, que el descifrado de contraseñas es un proceso de recuperar los hash de contraseñas almacenadas en algún sistema informático. Por lo general, se lleva a cabo durante las evaluaciones para saber si cuentas con contraseñas débiles.
-\subsection{Pruebas de Penetración}
-Las pruebas de penetración es la prueba de seguridad en el que los evaluadores imitan los posibles ataques del mundo real para identificar posibles métodos. Analizando así, las características de seguridad de una aplicación, sistema o red. A menudo implica el lanzamiento de algunos ataques a los sistemas reales y los datos que utilizan.
- \subsubsection {Fases de la prueba de penetración.}
- Podemos distinguir cuatro fases importantes:
- \begin{itemize}
-	\item Planificación.
-	\item Descubrimiento
-	\item Ataque
-	\item Informe
-  \end{itemize}
- 
-\subsubsection {Logística de Penetración} 
-Estas pruebas deben centrarse  y orientarse en cuanto a posibles defectos explotables en la implementación de la red inalámbrica, en mi caso, como a la gestión de aplicaciones,sistemas o redes. Estas pruebas reproducirán ataques dirigidos de una forma externa. Un escenario de prueba de penetración puede ser diseñado para simular un ataque en el interior, un ataque exterior, o ambos, se consideran métodos de pruebas de seguridad externas e internas.  
-
-
-%----------------------------------------------------------------------------------------
-%	seccion 4
-%----------------------------------------------------------------------------------------
-
-
-\section{Planificación de la evaluación de seguridad}
-Una planificación adecuada es fundamental para una evaluación de seguridad exitosa. En esta sección se proporciona orientación sobre la creación de una política de evaluación, priorización y programación de las evaluaciones, y hacer frente a las consideraciones logísticas. También proporciona recomendaciones para desarrollar una plan de evaluación y describe las consideraciones legales relacionadas con la evaluación de que las organizaciones pueden necesitar de la dirección.
-
-\subsection{Desarrollo de una política de evaluación}
-Las organizaciones deben desarrollar una política de evaluación de seguridad de la información para proporcionar la dirección y orientación para las evaluaciones de seguridad. Esta política debe identificar los requisitos de evaluación de la seguridad,
-y obedecer a los individuos responsables de garantizar que las evaluaciones cumplen con los requisitos. Debe abordar:
- \begin{itemize}
-	\item Requisitos de la organización con la que las evaluaciones deben cumplir.	
-	\item Los roles y responsabilidades apropiadas (como mínimo, para aquellas personas que se aprueba y la ejecución de las evaluaciones)
-	\item Tiempos fijados de evaluación
-  \end{itemize}
-\subsection{Consideraciones legales}
-Los posibles problemas legales deben abordarse antes de que dicha evaluación comience. Si la organización correspondiente autoriza a una entidad externa llevar a cabo una evaluación de seguridad, los departamentos legales de cada organización deben estar involucrados y fijar las pautas correspondientes.
-%----------------------------------------------------------------------------------------
-%	seccion 5
-%----------------------------------------------------------------------------------------
-\section{Ejecución de la evaluación de seguridad}
-
-\subsection{Análisis y Ataque}
-\begin{figure}[H]
-  \centering
-   \includegraphics[width=0.6\textwidth]{esquema1.jpg}
-  \caption{Pasos a seguir para el ataque.}
-  \label{fig:esquema2}
-\end{figure}
-
-\subsubsection{Ataque red WEP}.
-
-Como ya he comentado, las redes WEP tienen muchas debilidades criptográficas, por lo que se ha utilizando las herramientas necesarias para intentare romper la encriptación WEP.
-Lo primero, será configurar la tarjeta como modo monitor para un posterior escaneo de las redes cercanas utilizando el comando \textit{airodum-ng}. Así, se comenzara a volcar  todo el tráfico que hay e el aire en un archivo determinado(LOG\_CAP). En este punto,  se detectará el cifrado WEP de la red seleccionada y si existe cliente asociado a dicha red. Si existe cliente asociado, el crackeo será mas sencillo, sino, se hará una falsa autenticación con una MAC aleatoria.
-Una vez elegida la red, se comienza a inyectar con dos objetivos distintos, el primero será deautenticar el cliente asociado con el fin de que vuelva a autenticarse y genere un paquete ARP válido, y el segundo para capturar el paquete ARP y reinyectarlo para generar un gran volumen de paquetes de datos. Como ya comente en la parte teórica, es importante obtener una gran cantidad de IVs y así poder predecir y atacar la clave que descifran los paquetes, obteniendo la clave de red.
-
-\begingroup{}
-	\fontsize{7pt}{7pt}=\selectfont
-	\verbatiminput {aircrack-ng.txt}
-\endgroup{}
-
-\subsubsection{Denegación de servicios.}
-El objetivo de este ataque es dejar a los usuarios legítimos de una red Wi-Fi sin poder acceder a internet. Por lo tanto, se inunda con paquetes de deautenticación al punto de acceso o al cliente que decida.
-Como siempre, la tarjeta inalámbrica debe estar en modo monitor y escuchando en el canal específico. Ahora empezaré a deautenticar en un bucle infinito (-0 0) al cliente o al punto de acceso que seleccione.
-
-\begingroup{}
-	\fontsize{7pt}{7pt}=\selectfont
-	\verbatiminput {denegacion_servicios.txt}
-\endgroup{}
-
-\subsubsection{Extraer datos.(Ataque WPA con WPS activado.)}
-Una vez que sabemos que la red seleccionada tiene un cifrado WPA y cuenta con el WPS activado, realizo:
-\paragraph{reaver:}
-Como siempre, se activará el modo monitor de la tarjeta inalámbrica y se empezará a capturar el tráfico en el aire con \textit{airodump-ng} para obtener los \textit{beacons} de información del punto de accesos, y así comprobar que el dicho punto esta utilizando WPS.
-Una vez que he detectado WPS en el punto de acceso se prueba mediante la herramienta \textit{reaver} si el punto es vulnerable. Ésta, realizará fuerza bruta sobre el punto de acceso, enviando distintos PIN hasta encontrar el que le devuelva la credencial de la red con cifrado WPA2.
-\begingroup{}
-	\fontsize{7pt}{7pt}=\selectfont
-	\verbatiminput {reaver.txt}
-\endgroup{}
-\paragraph{Pixiewps:}
-Este ataque \textit{Pixiewps} también conocido como \textit{polvo mágico}.Lo primero será comprobar si el router al que se le realiza el ataque es vulnerable. Si así lo fuera, se podrá obtener la clave en segundos. Continuando los pasos de los ataques anteriores y utilizando la tarjeta en modo monitor y escaneando el tráfico, atacamos a una de las redes disponibles que disponga de WPS activado. Primero utilizaremos el comando \textit{reaver} para recoger la PKE (clave pública de la persona inscrita), PKR (clave pública del registrador),e-hash 1 (hash  de la primera mitad del PIN WPS, fuerza bruta) y E-2 de hash (hash  de la segunda mitad del PIN WPS, fuerza bruta), E-nonce/ R-nonce y la authkey. Una vez se obtenga toda la información, se podrá aplicar pixiewps, para reducir tiempos.
-\begingroup{}
-	\fontsize{7pt}{7pt}=\selectfont
-	\verbatiminput {pixiewps.txt}
-\endgroup{}
-
-
-\subsubsection{Ataque WPA/WPA2 (pyrit)}
-
-
-\subsection{Pautas y seguimiento para la creación del informe} 
-Partiendo de un lenguaje de programación desde el cual se ha desarrollado el código para automatizar el dispositivo, se contará con otro lenguaje de programación (\textit{Python}) para que interactúe, y por medio de una de sus bibliotecas \textit{Jinja2}, genere unas plantillas (templates) donde se irán introduciendo los datos variables. Como se muestra en el gráfico, una vez obtengamos el informeWEP.tex o informeWPA.tex dependiendo del protocolo de la red, se utilizara la aplicación \textit{pdflatex} para generar el informe final.pdf.
-\begin{figure}[H]
-  \centering
-   \includegraphics[width=1\textwidth]{esquema3.jpg}
-  \caption{Pasos a seguir para generar el informe.}
-  \label{fig:esquema3}
-\end{figure}
-
-%\subsubsection{Recopilación  de datos}
-%\subsubsection{Almacenamiento de datos}
-%\subsubsection{Datos Transmitidos}
+%%%%%%%%%%%%%%CONCLUSION %%%%%%%%%%
 
 
 \chapter{Conclusiones y propuestas}
 
-Como expuse al comienzo de mi memoria las principales ventajas de las redes inalámbricas son la movilidad que te proporcionan y su facilidad acceso. Esto será su principal inconveniente, ya que las ondas de radiofrecuencia no se pueden detener, y la información viaje en todas las direcciones.  
+\lettrine{C}{}omo expuse al comienzo de mi memoria las principales ventajas de las redes inalámbricas son la movilidad que te proporcionan y su facilidad acceso. Esto será su principal inconveniente, ya que las ondas de radiofrecuencia no se pueden detener, y la información viaje en todas las direcciones.  
 La seguridad en las redes inalámbricas debería ser un objetivo imprescindible para cualquier empresa, dando así la importancia que se merece la seguridad de la información.La motivación de este proyecto, es conseguir concienciar al mayor número posible de empresas, del fácil acceso y las posibles causas económicas e incluso jurídicas que le puede ocasionar un posible ataque. Por ello se  ..
 
 
