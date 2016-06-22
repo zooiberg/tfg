@@ -16,15 +16,16 @@
 \contentsline {figure}{\numberline {2.13}{\ignorespaces Ejemplo \LaTeX {}.}}{23}{figure.2.13}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Imagen Raspberry Pi 3 \url {https://www.raspberrypi.org/wp-content/uploads/2016/03/pi3.jpg} }}{24}{figure.3.1}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Tarjeta Inal\'ambrica alfa \cite {alfa}}}{25}{figure.3.2}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Interfaz gr\'afica. Lista tarjetas WiFi}}{27}{figure.3.3}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Interfaz gr\'afica. Activa el modo monitor}}{28}{figure.3.4}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Interfaz gr\'afica. Escaner de redes}}{29}{figure.3.5}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Interfaz gr\'afica. Muestra informaci\'on relevante.}}{29}{figure.3.6}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Interfaz gr\'afica. Selecci\'on de red que se vaya analizar.}}{30}{figure.3.7}
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Pasos a seguir para el ataque.}}{37}{figure.4.1}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Pasos a seguir para generar el informe.}}{42}{figure.4.2}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Conexi\'on Raspberry Pi}}{25}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Tarjeta Inal\'ambrica alfa \cite {alfa}}}{26}{figure.3.3}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Pasos a seguir para el ataque.}}{28}{figure.3.4}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Pautas de seguimiento}}{35}{figure.3.5}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Interfaz gr\'afica. Lista tarjetas WiFi}}{36}{figure.3.6}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Interfaz gr\'afica. Activa el modo monitor}}{37}{figure.3.7}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Interfaz gr\'afica. Escaner de redes}}{38}{figure.3.8}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Interfaz gr\'afica. Muestra informaci\'on relevante.}}{39}{figure.3.9}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Interfaz gr\'afica. Selecci\'on de red que se vaya analizar.}}{41}{figure.3.10}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Pasos a seguir para generar el informe.}}{43}{figure.3.11}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

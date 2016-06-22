@@ -511,12 +511,9 @@ Probe & Paquetes en los que el cliente intenta identificar una red wireless. Por
 \end{table}
 	
 	
-	\item Airbase-ng: Esta herramienta sirve para atacar a los clientes asociados a un punto de acceso. Es una aplicación versátil y flexible , disponiendo de distintos modos de trabajo.Con ella también es posible habilitar un punto de acceso normal. Esto sirve para engañar a un usuario para que se conecte al punto de acceso falso y capturar así todo el tráfico. \\
-	\par
-	\item Aircrack-ng: Sirve para realizar ataques de fuerza bruta, diccionario. En función del tipo de cifrado de la red que se quiera crackear se realizara un tipo de ataque u otro. El problema de realizar este tipo de ataques es la cantidad de tiempo y de recursos que se emplean para conseguir descifrar una clave WPA, llegando a quedar inutilizado este dispositivo mientras se realiza el ataque. Para intentar reducir estos tiempos podemos hablar de:
-	\begin{itemize}
-	\item pyrit: Es un herramienta muy potente que facilita la creación de bases de datos para precalcular las claves PSK y así acelerar el pre-procesamiento, aprovechando al máximo las plataformas del mercado(Nvidia CUDA, OpenCL) y así poder descifrar claves WPA o WPA2 mediante ataques de fuerza bruta o diccionario. 
-	\end{itemize}
+	\item Airbase-ng: Esta herramienta sirve para atacar a los clientes asociados a un punto de acceso. Es una aplicación versátil y flexible , disponiendo de distintos modos de trabajo.Con ella también es posible habilitar un punto de acceso normal. Esto sirve para engañar a un usuario para que se conecte al punto de acceso falso y capturar así todo el tráfico.
+
+	\item Aircrack-ng: Sirve para realizar ataques de fuerza bruta, diccionario. En función del tipo de cifrado de la red que se quiera crackear se realizara un tipo de ataque u otro. El problema de realizar este tipo de ataques es la cantidad de tiempo y de recursos que se emplean para conseguir descifrar una clave WPA, llegando a quedar inutilizado este dispositivo mientras se realiza el ataque. Para intentar reducir estos tiempos podemos hablar de:	
 	\item Aireplay-ng: Permite desautentificar e inyectar paquetes ARP a clientes asociados y así generar tráfico. 
 	
 \begin{table}[H]
@@ -568,26 +565,13 @@ Se puede ejecutar en la mayoría de las versiones de Python. Esta biblioteca se u
 
 \subsubsection{\LaTeX{}}
 \LaTeX{} es un sistema de preparación de documentos. Sirve para organizar y preparar artículos de revistas, libros, cartas, revistas, tesis y cualquier tipo de documento. Se desarrollo con el fin de facilitar y mejorar los textos científicos, sobre todo los matemáticos, y que estos se puedan utilizar entre distintas plataformas. Con el se desarrollo la memoria del proyecto y la generación del informe. 
-\paragraph{Ejemplo de informe WEP.}
+
 \begin{figure}[H]
   \centering
-    \includegraphics[width=1\textwidth]{ejemplo_la 1tex.png}
+    \includegraphics[width=1\textwidth]{ejemplo_latex.png}
   \caption{Ejemplo \LaTeX{}.}
   \label{fig:ejemplolatex}
 \end{figure}
-
-
-
-
-
-
-
-
-
-%\subparagraph{Reaver}
-%Se planteó como un ataque sólido y muy conveniente contra WPS. Se ejecuta un ataque de fuerza bruta contra el punto de acceso, creando todas las combinaciones posibles para adivinar el numero PIN de 8 dígitos del Punto de Acceso. Si fuera una red WPA, sabemos que la combinación son mucho mayores, ya que puede haber letras, números y a veces incluso símbolos, por lo tanto el ataque será mucho mas difícil y largos de ejecutar. Sin embargo en WPS sabemos que el último dígito es un valor de suma de control que podría ser calculada en base a los 7 dígitos anteriores, por lo que las combinaciones se reducirían mucho. Podemos reducir mas el tiempo ya que el numero de PIN para la verificación va en dos mitades, por lo que se puede comprobar independientemente los 4 primeros y los últimos 4 dígitos."
-
-
 
 
 %%%%%%%%%PROYECTO%%%%%%%%%%
@@ -616,10 +600,16 @@ RAM de 1 GB: Es un sistema-en-chip diseñado específicamente para este modelo de 
 	\item Puerto Micro SD para carga del sistema operativo y almacenamiento de datos: 
 	%\item Fuente de alimentación Micro USB actualizada con interruptor de hasta 2.5 A
 \end{itemize}
- 
+ En cuanto a la conexión, Raspberry Pi no cuenta con ningún tipo de monitor o pantalla incorporado. Normalmente se conecta a alguna pantalla por la conexión HDMI o VGA que dispone. El motivo por el no se contemplo esta solución fue la falta de movilidad que mostraba. Por ello se emplea el propio móvil del comercial para lanzar el ataque. Por medio de una aplicación VNC (VIirtual Network Computing) que es un sistema gráfico para el intercambio de escritorio para el control de forma remota el interfaz de escritorio de un dispositivo a otro.
+ \begin{figure}[H]
+  \centering
+   \includegraphics[width=0.3\textwidth]{conectar.png}
+  \caption{Conexión Raspberry Pi}
+  \label{fig:conectar}
+\end{figure}
 \paragraph{Soporte de tarjetas inalámbricas}
 
-Como se comento, el modelo de Raspberry Pi con el que se ha contado para la realización del proyecto, ya dispone de una tarjeta inalámbrica entre sus componente. El problema se obtuvo al desarrollar los supuestos ataques, ya que esta tarjeta no soportaba el modo monitor que se explicó en los antecedentes del proyecto. 
+Como se comentó, el modelo de Raspberry Pi con el que se ha contado para la realización del proyecto, ya dispone de una tarjeta inalámbrica entre sus componente. El problema se obtuvo al desarrollar los supuestos ataques, ya que esta tarjeta no soportaba el modo monitor que se explicó en los antecedentes del proyecto. 
 Se realizó una búsqueda completa en el mercado con varios posibles Chipset (Ralink RT3070, Ralink RT3572, Realtek 8187L, Ralink RT5370), empleando Atheros AR9271L, ya que no era excesivamente caro y proporcionaba una ganancia de 5 dbi y un rango de frecuencia de 2.412-2.483.
 \begin{itemize}
 \item Estandar Wi-Fi: IEEE 802.11b/g/n
@@ -643,7 +633,7 @@ Se descargó la versión para la Raspberry Pi 2/3 para instalarlo en la SD. Para h
 Las instalaciones se pueden hacer de dos maneras dependiendo del sistema operativo que se disponga para la instalación.
 
 \begin{enumerate}
-	\item Desde Linux o Mac OS: Con el comando ``dd if=kali-1.0.9-rpi.img of=/dev/sdb bs=512k'', siendo /dev/sdb la partición correspondiente a la SD y kali-1.0.9-rpi.img la imagen del sistema operativo.
+	\item Desde Linux o Mac OS: Con el comando ``dd if=kali-1.0.9-rpi.img of=/dev/sdb bs=512k'', siendo /dev/sdb la partición correspondiente a la SD y kali-1.0.9-rpi.img la imagen del sistema operativo. Se debe tener especial cuidado al utilizar este comando, ya que se tiene que tener claro que dispositivo estas volcando para que no se tenga problemas de borrado de disco.
 	\item Desde Windows: Con el programa Win32DiskImager, seleccionando la imagen de Kali Linux y la unidad correspondiente a la SD. Este método dio algunos problemas a la hora de montar la tarjeta SD, por lo que se empleo por el primer de los métodos.
 \end{enumerate}
 
@@ -653,25 +643,24 @@ Para las actualizaciones se emplearanlos siguientes comandos:
 \begin{enumerate}
 	\item \textit{apt-get update}
 	\item \textit{apt-get upgrade}
-	\item\textit{ apt-get kali-linux-wireless}
+	\item\textit{apt-get kali-linux-wireless}
 \end{enumerate}
 
-
+%%%ATAQUES%%%
 \section{Programación y ataques}
 El leguaje empleado para la automatización de los ataques es bash, 
-\subsection{Análisis y Ataque}
+
 \begin{figure}[H]
   \centering
-   \includegraphics[width=0.6\textwidth]{esquema1.jpg}
+   \includegraphics[width=0.8\textwidth]{ataque.png}
   \caption{Pasos a seguir para el ataque.}
-  \label{fig:esquema2}
+  \label{fig:ataque}
 \end{figure}
 
 \subsubsection{Ataque red WEP}.
-
-Como ya he comentado, las redes WEP tienen muchas debilidades criptográficas, por lo que se ha utilizando las herramientas necesarias para intentare romper la encriptación WEP.
-Lo primero, será configurar la tarjeta como modo monitor para un posterior escaneo de las redes cercanas utilizando el comando \textit{airodum-ng}. Así, se comenzara a volcar  todo el tráfico que hay e el aire en un archivo determinado(LOG\_CAP). En este punto,  se detectará el cifrado WEP de la red seleccionada y si existe cliente asociado a dicha red. Si existe cliente asociado, el crackeo será mas sencillo, sino, se hará una falsa autenticación con una MAC aleatoria.
-Una vez elegida la red, se comienza a inyectar con dos objetivos distintos, el primero será deautenticar el cliente asociado con el fin de que vuelva a autenticarse y genere un paquete ARP válido, y el segundo para capturar el paquete ARP y reinyectarlo para generar un gran volumen de paquetes de datos. Como ya comente en la parte teórica, es importante obtener una gran cantidad de IVs y así poder predecir y atacar la clave que descifran los paquetes, obteniendo la clave de red.
+Como ya se ha comentado, las redes WEP tienen muchas debilidades criptográficas, por lo que se ha utilizado las herramientas necesarias para intentare romper la encriptación WEP.
+Lo primero, será configurar la tarjeta como modo monitor para un posterior escaneo de las redes cercanas empleando el comando \textit{airodum-ng}. Así, se comenzará a volcar todo el tráfico que hay en el aire en un archivo determinado (LOG\_CAP). En este punto, se detectará el cifrado WEP de la red seleccionada y si existe cliente asociado a dicha red. Si existe cliente asociado, el crackeo será más sencillo, sino, se hará una falsa autenticación con una MAC aleatoria.
+Una vez elegida la red, se comienza a inyectar con dos objetivos distintos, el primero será deautenticar el cliente asociado con el fin de que vuelva a autenticarse y genere un paquete ARP válido, y el segundo para capturar el paquete ARP y reinyectarlo para generar un gran volumen de paquetes de datos. Como ya se habló en la parte teórica, es importante obtener una gran cantidad de IVs y así poder predecir y atacar la clave que descifran los paquetes, obteniendo la clave de red.
 
 \begingroup{}
 	\fontsize{7pt}{7pt}=\selectfont
@@ -680,7 +669,7 @@ Una vez elegida la red, se comienza a inyectar con dos objetivos distintos, el p
 
 \subsubsection{Denegación de servicios.}
 El objetivo de este ataque es dejar a los usuarios legítimos de una red Wi-Fi sin poder acceder a internet. Por lo tanto, se inunda con paquetes de deautenticación al punto de acceso o al cliente que decida.
-Como siempre, la tarjeta inalámbrica debe estar en modo monitor y escuchando en el canal específico. Ahora empezaré a deautenticar en un bucle infinito (-0 0) al cliente o al punto de acceso que seleccione.
+Como siempre, la tarjeta inalámbrica debe estar en modo monitor y escuchando en el canal específico. Así se deautenticará en un bucle infinito (-0 0) al cliente o al punto de acceso que se seleccione.
 
 \begingroup{}
 	\fontsize{7pt}{7pt}=\selectfont
@@ -690,96 +679,143 @@ Como siempre, la tarjeta inalámbrica debe estar en modo monitor y escuchando en 
 \subsubsection{Extraer datos.(Ataque WPA con WPS activado.)}
 Una vez que sabemos que la red seleccionada tiene un cifrado WPA y cuenta con el WPS activado, realizo:
 \paragraph{reaver:}
+Reaver se planteó como un ataque sólido y muy conveniente contra WPS. Se ejecuta un ataque de fuerza bruta contra el punto de acceso, creando todas las combinaciones posibles para adivinar el numero PIN de 8 dígitos del Punto de Acceso. Si fuera una red WPA, sabemos que la combinación son mucho mayores, ya que puede haber letras, números y a veces incluso símbolos, por lo tanto el ataque será mucho mas difícil y largos de ejecutar. Sin embargo en WPS sabemos que el último dígito es un valor de suma de control que podría ser calculada en base a los 7 dígitos anteriores, por lo que las combinaciones se reducirían mucho. Podemos reducir mas el tiempo ya que el numero de PIN para la verificación va en dos mitades, por lo que se puede comprobar independientemente los 4 primeros y los últimos 4 dígitos.''
 Como siempre, se activará el modo monitor de la tarjeta inalámbrica y se empezará a capturar el tráfico en el aire con \textit{airodump-ng} para obtener los \textit{beacons} de información del punto de accesos, y así comprobar que el dicho punto esta utilizando WPS.
-Una vez que he detectado WPS en el punto de acceso se prueba mediante la herramienta \textit{reaver} si el punto es vulnerable. Ésta, realizará fuerza bruta sobre el punto de acceso, enviando distintos PIN hasta encontrar el que le devuelva la credencial de la red con cifrado WPA2.
+Una vez detectado WPS en el punto de acceso se prueba mediante la herramienta \textit{reaver} si el punto es vulnerable. Ésta, realizará fuerza bruta sobre el punto de acceso, enviando distintos PIN hasta encontrar el que le devuelva la credencial de la red con cifrado WPA2.
 \begingroup{}
 	\fontsize{7pt}{7pt}=\selectfont
 	\verbatiminput {reaver.txt}
 \endgroup{}
 \paragraph{Pixiewps:}
-Este ataque \textit{Pixiewps} también conocido como \textit{polvo mágico}.Lo primero será comprobar si el router al que se le realiza el ataque es vulnerable. Si así lo fuera, se podrá obtener la clave en segundos. Continuando los pasos de los ataques anteriores y utilizando la tarjeta en modo monitor y escaneando el tráfico, atacamos a una de las redes disponibles que disponga de WPS activado. Primero utilizaremos el comando \textit{reaver} para recoger la PKE (clave pública de la persona inscrita), PKR (clave pública del registrador),e-hash 1 (hash  de la primera mitad del PIN WPS, fuerza bruta) y E-2 de hash (hash  de la segunda mitad del PIN WPS, fuerza bruta), E-nonce/ R-nonce y la authkey. Una vez se obtenga toda la información, se podrá aplicar pixiewps, para reducir tiempos.
+Este ataque \textit{Pixiewps} también conocido como \textit{polvo mágico}. Lo primero que hará es comprobar si el router al que se le realiza el ataque es vulnerable. Si así lo fuera, se podrá obtener la clave en segundos. Continuando los pasos de los ataques anteriores y utilizando la tarjeta en modo monitor y escaneando el tráfico, se atacará a una de las redes disponibles que disponga de WPS activado. Primero utilizaremos el comando \textit{reaver} para recoger la PKE (clave pública de la persona inscrita), PKR (clave pública del registrador),e-hash 1 (hash  de la primera mitad del PIN WPS, fuerza bruta) y E-2 de hash (hash  de la segunda mitad del PIN WPS, fuerza bruta), E-nonce/ R-nonce y la authkey. Una vez se obtenga toda la información, se podrá aplicar pixiewps, para reducir tiempos.
+
 \begingroup{}
 	\fontsize{7pt}{7pt}=\selectfont
 	\verbatiminput {pixiewps.txt}
 \endgroup{}
 
 
-\subsubsection{Ataque WPA/WPA2 (pyrit)}
+\subsubsection{Ataque en diccionario WPA/WPA2 }
+Sabemos que WPA y WPA2 PSK tiene posibles vulnerabilidades a un ataque de diccionario. Para la realización de este ataque es necesario el \textit{handshake } (saludo de cuatro vías) entre el punto de acceso y el cliente y un listado de palabras con frases comunes. Empleando el comando \textit{aircrack-ng}, se traatará de romper la contraseña.
+
+\subsubsection{Extaer datos del punto de acceso.}
+NOSE QUE PONER!!!!!!!!!!!!!!!!!!!!
+ \begingroup{}
+	\fontsize{7pt}{7pt}=\selectfont
+	\verbatiminput {ExtraerDatosAp().txt}
+\endgroup{}
+
+\subsubsection{Ataque de diccionario WPA}
+El tener que emplear la fuerza bruta es un gran inconveniente, ya que se hará un uso intensivo del procesador de la Raspberry Pi. Este proceso, si se dejara podrá llegar a durar horas e incluso días comprobando las posibles palabras del diccionario. 
+AircrackWPA()
+\begingroup{}
+	\fontsize{7pt}{7pt}=\selectfont
+	\verbatiminput {AircrackWPA().txt}
+\endgroup{}
+
+\subsubsection{Utilizamos Pyrit}
+Es un herramienta muy potente que facilita la creación de bases de datos para precalcular las claves PSK y así acelerar el pre-procesamiento, aprovechando al máximo las plataformas del mercado(Nvidia CUDA, OpenCL) y así poder descifrar claves WPA o WPA2 mediante ataques de fuerza bruta o diccionario. Es necesario haber capturado con anterioridad el handshake.
+AnalizarPyrit()
+\begingroup{}
+	\fontsize{7pt}{7pt}=\selectfont
+	\verbatiminput {AnalizarPyrit().txt}
+\endgroup{}
+
+%DenegacionServicio()
+%\begingroup{}
+%	\fontsize{7pt}{7pt}=\selectfont
+%	\verbatiminput {DenegacionServicio().txt}
+%\endgroup{}
 
 
-\subsection{Pautas y seguimiento para la creación del informe} 
-Partiendo de un lenguaje de programación desde el cual se ha desarrollado el código para automatizar el dispositivo, se contará con otro lenguaje de programación (\textit{Python}) para que interactúe, y por medio de una de sus bibliotecas \textit{Jinja2}, genere unas plantillas (templates) donde se irán introduciendo los datos variables. Como se muestra en el gráfico, una vez obtengamos el informeWEP.tex o informeWPA.tex dependiendo del protocolo de la red, se utilizara la aplicación \textit{pdflatex} para generar el informe final.pdf.
-\begin{figure}[H]
-  \centering
-   \includegraphics[width=1\textwidth]{esquema3.jpg}
-  \caption{Pasos a seguir para generar el informe.}
-  \label{fig:esquema3}
-\end{figure} 
+%%%%INTERFAZ%%%%%
 
-
-
-
-
-
-\section{Aplicación para el análisis de vulnerabilidad}
+\section{Aplicación para el análisis de vulnerabilidad (Interfaz gráfica)}
 La herramienta con la que se ha desarrollado la aplicación ha sido realizada en código bash linux. Utiliza la librería \textit{GTK dialog} para la gestión de pantalla, como interfaz gráfica. Pudiendo interactuar con diferentes botones que realizaran la tarea de análisis. 
-\subsection{Descripción del la interfaz}
 
 \begin{figure}[H]
   \centering
-	\includegraphics[width=1\textwidth]{Interfaz1.png}
-  \caption{Interfaz gráfica. Lista tarjetas WiFi}}
-   \label{fig:interfaz1}
+   \includegraphics[width=0.7\textwidth]{interfaz.png}
+  \caption{Pautas de seguimiento}
+  \label{fig:esquemainterfaz}
 \end{figure}
 
-Se inicia la aplicación SeguridadWifi y se muestra la pantalla principal de la aplicación y se listan las interfaces wifi disponibles para utilizar en el análisis de vulnerabilidades WIFI y se
 
-ListarTarjetasWifi()
+\subsection{Descripción del la interfaz}
+\begin{figure}[H]
+  \centering
+   \includegraphics[width=1\textwidth]{Interfaz1.png}
+  \caption{Interfaz gráfica. Lista tarjetas WiFi}
+  \label{fig:interfaz1}
+\end{figure}
+\begin{enumerate}
+	\item Se inicia la aplicación SeguridadWifi y se muestra la pantalla principal de la aplicación y se listan las interfaces wifi disponibles para utilizar en el análisis de vulnerabilidades WIFI y se
+
+	ListarTarjetasWifi()
+	
+\begingroup{}
+	\fontsize{7pt}{7pt}=\selectfont
+	\verbatiminput {ListarTarjetasWifi().txt}
+\endgroup{}
 
 
 
 \begin{figure}[H]
   \centering
 	\includegraphics[width=1\textwidth]{Interfaz2.png}
-  \caption{Interfaz gráfica. Activa el modo monitor}}
+  \caption{Interfaz gráfica. Activa el modo monitor}
    \label{fig:int2}
 \end{figure}
 
-En esta pantalla se muestra las tarjetas wifi disponibles y se activa el modo monitor de la tarjeta seleccionada.
+	\item En esta pantalla se muestra las tarjetas wifi disponibles y se activa el modo monitor de la tarjeta seleccionada.
 
 ActivarModoMonitor()
+\begingroup{}
+	\fontsize{7pt}{7pt}=\selectfont
+	\verbatiminput {ActivarModoMonitor().txt}
+\endgroup{}
 
 \begin{figure}[H]
   \centering
 	\includegraphics[width=1\textwidth]{Interfaz3.png}
-  \caption{Interfaz gráfica. Escaner de redes}}
+  \caption{Interfaz gráfica. Escaner de redes}
    \label{fig:int3}
 \end{figure}
 
-En esta pantalla se presiona el botón ESCANEAR REDES para el escaneo de las redes que se encuentran en nuestro alcance en un tiempo determinado.
+	\item En esta pantalla se presiona el botón ESCANEAR REDES para el escaneo de las redes que se encuentran en nuestro alcance en un tiempo determinado.
 
 ScanearRedes()
 
+\begingroup{}
+	\fontsize{7pt}{7pt}=\selectfont
+	\verbatiminput {ScanearRedes().txt}
+\endgroup{}
+
 \begin{figure}[H]
   \centering
-	\includegraphics[width=0.7\textwidth]{Interfaz4.png}
-  \caption{Interfaz gráfica. Muestra información relevante.}}
+	\includegraphics[width=1\textwidth]{Interfaz4.png}
+  \caption{Interfaz gráfica. Muestra información relevante.}
    \label{fig:int4}
 \end{figure}
 
-Se muestran las redes escanedas y se listan con la siguiente información. bssid, intensidad, tipo red, essid, etc.
+	\item Se muestran las redes escanedas y se listan con la siguiente información. bssid, intensidad, tipo red, essid, etc.
 
 ProcesarDatosEscaneoAirodump()
+\begingroup{}
+	\fontsize{7pt}{7pt}=\selectfont
+	\verbatiminput {ProcesarDatosEscaneoAirodump().txt}
+\endgroup{}
 
 
 \begin{figure}[H]
   \centering
 	\includegraphics[width=1\textwidth]{Interfaz5.png}
-  \caption{Interfaz gráfica. Selección de red que se vaya analizar.}}
+  \caption{Interfaz gráfica. Selección de red que se vaya analizar.}
    \label{fig:int5}
 \end{figure}
 
-En esta pantalla se selecciona la red que se quiere analizar. Si es WEP se selecciona el botón Atacar WEP y si es WPA/WPA2 se selecciona el botón Atacar WPA.
+	\item En esta pantalla se selecciona la red que se quiere analizar. Si es WEP se selecciona el botón Atacar WEP y si es WPA/WPA2 se selecciona el botón Atacar WPA.
+\end{enumerate}
 
 Si se escoge ATACAR WEP se realizan se invocan las siguientes funciones:
 \begin{itemize}
@@ -795,6 +831,34 @@ Si se escoge ATACAR WPA se invocan las siguientes funciones:
 	\item DenegacionServicio()
 	\item CrearInformeWPA()
 \end{itemize}
+
+%%%%%INFORME%%%%%
+\section{Informe}
+\subsection{Pautas y seguimiento para la creación del informe} 
+Partiendo de un lenguaje de programación desde el cual se ha desarrollado el código para automatizar el dispositivo, se contará con otro lenguaje de programación (\textit{Python}) para que interactúe, y por medio de una de sus bibliotecas \textit{Jinja2}, genere unas plantillas (templates) donde se irán introduciendo los datos variables. Como se muestra en el gráfico, una vez obtengamos el informeWEP.tex o informeWPA.tex dependiendo del protocolo de la red, se utilizara la aplicación \textit{pdflatex} para generar el informe final.pdf.
+\begin{figure}[H]
+  \centering
+   \includegraphics[width=1\textwidth]{informe.png}
+  \caption{Pasos a seguir para generar el informe.}
+  \label{fig:esquema3}
+\end{figure} 
+\paragrph{Cración de informe WEP.}
+CrearInformeWEP()
+\begingroup{}
+	\fontsize{7pt}{7pt}=\selectfont
+	\verbatiminput {CrearInformeWEP().txt}
+\endgroup{}
+
+\paragrph{Cración de informe WPA.}
+CrearInformeWPA()
+\begingroup{}
+	\fontsize{7pt}{7pt}=\selectfont
+	\verbatiminput {CrearInformeWPA().txt}
+\endgroup{}
+
+
+
+
 
 %%%%%%%%%%%%%%CONCLUSION %%%%%%%%%%
 
@@ -818,17 +882,8 @@ Como posible estudios futuros, me gustaría seguir desarrollando mi aplicación, a
 	\item Utilizar IP estáticas, deshabilitando el DHCP (asignación dinámica IP) 
 	\item Realizar auditorias periódicamente ayudará a prevenir ataques, evitando posibles errores.
 	\item Contratar profesionales en la seguridad informática. 
-	\item Hacer auditorias de seguridad de forma periódica.
-
+	
 Estas medidas no harán que tu red sea invulnerable a cualquier ataque, pues eso es imposible, pero garantizará unos niveles altos de seguridad.
-
-
-
-
-
-
-
-
 
 %%Para hacer apendices%%
 \appendix
@@ -848,7 +903,7 @@ Estas medidas no harán que tu red sea invulnerable a cualquier ataque, pues eso 
 \bibitem{ipyme} \textsc{Fundetec y el ONTSI. (2012), Urueña, Alberto., P. Ballestero,  María. Valdecasa, Elena.}  \textsc{Recuperado de \url{http://www.ipyme.org/Publicaciones/informe-epyme-2012.pdf}},\textit{Análisis sectorial de implantación de las TIC en la pyme española.}
 España 2012, pag 105.
 
-\bibitem{INTECO} \textsc{INTECO. (2012),Pablo Pérez San-José (dirección), Cristina Gutérrez(coordinación), Eduardo Alvarez Alonso, Laura García Pérez, Susana de la Fuente Rodríguez}\textsc{Recuperado de \url{https://www.incibe.es/file/Sp61c9ljOlMT7jcjbxYNVQ}},\textit{ Estudio sobre seguridad de la información y continuidad de negocio en las pymes españolas.}
+\bibitem{INTECO} \textsc{INTECO. (2012), Pérez San-José, Pablo(dirección)., Gutérrez, Cristina (coordinación)., Alvarez Alonso,Eduardo., García Pérez,Laura., de la Fuente Rodríguez, Susana .}\textsc{Recuperado de \url{https://www.incibe.es/file/Sp61c9ljOlMT7jcjbxYNVQ}},\textit{ Estudio sobre seguridad de la información y continuidad de negocio en las pymes españolas.}
 España, Semptiembre 2012,
 
 \bibitem{SP} \textsc{National Institute of Standards and Techonology (2008), Scarfone, Karen., Souppaya, Murugiah., Cody, Amanda., Orebaugh, Angela  }  \textsc{Recuperado de \url{http://csrc.nist.gov/publications/nistpubs/800-115/SP800-115.pdf}},\textit{Technical Guide to Information Security Testing and Assessment}, 
@@ -892,7 +947,6 @@ Madrid, España.
 \bibitem{elladodelmal} \textsc{Un informático en el lado del mal, Chema Alonso.(2013)}  \textsc{Recuperado de \url{http://www.elladodelmal.com/2013/05/pentesting-by-desing.html}}, 
 
 \end{thebibliography}
-
 
 \end{document}
 
