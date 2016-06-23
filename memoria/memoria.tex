@@ -114,7 +114,7 @@ $\ $
 
 Se centrará en las vulnerabilidades de las redes inalámbricas, las cuales están en continuo crecimiento, y disponen de algunas ventajas frente a las cableadas. No solo por la comodidad en la instalación sino por la movilidad que te brinda. No todo son ventajas, ya que en las comunicaciones inalámbricas la información se ``propaga'' por el aire, siendo posible capturar o escuchar dicha información. Ninguna red inalámbrica es completamente segura ya que todos los mecanismos o protocolos tienen vulnerabilidades, pero se puede trabajar para conseguir niveles aceptables de seguridad.
 
-El proyecto fue pensado para fomentar y facilitar la venta de auditorías de seguridad. Por tanto, el dispositivo debe poder ejecutarse por un comercial sin conocimientos previos de informática, utilizando por esta razón un lenguaje sencillo. Su funcionamiento se basa en iniciar los ataques a la red inalámbrica, detectando así algunos de los puntos débiles de seguridad de la misma.
+El proyecto fue pensado para fomentar y facilitar la venta de auditorías de seguridad. Por tanto, el dispositivo debe poder ejecutarse por un comercial sin conocimientos previos de informática. Su funcionamiento se basa en iniciar los ataques a la red inalámbrica, detectando así algunos de los puntos débiles de seguridad de la misma.
 
 Con la ejecución de la aplicación y la posterior generación del informe por parte del comercial, la empresa tendrá conocimiento de algunas de las vulnerabilidades de su red inalámbrica. De esta manera, se intentará concienciar a las empresas de la facilidad  de intrusión en sus redes, encontrando así información confidencial y la posibilidad de ralentizar e incluso llegar a parar la producción de la mayoría de las empresas si no se toman unas medidas de seguridad informática adecuadas. 
 
@@ -359,10 +359,10 @@ La fase de confidencialidad se encarga de que nadie que estuviera \textit{escuch
 \begin{figure}[H]
   \centering
     \includegraphics[width=1\textwidth]{WEP1.png}
-  \caption{Algoritmo de Encriptación WEP\cite{WEP}}
+  \caption{Algoritmo de Encriptación WEP}
   \label{fig:wep}
 \end{figure}
-En esta imagen se puede apreciar el proceso que se lleva acabo para formar la trama WEP, ya sea del punto de acceso al cliente, o del cliente al punto de acceso. La \textit{shared key} es estática, es la que configura el dueño de la red en el punto de acceso, o si fuera en la casa de un particular en el router WiFi (5 caracteres o 10 hexadecimales) o (13 caracteres o 26 hexadecimales). Los IV como se ha mencionado  van cambiando aleatoriamente en cada trama. Esta cadena junto con la clave estática es introducida en el algoritmo RC4 como entrada. La salida de este produce el \textit{keystream.}
+En esta imagen \cite{WEP} se puede apreciar el proceso que se lleva acabo para formar la trama WEP, ya sea del punto de acceso al cliente, o del cliente al punto de acceso. La \textit{shared key} es estática, es la que configura el dueño de la red en el punto de acceso, o si fuera en la casa de un particular en el router WiFi (5 caracteres o 10 hexadecimales) o (13 caracteres o 26 hexadecimales). Los IV como se ha mencionado  van cambiando aleatoriamente en cada trama. Esta cadena junto con la clave estática es introducida en el algoritmo RC4 como entrada. La salida de este produce el \textit{keystream.}
 
 \paragraph{Integridad}
 
@@ -382,11 +382,11 @@ En la fase de intercambio de claves el cliente y el punto de acceso emplean las 
 \begin{figure}
   \centering
      \includegraphics[width=1\textwidth]{WPA.png}
-  \caption{Ilustración del saludo a cuatro vías\cite{backtrack5}}
+  \caption{Ilustración del saludo a cuatro vías}}
   \label{fig:wpa}
 \end{figure}
 
-Con la PMK se genera una clave de cifrado para cada proceso de autentificación de un cliente llamada PTK que básicamente se genera a partir de dos números aleatorios, uno de ellos obtenidos del cliente y el otro por el punto de acceso para obtener ambos la misma clave PTK. Esto es el famoso \textit{4-way-Handshake}\\
+Con la PMK se genera una clave de cifrado para cada proceso de autentificación de un cliente llamada PTK que básicamente se genera a partir de dos números aleatorios, uno de ellos obtenidos del cliente y el otro por el punto de acceso para obtener ambos la misma clave PTK. Esto es el famoso \textit{4-way-Handshake} \cite{backtrack5\\
 
 Cuando el cliente está autenticado, el protocolo TKIP utiliza seis claves de cifrado por cada sesión, 4 de ellas son utilizadas para comunicaciones \textit{unicast} y dos para comunicaciones \textit{multicast}. Estas claves son únicas para cliente y sesión y se cambian periódicamente, siendo generadas de las direcciones MAC, ESSID y la PTK.
 Un atacante que quiera vulnerar una red WPA-PSK va a tratar de capturar ese intercambio de números aleatorios, para que una vez conocidos éstos, junto al SSID y la direcciones MAC del cliente y del punto de acceso de la red, obtener la frase o secreto compartido que se empleó.
@@ -471,11 +471,11 @@ El sufijo Linux se refiere al kernel (núcleo) que utiliza del sistema operativo.
 \subparagraph{Kali Linux}
 Sabemos que el mundo de la seguridad informática avanza cada día a gran velocidad. Es por ello que es necesario que las personas que se dedican a ello siempre estén siempre ampliando conocimiento. 
 \textit{BlackTrack}  era una gran distribución de seguridad y la distribución de pruebas de penetración mas popular, ya que contenía cientos de herramientas de seguridad. La empresa que gestionaba esta distribución, Offensive Security\cite{offensive security}\footnote{Página oficial de la empresa offensive security \url{https://www.offensive-security.com/}}, evoluciono su distribución para proporcionar mejoras importantes. Kali Linux siguió con los pasos creando una distribución Linux basada en Debian orientado a las auditorias de seguridad a pruebas de penetración en el 2013.Ésta ofrece al usuario un gran número de herramientas para cada rama del pentesting, como análisis forense, explotación de vulnerabilidades del sistema web o wireless. 
-Según \cite{kali} Kali Linux 2.0 contiene un nuevo kernel en su versión 4.0 y esta basada en Debian Jessie, mejorando la integración con el hardware y el uso de los drivers Wireless. Tiene soporte actualizado para un mayor número de escritorios (gnome, kde ,xfce ,mate ,e17 ,lxde o i3wm). Una de las grandes mejoras fue el sistema de actualizaciones que presenta. La nueva versión de aplicaciones es una realidad. Generalmente, las actualizaciones serán llevadas a cabo vía \textit{Git}. El \textit{script} se ejecuta diariamente sobre un listado de herramientas comunes en la distribución y mantendrá alerta al usuario ante posibles nuevas actualizaciones.
+Según \cite{kali} Kali Linux 2.0 contiene un nuevo kernel en su versión 4.0 y esta basada en Debian Jessie, mejorando la integración con el hardware y el uso de los drivers Wireless. Tiene soporte actualizado para un mayor número de escritorios (gnome, kde, xfce, mate, e17, lxde o i3wm). Una de las grandes mejoras fue el sistema de actualizaciones que presenta. La nueva versión de aplicaciones es una realidad. Generalmente, las actualizaciones serán llevadas a cabo vía \textit{Git}. El \textit{script} se ejecuta diariamente sobre un listado de herramientas comunes en la distribución y mantendrá alerta al usuario ante posibles nuevas actualizaciones. \cite{kali1}
 \begin{figure}[H]
   \centering
 	\includegraphics[width=0.7\textwidth]{kali_linux.jpg}%%ajusta el tamaño de la imagen.  %\caption{Logo de Kali Linux}
-  \caption{Logotipo de kali linux\cite{kali1}.}
+  \caption{Logotipo de kali linux.}
   \label{fig:kali}
 \end{figure}
 ARM (Advanced RISC Machine) se ha visto favorecido con el lanzamiento de Kali Linux 2.0 ya que sigue proporcionando soporte para Rasberry Pi, Chomebooks, Odroids,etc. Esto es importante ya que se utilizará una Rasberry Pi para automatizar todos los ataques.\\
@@ -511,7 +511,7 @@ Probe & Paquetes en los que el cliente intenta identificar una red wireless. Por
 \end{table}
 	
 	
-	\item Airbase-ng: Esta herramienta sirve para atacar a los clientes asociados a un punto de acceso. Es una aplicación versátil y flexible , disponiendo de distintos modos de trabajo.Con ella también es posible habilitar un punto de acceso normal. Esto sirve para engañar a un usuario para que se conecte al punto de acceso falso y capturar así todo el tráfico.
+	\item Airbase-ng: Esta herramienta sirve para atacar a los clientes asociados a un punto de acceso. Es una aplicación versátil y flexible , disponiendo de distintos modos de trabajo. Con ella también es posible habilitar un punto de acceso normal. Esto sirve para engañar a un usuario para que se conecte al punto de acceso falso y capturar así todo el tráfico.
 
 	\item Aircrack-ng: Sirve para realizar ataques de fuerza bruta, diccionario. En función del tipo de cifrado de la red que se quiera crackear se realizara un tipo de ataque u otro. El problema de realizar este tipo de ataques es la cantidad de tiempo y de recursos que se emplean para conseguir descifrar una clave WPA, llegando a quedar inutilizado este dispositivo mientras se realiza el ataque. Para intentar reducir estos tiempos podemos hablar de:	
 	\item Aireplay-ng: Permite desautentificar e inyectar paquetes ARP a clientes asociados y así generar tráfico. 
@@ -600,7 +600,7 @@ RAM de 1 GB: Es un sistema-en-chip diseñado específicamente para este modelo de 
 	\item Puerto Micro SD para carga del sistema operativo y almacenamiento de datos: 
 	%\item Fuente de alimentación Micro USB actualizada con interruptor de hasta 2.5 A
 \end{itemize}
- En cuanto a la conexión, Raspberry Pi no cuenta con ningún tipo de monitor o pantalla incorporado. Normalmente se conecta a alguna pantalla por la conexión HDMI o VGA que dispone. El motivo por el no se contemplo esta solución fue la falta de movilidad que mostraba. Por ello se emplea el propio móvil del comercial para lanzar el ataque. Por medio de una aplicación VNC (VIirtual Network Computing) que es un sistema gráfico para el intercambio de escritorio para el control de forma remota el interfaz de escritorio de un dispositivo a otro.
+ En cuanto a la conexión, Raspberry Pi no cuenta con ningún tipo de monitor o pantalla incorporado. Normalmente se conecta a alguna pantalla por la conexión HDMI o VGA que dispone. El motivo por el no se contemplo esta solución fue la falta de movilidad que mostraba. Por ello se emplea el propio móvil del comercial para lanzar el ataque. Por medio de una aplicación VNC (VIirtual Network Computing) que es un sistema gráfico para el intercambio de escritorio, controlando de forma remota el interfaz de escritorio de un dispositivo a otro.
  \begin{figure}[H]
   \centering
    \includegraphics[width=0.3\textwidth]{conectar.png}
@@ -610,7 +610,7 @@ RAM de 1 GB: Es un sistema-en-chip diseñado específicamente para este modelo de 
 \paragraph{Soporte de tarjetas inalámbricas}
 
 Como se comentó, el modelo de Raspberry Pi con el que se ha contado para la realización del proyecto, ya dispone de una tarjeta inalámbrica entre sus componente. El problema se obtuvo al desarrollar los supuestos ataques, ya que esta tarjeta no soportaba el modo monitor que se explicó en los antecedentes del proyecto. 
-Se realizó una búsqueda completa en el mercado con varios posibles Chipset (Ralink RT3070, Ralink RT3572, Realtek 8187L, Ralink RT5370), empleando Atheros AR9271L, ya que no era excesivamente caro y proporcionaba una ganancia de 5 dbi y un rango de frecuencia de 2.412-2.483.
+Se realizó una búsqueda completa en el mercado con varios posibles Chipset (Ralink RT3070, Ralink RT3572, Realtek 8187L, Ralink RT5370), empleando Atheros AR9271L \cite{alfa}, ya que no era excesivamente caro y proporcionaba una ganancia de 5 dbi y un rango de frecuencia de 2.412-2.483.
 \begin{itemize}
 \item Estandar Wi-Fi: IEEE 802.11b/g/n
 \item OS que soporta: Linux,  Windows 2000, XP, Vista, 7
@@ -620,15 +620,15 @@ Se realizó una búsqueda completa en el mercado con varios posibles Chipset (Rali
 \begin{figure}[H]
   \centering
 	\includegraphics[width=0.2\textwidth]{alfa.png}
-  \caption{Tarjeta Inalámbrica alfa  \cite{alfa}}
+  \caption{Tarjeta Inalámbrica alfa}
    \label{fig:Raspberry}
 \end{figure}
-
+%%%INSTALACION%%%%%
 \section{Instalación y configuración del sistema operativo de la Raspberry Pi}
 
 Como ya se ha comentado con anterioridad, se empleará el sistema operativo Kali Linux, ya que es uno de los sistema operativo con herramientas de seguridad más completo que se puede encontrar y gratuito. Cuenta con la ventaja que también dispone de versiones para ARM.
                                                                   
-Se descargó la versión para la Raspberry Pi 2/3 para instalarlo en la SD. Para hacer esto, previamente se instaló el sistema operativo Raspbian ya que cuenta con una incompatibilidad de la versión para la Raspberry Pi 1 y 2, y se  debe retocar la partición de arranque de la SD. En primer lugar se instala la versión Raspbian guardando la partición de arranque, y así se instala el sistema operativo Kali Linux.
+Se descargó la versión para la Raspberry Pi 2/3 para instalarlo en la SD. Para hacer esto, previamente se instaló el sistema operativo Raspbian ya que cuenta con una incompatibilidad de la versión para la Raspberry Pi, y se  debe cambiar la partición de arranque de la SD. En primer lugar se instala la versión Raspbian guardando la partición de arranque, y así se instala el sistema operativo Kali Linux.
 
 Las instalaciones se pueden hacer de dos maneras dependiendo del sistema operativo que se disponga para la instalación.
 
@@ -647,17 +647,19 @@ Para las actualizaciones se emplearanlos siguientes comandos:
 \end{enumerate}
 
 %%%ATAQUES%%%
-\section{Programación y ataques}
-El leguaje empleado para la automatización de los ataques es bash, 
-
+\section{Ataques automatizados y funciones.}
+El leguaje empleado para la automatización de los ataques es bash, dependiendo del tipo de protocolo que utilice la red seleccionada, se empleará una serie de ataques distintos. A continuación se emplea un gráfico \ref{fig:ataque}, para facilitar el entendimiento de los posibles ataques y la sucesión de ellos. Comenzaremos ejecutando la aplicación. Ésta, hará una búsqueda de las posibles tarjetas de red que encuentre conectadas a nuestro dispositivo. Una vez que encuentre la tarjeta de red disponible la pondrá en modo monitor para posteriormente escanear las redes a su alcance. Cuando se disponga del listados de las posibles redes, se seleccionara la cual se quiere analizar. Siendo posible dos soluciones: 
+\begin{itemize}
+	\item Si el protocolo de cifrado que encuentra es WEP, el primer ataque a realizar será una denegación de servicios (DDS), una vez se haya dejado sin internet al punto de acceso por el exceso de paquetes recibidos se intentará un ataque de fuerza bruta. Utilizando la herramienta \textit{aireplay-ng} para capturar un numero determinado de IV, se terminará consiguiendo la contraseña utilizando \textit{aircrack-ng}.
+	\item Si fuera WPA o WPA2 se empezará con un ataque de denegación de servicios como en el caso de WEP. Se comprobará si dispone de WPS activado, si fuera así se atacaría con el comando \textit{reaver} y \textit{pixiewps}. Si no, se trataría de un ataque en diccionario que es el ataque que más tiempo necesita, ya que comprueba una por una las palabras del diccionario que dispongas. Para ello utiliza \textit{aireplay-ng} para desautenticar e inyectar y generar así tráfico para la captura del \textit{handshake}. Una vez se disponga de el, se utilizará \textit{aircrack} para hacer la búsqueda. Al cabo de un tiempo determinado se completará el análisis
 \begin{figure}[H]
   \centering
-   \includegraphics[width=0.8\textwidth]{ataque.png}
+   \includegraphics[width=0.7\textwidth]{ataque.png}
   \caption{Pasos a seguir para el ataque.}
   \label{fig:ataque}
 \end{figure}
 
-\subsubsection{Ataque red WEP}.
+\subsubsection{Ataque red WEP}
 Como ya se ha comentado, las redes WEP tienen muchas debilidades criptográficas, por lo que se ha utilizado las herramientas necesarias para intentare romper la encriptación WEP.
 Lo primero, será configurar la tarjeta como modo monitor para un posterior escaneo de las redes cercanas empleando el comando \textit{airodum-ng}. Así, se comenzará a volcar todo el tráfico que hay en el aire en un archivo determinado (LOG\_CAP). En este punto, se detectará el cifrado WEP de la red seleccionada y si existe cliente asociado a dicha red. Si existe cliente asociado, el crackeo será más sencillo, sino, se hará una falsa autenticación con una MAC aleatoria.
 Una vez elegida la red, se comienza a inyectar con dos objetivos distintos, el primero será deautenticar el cliente asociado con el fin de que vuelva a autenticarse y genere un paquete ARP válido, y el segundo para capturar el paquete ARP y reinyectarlo para generar un gran volumen de paquetes de datos. Como ya se habló en la parte teórica, es importante obtener una gran cantidad de IVs y así poder predecir y atacar la clave que descifran los paquetes, obteniendo la clave de red.
@@ -706,16 +708,16 @@ NOSE QUE PONER!!!!!!!!!!!!!!!!!!!!
 \endgroup{}
 
 \subsubsection{Ataque de diccionario WPA}
-El tener que emplear la fuerza bruta es un gran inconveniente, ya que se hará un uso intensivo del procesador de la Raspberry Pi. Este proceso, si se dejara podrá llegar a durar horas e incluso días comprobando las posibles palabras del diccionario. 
-AircrackWPA()
+El tener que emplear la fuerza bruta es un gran inconveniente, ya que se hará un uso intensivo del procesador de la Raspberry Pi. Este proceso, si se dejara podrá llegar a durar horas e incluso días comprobando las posibles palabras del diccionario. En nuestro caso se pondrán tiempo cortos para que no se demore en exceso.
+
 \begingroup{}
 	\fontsize{7pt}{7pt}=\selectfont
 	\verbatiminput {AircrackWPA().txt}
 \endgroup{}
 
 \subsubsection{Utilizamos Pyrit}
-Es un herramienta muy potente que facilita la creación de bases de datos para precalcular las claves PSK y así acelerar el pre-procesamiento, aprovechando al máximo las plataformas del mercado(Nvidia CUDA, OpenCL) y así poder descifrar claves WPA o WPA2 mediante ataques de fuerza bruta o diccionario. Es necesario haber capturado con anterioridad el handshake.
-AnalizarPyrit()
+Es un herramienta muy potente que facilita la creación de bases de datos para precalcular las claves PSK y así acelerar el pre-procesamiento, aprovechando al máximo las plataformas del mercado(Nvidia CUDA, OpenCL) y así poder descifrar claves WPA o WPA2 mediante ataques de fuerza bruta o diccionario. Es necesario haber capturado con anterioridad el handshake. Se empleará un diccionario con el que cuenta por defecto kali linux (\textit{rockyou}), que se renombrará como wpa.lst.
+
 \begingroup{}
 	\fontsize{7pt}{7pt}=\selectfont
 	\verbatiminput {AnalizarPyrit().txt}
@@ -735,7 +737,7 @@ La herramienta con la que se ha desarrollado la aplicación ha sido realizada en 
 
 \begin{figure}[H]
   \centering
-   \includegraphics[width=0.7\textwidth]{interfaz.png}
+   \includegraphics[width=0.55\textwidth]{interfaz.png}
   \caption{Pautas de seguimiento}
   \label{fig:esquemainterfaz}
 \end{figure}
@@ -749,8 +751,7 @@ La herramienta con la que se ha desarrollado la aplicación ha sido realizada en 
   \label{fig:interfaz1}
 \end{figure}
 \begin{enumerate}
-	\item Se inicia la aplicación SeguridadWifi y se muestra la pantalla principal de la aplicación y se listan las interfaces wifi disponibles para utilizar en el análisis de vulnerabilidades WIFI y se
-
+	\item Se inicia la aplicación SeguridadWifi y se muestra la pantalla principal de la aplicación y se listan las interfaces wifi disponibles para utilizar en el análisis de vulnerabilidades WIFI.
 	ListarTarjetasWifi()
 	
 \begingroup{}
@@ -822,7 +823,7 @@ Si se escoge ATACAR WEP se realizan se invocan las siguientes funciones:
 	\item AircrackWEP()
 	\item DenegacionServicio()
 	\item CrearInformeWEP()
-
+\end{itemize}
 Si se escoge ATACAR WPA se invocan las siguientes funciones:
 \begin{itemize}
 	\item ExtraerDatosAp()
@@ -842,14 +843,17 @@ Partiendo de un lenguaje de programación desde el cual se ha desarrollado el cód
   \caption{Pasos a seguir para generar el informe.}
   \label{fig:esquema3}
 \end{figure} 
-\paragrph{Cración de informe WEP.}
+
+\paragrph{Generar informe WEP.}
+
 CrearInformeWEP()
 \begingroup{}
 	\fontsize{7pt}{7pt}=\selectfont
 	\verbatiminput {CrearInformeWEP().txt}
 \endgroup{}
 
-\paragrph{Cración de informe WPA.}
+\paragrph{Generar informe WPA.}
+
 CrearInformeWPA()
 \begingroup{}
 	\fontsize{7pt}{7pt}=\selectfont
@@ -865,16 +869,19 @@ CrearInformeWPA()
 
 \chapter{Conclusiones y propuestas}
 
-\lettrine{C}{}omo expuse al comienzo de mi memoria las principales ventajas de las redes inalámbricas son la movilidad que te proporcionan y su facilidad acceso. Esto será su principal inconveniente, ya que las ondas de radiofrecuencia no se pueden detener, y la información viaje en todas las direcciones.  
-La seguridad en las redes inalámbricas debería ser un objetivo imprescindible para cualquier empresa, dando así la importancia que se merece la seguridad de la información.La motivación de este proyecto, es conseguir concienciar al mayor número posible de empresas, del fácil acceso y las posibles causas económicas e incluso jurídicas que le puede ocasionar un posible ataque. Por ello se  ..
+\lettrine{E}{}n la actualidad las redes inalámbricas están sustituyendo a los cables de red. Así la conexión no se limita a la longitud de un cable y se puede extender muchos metros alrededor del punto de acceso. 
 
+Con este proyecto se ha tratado de advertir de los distintos problemas con los que cuentan las redes inalámbricas, así como la seguridad que se les aplica.
+Para entender un poco éste funcionamiento se a de tener claro algunos conocimientos básicos que se han explicado a lo largo de la memoria, como las tecnologías WiFi, su distintos modos de funcionamiento y los prácticas necesarias para su buen funcionamiento.
 
-Como posible estudios futuros, me gustaría seguir desarrollando mi aplicación, ampliando el número de ataques y recogiendo mayor información en el informe automático.
+La seguridad en las redes inalámbricas debería ser un objetivo imprescindible para cualquier empresa, dando así la importancia que se merece la seguridad de la información. La motivación de este proyecto, es conseguir concienciar al mayor número posible de empresas, del fácil acceso y las posibles causas económicas e incluso jurídicas que le puede ocasionar un posible ataque. Por ello se pretende concienciar a las empresas en generar de la importancia de hacer auditorias de forma periódica.
+
+Como posible estudios futuros, me gustaría seguir desarrollando la aplicación, ampliando el número de ataques y recogiendo mayor información en el informe automático.
 
 \section{Recomendaciones.}
 \begin{itemize}
 	\item Se debe tener en cuenta el alcance de nuestra red, ya que cuanto menos señal se propague fuera de las instalaciones menor será las posibilidades de que se acceda desde fuera.
-	\item Por muy simple que parezca, es importante cambiar los datos de accesos al router que vienen por defecto.(No olvidar cambiar la contraseña)
+	\item Por muy simple que parezca, es importante cambiar los datos de accesos al router que vienen por defecto.(No olvidar cambiar la contraseña) Utilizar contraseñas de al menos 16 caracteres, empleando mayusculas minusculas y caracteres especiales. 
 	\item Ocultar el nombre de la red (SSID), de forma que no se difunda el nombre de la red.
  	\item Se deben usar los protocolos de seguridad, WPA o WPA2. Ya que, el protocolo WEP no nos aporta ningún tipo de seguridad.
 	\item Es recomendable que se apague el router o punto de acceso una vez que ya no vaya a utilizarse.
@@ -882,8 +889,8 @@ Como posible estudios futuros, me gustaría seguir desarrollando mi aplicación, a
 	\item Utilizar IP estáticas, deshabilitando el DHCP (asignación dinámica IP) 
 	\item Realizar auditorias periódicamente ayudará a prevenir ataques, evitando posibles errores.
 	\item Contratar profesionales en la seguridad informática. 
-	
-Estas medidas no harán que tu red sea invulnerable a cualquier ataque, pues eso es imposible, pero garantizará unos niveles altos de seguridad.
+\end{itemize}	
+Estas medidas no harán que su red sea invulnerable a cualquier ataque, pues eso es imposible, pero garantizará unos niveles altos de seguridad.
 
 %%Para hacer apendices%%
 \appendix
@@ -945,6 +952,8 @@ Madrid, España.
 \bibitem{Python1} \textsc{Python SoftwareFoundation, Tutorial Python,. }  \textsc{Recuperado de \url{https://docs.python.org/3/tutorial/index.html}}, 
 
 \bibitem{elladodelmal} \textsc{Un informático en el lado del mal, Chema Alonso.(2013)}  \textsc{Recuperado de \url{http://www.elladodelmal.com/2013/05/pentesting-by-desing.html}}, 
+
+\bibitem{gliffy} \textsc{Programa empleado para la realización de los gráficos}  \textsc{Recuperado de \url{https://www.gliffy.com}}, 
 
 \end{thebibliography}
 
