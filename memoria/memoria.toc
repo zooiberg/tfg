@@ -40,24 +40,23 @@
 \contentsline {paragraph}{Jinja2}{22}{section*.20}
 \contentsline {paragraph}{Ejemplo Jinja2}{22}{section*.21}
 \contentsline {subsubsection}{\LaTeX {}}{22}{section*.22}
-\contentsline {chapter}{\numberline {3}Proyecto}{24}{chapter.3}
-\contentsline {paragraph}{Soporte de tarjetas inal\'ambricas}{25}{section*.23}
-\contentsline {section}{\numberline {3.1}Instalaci\'on y configuraci\'on del sistema operativo de la Raspberry Pi}{26}{section.3.1}
-\contentsline {section}{\numberline {3.2}Ataques automatizados y funciones.}{27}{section.3.2}
-\contentsline {subsubsection}{Ataque red WEP}{28}{section*.24}
-\contentsline {subsubsection}{Denegaci\'on de servicios.}{29}{section*.25}
-\contentsline {subsubsection}{Extraer datos.(Ataque WPA con WPS activado.)}{30}{section*.26}
-\contentsline {paragraph}{reaver:}{30}{section*.27}
-\contentsline {paragraph}{Pixiewps:}{31}{section*.28}
-\contentsline {subsubsection}{Ataque en diccionario WPA/WPA2 }{32}{section*.29}
-\contentsline {subsubsection}{Extaer datos del punto de acceso.}{33}{section*.30}
-\contentsline {subsubsection}{Ataque de diccionario WPA}{33}{section*.31}
-\contentsline {subsubsection}{Utilizamos Pyrit}{34}{section*.32}
-\contentsline {section}{\numberline {3.3}Aplicaci\'on para el an\'alisis de vulnerabilidad (Interfaz gr\'afica)}{35}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Descripci\'on del la interfaz}{36}{subsection.3.3.1}
-\contentsline {section}{\numberline {3.4}Informe}{42}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}Pautas y seguimiento para la creaci\'on del informe}{42}{subsection.3.4.1}
-\contentsline {chapter}{\numberline {4}Conclusiones y propuestas}{45}{chapter.4}
-\contentsline {section}{\numberline {4.1}Recomendaciones.}{45}{section.4.1}
-\contentsline {chapter}{\numberline {A}Informe WEP}{47}{appendix.Alph1}
-\contentsline {chapter}{\numberline {B}Informe WPA}{48}{appendix.Alph2}
+\contentsline {chapter}{\numberline {3}Desarrollo del proyecto}{24}{chapter.3}
+\contentsline {section}{\numberline {3.1}Creaci\'on de una aplicaci\'on de detecci\'on de las vulnerabilidades}{24}{section.3.1}
+\contentsline {paragraph}{Soporte de tarjetas inal\'ambricas}{26}{section*.23}
+\contentsline {subsection}{\numberline {3.1.1}Instalaci\'on y configuraci\'on del sistema operativo de la Raspberry Pi}{27}{subsection.3.1.1}
+\contentsline {section}{\numberline {3.2}Dotaci\'on a la aplicaci\'on de una interfaz gr\'afica simple e intuitiva.}{28}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Descripci\'on del la interfaz}{28}{subsection.3.2.1}
+\contentsline {section}{\numberline {3.3}Ejecuci\'on de an\'alisis de vulnerabilidades. Realizaci\'on de ataques.}{35}{section.3.3}
+\contentsline {subsubsection}{Ataque red WEP}{36}{section*.24}
+\contentsline {subsubsection}{Denegaci\'on de servicios.}{38}{section*.25}
+\contentsline {subsubsection}{Ataque WPA con WPS activado}{38}{section*.26}
+\contentsline {paragraph}{reaver:}{39}{section*.27}
+\contentsline {paragraph}{Pixiewps:}{40}{section*.28}
+\contentsline {subsubsection}{Ataque por fuerza bruta WPA/WPA2 }{41}{section*.29}
+\contentsline {subsubsection}{Utilizamos Pyrit}{42}{section*.30}
+\contentsline {section}{\numberline {3.4}Generaci\'on de un informe con posibles vulnerabilidades de la red}{43}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Pautas y seguimiento para la creaci\'on del informe}{43}{subsection.3.4.1}
+\contentsline {chapter}{\numberline {4}Conclusiones y propuestas}{46}{chapter.4}
+\contentsline {section}{\numberline {4.1}Recomendaciones.}{46}{section.4.1}
+\contentsline {chapter}{\numberline {A}Informe WEP}{48}{appendix.Alph1}
+\contentsline {chapter}{\numberline {B}Informe WPA}{49}{appendix.Alph2}
