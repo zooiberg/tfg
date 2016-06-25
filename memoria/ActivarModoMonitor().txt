@@ -1,0 +1,23 @@
+ActivarModoMonitor(){
+  TARJETA_SELECCIONADA=`echo $TARJETA_SELECCIONADA | awk {' print $1 '}`
+  echo $TARJETA_SELECCIONADA > $ARCHIVO_TARJETA_SELECCIONADA
+  if ! CheckInterface ; then return 1;fi
+  echo "RESETEANDO INTERFACE" > "$ARCHIVO_STATUSBAR"
+  if ! ResetInterface ; then return 1;fi
+  echo "DESLIGANDO INTERFACE DE NETWORKMANAGER" > "$ARCHIVO_STATUSBAR"
+  if ! DeshabilitarNetworkManager ON ; then return 1;fi 
+  echo "ACTIVANDO MODO MONITOR" > "$ARCHIVO_STATUSBAR"  
+  airmon-ng start $TARJETA_SELECCIONADA &> $ARCHIVO_LOG
+  TARJETA_MODO_MONITOR=(`iwconfig 2>/dev/null | grep Mode:Monitor | awk {'print $1'}`)
+  echo "$(iwconfig $TARJETA_MODO_MONITOR)" >> "$LOG_AIRMONG"
+  if [ ! $TARJETA_MODO_MONITOR ]
+  then 
+       echo "ERROR: No se pudo activar el modo monitor en $TARJETA_SELECCIONADA" > $ARCHIVO_STATUSBAR
+    echo "1" > $ARCHIVO_LOG
+    return 1
+  else
+    echo "Modo monitor activado en $TARJETA_MODO_MONITOR" > $ARCHIVO_STATUSBAR
+    echo $TARJETA_MODO_MONITOR > $ARCHIVO_TARJETA_MONITOR
+    echo "0" > $ARCHIVO_LOG
+  fi
+}

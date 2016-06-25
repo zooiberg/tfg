@@ -1,0 +1,9 @@
+\section{Encriptacion WEP}
+
+A continuacion procedemos a analizar la red wifi con encriptacion WEP siguiente:
+\begin{itemize}
+        \item BSSID: \VAR{sbssid}
+        \item ESSID: \VAR{sessid}
+        \item CANAL: \VAR{scanal}
+        \item INTERFAZ: \VAR{sinterfaz}
+\end{itemize}

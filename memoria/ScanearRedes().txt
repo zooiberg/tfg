@@ -1,0 +1,36 @@
+ScanearRedes() {
+    rm -f "$RUTA_LOGS"CAP* > /dev/null
+    rm -f "$ARCHIVO_REDES_SCAN" &> /dev/null && touch $ARCHIVO_REDES_SCAN 
+    
+    TARJETA_SELECCIONADA=`cat $ARCHIVO_TARJETA_SELECCIONADA` 
+    TARJETA_MODO_MONITOR=`cat $ARCHIVO_TARJETA_MONITOR` 
+    ifconfig $TARJETA_SELECCIONADA up &> /dev/null
+    
+    (airodump-ng "$TARJETA_MODO_MONITOR" -a -w "$ARCHIVO_CAPTURAS" &>/dev/null &)
+    
+    for A in `seq 1 $TIEMPO_SCANEO` ; do
+      sleep 1s
+      if [ $A -eq $TIEMPO_SCANEO ]
+      then
+	echo "ESCANEO COMPLETADO, PROCESANDO DATOS" > $ARCHIVO_STATUSBAR
+	PID_AIRODUMP=`ps -A | grep airodump-ng | awk '{ print $1}'`
+	ATAQUE_ACABADO="NO"
+	kill $PID_AIRODUMP &> /dev/null
+	ProcesarDatosEscaneoAirodump
+      else
+	if [ -f  $ARCHIVO_DETENER_SCAN ]
+	then
+	  echo "ESCANEO DETENIDO, PROCESANDO DATOS, ESPERA ..." > $ARCHIVO_STATUSBAR
+	  rm $ARCHIVO_DETENER_SCAN
+	  PID_AIRODUMP=`ps -A | grep airodump-ng | awk '{ print $1}'`
+	  kill $PID_AIRODUMP &> /dev/null
+	  ATAQUE_ACABADO="NO"
+	  ProcesarDatosEscaneoAirodump
+	  return
+	fi
+	TIEMPO_RESTANTE=`expr $TIEMPO_SCANEO - $A`
+	echo "BUSCANDO REDES, ESPERA $TIEMPO_RESTANTE segundos" > $ARCHIVO_STATUSBAR
+      fi
+    done
+    unset TARJETA_MODO_MONITOR TIEMPO_SCANEO TIEMPO_RESTANTE PID_AIRODUMP A ATAQUE_ACABADO
+}

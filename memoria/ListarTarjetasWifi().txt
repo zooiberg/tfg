@@ -1,0 +1,34 @@
+ListarTarjetasWifi() {   
+    INTERFACES_MONITOR=`iwconfig --version | grep "Recommend" | awk '{print $1}' | grep mon`
+    let CUANTAS=`echo $INTERFACES_MONITOR | wc -w`
+    let CONT=1
+    while [ $CONT -le $CUANTAS ]
+    do
+	MON=`echo $INTERFACES_MONITOR | awk '{print $'$CONT'}'`
+	airmon-ng stop $MON > /dev/null 2>&1
+	let CONT=$CONT+1
+    done
+    
+    echo '<comboboxtext active="0" button-sensitivity="1">'
+    echo '<variable>TARJETA_SELECCIONADA</variable>'
+    
+    TARJETAS_WIFI_DISPONIBLES=`iwconfig --version | grep "Recommend" | awk '{print $1}' | sort`
+    echo "$(iwconfig)" >> "$LOG_TARJETA_WIFI"
+    N_TARJETAS_WIFI=`echo $TARJETAS_WIFI_DISPONIBLES | awk '{print NF}'`
+    if [ "$TARJETAS_WIFI_DISPONIBLES" = "" ]
+    then
+	
+	exit 1
+    else
+	let x=1
+	while [ $x -le $N_TARJETAS_WIFI ]
+	do
+		INTERFAZ=`echo $TARJETAS_WIFI_DISPONIBLES | awk '{print $'$x'}'`
+		DRIVER=`ls -l /sys/class/net/$INTERFAZ/device/driver | sed 's/^.*\/\([a-zA-Z0-9_-]*\)$/\1/'`
+		echo '<item>'$INTERFAZ' '$DRIVER'</item>'
+		x=$((x+1))
+	done
+    fi
+    echo "</comboboxtext>"
+    unset INTERFACES_MONITOR CONT CUANTAS MON TARJETAS_WIFI_DISPONIBLES N_TARJETAS_WIFI INTERFAZ DRIVER x
+}

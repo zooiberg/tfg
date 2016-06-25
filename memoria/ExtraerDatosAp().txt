@@ -1,0 +1,28 @@
+ExtraerDatosAp() {
+  LINEA_AUX=$LINEA_ATAQUE
+  LINEA_ATAQUE=$(head -$LINEA_ATAQUE $ARCHIVO_REDES_SCAN | tail -1)
+  BSSID=$(echo $LINEA_ATAQUE | awk -F "|" {' print $3 '})
+  CANAL=$(echo $LINEA_ATAQUE | awk -F "|" {' print $4 '})
+  ESSID=$(echo $LINEA_ATAQUE | awk -F "|" {' print $9 '})
+  CLAVE_CONSEGUIDA=$(echo $LINEA_ATAQUE | awk -F "|" {' print $1 '})
+ 
+  if [ $CLAVE_CONSEGUIDA = "gtk-about" ]     
+  then
+    if [ $AUTOMATICO = 0 ]
+    then
+      seguir=$(yad --image "dialog-question" --title "PIN YA CONSEGUIDO" --button=gtk-yes:1 --yes-label "SI" --button=gtk-no:0 --text "<b>PIN YA CONSEGUIDO</b>: Ya se tiene este PIN almacenado. ¿ Quieres volver a atacar $BSSID ? " --width=450 --on-top --center --window-icon=ICONOS/SCRIPT.png)
+      ret=$?
+      if [ $ret = "1" ]
+      then
+	let vez=1
+	AtacarAP
+	ATAQUE_ACABADO="SI"
+      fi
+    fi
+  else
+    let vez=1
+    AtacarAP
+    ATAQUE_ACABADO="SI"
+  fi
+  unset seguir ret
+}
