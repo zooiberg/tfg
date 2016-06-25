@@ -1,3 +1,4 @@
+\RequirePackage{fix-cm}
 \documentclass[a4paper,openright,10pt]{report}
 \usepackage[spanish]{babel} 
 \usepackage[latin1]{inputenc}
@@ -110,18 +111,18 @@ $\ $
 \addcontentsline{toc}{section}{Resumen} % si queremos que aparezca en el índice
 \markboth{RESUMEN}{RESUMEN} % encabezado
 
-\lettrine{E}{}ste proyecto consiste en la implementación de un dispositivo para generar posibles ataques básicos y conocidos a una red WiFi determinada, con el fin de generar un informe de manera automatizada con algunas de las posibles vulnerabilidades.
+\lettrine[lines=2]{E}{}ste proyecto consiste en la implementación de un dispositivo para generar posibles ataques básicos y conocidos a una red WiFi determinada, con el fin de generar un informe de manera automatizada con algunas de las posibles vulnerabilidades.
 
 
-Se centrará en las vulnerabilidades de las redes inalámbricas, las cuales están en continuo crecimiento, y disponen de algunas ventajas frente a las cableadas. No solo por la comodidad en la instalación sino por la movilidad que te brinda. No todo son ventajas, ya que en las comunicaciones inalámbricas la información se ``propaga'' por el aire, siendo posible capturar o escuchar dicha información. Ninguna red inalámbrica es completamente segura ya que todos los mecanismos o protocolos tienen vulnerabilidades, pero se puede trabajar para conseguir niveles aceptables de seguridad.\\
+Se centrará en las vulnerabilidades de las redes inalámbricas, las cuales están en continuo crecimiento, y disponen de algunas ventajas frente a las cableadas. No solo por la comodidad en la instalación sino por la movilidad que brinda. No todo son ventajas, ya que en las comunicaciones inalámbricas la información se ``propaga'' por el aire, siendo posible capturar o escuchar dicha información. Ninguna red inalámbrica es completamente segura ya que todos los mecanismos o protocolos tienen vulnerabilidades, pero se puede trabajar para conseguir niveles aceptables de seguridad.
 
 El proyecto fue pensado para fomentar y facilitar la venta de auditorías de seguridad. Por tanto, el dispositivo debe poder ejecutarse por un comercial sin conocimientos previos de informática. Su funcionamiento se basa en iniciar los ataques a la red inalámbrica, detectando así algunos de los puntos débiles de seguridad de la misma.
 
-Con la ejecución de la aplicación y la posterior generación del informe por parte del comercial, la empresa tendrá conocimiento de algunas de las vulnerabilidades de su red inalámbrica. De esta manera, se intentará concienciar a las empresas de la facilidad  de intrusión en sus redes, encontrando así información confidencial y la posibilidad de ralentizar e incluso llegar a parar la producción de la mayoría de las empresas si no se toman unas medidas de seguridad informática adecuadas. \\
+Con la ejecución de la aplicación y la posterior generación del informe por parte del comercial, la empresa tendrá conocimiento de algunas de las vulnerabilidades de su red inalámbrica. De esta manera, se intentará concienciar a las empresas de la facilidad  de intrusión en sus redes, encontrando así información confidencial y la posibilidad de ralentizar e incluso llegar a parar la producción de la mayoría de las empresas si no se toman unas medidas de seguridad informática adecuadas.
 
 De cualquier modo, el objeto del proyecto es el paso previo a la posterior venta de una auditoría de seguridad completa (que se llevaría a cabo por un experto), por lo que la aplicación, simplemente servirá como método de detección de vulnerabilidades, no como solución de los mismos. Este proceso nunca debería utilizarse como sustituto a una auditoría, tan sólo debe plantearse de modo informativo.
 
-El desarrollo completo del proceso culminaría con una auditoria técnica de seguridad, es decir un examen cuyo objetivo es evaluar la eficacia y eficiencia de los recursos informáticos y destacar posibles errores o fallos del sistema, pudiendo abarcar un gran número de posibilidades (internas, externas, web\ldots). Del mismo modo que en la fase previa, se centrará en las auditorias tipo \emph{wireless}, que se podrán tratar como auditorias internas o externas, dependiendo el nivel de información previa. \\
+El desarrollo completo del proceso culminaría con una auditoria técnica de seguridad, es decir un examen cuyo objetivo es evaluar la eficacia y eficiencia de los recursos informáticos y destacar posibles errores o fallos del sistema, pudiendo abarcar un gran número de posibilidades (internas, externas, web\ldots). Del mismo modo que en la fase previa, se centrará en las auditorias tipo \emph{wireless}, que se podrán tratar como auditorias internas o externas, dependiendo el nivel de información previa.
 
 Dentro de la multitud de vulnerabilidades de la seguridad informática, el proyecto se centra en las redes WiFi. Estas redes son cada vez más utilizadas por gran parte de la sociedad en su día a día; por esto, y por su fácil instalación y conectividad, crecen en número diariamente. A pesar de los numerosos ejemplos de intrusión de estas redes, la sociedad aún no está lo suficientemente concienciada del fácil acceso a nuestra información y de la necesidad de la protección de los datos en la red. Nos encontramos en un momento en el que la información privada de las personas cada vez tiende a ser más pública. 
 
@@ -129,8 +130,9 @@ Desde hace años se ha intentando concienciar a la población de este serio proble
  
 %%%%%%%%%%%%%%%%%%CAPITULO 1: INTRODUCCION%%%%%%%%%%%%%%%
 \chapter{Introducción}\label{cap.introduccion}
-\lettrine{D}{}esde el inicio del nuevo siglo, el uso de las tecnologías forma parte de nuestra actividad cotidiana, lo que implica que cada vez se tiende más, y con mayor frecuencia, a compartir en red todo tipo de datos.
-Durante todos estos años de evolución tecnológica han aparecido cada vez más y novedosos métodos de intrusión, pérdida o robo de datos e información personal (spam, virus, troyanos, intrusiones en red, etc).
+\lettrine[lines=2]{D}{}esde el inicio del nuevo siglo, el uso de las tecnologías forma parte de nuestra actividad cotidiana, lo que implica que cada vez se tiende más, y con mayor frecuencia, a compartir en red todo tipo de datos.
+Durante todos estos años de evolución tecnológica han aparecido cada vez más métodos de intrusión, pérdida o robo de datos e información personal (spam, virus, troyanos, intrusiones en red, etc).
+
 Por otro lado, cada vez resulta más común la implantación de redes inalámbricas tanto por la comodidad de instalación, y reducción de costes, como la ausencia de cableado. Pero lo que se presenta como ventaja, también conforma su principal inconveniente, ya que al viajar a través del espacio, y no por un medio físico, permite que prácticamente cualquier persona con mínimos conocimientos informáticos pueda captar la información transmitida.
 
 \pagenumbering{arabic}
@@ -141,20 +143,24 @@ En la actualidad, no se ha conseguido una solución que erradique por completo la
 %%%%%%%%%%%%%%%% OBJETIVOS%%%%%%%%%%%%%%
 \section{Objetivos}\label{cap.Objetivos}
 
-%\lettrine{E}{}
+%\lettrine[lines=2]{E}{}
 En cuanto a los objetivos del proyecto se destacará un objetivo principal, para entender el desarrollo de la aplicación al que se subordinaran una serie de objetivos secundarios.
+
 \subsection{Objetivo general}
-El objetivo principal será introducir a las empresas en la importancia de contar con una red inalámbrica segura, y la necesidad de realizar una pre-auditoria de caja negra automática, que detecte las vulnerabilidades de la red, y que sirva como argumento de venta de auditorias completas de forma periódica.
+
+El objetivo principal es el desarrollo de un sistema de pre-auditoría de redes WiFi de caja negra que genere un informe de forma automática, de manera que sirva como argumento de venta de auditorías de seguridad.
+
 %es decir, sin conocimientos previos de la infraestructura. Esto permite simular ataques realizados por parte de personal externo a la organización.
 %la automatización de un dispositivo para realizar una serie de  ataques conocidos, a redes inalámbricas y así analizar algunas de las posibles vulnerabilidades de dichas redes, generando un informe con las posibles amenazas.
+
 \subsection{Objetivos secundarios}
 En un segundo lugar, pero no por ello menos importante, dispongo de una serie de objetivos que se encuentran subordinados al cumplimiento del objetivo principal.
 \begin{enumerate}
-	\item Creación de una aplicación de detección de las vulnerabilidades de la red WiFi, que funcione mediante un dispositivo de fácil uso y de bajo coste. 	
-	\item Dotación a dicha aplicación de una interfaz simple e intuitiva que facilite el desarrollo de una manera rápida, y pueda ser ejecutada por un comercial sin conocimientos informáticos previos. 
+	\item Crear una aplicación de detección de las vulnerabilidades de la red WiFi, que funcione mediante un dispositivo de fácil uso y de bajo coste. 	
+	\item Dotar a dicha aplicación de una interfaz simple e intuitiva que facilite el desarrollo de una manera rápida, y pueda ser ejecutada por un comercial sin conocimientos informáticos previos. 
 	\item Hacer que el dispositivo responsable de la ejecución de la aplicación sea portátil y de fácil movilidad.
-	\item Recogida sistematizada de información de todos los datos del análisis realizados por el dispositivo, que se plasmara en un informe de manera automatizada. 
-	\item Generación de un informe con posibles vulnerabilidades, según el estándar NIST SP 800-115\cite{SP}. Con un lenguaje sencillo y no demasiado técnico que permita una fácil comprensión.
+	\item Recoger de forma sistemática todos los datos del análisis realizado por el dispositivo, que se plasmará en un informe de manera automatizada. 
+	\item Generar un informe con posibles vulnerabilidades, según el estándar NIST SP 800-115\cite{SP}. Con un lenguaje sencillo y no demasiado técnico que permita una fácil comprensión.
 	
 	
 \end{enumerate}
@@ -167,11 +173,11 @@ En un segundo lugar, pero no por ello menos importante, dispongo de una serie de
 %%%%ANTECEDENTES PYMES%%%%
 \section{Antecedentes de la seguridad informática en pequeñas y medianas empresas (PYMEs)}
 
-\lettrine{D}{}esde que la tecnología forma parte de nuestra vida cotidiana, se encuentra cada vez más presente en las empresas, la pérdida o robo de información de datos electrónicos. Esto conlleva un importante agujero de seguridad, debido a una falta de previsión en la implantación de los métodos de seguridad.
+\lettrine[lines=2]{D}{}esde que la tecnología forma parte de nuestra vida cotidiana, se encuentra cada vez más presente en las empresas, la pérdida o robo de información de datos electrónicos. Esto conlleva un importante agujero de seguridad, debido a una falta de previsión en la implantación de los métodos de seguridad.
 
 Para cualquier empresa plantear un buen uso de las TIC (Tecnologías de la Información y la Comunicación) es un punto clave que se debe tener en cuenta y aprovechar al máximo para aumentar la productividad y la eficiencia. Existe una gran inversión en cuanto a equipamiento informático y servicios básicos de comunicación que emplean las empresas, para su posible interconexión.
 
-En la actualidad las tecnologías inalámbricas y móviles tienen cada vez más peso en las empresas. Según un informe de 2012 realizado conjuntamente por Fundetec y el ONTSI\cite{ipyme}\footnote{\url{http://www.ipyme.org/Publicaciones/informe-epyme-2012.pdf}} sobre el análisis de implantación de las TIC en las pyme españolas, el 99,9\% de ellas disponen de ordenadores.   
+En la actualidad las tecnologías inalámbricas y móviles tienen cada vez más peso en las empresas. Según un informe de 2012 realizado conjuntamente por Fundetec y el ONTSI\cite{ipyme} sobre el análisis de implantación de las TIC en las pymes españolas, el 99,9\% de ellas disponen de ordenadores.   
 \begin{figure}[H]
   \centering
    \includegraphics[width=1\textwidth]{equipamiento.png}
@@ -179,9 +185,9 @@ En la actualidad las tecnologías inalámbricas y móviles tienen cada vez más peso
   \label{figura:eq}
 \end{figure}
 
-En esta Figura \ref{figura:eq} apreciamos el gran uso por parte de las empresas de las nuevas tecnologías, tanto en ordenadores como en dispositivos móviles. Estos últimos están teniendo un crecimiento exponencial; Su difusión conlleva la necesidad de asegurar su protección. 
+En esta Figura \ref{figura:eq} apreciamos el gran uso por parte de las empresas de las nuevas tecnologías, tanto en ordenadores como en dispositivos móviles. Estos últimos están teniendo un crecimiento exponencial; su difusión conlleva la necesidad de asegurar su protección. 
 
-A medida que aumentan la implementación de dispositivos informáticos individuales en las empresas como método de trabajo, es necesaria la conexión entre ellos para compartir los datos y poder llevar a cabo un trabajo colectivo. La interconexión de estos dispositivos se lleva a cabo mediante la creación de una red interna, pudiendo ser inalámbrica o cableada. Asegurar la red es de igual importancia que la protección de los dispositivos.
+A medida que aumenta la implantación de dispositivos informáticos individuales en las empresas como método de trabajo, es necesaria la conexión entre ellos para compartir los datos y poder llevar a cabo un trabajo colectivo. La interconexión de estos dispositivos se lleva a cabo mediante la creación de una red interna, pudiendo ser inalámbrica o cableada. Asegurar la red es de igual importancia que la protección de los dispositivos.
 
 \begin{figure}[H]
   \centering
@@ -194,7 +200,8 @@ Como indica el gráfico anterior, a pesar de la disponibilidad de varios tipos de
 
 \subsection{Herramientas de seguridad}
 
-Gracias a la INTECO\cite{INTECO}\footnote{\url{https://www.incibe.es/file/Sp61c9ljOlMT7jcjbxYNVQ}} , la cual realizo una encuesta a mas de 1000 empresas para posteriormente elaborar un informe, que incluye que tipo de herramientas disponían para proteger sus equipos, podemos destacar un notable grado de implicación en cuanto a las medidas básicas aplicables. Un gran número de las empresas encuestadas afirmaban la utilización de medidas paquetizadas, conocidas por todos ( antivirus, antiespias, cortafuegos). No obstante, no deberían conformarse con estas soluciones tan elementales, ya que un gasto inicial en seguridad puede paliar futuros gastos de perdida de información. Sin personalizar en una empresa, ni en su posible capital, cualquier robo de información por un fallo en la seguridad, obligará a invertir tiempo y dinero en la investigación de las posibles causas y la magnitud de los daños causados, tanto a nivel económico como en la reputación de la empresa.
+En 2012 INTECO realizó una encuesta a mas de 1000 empresas españolas para posteriormente elaborar un informe~\cite{INTECO}.  Podemos destacar un notable grado de implicación en cuanto a las medidas básicas aplicables. Un gran número de las empresas encuestadas utilizan medidas paquetizadas, conocidas por todos (antivirus, antiespias, cortafuegos). No obstante, no deberían conformarse con estas soluciones tan elementales, ya que un gasto inicial en seguridad puede paliar futuros gastos de perdida de información. Sin personalizar en una empresa, ni en su posible capital, cualquier robo de información por un fallo en la seguridad, obligará a invertir tiempo y dinero en la investigación de las posibles causas y la magnitud de los daños causados, tanto a nivel económico como en la reputación de la empresa.
+
 \begin{figure}[H]
   \centering
    \includegraphics[width=1\textwidth]{inteco1.png}
@@ -202,8 +209,9 @@ Gracias a la INTECO\cite{INTECO}\footnote{\url{https://www.incibe.es/file/Sp61c9
   \label{fig:ej}
 \end{figure}
 
-Como ha sido comentado anteriormente, igual de importante que la protección de los dispositivos, es la seguridad de las redes que lo conectan. También podemos extraer del informe de la INTECO, que frente al dato de casi el 100\% de los dispositivos se encuentran protegidos por algún posible método, por muy básico que sea, todavía un 13\% de las redes no cuentan con ningún tipo de protección. Tan importante es, el gasto de seguridad en la red, al mismo tiempo que su instalación, es decir desde un principio, como revisiones periódicas de la misma. Ya que la implantación de un cifrado o sistema de seguridad en un inicio, no garantiza una seguridad permanente. En la actualidad podemos elegir entre distintos protocolos de seguridad para las redes WiFi (WEP, WPA,WPA/WPA2), de los que se deben elegir WPA/WPA2 por los niveles de robustez en su cifrado. Hoy en día son usados indistintamente estos protocolos (27,4\%), debido a la falta de información de la diferencia de niveles de seguridad que aportan cada uno de ellos. 
+Como ha sido comentado anteriormente, igual de importante que la protección de los dispositivos, es la seguridad de las redes que lo conectan. También podemos extraer del informe de INTECO, que frente al dato de casi el 100\% de los dispositivos se encuentran protegidos por algún posible método, por muy básico que sea, todavía un 13\% de las redes no cuentan con ningún tipo de protección.
 
+La seguridad informática debe ser entendida como un proceso, no como una propiedad del sistema.  Por tanto es tan importante la revisión periódica por personal especializado como el diseño inicial.  La implantación de un cifrado o sistema de seguridad en un inicio, no garantiza una seguridad permanente. En la actualidad podemos elegir entre distintos protocolos de seguridad para las redes WiFi (WEP, WPA, WPA/WPA2), de los que se deben elegir WPA/WPA2 por los niveles de robustez en su cifrado.  Sin embargo el informe de INTECO destaca que un 27,4\% de los encuestados emplea WEP, debido a la falta de información de la diferencia de niveles de seguridad que aportan cada uno de ellos. 
 
 Debido a los avances tecnológicos e informáticos, tanto los ataques como las protecciones evolucionan a diario, por ello es igual de importante que la buena elección de un protocolo de seguridad, llevar a cabo un control periódico, que podría tratarse de auditorías informáticas.
 \begin{figure}[H]
@@ -580,7 +588,7 @@ Se puede ejecutar en la mayoría de las versiones de Python. Esta biblioteca se u
 
 
 \chapter{Desarrollo del proyecto}
-\lettrine{P}{}ara llegar al fin del proyecto, es decir al cumplimiento del objetivo principal, introducir a las empresas en la importancia de contar con una red inalámbrica segura, y la necesidad de realizar una pre-auditoria
+\lettrine[lines=2]{P}{}ara llegar al fin del proyecto, es decir al cumplimiento del objetivo principal, introducir a las empresas en la importancia de contar con una red inalámbrica segura, y la necesidad de realizar una pre-auditoria
 de caja negra automática, que detecte las vulnerabilidades de la red, y que sirva como argumento de venta de auditorias completas de forma periódica, es necesario desarrollar diferentes fases:
 
 \section{Creación de una aplicación de detección de las vulnerabilidades}
@@ -878,7 +886,7 @@ CrearInformeWPA()
 
 \chapter{Conclusiones y propuestas}
 
-\lettrine{E}{}n la actualidad las redes inalámbricas están sustituyendo a los cables de red. Así la conexión no se limita a la longitud de un cable y se puede extender muchos metros alrededor del punto de acceso. 
+\lettrine[lines=2]{E}{}n la actualidad las redes inalámbricas están sustituyendo a los cables de red. Así la conexión no se limita a la longitud de un cable y se puede extender muchos metros alrededor del punto de acceso. 
 
 Con este proyecto se ha tratado de advertir de los distintos problemas con los que cuentan las redes inalámbricas, así como la seguridad que se les aplica.
 Para entender un poco éste funcionamiento se a de tener claro algunos conocimientos básicos que se han explicado a lo largo de la memoria, como las tecnologías WiFi, su distintos modos de funcionamiento y los prácticas necesarias para su buen funcionamiento.
