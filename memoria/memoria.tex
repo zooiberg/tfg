@@ -3,13 +3,13 @@
 \usepackage[spanish]{babel} 
 \usepackage[latin1]{inputenc}
 \usepackage{graphicx} % graficos
-\usepackage{hyperref}%hipervinculos
 \usepackage{multirow} % para las tablas
 \usepackage[spanish]{babel}%tablas en español
 \usepackage{lettrine}%letras capitales
 \usepackage{float}%comando [H]
-\usepackage {verbatim }%introducir .txt
+\usepackage{verbatim}%introducir .txt
 \usepackage{setspace}
+\usepackage{hyperref}%hipervinculos
 
 \def\thetitle{Seguridad y vulnerabilidad de redes inalámbricas en PYMEs}
 
@@ -105,15 +105,17 @@ $\ $
 %\cleardoublepage
 \addcontentsline{toc}{chapter}{Lista de tablas} % para que aparezca en el indice de contenidos
 \listoftables % indice de tablas
-\newpage
+\cleardoublepage
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%RESUMEN%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\addcontentsline{toc}{section}{Resumen} % si queremos que aparezca en el índice
-\markboth{RESUMEN}{RESUMEN} % encabezado
+\phantomsection
+\addcontentsline{toc}{chapter}{Resumen}
 
-\lettrine[lines=2]{E}{}ste proyecto consiste en la implementación de un dispositivo para generar posibles ataques básicos y conocidos a una red WiFi determinada, con el fin de generar un informe de manera automatizada con algunas de las posibles vulnerabilidades.
+\begin{abstract}
+  
+\lettrine[lines=2]{E}{ste} proyecto consiste en la implementación de un dispositivo para generar posibles ataques básicos y conocidos a una red WiFi determinada, con el fin de generar un informe de manera automatizada con algunas de las posibles vulnerabilidades.
 
 
 Se centrará en las vulnerabilidades de las redes inalámbricas, las cuales están en continuo crecimiento, y disponen de algunas ventajas frente a las cableadas. No solo por la comodidad en la instalación sino por la movilidad que brinda. No todo son ventajas, ya que en las comunicaciones inalámbricas la información se ``propaga'' por el aire, siendo posible capturar o escuchar dicha información. Ninguna red inalámbrica es completamente segura ya que todos los mecanismos o protocolos tienen vulnerabilidades, pero se puede trabajar para conseguir niveles aceptables de seguridad.
@@ -129,10 +131,14 @@ El desarrollo completo del proceso culminaría con una auditoria técnica de segur
 Dentro de la multitud de vulnerabilidades de la seguridad informática, el proyecto se centra en las redes WiFi. Estas redes son cada vez más utilizadas por gran parte de la sociedad en su día a día; por esto, y por su fácil instalación y conectividad, crecen en número diariamente. A pesar de los numerosos ejemplos de intrusión de estas redes, la sociedad aún no está lo suficientemente concienciada del fácil acceso a nuestra información y de la necesidad de la protección de los datos en la red. Nos encontramos en un momento en el que la información privada de las personas cada vez tiende a ser más pública. 
 
 Desde hace años se ha intentando concienciar a la población de este serio problema que nos afecta a todos, desde particulares y la información almacenada en sus dispositivos hasta empresarios y la protección de sus bases de datos. Se pretende, con la materialización de los posibles fallos de la red a través del informe, alertar y poner de manifiesto la necesidad de la toma de medidas adecuadas para la protección, como la contratación de personal especializado y la realización de auditorías de forma periódica.
- 
+
+\end{abstract}
+
+
+
 %%%%%%%%%%%%%%%%%%CAPITULO 1: INTRODUCCION%%%%%%%%%%%%%%%
 \chapter{Introducción}\label{cap.introduccion}
-\lettrine[lines=2]{D}{}esde el inicio del nuevo siglo, el uso de las tecnologías forma parte de nuestra actividad cotidiana, lo que implica que cada vez se tiende más, y con mayor frecuencia, a compartir en red todo tipo de datos.
+\lettrine[lines=2]{D}{esde} el inicio del nuevo siglo, el uso de las tecnologías forma parte de nuestra actividad cotidiana, lo que implica que cada vez se tiende más, y con mayor frecuencia, a compartir en red todo tipo de datos.
 Durante todos estos años de evolución tecnológica han aparecido cada vez más métodos de intrusión, pérdida o robo de datos e información personal (spam, virus, troyanos, intrusiones en red, etc).
 
 Por otro lado, cada vez resulta más común la implantación de redes inalámbricas tanto por la comodidad de instalación, y reducción de costes, como la ausencia de cableado. Pero lo que se presenta como ventaja, también conforma su principal inconveniente, ya que al viajar a través del espacio, y no por un medio físico, permite que prácticamente cualquier persona con mínimos conocimientos informáticos pueda captar la información transmitida.
@@ -145,7 +151,7 @@ En la actualidad, no se ha conseguido una solución que erradique por completo la
 %%%%%%%%%%%%%%%% OBJETIVOS%%%%%%%%%%%%%%
 \section{Objetivos}\label{cap.Objetivos}
 
-%\lettrine[lines=2]{E}{}
+%\lettrine[lines=2]{E}{n}
 En cuanto a los objetivos del proyecto se destacará un objetivo principal, para entender el desarrollo de la aplicación al que se subordinaran una serie de objetivos secundarios.
 
 \subsection{Objetivo general}
@@ -175,7 +181,7 @@ En un segundo lugar, pero no por ello menos importante, dispongo de una serie de
 %%%%ANTECEDENTES PYMES%%%%
 \section{Antecedentes de la seguridad informática en pequeñas y medianas empresas (PYMEs)}
 
-\lettrine[lines=2]{D}{}esde que la tecnología forma parte de nuestra vida cotidiana, se encuentra cada vez más presente en las empresas, la pérdida o robo de información de datos electrónicos. Esto conlleva un importante agujero de seguridad, debido a una falta de previsión en la implantación de los métodos de seguridad.
+\lettrine[lines=2]{D}{esde} que la tecnología forma parte de nuestra vida cotidiana, se encuentra cada vez más presente en las empresas, la pérdida o robo de información de datos electrónicos. Esto conlleva un importante agujero de seguridad, debido a una falta de previsión en la implantación de los métodos de seguridad.
 
 Para cualquier empresa plantear un buen uso de las TIC (Tecnologías de la Información y la Comunicación) es un punto clave que se debe tener en cuenta y aprovechar al máximo para aumentar la productividad y la eficiencia. Existe una gran inversión en cuanto a equipamiento informático y servicios básicos de comunicación que emplean las empresas, para su posible interconexión.
 
@@ -590,7 +596,7 @@ Se puede ejecutar en la mayoría de las versiones de Python. Esta biblioteca se u
 
 
 \chapter{Desarrollo del proyecto}
-\lettrine[lines=2]{P}{}ara llegar al fin del proyecto, es decir al cumplimiento del objetivo principal, introducir a las empresas en la importancia de contar con una red inalámbrica segura, y la necesidad de realizar una pre-auditoria
+\lettrine[lines=2]{P}{ara} llegar al fin del proyecto, es decir al cumplimiento del objetivo principal, introducir a las empresas en la importancia de contar con una red inalámbrica segura, y la necesidad de realizar una pre-auditoria
 de caja negra automática, que detecte las vulnerabilidades de la red, y que sirva como argumento de venta de auditorias completas de forma periódica, es necesario desarrollar diferentes fases:
 
 \section{Creación de una aplicación de detección de las vulnerabilidades}
@@ -888,7 +894,7 @@ CrearInformeWPA()
 
 \chapter{Conclusiones y propuestas}
 
-\lettrine[lines=2]{E}{}n la actualidad las redes inalámbricas están sustituyendo a los cables de red. Así la conexión no se limita a la longitud de un cable y se puede extender muchos metros alrededor del punto de acceso. 
+\lettrine[lines=2]{E}{n} la actualidad las redes inalámbricas están sustituyendo a los cables de red. Así la conexión no se limita a la longitud de un cable y se puede extender muchos metros alrededor del punto de acceso. 
 
 Con este proyecto se ha tratado de advertir de los distintos problemas con los que cuentan las redes inalámbricas, así como la seguridad que se les aplica.
 Para entender un poco éste funcionamiento se a de tener claro algunos conocimientos básicos que se han explicado a lo largo de la memoria, como las tecnologías WiFi, su distintos modos de funcionamiento y los prácticas necesarias para su buen funcionamiento.
