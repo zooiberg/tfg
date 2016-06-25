@@ -13,52 +13,52 @@
 \contentsline {subsection}{\numberline {2.1.1}Herramientas de seguridad}{6}{subsection.2.1.1}
 \contentsline {subsection}{\numberline {2.1.2}Limitaciones de seguridad.}{8}{subsection.2.1.2}
 \contentsline {subsection}{\numberline {2.1.3}Personal encargado de la seguridad de la informaci\'on.}{9}{subsection.2.1.3}
-\contentsline {section}{\numberline {2.2}Antecedentes de la seguridad informatica en redes WiFi}{12}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Estandares WI-FI}{13}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}Comunicaciones Inal\'ambricas}{16}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}Protocolos inal\'ambricos}{17}{subsection.2.2.3}
-\contentsline {subsubsection}{Protocolo WEP}{17}{section*.5}
-\contentsline {paragraph}{Autentificaci\'on}{17}{section*.6}
-\contentsline {paragraph}{Confidencialidad}{17}{section*.7}
-\contentsline {paragraph}{Integridad}{19}{section*.8}
-\contentsline {subsubsection}{Protocolo WPA/WPA2}{20}{section*.9}
-\contentsline {paragraph}{WPA2 Personal}{21}{section*.10}
-\contentsline {paragraph}{WPA2 Enterprise}{21}{section*.11}
-\contentsline {paragraph}{WPS}{22}{section*.12}
-\contentsline {section}{\numberline {2.3}Antecedentes de pentest de WiFi}{22}{section.2.3}
-\contentsline {section}{\numberline {2.4}Antecedentes de proyecto}{24}{section.2.4}
-\contentsline {subsection}{\numberline {2.4.1}Automatizaci\'on de dispositivos}{24}{subsection.2.4.1}
-\contentsline {subsubsection}{Hardware}{24}{section*.13}
-\contentsline {paragraph}{Raspberry Pi}{24}{section*.14}
-\contentsline {subsubsection}{Detalles del Software}{25}{section*.15}
-\contentsline {paragraph}{GNU/Linux}{25}{section*.16}
-\contentsline {subparagraph}{Kali Linux}{26}{section*.17}
-\contentsline {paragraph}{Suite aircrack-ng}{27}{section*.18}
-\contentsline {paragraph}{Lenguaje Bash}{29}{section*.19}
-\contentsline {subsection}{\numberline {2.4.2}Sistemas de generaci\'on autom\'atica de informes}{30}{subsection.2.4.2}
-\contentsline {subsubsection}{Python}{30}{section*.20}
-\contentsline {paragraph}{Jinja2}{30}{section*.21}
-\contentsline {paragraph}{Ejemplo Jinja2}{30}{section*.22}
-\contentsline {subsubsection}{\LaTeX {}}{31}{section*.23}
-\contentsline {chapter}{\numberline {3}Desarrollo del proyecto}{33}{chapter.3}
-\contentsline {section}{\numberline {3.1}Creaci\'on de una aplicaci\'on de detecci\'on de las vulnerabilidades}{33}{section.3.1}
-\contentsline {paragraph}{Soporte de tarjetas inal\'ambricas}{35}{section*.24}
-\contentsline {subsection}{\numberline {3.1.1}Instalaci\'on y configuraci\'on del sistema operativo de la Raspberry Pi}{36}{subsection.3.1.1}
+\contentsline {section}{\numberline {2.2}Antecedentes de la seguridad informatica en redes WiFi}{11}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Estandares WI-FI}{12}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Comunicaciones Inal\'ambricas}{15}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Protocolos inal\'ambricos}{16}{subsection.2.2.3}
+\contentsline {subsubsection}{Protocolo WEP}{16}{section*.5}
+\contentsline {paragraph}{Autentificaci\'on}{16}{section*.6}
+\contentsline {paragraph}{Confidencialidad}{16}{section*.7}
+\contentsline {paragraph}{Integridad}{18}{section*.8}
+\contentsline {subsubsection}{Protocolo WPA/WPA2}{19}{section*.9}
+\contentsline {paragraph}{WPA2 Personal}{20}{section*.10}
+\contentsline {paragraph}{WPA2 Enterprise}{20}{section*.11}
+\contentsline {paragraph}{WPS}{21}{section*.12}
+\contentsline {section}{\numberline {2.3}Antecedentes de pentest de WiFi}{21}{section.2.3}
+\contentsline {section}{\numberline {2.4}Antecedentes de proyecto}{23}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Automatizaci\'on de dispositivos}{23}{subsection.2.4.1}
+\contentsline {subsubsection}{Hardware}{23}{section*.13}
+\contentsline {paragraph}{Raspberry Pi}{23}{section*.14}
+\contentsline {subsubsection}{Detalles del Software}{24}{section*.15}
+\contentsline {paragraph}{GNU/Linux}{24}{section*.16}
+\contentsline {subparagraph}{Kali Linux}{25}{section*.17}
+\contentsline {paragraph}{Suite aircrack-ng}{26}{section*.18}
+\contentsline {paragraph}{Lenguaje Bash}{28}{section*.19}
+\contentsline {subsection}{\numberline {2.4.2}Sistemas de generaci\'on autom\'atica de informes}{29}{subsection.2.4.2}
+\contentsline {subsubsection}{Python}{29}{section*.20}
+\contentsline {paragraph}{Jinja2}{29}{section*.21}
+\contentsline {paragraph}{Ejemplo Jinja2}{29}{section*.22}
+\contentsline {subsubsection}{\LaTeX {}}{30}{section*.23}
+\contentsline {chapter}{\numberline {3}Desarrollo del proyecto}{32}{chapter.3}
+\contentsline {section}{\numberline {3.1}Creaci\'on de una aplicaci\'on de detecci\'on de las vulnerabilidades}{32}{section.3.1}
+\contentsline {paragraph}{Soporte de tarjetas inal\'ambricas}{34}{section*.24}
+\contentsline {subsection}{\numberline {3.1.1}Instalaci\'on y configuraci\'on del sistema operativo de la Raspberry Pi}{35}{subsection.3.1.1}
 \contentsline {section}{\numberline {3.2}Dotaci\'on a la aplicaci\'on de una interfaz gr\'afica simple e intuitiva.}{37}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Descripci\'on del la interfaz}{38}{subsection.3.2.1}
-\contentsline {section}{\numberline {3.3}Ejecuci\'on de an\'alisis de vulnerabilidades. Realizaci\'on de ataques.}{44}{section.3.3}
-\contentsline {subsubsection}{Ataque red WEP}{45}{section*.25}
-\contentsline {subsubsection}{Denegaci\'on de servicios.}{46}{section*.26}
-\contentsline {subsubsection}{Ataque WPA con WPS activado}{47}{section*.27}
-\contentsline {paragraph}{reaver:}{47}{section*.28}
-\contentsline {paragraph}{Pixiewps:}{49}{section*.29}
-\contentsline {subsubsection}{Ataque por fuerza bruta WPA/WPA2 }{52}{section*.30}
-\contentsline {subsubsection}{Utilizamos Pyrit}{52}{section*.31}
-\contentsline {section}{\numberline {3.4}Generaci\'on de un informe con posibles vulnerabilidades de la red}{53}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}Pautas y seguimiento para la creaci\'on del informe}{53}{subsection.3.4.1}
-\contentsline {paragraph}{Generar informe WEP.}{55}{figure.3.12}
-\contentsline {paragraph}{Generar informe WPA.}{55}{section*.33}
-\contentsline {chapter}{\numberline {4}Conclusiones y propuestas}{56}{chapter.4}
-\contentsline {section}{\numberline {4.1}Recomendaciones.}{57}{section.4.1}
-\contentsline {chapter}{\numberline {A}Informe WEP}{58}{appendix.Alph1}
-\contentsline {chapter}{\numberline {B}Informe WPA}{59}{appendix.Alph2}
+\contentsline {subsection}{\numberline {3.2.1}Descripci\'on del la interfaz}{37}{subsection.3.2.1}
+\contentsline {section}{\numberline {3.3}Ejecuci\'on de an\'alisis de vulnerabilidades. Realizaci\'on de ataques.}{43}{section.3.3}
+\contentsline {subsubsection}{Ataque red WEP}{44}{section*.25}
+\contentsline {subsubsection}{Denegaci\'on de servicios.}{45}{section*.26}
+\contentsline {subsubsection}{Ataque WPA con WPS activado}{46}{section*.27}
+\contentsline {paragraph}{reaver:}{46}{section*.28}
+\contentsline {paragraph}{Pixiewps:}{48}{section*.29}
+\contentsline {subsubsection}{Ataque por fuerza bruta WPA/WPA2 }{51}{section*.30}
+\contentsline {subsubsection}{Utilizamos Pyrit}{51}{section*.31}
+\contentsline {section}{\numberline {3.4}Generaci\'on de un informe con posibles vulnerabilidades de la red}{52}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Pautas y seguimiento para la creaci\'on del informe}{52}{subsection.3.4.1}
+\contentsline {paragraph}{Generar informe WEP.}{54}{figure.3.12}
+\contentsline {paragraph}{Generar informe WPA.}{54}{section*.33}
+\contentsline {chapter}{\numberline {4}Conclusiones y propuestas}{55}{chapter.4}
+\contentsline {section}{\numberline {4.1}Recomendaciones.}{56}{section.4.1}
+\contentsline {chapter}{\numberline {A}Informe WEP}{57}{appendix.Alph1}
+\contentsline {chapter}{\numberline {B}Informe WPA}{58}{appendix.Alph2}

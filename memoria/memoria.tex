@@ -126,7 +126,7 @@ Con la ejecución de la aplicación y la posterior generación del informe por part
 
 De cualquier modo, el objeto del proyecto es el paso previo a la posterior venta de una auditoría de seguridad completa (que se llevaría a cabo por un experto), por lo que la aplicación, simplemente servirá como método de detección de vulnerabilidades, no como solución de los mismos. Este proceso nunca debería utilizarse como sustituto a una auditoría, tan sólo debe plantearse de modo informativo.
 
-El desarrollo completo del proceso culminaría con una auditoria técnica de seguridad, es decir un examen cuyo objetivo es evaluar la eficacia y eficiencia de los recursos informáticos y destacar posibles errores o fallos del sistema, pudiendo abarcar un gran número de posibilidades (internas, externas, web\ldots). Del mismo modo que en la fase previa, se centrará en las auditorias tipo \emph{wireless}, que se podrán tratar como auditorias internas o externas, dependiendo el nivel de información previa.
+El desarrollo completo del proceso culminaría con una auditoría técnica de seguridad, es decir un examen cuyo objetivo es evaluar la eficacia y eficiencia de los recursos informáticos y destacar posibles errores o fallos del sistema, pudiendo abarcar un gran número de posibilidades (internas, externas, web\ldots). Del mismo modo que en la fase previa, se centrará en las auditorías tipo \emph{wireless}, que se podrán tratar como auditorías internas o externas, dependiendo el nivel de información previa.
 
 Dentro de la multitud de vulnerabilidades de la seguridad informática, el proyecto se centra en las redes WiFi. Estas redes son cada vez más utilizadas por gran parte de la sociedad en su día a día; por esto, y por su fácil instalación y conectividad, crecen en número diariamente. A pesar de los numerosos ejemplos de intrusión de estas redes, la sociedad aún no está lo suficientemente concienciada del fácil acceso a nuestra información y de la necesidad de la protección de los datos en la red. Nos encontramos en un momento en el que la información privada de las personas cada vez tiende a ser más pública. 
 
@@ -179,7 +179,7 @@ En un segundo lugar, pero no por ello menos importante, dispongo de una serie de
 %%%%%%%%%%%%%%%% CAPITULO 2 ANTECEDENTES%%%%%%%%%%%
 \chapter{Antecedentes}\label{cap.antecedentes}
 %%%%ANTECEDENTES PYMES%%%%
-\section{Antecedentes de la seguridad informática en pequeñas y medianas empresas (PYMEs)}
+\section{Antecedentes de seguridad informática en pequeñas y medianas empresas (PYMEs)}
 
 \lettrine[lines=2]{D}{esde} que la tecnología forma parte de nuestra vida cotidiana, se encuentra cada vez más presente en las empresas, la pérdida o robo de información de datos electrónicos. Esto conlleva un importante agujero de seguridad, debido a una falta de previsión en la implantación de los métodos de seguridad.
 
@@ -268,7 +268,7 @@ Como podemos extraer de los resultados anteriores, los recursos dedicados a pers
 Una razón de peso para las empresas, en la que apoyan la externalización del personal dedicado a la seguridad informática es la consideración de que una persona externa a la empresa garantiza un conocimiento más profundo y actualizado.
 De todos estos datos, extraemos que este proyecto se encontrará más enfocado y contará con mayor demanda en las pequeñas y medianas empresas, ya que se encuentran menos concienciadas de la falta de seguridad y recurren con mayor frecuencia a personal externo. 
 %%%%%%%ANTECEDENTES WIFI%%%%
-\section{Antecedentes de la seguridad informatica en redes WiFi}
+\section{Antecedentes de seguridad informática en redes WiFi}
 
 Hace años cuando se empezaron a utilizar las redes inalámbricas existía un error de incompatibilidad, debido a que cada fabricante usaba un estándar distinto, fue en ese momento cuando las empresas punteras se reunieron para crear WECA (Wireless Ethernet Compability Aliance) que en la actualidad lo llamamos como WIFI Alliance\cite{wifi}.
 \begin{figure}[H]
@@ -281,7 +281,7 @@ Hace años cuando se empezaron a utilizar las redes inalámbricas existía un error
 En el año 2000 se implanta la interoperabilidad que permite operar entre todos los dispositivos Wi-Fi bajo la especificación IEE 802.11b. Es por ello que sabemos que todos equipos que dispongan del sello de Wi-Fi pueden interactuar independientemente del fabricante.
 Gracias a Wi-Fi se pueden crear redes de área local inalámbricas y conectar multitud de equipos mientras no estén muy alejados del punto de acceso a una velocidad elevada.
 
-\subsection{Estandares WI-FI}
+\subsection{Estándares WI-FI}
 El estándar original se ha ido modificando con el objetivo de ir mejorando la seguridad y la compatibilidad. Esta tabla nos enseña las distintas modificaciones del estándar 802.11 y a lo que se refiere.\cite{802.11}
 %%%TABLAAAAA%%%
 \begin{table}[H]
@@ -297,7 +297,7 @@ Nombre del estándar & Nombre& Descripción \\
 802.11e & Mejora de la calidad del servicio  & El estándar 802.11e está destinado a mejorar la calidad del servicio en el nivel de la capa de enlace de datos. El objetivo del estándar es definir los requisitos de diferentes paquetes en cuanto al ancho de banda y al retardo de transmisión para permitir mejores transmisiones de audio y vídeo. \\ \hline
 802.11f & Itinerancia  & El 802.11f es una recomendación para proveedores de puntos de acceso que permite que los productos sean más compatibles. Utiliza el protocolo IAPP que le permite a un usuario itinerante cambiarse claramente de un punto de acceso a otro mientras está en movimiento sin importar qué marcas de puntos de acceso se usan en la infraestructura de la red. También se conoce a esta propiedad simplemente como itinerancia.  \\ \hline
 \end{tabular}
-\caption{Estandar 802.11.}
+\caption{Estándar 802.11.}
 \label{tabla:802.11}
 \end{center}
 \end{table}
@@ -346,7 +346,7 @@ Las redes inalámbricas pueden acoger distintas topologías.
 	\item Modo Ad-Hoc.
 	Es una conexión que comunica una serie de dispositivos entre si, sin usar ningún tipo de Punto de Acceso. Ésta, es una configuración tipo punto a punto (peer-to-peer), así, el área de cobertura se limita por el alcance de cada tarjeta de red propia. Deben trabajar en el mismo rango de frecuencias, de lo contrario no podrán interactuar entre ellas.
 	\item Modo Infraestructura.
-	Éste modo es del tipo cliente-servidor, en el que el cliente son los dispositivos que suelen conectarse al servidor, el punto de acceso. Tiene que haber como mínimo un servidor, por lo tanto los dispositivos no se pueden comunicar entre si y toda la información pasara primero por el Punto de Acceso. Para que varios dispositivos puedan comunicarse entre sí, deben estar todos conectados al mismo punto de acceso, por lo que pueden estar comunicandose entre los dispositivos sin saber nada entre ellos, ya que toda la información que se necesita para la conexión, la tiene el punto de acceso.
+	Éste modo es del tipo cliente-servidor, en el que el cliente son los dispositivos que suelen conectarse al servidor, el punto de acceso. Tiene que haber como mínimo un servidor, por lo tanto los dispositivos no se pueden comunicar entre si y toda la información pasara primero por el Punto de Acceso. Para que varios dispositivos puedan comunicarse entre sí, deben estar todos conectados al mismo punto de acceso, por lo que pueden estar comunicándose entre los dispositivos sin saber nada entre ellos, ya que toda la información que se necesita para la conexión, la tiene el punto de acceso.
 \end{itemize}
 
 \subsection{Protocolos inalámbricos}
@@ -357,12 +357,12 @@ El cifrado WLAN desde sus orígenes ha estado ligado a vulnerabilidades y ataques
 \subsubsection{Protocolo WEP}
  WEP (Wired Equivalenet Privacy) fue el primer protocolo de cifrado que se implantó con el primer estándar IEEE 802.11. Es un protocolo que no ofrece mucha seguridad en una red inalámbrica, ya que esta seguridad está obsoleta y se conocen muchas maneras de descifrar el contenido de las tramas que van cifradas con WEP. Para entender bien el proceso de cifrado WEP, diferenciaremos entre sus tres fases:
 
-\paragraph{Autentificación}
+\paragraph{Autenticación}
 \begin{itemize}	
-	\item Open System:(Autentificación de Sistema Abierto)
-	\item Shared Key:(Autentificación por clave compartida)
+	\item Open System:(Autenticación de Sistema Abierto)
+	\item Shared Key:(Autenticación por clave compartida)
 \end{itemize}
-En cuanto a la autentificación, \textit{Open system} deja a todos los clientes que se lo pidan, autentificarse al punto de acceso, mientras que \textit{Shared key} necesita un mensaje solicitando conexión previa. Este (punto de acceso) contesta con un paquete cifrado por el cliente y se reenvía al punto de acceso que intenta descifrar la autentificación para que sea válida.
+En cuanto a la autenticación, \textit{Open system} deja a todos los clientes que se lo pidan, autenticarse al punto de acceso, mientras que \textit{Shared key} necesita un mensaje solicitando conexión previa. Este (punto de acceso) contesta con un paquete cifrado por el cliente y se reenvía al punto de acceso que intenta descifrar la autenticación para que sea válida.
 
 \paragraph{Confidencialidad}
 
@@ -403,7 +403,7 @@ En la fase de intercambio de claves el cliente y el punto de acceso emplean las 
   \label{fig:wpa}
 \end{figure}
 
-Con la PMK se genera una clave de cifrado para cada proceso de autentificación de un cliente llamada PTK que básicamente se genera a partir de dos números aleatorios, uno de ellos obtenidos del cliente y el otro por el punto de acceso para obtener ambos la misma clave PTK. Esto es el famoso \textit{4-way-Handshake}~\cite{backtrack5}.
+Con la PMK se genera una clave de cifrado para cada proceso de autenticación de un cliente llamada PTK que básicamente se genera a partir de dos números aleatorios, uno de ellos obtenidos del cliente y el otro por el punto de acceso para obtener ambos la misma clave PTK. Esto es el famoso \textit{4-way-Handshake}~\cite{backtrack5}.
 
 Cuando el cliente está autenticado, el protocolo TKIP utiliza seis claves de cifrado por cada sesión, 4 de ellas son utilizadas para comunicaciones \textit{unicast} y dos para comunicaciones \textit{multicast}. Estas claves son únicas para cliente y sesión y se cambian periódicamente, siendo generadas de las direcciones MAC, ESSID y la PTK.
 Un atacante que quiera vulnerar una red WPA-PSK va a tratar de capturar ese intercambio de números aleatorios, para que una vez conocidos éstos, junto al SSID y la direcciones MAC del cliente y del punto de acceso de la red, obtener la frase o secreto compartido que se empleó.
@@ -444,7 +444,7 @@ Un test de penetración abarca distintas etapas con diferentes tipos de procedimi
 Cuando se realiza una de estas pruebas, lo más probable es que se entregue un informe que demuestra los posibles fallos o vulnerabilidades de zonas importantes del sistema. Esta documentación es la que se entregará al cliente, y se empleará como guía para tomar las decisiones pertinentes.\\
 
 
-Un pentesting de forma continua permite que los procesos de las auditorias de seguridad dispongan de las mismas posibilidades de conseguir privilegios, que una persona mal intencionada, aun así se debe seguir manteniendo la seguridad en todas las fases de gestión de la seguridad.\\
+Un pentesting de forma continua permite que los procesos de las auditorías de seguridad dispongan de las mismas posibilidades de conseguir privilegios, que una persona mal intencionada, aun así se debe seguir manteniendo la seguridad en todas las fases de gestión de la seguridad.\\
 
 
 ``\textit{El pentesting no debería ser un proceso puntual que se contrata, sino un servicio de ataque 24x7 durante todo el ciclo de vida de tu sistema.}'' \cite{elladodelmal}
@@ -487,7 +487,7 @@ Las siglas GNU quiere decir GNU's Not Unix, es decir GNU no es Unix. Se refiere 
 El sufijo Linux se refiere al kernel (núcleo) que utiliza del sistema operativo. GNU esta desarrollando su propio kernel pero todavía no lo tienen disponible.
 \subparagraph{Kali Linux}
 Sabemos que el mundo de la seguridad informática avanza cada día a gran velocidad. Es por ello que es necesario que las personas que se dedican a ello siempre estén ampliando conocimiento. 
-\textit{BlackTrack}  era una gran distribución de seguridad y la distribución de pruebas de penetración mas popular, ya que contenía cientos de herramientas de seguridad. La empresa que gestionaba esta distribución, Offensive Security\cite{offensive security}\footnote{Página oficial de la empresa offensive security \url{https://www.offensive-security.com/}}, evolucionó su distribución para proporcionar mejoras importantes. Kali Linux siguió con los pasos creando una distribución Linux basada en Debian orientado a las auditorias de seguridad a pruebas de penetración en el 2013. Ésta ofrece al usuario un gran número de herramientas para cada rama del pentesting, como análisis forense, explotación de vulnerabilidades del sistema web o wireless. 
+\textit{BlackTrack}  era una gran distribución de seguridad y la distribución de pruebas de penetración mas popular, ya que contenía cientos de herramientas de seguridad. La empresa que gestionaba esta distribución, Offensive Security\cite{offensive security}\footnote{Página oficial de la empresa offensive security \url{https://www.offensive-security.com/}}, evolucionó su distribución para proporcionar mejoras importantes. Kali Linux siguió con los pasos creando una distribución Linux basada en Debian orientado a las auditorías de seguridad a pruebas de penetración en el 2013. Ésta ofrece al usuario un gran número de herramientas para cada rama del pentesting, como análisis forense, explotación de vulnerabilidades del sistema web o wireless. 
 Según \cite{kali} Kali Linux 2.0 contiene un nuevo kernel en su versión 4.0 y esta basada en Debian Jessie, mejorando la integración con el hardware y el uso de los drivers Wireless. Tiene soporte actualizado para un mayor número de escritorios (gnome, kde, xfce, mate, e17, lxde o i3wm). Una de las grandes mejoras fue el sistema de actualizaciones que presenta. Generalmente, las actualizaciones serán llevadas a cabo vía \textit{Git}. El \textit{script} se ejecuta diariamente sobre un listado de herramientas comunes en la distribución y mantendrá alerta al usuario ante posibles nuevas actualizaciones. \cite{kali1}
 \begin{figure}[H]
   \centering
@@ -497,7 +497,7 @@ Según \cite{kali} Kali Linux 2.0 contiene un nuevo kernel en su versión 4.0 y es
 \end{figure}
 ARM (Advanced RISC Machine) se ha visto favorecido con el lanzamiento de Kali Linux 2.0 ya que sigue proporcionando soporte para Rasberry Pi, Chomebooks, Odroids,etc. Esto es importante ya que se utilizará una Rasberry Pi para automatizar todos los ataques.\\
 \paragraph{Suite aircrack-ng}
-La suite de herramientas \textit{``air''} proporciona todo lo necesario para llevar a cabo auditorias a redes wireless. También disponemos de más herramientas, como son GUIs o \textit{sripts}, que por debajo utilizan las propias herramientas de la suite. 
+La suite de herramientas \textit{``air''} proporciona todo lo necesario para llevar a cabo auditorías a redes wireless. También disponemos de más herramientas, como son GUIs o \textit{sripts}, que por debajo utilizan las propias herramientas de la suite. 
 Las más utilizadas en el proyecto son:
 \begin{itemize}
 	\item Airmon-ng: Sirve para cambiar el modo de trabajo de la tarjeta inalámbrica, siempre y cuando el chipset lo permita. Este modo de trabajo cambiara a modo monitor.
@@ -514,13 +514,13 @@ PWR &Intensidad de la señal   \\ \hline
 \#/s & Número de paquetes de datos por segundos.  \\ \hline
 Data &  Número de paquetes de datos. En WEP solo cuentan los IVS. \\ \hline
 CH & Canal   \\ \hline
-MB & Velocidad minima soportada por el punto de acceso.   \\ \hline
+MB & Velocidad mínima soportada por el punto de acceso.   \\ \hline
 ENC & Algoritmo de cifrado en uso por el punto de acceso. Puede ser OPN, WEP, WPA o WPA2.  \\ \hline
 CIPHER & Tipo de cifrado de datos. Puede ser WEP, TKIP (WPA) o CCMP (WPA2) \\ \hline
 AUTH & Método de autenticación. Generalmente suele visualizarse PSK en entornos de clave compartida.  \\ \hline
 ESSID & Nombre de la red Wireless   \\ \hline
 Station & Dirección MAC de un cliente asociado al punto de acceso.  \\ \hline
-Probe & Paquetes en los que el cliente intenta identificar una red wireless. Por lo que se puede obtener el nombre de redes que un cliente esta buscando e intenta verificar que se encuentran en su radio de ación.   \\ \hline
+Probe & Paquetes en los que el cliente intenta identificar una red wireless. Por lo que se puede obtener el nombre de redes que un cliente esta buscando e intenta verificar que se encuentran en su radio de acción.   \\ \hline
 \end{tabular}
 \caption{Parámetros básicos Aerodump-ng.}
 \label{Airodump}
@@ -557,7 +557,7 @@ Parámetros & Descripción \\
 \end{itemize}
 
 \paragraph{Lenguaje Bash}
-El lenguaje Bash, es un lenguaje de programación en linea de comandos y además se trata de uno de los lenguajes que se empleará para el desarrollo de la aplicación. Normalmente es utilizado para la gestión de archivos, y la consola de linux fomenta su desarrollo, permitiendo programar \textit{scrips} dependiendo de las necesidades. Se refiere con \textit{script} a un archivo que contiene código escrito en un lenguaje de programación y que el dispositivo usa para un cometido establecido.
+El lenguaje Bash, es un lenguaje de programación en linea de comandos y además se trata de uno de los lenguajes que se empleará para el desarrollo de la aplicación. Normalmente es utilizado para la gestión de archivos, y la consola de Linux fomenta su desarrollo, permitiendo programar \textit{scrips} dependiendo de las necesidades. Se refiere con \textit{script} a un archivo que contiene código escrito en un lenguaje de programación y que el dispositivo usa para un cometido establecido.
 Además este lenguaje utiliza como intérprete, la \textit{shell}, que es un entorno de trabajo que nos permite ejecutar programas por medio de órdenes. Dichas órdenes deben formarse con el nombre de un programa y una serie de parámetros.
 A pesar del conocimiento de múltiples lenguajes de programación informática, se empleó este lenguaje porque es el lenguaje de programación utilizado en linux, y por tanto, nos brinda la oportunidad de aprender.
 
@@ -596,8 +596,8 @@ Se puede ejecutar en la mayoría de las versiones de Python. Esta biblioteca se u
 
 
 \chapter{Desarrollo del proyecto}
-\lettrine[lines=2]{P}{ara} llegar al fin del proyecto, es decir al cumplimiento del objetivo principal, introducir a las empresas en la importancia de contar con una red inalámbrica segura, y la necesidad de realizar una pre-auditoria
-de caja negra automática, que detecte las vulnerabilidades de la red, y que sirva como argumento de venta de auditorias completas de forma periódica, es necesario desarrollar diferentes fases:
+\lettrine[lines=2]{P}{ara} llegar al fin del proyecto, es decir al cumplimiento del objetivo principal, introducir a las empresas en la importancia de contar con una red inalámbrica segura, y la necesidad de realizar una pre-auditoría
+de caja negra automática, que detecte las vulnerabilidades de la red, y que sirva como argumento de venta de auditorías completas de forma periódica, es necesario desarrollar diferentes fases:
 
 \section{Creación de una aplicación de detección de las vulnerabilidades}
 Para la creación de la aplicación ha sido utilizado el dispositivo Raspberry Pi 3 Modelo B, que como se aprecia en la imagen anterior (Figura \ref{fig:Ras}), mejora las características de sus predecesoras con un nuevo procesador más rápido integrado para incrementar su velocidad. Cuenta también con una tarjeta de WiFi y Bluetooth BLE integrada para mejorar su funcionalidad y la capacidad de alimentar dispositivos más potentes mediante los puertos USB. Se optó por  este dispositivo por la facilidad que tiene a la hora de instalar un sistema operativo y la movilidad que te proporciona, pudiendo transportarlo sin ningún tipo de impedimento. Contando por supuesto con su gran comunidad y las ventajas de esto a la hora de buscar información y de solucionar los posibles errores. 
@@ -621,7 +621,7 @@ RAM de 1 GB: Es un sistema-en-chip diseñado específicamente para este modelo de 
 	\item Puerto Micro SD para carga del sistema operativo y almacenamiento de datos: 
 	%\item Fuente de alimentación Micro USB actualizada con interruptor de hasta 2.5 A
 \end{itemize}
- En cuanto a la conexión, Raspberry Pi no cuenta con ningún tipo de monitor o pantalla incorporado. Normalmente se conecta a alguna pantalla por la conexión HDMI o VGA. En este proyecto, se ha añadido una nueva tarjeta inalámbrica en la Raspberry Pi para realizar el analisis de vulnerabilidad desde el dispositivo móvil. Esto es posible configurando en el dispositivo móvil un punto de acceso (conexión hostspot) para que haya conectividad con la tarjeta inalambrica y mediante la aplicación VNC (VIirtual Network Computing) se pueda  controlar de forma remota el interfaz de escritorios de Raspberry Pi.
+ En cuanto a la conexión, Raspberry Pi no cuenta con ningún tipo de monitor o pantalla incorporado. Normalmente se conecta a alguna pantalla por la conexión HDMI o VGA. En este proyecto, se ha añadido una nueva tarjeta inalámbrica en la Raspberry Pi para realizar el análisis de vulnerabilidad desde el dispositivo móvil. Esto es posible configurando en el dispositivo móvil un punto de acceso (conexión hostspot) para que haya conectividad con la tarjeta inalámbrica y mediante la aplicación VNC (VIirtual Network Computing) se pueda  controlar de forma remota el interfaz de escritorios de Raspberry Pi.
  
 \begin{figure}[H]
   \centering
@@ -635,7 +635,7 @@ Como se comentó, el modelo de Raspberry Pi con el que se ha contado para la real
 Para conseguir incorporar el modo monitor se realizó una búsqueda completa en el mercado con varios posibles Chipset (Ralink RT3070, Ralink RT3572, Realtek 8187L, Ralink RT5370), empleando Atheros AR9271L \cite{alfa}, ya que no era excesivamente caro y proporcionaba una ganancia de 5 dbi y un rango de frecuencia de 2.412-2.483, y que cuenta con las siguientes características:
 
 \begin{itemize}
-\item Estandar Wi-Fi: IEEE 802.11b/g/n
+\item Estándar Wi-Fi: IEEE 802.11b/g/n
 \item OS que soporta: Linux,  Windows 2000, XP, Vista, 7
 \item Conector r-SMA 
 \item Chipset Atheros AR9271
@@ -771,10 +771,10 @@ Si se escoge ATACAR WPA se realizan los siguientes análisis:
 
 %%%ATAQUES%%%
 \section{Ejecución de análisis de vulnerabilidades. Realización de ataques.}
-Para la detección de las vulnerabilidades de la red seleccionada se llevará acabo la iniciación de ataques a la misma, para así poder recoger la informción y analizarla. 
-El leguaje empleado para la automatización de los ataques es bash, dependiendo del tipo de protocolo que utilice la red seleccionada, se empleará una serie de ataques distintos. A continuación se emplea un gráfico \ref{fig:ataque}, para facilitar el entendimiento de los posibles ataques y la sucesión de ellos. Comenzaremos ejecutando la aplicación. Ésta, hará una búsqueda de las posibles tarjetas de red que encuentre conectadas a nuestro dispositivo. Una vez que encuentre la tarjeta de red disponible la pondrá en modo monitor para posteriormente escanear las redes a su alcance. Cuando se disponga del listados de las posibles redes, se seleccionara la que se quiere analizar. Siendo posible dos soluciones: 
+Para la detección de las vulnerabilidades de la red seleccionada se llevará acabo la iniciación de ataques a la misma, para así poder recoger la información y analizarla. 
+El lenguaje empleado para la automatización de los ataques es bash, dependiendo del tipo de protocolo que utilice la red seleccionada, se empleará una serie de ataques distintos. A continuación se emplea un gráfico \ref{fig:ataque}, para facilitar el entendimiento de los posibles ataques y la sucesión de ellos. Comenzaremos ejecutando la aplicación. Ésta, hará una búsqueda de las posibles tarjetas de red que encuentre conectadas a nuestro dispositivo. Una vez que encuentre la tarjeta de red disponible la pondrá en modo monitor para posteriormente escanear las redes a su alcance. Cuando se disponga del listados de las posibles redes, se seleccionara la que se quiere analizar. Siendo posible dos soluciones: 
 \begin{itemize}
-	\item Si el protocolo de cifrado que encuentra es WEP, el primer ataque a realizar será una denegación de servicios (DDS), una vez se haya dejado sin internet al punto de acceso por el exceso de paquetes recibidos se intentará un ataque de fuerza bruta. Utilizando la herramienta \textit{aireplay-ng} para capturar un numero determinado de IV, se terminará consiguiendo la contraseña utilizando \textit{aircrack-ng}.
+	\item Si el protocolo de cifrado que encuentra es WEP, el primer ataque a realizar será una denegación de servicios (DOS), una vez se haya dejado sin internet al punto de acceso por el exceso de paquetes recibidos se intentará un ataque de fuerza bruta. Utilizando la herramienta \textit{aireplay-ng} para capturar un numero determinado de IV, se terminará consiguiendo la contraseña utilizando \textit{aircrack-ng}.
 	\item Si fuera WPA o WPA2 se empezará con un ataque de denegación de servicios como en el caso de WEP. Se comprobará si dispone de WPS activado, si fuera así se atacaría con el comando \textit{reaver} y \textit{pixiewps}. Si no, se trataría de un ataque en diccionario que es el ataque que más tiempo necesita, ya que comprueba una por una las palabras del diccionario del que se disponga. Para ello utiliza \textit{aireplay-ng} para desautenticar e inyectar y generar así tráfico para la captura del \textit{handshake}. Una vez se disponga de el, se utilizará \textit{aircrack} para hacer la búsqueda. Al cabo de un tiempo determinado se completará el análisis
 \end{itemize}
 
@@ -826,7 +826,7 @@ Este ataque \textit{Pixiewps} también conocido como \textit{polvo mágico}. Lo pr
 
 
 \subsubsection{Ataque por fuerza bruta WPA/WPA2 }
-Sabemos que WPA y WPA2 PSK tiene posibles vulnerabilidades a un ataque de diccionario. Para la realización de este ataque es necesario el \textit{handshake } (saludo de cuatro vías) entre el punto de acceso y el cliente y un listado de palabras con frases comunes. Empleando el comando \textit{aircrack-ng}, se traatará de romper la contraseña.
+Sabemos que WPA y WPA2 PSK tiene posibles vulnerabilidades a un ataque de diccionario. Para la realización de este ataque es necesario el \textit{handshake } (saludo de cuatro vías) entre el punto de acceso y el cliente y un listado de palabras con frases comunes. Empleando el comando \textit{aircrack-ng}, se tratará de romper la contraseña.
 
 El tener que emplear la fuerza bruta es un gran inconveniente, ya que se hará un uso intensivo del procesador de la Raspberry Pi. Este proceso, si se dejara podrá llegar a durar horas e incluso días comprobando las posibles palabras del diccionario. En nuestro caso se pondrán tiempo cortos para que no se demore en exceso.
 
@@ -906,13 +906,13 @@ Como posible estudios futuros, me gustaría seguir desarrollando la aplicación, a
 \section{Recomendaciones.}
 \begin{itemize}
 	\item Se debe tener en cuenta el alcance de nuestra red, ya que cuanto menos señal se propague fuera de las instalaciones menor será las posibilidades de que se acceda desde fuera.
-	\item Por muy simple que parezca, es importante cambiar los datos de accesos al router que vienen por defecto.(No olvidar cambiar la contraseña) Utilizar contraseñas de al menos 16 caracteres, empleando mayusculas minusculas y caracteres especiales. 
+	\item Por muy simple que parezca, es importante cambiar los datos de accesos al router que vienen por defecto.(No olvidar cambiar la contraseña) Utilizar contraseñas de al menos 16 caracteres, empleando mayúsculas minúsculas y caracteres especiales. 
 	\item Ocultar el nombre de la red (SSID), de forma que no se difunda el nombre de la red.
  	\item Se deben usar los protocolos de seguridad, WPA o WPA2. Ya que, el protocolo WEP no nos aporta ningún tipo de seguridad.
 	\item Es recomendable que se apague el router o punto de acceso una vez que ya no vaya a utilizarse.
 	\item Hacer listas de control de acceso con las direcciones MAC de aquellos dispositivos que quieras que tengan acceso a la red.
 	\item Utilizar IP estáticas, deshabilitando el DHCP (asignación dinámica IP) 
-	\item Realizar auditorias periódicamente ayudará a prevenir ataques, evitando posibles errores.
+	\item Realizar auditorías periódicamente ayudará a prevenir ataques, evitando posibles errores.
 	\item Contratar profesionales en la seguridad informática. 
 \end{itemize}	
 Estas medidas no harán que su red sea invulnerable a cualquier ataque, pues eso es imposible, pero garantizará unos niveles altos de seguridad.
