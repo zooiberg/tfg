@@ -1,32 +1,32 @@
 \select@language {spanish}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Equipamiento inform\'atico presente en las empresas.}}{3}{figure.2.1}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Servicios de red inal\'ambrica o wifi declarados por las empresas (\%)}}{4}{figure.2.2}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Nivel de implantaci\'on declarado de soluciones de seguridad en la empresa.}}{5}{figure.2.3}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Medidas de seguridad de las redes WiFi}}{6}{figure.2.4}
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Motivos se\~nalados por las empresas para no utilizar las herramientas y soluciones de seguridad.}}{7}{figure.2.5}
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Disponibilidad de personal dedicado a la seguridad de la informaci\'on.}}{8}{figure.2.6}
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Disponibilidad de personal dedicado a la seguridad seg\'un tama\~no de empresa (\%).}}{8}{figure.2.7}
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Imagen wifi}}{9}{figure.2.8}
-\contentsline {figure}{\numberline {2.9}{\ignorespaces Algoritmo de Encriptaci\'on WEP}}{14}{figure.2.9}
-\contentsline {figure}{\numberline {2.10}{\ignorespaces Ilustraci\'on del saludo a cuatro v\IeC {\'\i }as}}{15}{figure.2.10}
-\contentsline {figure}{\numberline {2.11}{\ignorespaces Diferentes modelos de Raspberry Pi }}{18}{figure.2.11}
-\contentsline {figure}{\numberline {2.12}{\ignorespaces Logotipo de kali linux.}}{19}{figure.2.12}
-\contentsline {figure}{\numberline {2.13}{\ignorespaces Ejemplo \LaTeX {}.}}{23}{figure.2.13}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Equipamiento inform\'atico presente en las empresas.}}{5}{figure.2.1}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Servicios de red inal\'ambrica o wifi declarados por las empresas (\%)}}{6}{figure.2.2}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Nivel de implantaci\'on declarado de soluciones de seguridad en la empresa.}}{7}{figure.2.3}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Medidas de seguridad de las redes WiFi}}{8}{figure.2.4}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Motivos se\~nalados por las empresas para no utilizar las herramientas y soluciones de seguridad.}}{9}{figure.2.5}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Disponibilidad de personal dedicado a la seguridad de la informaci\'on.}}{10}{figure.2.6}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Disponibilidad de personal dedicado a la seguridad seg\'un tama\~no de empresa (\%).}}{11}{figure.2.7}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Imagen wifi}}{12}{figure.2.8}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Algoritmo de Encriptaci\'on WEP}}{19}{figure.2.9}
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Ilustraci\'on del saludo a cuatro v\IeC {\'\i }as}}{21}{figure.2.10}
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Diferentes modelos de Raspberry Pi }}{25}{figure.2.11}
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Logotipo de kali linux.}}{27}{figure.2.12}
+\contentsline {figure}{\numberline {2.13}{\ignorespaces Ejemplo \LaTeX {}.}}{32}{figure.2.13}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Imagen Raspberry Pi 3 \url {https://www.raspberrypi.org/wp-content/uploads/2016/03/pi3.jpg} }}{25}{figure.3.1}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Conexi\'on Raspberry Pi}}{26}{figure.3.2}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Tarjeta Inal\'ambrica alfa}}{27}{figure.3.3}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Pautas de seguimiento}}{28}{figure.3.4}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Interfaz gr\'afica. Lista tarjetas WiFi}}{29}{figure.3.5}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Interfaz gr\'afica. Activa el modo monitor}}{30}{figure.3.6}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Interfaz gr\'afica. Escaner de redes}}{31}{figure.3.7}
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Interfaz gr\'afica. Muestra informaci\'on relevante.}}{32}{figure.3.8}
-\contentsline {figure}{\numberline {3.9}{\ignorespaces Interfaz gr\'afica. Selecci\'on de red que se vaya analizar.}}{34}{figure.3.9}
-\contentsline {figure}{\numberline {3.10}{\ignorespaces Pasos a seguir para el ataque.}}{36}{figure.3.10}
-\contentsline {figure}{\numberline {3.11}{\ignorespaces Pasos a seguir para generar el informe.}}{44}{figure.3.11}
-\contentsline {figure}{\numberline {3.12}{\ignorespaces Pasos a seguir informe WEP}}{45}{figure.3.12}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Imagen Raspberry Pi 3 \url {https://www.raspberrypi.org/wp-content/uploads/2016/03/pi3.jpg} }}{34}{figure.3.1}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Conexi\'on Raspberry Pi}}{35}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Tarjeta Inal\'ambrica alfa}}{36}{figure.3.3}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Pautas de seguimiento}}{38}{figure.3.4}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Interfaz gr\'afica. Lista tarjetas WiFi}}{39}{figure.3.5}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Interfaz gr\'afica. Activa el modo monitor}}{40}{figure.3.6}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Interfaz gr\'afica. Escaner de redes}}{41}{figure.3.7}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Interfaz gr\'afica. Muestra informaci\'on relevante.}}{42}{figure.3.8}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Interfaz gr\'afica. Selecci\'on de red que se vaya analizar.}}{43}{figure.3.9}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Pasos a seguir para el ataque.}}{45}{figure.3.10}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Pasos a seguir para generar el informe.}}{54}{figure.3.11}
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Pasos a seguir informe WEP}}{55}{figure.3.12}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

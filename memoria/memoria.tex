@@ -4,10 +4,10 @@
 \usepackage{graphicx} % graficos
 \usepackage{hyperref}%hipervinculos
 \usepackage{multirow} % para las tablas
-\usepackage[spanish,es-tabla]{babel}%tablas en español
+\usepackage[spanish]{babel}%tablas en español
 \usepackage{lettrine}%letras capitales
 \usepackage{float}%comando [H]
-\usepackage { verbatim }%introducir .txt
+\usepackage {verbatim }%introducir .txt
 \usepackage{setspace}
 \begin{document}
 %PORTADA%
@@ -76,6 +76,7 @@ $\ $
 %\newpage
 ~\vfill
 \thispagestyle{empty}
+\end{titlepage}
 
 %\noindent Copyright \copyright\ \\ % Copyright notice
 \doublespace\noindent \textsc{Seguridad y vulnerabilidad de redes inalámbricas}\\
@@ -85,7 +86,6 @@ $\ $
 \noindent Memoria realizada durante el Trabajo Final de Carrera del alumno Luis Ramírez de Diego en el año lectivo 2015/2016 y supervisado por el profesor y tutor del proyecto, Francisco Moya Fernandez\\ % License information
 
 \noindent \textit{Primera actualización, Junio 2016} % Printing/edition date
-\end{titlepage}
 %pagina en blanco%
 %\newpage
 %$\ $
@@ -383,11 +383,11 @@ En la fase de intercambio de claves el cliente y el punto de acceso emplean las 
 \begin{figure}
   \centering
      \includegraphics[width=1\textwidth]{WPA.png}
-  \caption{Ilustración del saludo a cuatro vías}}
+  \caption{Ilustración del saludo a cuatro vías}
   \label{fig:wpa}
 \end{figure}
 
-Con la PMK se genera una clave de cifrado para cada proceso de autentificación de un cliente llamada PTK que básicamente se genera a partir de dos números aleatorios, uno de ellos obtenidos del cliente y el otro por el punto de acceso para obtener ambos la misma clave PTK. Esto es el famoso \textit{4-way-Handshake} \cite{backtrack5\\
+Con la PMK se genera una clave de cifrado para cada proceso de autentificación de un cliente llamada PTK que básicamente se genera a partir de dos números aleatorios, uno de ellos obtenidos del cliente y el otro por el punto de acceso para obtener ambos la misma clave PTK. Esto es el famoso \textit{4-way-Handshake}~\cite{backtrack5}.
 
 Cuando el cliente está autenticado, el protocolo TKIP utiliza seis claves de cifrado por cada sesión, 4 de ellas son utilizadas para comunicaciones \textit{unicast} y dos para comunicaciones \textit{multicast}. Estas claves son únicas para cliente y sesión y se cambian periódicamente, siendo generadas de las direcciones MAC, ESSID y la PTK.
 Un atacante que quiera vulnerar una red WPA-PSK va a tratar de capturar ese intercambio de números aleatorios, para que una vez conocidos éstos, junto al SSID y la direcciones MAC del cliente y del punto de acceso de la red, obtener la frase o secreto compartido que se empleó.
@@ -760,6 +760,8 @@ El leguaje empleado para la automatización de los ataques es bash, dependiendo d
 \begin{itemize}
 	\item Si el protocolo de cifrado que encuentra es WEP, el primer ataque a realizar será una denegación de servicios (DDS), una vez se haya dejado sin internet al punto de acceso por el exceso de paquetes recibidos se intentará un ataque de fuerza bruta. Utilizando la herramienta \textit{aireplay-ng} para capturar un numero determinado de IV, se terminará consiguiendo la contraseña utilizando \textit{aircrack-ng}.
 	\item Si fuera WPA o WPA2 se empezará con un ataque de denegación de servicios como en el caso de WEP. Se comprobará si dispone de WPS activado, si fuera así se atacaría con el comando \textit{reaver} y \textit{pixiewps}. Si no, se trataría de un ataque en diccionario que es el ataque que más tiempo necesita, ya que comprueba una por una las palabras del diccionario del que se disponga. Para ello utiliza \textit{aireplay-ng} para desautenticar e inyectar y generar así tráfico para la captura del \textit{handshake}. Una vez se disponga de el, se utilizará \textit{aircrack} para hacer la búsqueda. Al cabo de un tiempo determinado se completará el análisis
+\end{itemize}
+
 \begin{figure}[H]
   \centering
    \includegraphics[width=0.7\textwidth]{ataque.png}
@@ -792,10 +794,12 @@ Una vez que sabemos que la red seleccionada tiene un cifrado WPA y cuenta con el
 Reaver se planteó como un ataque sólido y muy conveniente contra WPS. Se ejecuta un ataque de fuerza bruta contra el punto de acceso, creando todas las combinaciones posibles para adivinar el numero PIN de 8 dígitos del Punto de Acceso. Si fuera una red WPA, sabemos que la combinación son mucho mayores, ya que puede haber letras, números y a veces incluso símbolos, por lo tanto el ataque será mucho mas difícil y largos de ejecutar. Sin embargo en WPS sabemos que el último dígito es un valor de suma de control que podría ser calculada en base a los 7 dígitos anteriores, por lo que las combinaciones se reducirían mucho. Podemos reducir mas el tiempo ya que el numero de PIN para la verificación va en dos mitades, por lo que se puede comprobar independientemente los 4 primeros y los últimos 4 dígitos.''
 Como siempre, se activará el modo monitor de la tarjeta inalámbrica y se empezará a capturar el tráfico en el aire con \textit{airodump-ng} para obtener los \textit{beacons} de información del punto de accesos, y así comprobar que el dicho punto esta utilizando WPS.
 Una vez detectado WPS en el punto de acceso se prueba mediante la herramienta \textit{reaver} si el punto es vulnerable. Ésta, realizará fuerza bruta sobre el punto de acceso, enviando distintos PIN hasta encontrar el que le devuelva la credencial de la red con cifrado WPA2.
+
 \begingroup{}
-	\fontsize{7pt}{7pt}=\selectfont
-	\verbatiminput {reaver.txt}
+  \fontsize{7pt}{7pt}=\selectfont
+  \verbatiminput {reaver.txt}
 \endgroup{}
+
 \paragraph{Pixiewps:}
 Este ataque \textit{Pixiewps} también conocido como \textit{polvo mágico}. Lo primero que hará es comprobar si el router al que se le realiza el ataque es vulnerable. Si así lo fuera, se podrá obtener la clave en segundos. Continuando los pasos de los ataques anteriores y utilizando la tarjeta en modo monitor y escaneando el tráfico, se atacará a una de las redes disponibles que disponga de WPS activado. Primero utilizaremos el comando \textit{reaver} para recoger la PKE (clave pública de la persona inscrita), PKR (clave pública del registrador),e-hash 1 (hash  de la primera mitad del PIN WPS, fuerza bruta) y E-2 de hash (hash  de la segunda mitad del PIN WPS, fuerza bruta), E-nonce/ R-nonce y la authkey. Una vez se obtenga toda la información, se podrá aplicar pixiewps, para reducir tiempos.
 
@@ -843,7 +847,7 @@ Partiendo de un lenguaje de programación desde el cual se ha desarrollado el cód
   \label{fig:esquema3}
 \end{figure} 
 
-\paragrph{Generar informe WEP.}
+\paragraph{Generar informe WEP.}
 
 \begin{figure}[H]
   \centering
@@ -857,7 +861,7 @@ CrearInformeWEP()
 	\verbatiminput {CrearInformeWEP().txt}
 \endgroup{}
 
-\paragrph{Generar informe WPA.}
+\paragraph{Generar informe WPA.}
 
 CrearInformeWPA()
 \begingroup{}
