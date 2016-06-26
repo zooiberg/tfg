@@ -9,9 +9,18 @@
 \usepackage{float}%comando [H]
 \usepackage{verbatim}%introducir .txt
 \usepackage{setspace}
+\usepackage{fixme}
+\usepackage{fancyhdr}
 \usepackage{hyperref}%hipervinculos
 
 \def\thetitle{Seguridad y vulnerabilidad de redes inalámbricas en PYMEs}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{Share\LaTeX}
+\fancyhead[RE,LO]{Guides and tutorials}
+\fancyfoot[CE,CO]{\leftmark}
+\fancyfoot[LE,RO]{\thepage}
 
 \begin{document}
 %PORTADA%
@@ -346,7 +355,7 @@ Las redes inalámbricas pueden acoger distintas topologías.
 	\item Modo Ad-Hoc.
 	Es una conexión que comunica una serie de dispositivos entre si, sin usar ningún tipo de Punto de Acceso. Ésta, es una configuración tipo punto a punto (peer-to-peer), así, el área de cobertura se limita por el alcance de cada tarjeta de red propia. Deben trabajar en el mismo rango de frecuencias, de lo contrario no podrán interactuar entre ellas.
 	\item Modo Infraestructura.
-	Éste modo es del tipo cliente-servidor, en el que el cliente son los dispositivos que suelen conectarse al servidor, el punto de acceso. Tiene que haber como mínimo un servidor, por lo tanto los dispositivos no se pueden comunicar entre si y toda la información pasara primero por el Punto de Acceso. Para que varios dispositivos puedan comunicarse entre sí, deben estar todos conectados al mismo punto de acceso, por lo que pueden estar comunicándose entre los dispositivos sin saber nada entre ellos, ya que toda la información que se necesita para la conexión, la tiene el punto de acceso.
+	Éste modo es del tipo cliente-servidor, en el que el cliente son los dispositivos que suelen conectarse al servidor, el punto de acceso. Tiene que haber como mínimo un servidor, por lo tanto los dispositivos no se pueden comunicar entre si y toda la información pasará primero por el Punto de Acceso. Para que varios dispositivos puedan comunicarse entre sí, deben estar todos conectados al mismo punto de acceso, por lo que pueden estar comunicándose entre los dispositivos sin saber nada entre ellos, ya que toda la información que se necesita para la conexión, la tiene el punto de acceso.
 \end{itemize}
 
 \subsection{Protocolos inalámbricos}
@@ -362,15 +371,16 @@ El cifrado WLAN desde sus orígenes ha estado ligado a vulnerabilidades y ataques
 	\item Open System:(Autenticación de Sistema Abierto)
 	\item Shared Key:(Autenticación por clave compartida)
 \end{itemize}
-En cuanto a la autenticación, \textit{Open system} deja a todos los clientes que se lo pidan, autenticarse al punto de acceso, mientras que \textit{Shared key} necesita un mensaje solicitando conexión previa. Este (punto de acceso) contesta con un paquete cifrado por el cliente y se reenvía al punto de acceso que intenta descifrar la autenticación para que sea válida.
+En cuanto a la autenticación, \textit{Open system} deja a todos los clientes que lo pidan, autenticarse al punto de acceso, mientras que \textit{Shared key} necesita un mensaje solicitando conexión previa. Este (punto de acceso) contesta con un paquete cifrado por el cliente y se reenvía al punto de acceso que intenta descifrar la autenticación para que sea válida.
 
 \paragraph{Confidencialidad}
 
 
 La fase de confidencialidad se encarga de que nadie que estuviera \textit{escuchando} y \textit{capturando} la transmisión  pueda entender o analizar la información, para ello dispone de varios elementos a tener en cuenta:
 	\begin{itemize}
-		\item RC4, es el algoritmo de cifrado de la información, el cual emplea un sistema que consiste, en que el emisor y el receptor deben saber la clave con anterioridad, y por tanto generar el \textit{keystream} (dos fases: KSA y PRGA). Así, recibe un flujo de bits que debe cifrar, y por otro sitio un flujo de bits codificados. Juntando estos dos flujos y por medio de una operación binaria XOR entre ellos, nos dará un único flujo ya cifrado. El problema es que estos bits codificados son generados por medio de operaciones matemáticas complejas sobre una secuencia de bits que se le llama la "semilla", que es de un único tamaño. Por ello al utilizar siempre la misma "semilla", se demuestra matemáticamente que una persona mal intencionada capturando un numero suficientes de tramas, puede adivinarla. Por tanto, ésta, crea con una clave generada por el usuario e implementando una secuencia aleatoria de 24 bits generada por el mismo protocolo WEP, esta secuencia son los famosos vectores de iniciación (IV) que explicaremos mas adelante. 
-	Este protocolo (WEP) te da la opción de utilizar claves de distintos tamaños:  64 bits(40 de la clave del usuario más 24 de los vectores de iniciación) o de 128(104 de la clave del usuario más 24 de los vectores de iniciación)
+	\item RC4, es el algoritmo de cifrado de la información, el cual emplea un sistema que consiste, en que el emisor y el receptor deben saber la clave con anterioridad, y por tanto generar el \textit{keystream} (dos fases: KSA y PRGA). Así, recibe un flujo de bits que debe cifrar, y por otro sitio un flujo de bits codificados. Juntando estos dos flujos y por medio de una operación binaria XOR entre ellos, nos dará un único flujo ya cifrado. El problema es que estos bits codificados son generados por medio de operaciones matemáticas complejas sobre una secuencia de bits que se le llama la "semilla", que es de un único tamaño. Por ello al utilizar siempre la misma "semilla", se demuestra matemáticamente que una persona mal intencionada capturando un numero suficientes de tramas, puede adivinarla.
+          \fixme{Por tanto, ésta, crea con una clave generada por el usuario e implementando una secuencia aleatoria de 24 bits generada por el mismo protocolo WEP, esta secuencia son los famosos vectores de iniciación (IV) que explicaremos mas adelante.}
+	WEP permite utilizar claves de distintos tamaños:  64 bits (40 de la clave del usuario más 24 de los vectores de iniciación) o de 128(104 de la clave del usuario más 24 de los vectores de iniciación)
 		\item IV, son los vectores de inicialización , son la parte dinámica de los \textit{keystream.} Cada trama lleva un IV distinto, aunque al ser generados de forma aleatoria no siempre es posible. Los IV van en la parte que no se cifra de la trama WEP.
 	\end{itemize}
 \begin{figure}[H]
@@ -383,19 +393,20 @@ En esta imagen \cite{WEP} se puede apreciar el proceso que se lleva acabo para f
 
 \paragraph{Integridad}
 
- Por último, la integridad de los datos, pretende garantizar que el mensaje que recibimos es exactamente el que se envió. WEP emplea un algoritmo de comprobación de integridad CRC32. Éste, es un algoritmo de control de errores que empleando operaciones matemáticas sobre una secuencia de bits de datos, obtiene unos bits de control. Posteriormente los añade otra vez a los bits de datos formando una secuencia "protegida". El receptor sabrá de que tipo es cada bits, por lo que si alguno de ellos ha cambiado por el camino, tendrá una secuencia errónea y la descartará. 
+ Por último, la integridad de los datos, pretende garantizar que el mensaje que recibimos es exactamente el que se envió. WEP emplea un algoritmo de comprobación de integridad CRC32. Éste, es un algoritmo de control de errores que empleando operaciones matemáticas sobre una secuencia de bits de datos, obtiene unos bits de control. Posteriormente los añade otra vez a los bits de datos formando una secuencia "protegida". \fixme{El receptor sabrá de que tipo es cada bits, por lo que si alguno de ellos ha cambiado por el camino, tendrá una secuencia errónea y la descartará. }
  
  
-Por tanto, el problema del cifrado WEP, es el uso de las clave estática, ya que se pueden realizar ataques de observación y gracias a la estadística conseguir sacar el patrón de la clave, y así conseguir descifrarla.
+Por tanto, el problema del cifrado WEP, es el uso de la clave estática, ya que se pueden realizar ataques de observación y gracias a la estadística conseguir sacar el patrón de la clave, y así conseguir descifrarla.
 
 
 \subsubsection{Protocolo WPA/WPA2}
-WPA, \textit{Wi-Fi Protected Access}, surgió como una solución temporal de la Wi-Fi Alliance, para hacer las redes más seguras. Ambas soluciones, WPA y WPA2, soportan el protocolo 802.11 para la autentificación en ámbitos empresariales y la autentificación mediante clave compartida PSK (\textit{Pre-Shared Key}) para los entornos SOHO \textit{Small Office and Home Office}, y ámbitos  domésticos.\\
-\par
-Estos dos métodos de cifrado se diferencian en muy poco y su diferencia principal es en el algoritmo de cifrado que emplean. Mientras que WPA basa el cifrado de las comunicaciones en el uso del algoritmo TKIP (\textit{Temporary Key Integrity Protocol}), que esta basado en RC4 al igual WEP, WPA2 utiliza CCMP (\textit{Counter-mode/CBC-MAC Protocol}) basado en AES/\textit{Advanced Encrytion System.} \\
-\par
+WPA, \textit{Wi-Fi Protected Access}, surgió como una solución temporal de la Wi-Fi Alliance, para hacer las redes más seguras. Ambas soluciones, WPA y WPA2, soportan el protocolo 802.11 para la autenticación en ámbitos empresariales y la autentificación mediante clave compartida PSK (\textit{Pre-Shared Key}) para los entornos SOHO \textit{Small Office and Home Office}, y ámbitos  domésticos.
+
+Estos dos métodos de cifrado se diferencian en muy poco y su diferencia principal es en el algoritmo de cifrado que emplean. Mientras que WPA basa el cifrado de las comunicaciones en el uso del algoritmo TKIP (\textit{Temporary Key Integrity Protocol}), que esta basado en RC4 al igual WEP, WPA2 utiliza CCMP (\textit{Counter-mode/CBC-MAC Protocol}) basado en AES/\textit{Advanced Encrytion System.}
+
 Otra diferencia a tener en cuenta es el algoritmo que utiliza para controlar la integridad del mensaje. Mientras WPA usa una versión más pobre para generar el código MIC (\textit{Message Integryty Code}), WPA2 emplea una versión mejorada de MIC.
 En la fase de intercambio de claves el cliente y el punto de acceso emplean las PSK para generar una clave llamada PMK(\textit{Pairwise Master Key}). Ésta es una derivada cuando el sistema es WPA/WPA2 empresarial pero es la misma PSK en los entornos WPA/WPA2 PSK.
+
 \begin{figure}
   \centering
      \includegraphics[width=1\textwidth]{WPA.png}
@@ -434,18 +445,17 @@ La mayoría de los casos en los que las empresas u organizaciones sufren incident
 
 Un test de penetración abarca distintas etapas con diferentes tipos de procedimientos. Se debe acordar con el clientes las distintas etapas que se quieren analizar, siendo las más habituales:
 \begin{itemize}
-	\item Fase de Reconocimiento. En esta primera fase se buscará la mayor información del posible objetivo.(footpriting, fingerprinting.)
-	\item Fase de Escaneo. Empleando toda la información obtenida con anterioridad, se buscan posibles vectores de ataques. (puertos, servicios)
+	\item Fase de Reconocimiento. En esta primera fase se buscará la mayor información del posible objetivo (footprinting, fingerprinting).
+	\item Fase de Escaneo. Empleando toda la información obtenida con anterioridad, se buscan posibles vectores de ataques (puertos, servicios).
 	\item Fase de enumeración: La responsable de obtener usuarios, nombres de equipos, etc.
 	\item Fase de acceso: Una vez encontrada las vulnerabilidades se intentan aprovechar para comprometer al sistema, y acceder a él.
 	\item Mantenimiento: Cuando se ha conseguido acceso al sistema, se intentará mantener el máximo tiempo.
 \end{itemize}
 
-Cuando se realiza una de estas pruebas, lo más probable es que se entregue un informe que demuestra los posibles fallos o vulnerabilidades de zonas importantes del sistema. Esta documentación es la que se entregará al cliente, y se empleará como guía para tomar las decisiones pertinentes.\\
+Cuando se realiza una de estas pruebas, lo más probable es que se entregue un informe que demuestra los posibles fallos o vulnerabilidades de zonas importantes del sistema. Esta documentación es la que se entregará al cliente, y se empleará como guía para tomar las decisiones pertinentes.
 
 
-Un pentesting de forma continua permite que los procesos de las auditorías de seguridad dispongan de las mismas posibilidades de conseguir privilegios, que una persona mal intencionada, aun así se debe seguir manteniendo la seguridad en todas las fases de gestión de la seguridad.\\
-
+Un pentesting de forma continua permite que los procesos de las auditorías de seguridad dispongan de las mismas posibilidades de conseguir privilegios que una persona mal intencionada.  Aún así se debe seguir manteniendo la seguridad en todas las fases de gestión de la seguridad.
 
 ``\textit{El pentesting no debería ser un proceso puntual que se contrata, sino un servicio de ataque 24x7 durante todo el ciclo de vida de tu sistema.}'' \cite{elladodelmal}
 
@@ -465,13 +475,14 @@ El perfeccionamiento de los programas y dispositivos es lo que esta permitiendo 
 Cualquier elemento electrónico que puede ser programado, pude trabajar de forma automatizada si así se implementa. 
 
 \paragraph{Raspberry Pi}
- Raspberry Pi es un hardware que nos permite con gran facilidad automatizarlo y emplearlo para múltiples fines. Se trata de un mini-ordenador  que se desarrolló en el Reino Unido, por un grupo del Computer Lab que empezó a preocuparse por el nivel de conocimientos sobre tecnologías informáticas con los que los estudiantes llegaban a la universidad.
-Apareció como una iniciativa para fomentar el aprendizaje de la programación desde edades más tempranas.\cite{Raspberry}
+ Raspberry Pi es un hardware que nos permite con gran facilidad automatizarlo y emplearlo para múltiples fines. Se trata de un mini-ordenador que se desarrolló en el Reino Unido, por un grupo del Computer Lab de la Universidad de Cambridge, que empezó a preocuparse por el nivel de conocimientos sobre tecnologías informáticas con los que los estudiantes llegaban a la universidad.
+Apareció como una iniciativa para fomentar el aprendizaje de la programación desde edades más tempranas~\cite{Raspberry}.
+
 En los pocos años que lleva en funcionamiento \textit{Raspberry Pi Foundation} se han creado distintos modelos:
 \begin{figure}[H]
   \centering
 	\includegraphics[width=1\textwidth]{Raspberry.png}
-  \caption{Diferentes modelos de Raspberry Pi }
+  \caption{Diferentes modelos de Raspberry Pi.}
   \label{fig:Ras}
 \end{figure}
 
@@ -487,7 +498,7 @@ Las siglas GNU quiere decir GNU's Not Unix, es decir GNU no es Unix. Se refiere 
 El sufijo Linux se refiere al kernel (núcleo) que utiliza del sistema operativo. GNU esta desarrollando su propio kernel pero todavía no lo tienen disponible.
 \subparagraph{Kali Linux}
 Sabemos que el mundo de la seguridad informática avanza cada día a gran velocidad. Es por ello que es necesario que las personas que se dedican a ello siempre estén ampliando conocimiento. 
-\textit{BlackTrack}  era una gran distribución de seguridad y la distribución de pruebas de penetración mas popular, ya que contenía cientos de herramientas de seguridad. La empresa que gestionaba esta distribución, Offensive Security\cite{offensive security}\footnote{Página oficial de la empresa offensive security \url{https://www.offensive-security.com/}}, evolucionó su distribución para proporcionar mejoras importantes. Kali Linux siguió con los pasos creando una distribución Linux basada en Debian orientado a las auditorías de seguridad a pruebas de penetración en el 2013. Ésta ofrece al usuario un gran número de herramientas para cada rama del pentesting, como análisis forense, explotación de vulnerabilidades del sistema web o wireless. 
+\textit{BackTrack}  era una gran distribución de seguridad y la distribución de pruebas de penetración mas popular, ya que contenía cientos de herramientas de seguridad. La empresa que gestionaba esta distribución, Offensive Security\cite{offensive security}\footnote{Página oficial de la empresa offensive security \url{https://www.offensive-security.com/}}, evolucionó su distribución para proporcionar mejoras importantes. Kali Linux siguió con los pasos creando una distribución Linux basada en Debian orientado a las auditorías de seguridad a pruebas de penetración en el 2013. Ésta ofrece al usuario un gran número de herramientas para cada rama del pentesting, como análisis forense, explotación de vulnerabilidades del sistema web o wireless. 
 Según \cite{kali} Kali Linux 2.0 contiene un nuevo kernel en su versión 4.0 y esta basada en Debian Jessie, mejorando la integración con el hardware y el uso de los drivers Wireless. Tiene soporte actualizado para un mayor número de escritorios (gnome, kde, xfce, mate, e17, lxde o i3wm). Una de las grandes mejoras fue el sistema de actualizaciones que presenta. Generalmente, las actualizaciones serán llevadas a cabo vía \textit{Git}. El \textit{script} se ejecuta diariamente sobre un listado de herramientas comunes en la distribución y mantendrá alerta al usuario ante posibles nuevas actualizaciones. \cite{kali1}
 \begin{figure}[H]
   \centering
@@ -495,9 +506,9 @@ Según \cite{kali} Kali Linux 2.0 contiene un nuevo kernel en su versión 4.0 y es
   \caption{Logotipo de kali linux.}
   \label{fig:kali}
 \end{figure}
-ARM (Advanced RISC Machine) se ha visto favorecido con el lanzamiento de Kali Linux 2.0 ya que sigue proporcionando soporte para Rasberry Pi, Chomebooks, Odroids,etc. Esto es importante ya que se utilizará una Rasberry Pi para automatizar todos los ataques.\\
+ARM (Advanced RISC Machine) se ha visto favorecido con el lanzamiento de Kali Linux 2.0 ya que sigue proporcionando soporte para Rasberry Pi, Chromebooks, Odroids,etc. Esto es importante ya que se utilizará una Rasberry Pi para automatizar todos los ataques.\\
 \paragraph{Suite aircrack-ng}
-La suite de herramientas \textit{``air''} proporciona todo lo necesario para llevar a cabo auditorías a redes wireless. También disponemos de más herramientas, como son GUIs o \textit{sripts}, que por debajo utilizan las propias herramientas de la suite. 
+La suite de herramientas \textit{``air''} proporciona todo lo necesario para llevar a cabo auditorías a redes wireless. También disponemos de más herramientas, como son GUIs o \textit{scripts}, que por debajo utilizan las propias herramientas de la suite. 
 Las más utilizadas en el proyecto son:
 \begin{itemize}
 	\item Airmon-ng: Sirve para cambiar el modo de trabajo de la tarjeta inalámbrica, siempre y cuando el chipset lo permita. Este modo de trabajo cambiara a modo monitor.
@@ -543,7 +554,7 @@ Parámetros & Descripción \\
 -0, --deauth & Desautentifica. \\ \hline
 -1, --fakeauth  & Falsa autenticación con el Punto de Acceso.  \\ \hline
 -2, --interactive &   \\ \hline
--3, --arpreplay & Estandar de repetición ARP. \\ \hline
+-3, --arpreplay & Estándar de repetición ARP. \\ \hline
 -4, --chopchop & Ataque Chopchop.   \\ \hline
 -5, --fragment & Genera una cadena de claves válidas.  \\ \hline
 -9, --test & Pruebas de inyección.   \\ \hline
@@ -557,7 +568,7 @@ Parámetros & Descripción \\
 \end{itemize}
 
 \paragraph{Lenguaje Bash}
-El lenguaje Bash, es un lenguaje de programación en linea de comandos y además se trata de uno de los lenguajes que se empleará para el desarrollo de la aplicación. Normalmente es utilizado para la gestión de archivos, y la consola de Linux fomenta su desarrollo, permitiendo programar \textit{scrips} dependiendo de las necesidades. Se refiere con \textit{script} a un archivo que contiene código escrito en un lenguaje de programación y que el dispositivo usa para un cometido establecido.
+El lenguaje Bash, es un lenguaje de programación en linea de comandos y además se trata de uno de los lenguajes que se empleará para el desarrollo de la aplicación. Normalmente es utilizado para la gestión de archivos, y la consola de Linux fomenta su desarrollo, permitiendo programar \textit{scripts} dependiendo de las necesidades. Se refiere con \textit{script} a un archivo que contiene código escrito en un lenguaje de programación y que el dispositivo usa para un cometido establecido.
 Además este lenguaje utiliza como intérprete, la \textit{shell}, que es un entorno de trabajo que nos permite ejecutar programas por medio de órdenes. Dichas órdenes deben formarse con el nombre de un programa y una serie de parámetros.
 A pesar del conocimiento de múltiples lenguajes de programación informática, se empleó este lenguaje porque es el lenguaje de programación utilizado en linux, y por tanto, nos brinda la oportunidad de aprender.
 
@@ -632,7 +643,7 @@ RAM de 1 GB: Es un sistema-en-chip diseñado específicamente para este modelo de 
 \paragraph{Soporte de tarjetas inalámbricas}
 
 Como se comentó, el modelo de Raspberry Pi con el que se ha contado para la realización del proyecto, ya dispone de una tarjeta inalámbrica entre sus componente. El problema se obtuvo al desarrollar los supuestos ataques, ya que esta tarjeta no soportaba el modo monitor que se explicó en los antecedentes del proyecto. 
-Para conseguir incorporar el modo monitor se realizó una búsqueda completa en el mercado con varios posibles Chipset (Ralink RT3070, Ralink RT3572, Realtek 8187L, Ralink RT5370), empleando Atheros AR9271L \cite{alfa}, ya que no era excesivamente caro y proporcionaba una ganancia de 5 dbi y un rango de frecuencia de 2.412-2.483, y que cuenta con las siguientes características:
+Para conseguir incorporar el modo monitor se realizó una búsqueda completa en el mercado con varios posibles Chipset (Ralink RT3070, Ralink RT3572, Realtek 8187L, Ralink RT5370), empleando Atheros AR9271L \cite{alfa}, ya que no era excesivamente caro y proporcionaba una ganancia de 5 dBi y un rango de frecuencia de 2.412-2.483, y que cuenta con las siguientes características:
 
 \begin{itemize}
 \item Estándar Wi-Fi: IEEE 802.11b/g/n
@@ -787,7 +798,7 @@ El lenguaje empleado para la automatización de los ataques es bash, dependiendo 
 
 \subsubsection{Ataque red WEP}
 Como ya se ha comentado, las redes WEP tienen muchas debilidades criptográficas, por lo que se ha utilizado las herramientas necesarias para intentare romper la encriptación WEP.
-Lo primero, será configurar la tarjeta como modo monitor para un posterior escaneo de las redes cercanas empleando el comando \textit{airodum-ng}. Así, se comenzará a volcar todo el tráfico que hay en el aire en un archivo determinado (LOG\_CAP). En este punto, se detectará el cifrado WEP de la red seleccionada y si existe cliente asociado a dicha red. Si existe cliente asociado, el crackeo será más sencillo, sino, se hará una falsa autenticación con una MAC aleatoria.
+Lo primero, será configurar la tarjeta como modo monitor para un posterior escaneo de las redes cercanas empleando el comando \textit{airodump-ng}. Así, se comenzará a volcar todo el tráfico que hay en el aire en un archivo determinado (LOG\_CAP). En este punto, se detectará el cifrado WEP de la red seleccionada y si existe cliente asociado a dicha red. Si existe cliente asociado, el crackeo será más sencillo, sino, se hará una falsa autenticación con una MAC aleatoria.
 Una vez elegida la red, se comienza a inyectar con dos objetivos distintos, el primero será deautenticar el cliente asociado con el fin de que vuelva a autenticarse y genere un paquete ARP válido, y el segundo para capturar el paquete ARP y reinyectarlo para generar un gran volumen de paquetes de datos. Como ya se habló en la parte teórica, es importante obtener una gran cantidad de IVs y así poder predecir y atacar la clave que descifran los paquetes, obteniendo la clave de red.
 
 \begingroup{}
