@@ -66,7 +66,7 @@ NO SE HAN PODIDO RECUPERAR LA CLAVE WPA DE $BSSID" --fixed --on-top --center --w
   echo "PROBANDO CON PIXIEWPS 1.0 by wiire" > $ARCHIVO_STATUSBAR
   
   #Infome Latex SECWPA1-Template.tex
-  X2="Se ha obtenido la información requerida"
+  X2="Se ha obtenido la informaciÃ³n requerida"
   X3="pixiewps -e $PKe -r $PKr -s $EHash1 -z $EHash2 -a $AuthKey -n $Enrollee"
   X4="PIXIEWPS"
   (`sudo python "$RUTA_INFORME/SUBSWPA1.py" "$X1" "$X2" "$X3" "$X4"`)
