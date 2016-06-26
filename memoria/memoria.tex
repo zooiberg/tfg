@@ -379,7 +379,6 @@ En cuanto a la autenticación, \textit{Open system} deja a todos los clientes que
 La fase de confidencialidad se encarga de que nadie que estuviera \textit{escuchando} y \textit{capturando} la transmisión  pueda entender o analizar la información, para ello dispone de varios elementos a tener en cuenta:
 	\begin{itemize}
 	\item RC4, es el algoritmo de cifrado de la información, el cual emplea un sistema que consiste, en que el emisor y el receptor deben saber la clave con anterioridad, y por tanto generar el \textit{keystream} (dos fases: KSA y PRGA). Así, recibe un flujo de bits que debe cifrar, y por otro sitio un flujo de bits codificados. Juntando estos dos flujos y por medio de una operación binaria XOR entre ellos, nos dará un único flujo ya cifrado. El problema es que estos bits codificados son generados por medio de operaciones matemáticas complejas sobre una secuencia de bits que se le llama la "semilla", que es de un único tamaño. Por ello al utilizar siempre la misma "semilla", se demuestra matemáticamente que una persona mal intencionada capturando un numero suficientes de tramas, puede adivinarla.
-          \fixme{Por tanto, ésta, crea con una clave generada por el usuario e implementando una secuencia aleatoria de 24 bits generada por el mismo protocolo WEP, esta secuencia son los famosos vectores de iniciación (IV) que explicaremos mas adelante.}
 	WEP permite utilizar claves de distintos tamaños:  64 bits (40 de la clave del usuario más 24 de los vectores de iniciación) o de 128(104 de la clave del usuario más 24 de los vectores de iniciación)
 		\item IV, son los vectores de inicialización , son la parte dinámica de los \textit{keystream.} Cada trama lleva un IV distinto, aunque al ser generados de forma aleatoria no siempre es posible. Los IV van en la parte que no se cifra de la trama WEP.
 	\end{itemize}
@@ -393,7 +392,7 @@ En esta imagen \cite{WEP} se puede apreciar el proceso que se lleva acabo para f
 
 \paragraph{Integridad}
 
- Por último, la integridad de los datos, pretende garantizar que el mensaje que recibimos es exactamente el que se envió. WEP emplea un algoritmo de comprobación de integridad CRC32. Éste, es un algoritmo de control de errores que empleando operaciones matemáticas sobre una secuencia de bits de datos, obtiene unos bits de control. Posteriormente los añade otra vez a los bits de datos formando una secuencia "protegida". \fixme{El receptor sabrá de que tipo es cada bits, por lo que si alguno de ellos ha cambiado por el camino, tendrá una secuencia errónea y la descartará. }
+ Por último, la integridad de los datos, pretende garantizar que el mensaje que recibimos es exactamente el que se envió. WEP emplea un algoritmo de comprobación de integridad CRC32. Éste, es un algoritmo de control de errores que empleando operaciones matemáticas sobre una secuencia de bits de datos, obtiene unos bits de control. Posteriormente los añade otra vez a los bits de datos formando una secuencia "protegida". El destinatario de los datos sabrá de que tipo es cada bits, por lo tanto si no recibe lo esperado, tendrá una secuencia errónea y la descartará. 
  
  
 Por tanto, el problema del cifrado WEP, es el uso de la clave estática, ya que se pueden realizar ataques de observación y gracias a la estadística conseguir sacar el patrón de la clave, y así conseguir descifrarla.
@@ -888,13 +887,24 @@ CrearInformeWEP()
 	\verbatiminput {CrearInformeWEP().txt}
 \endgroup{}
 
-\paragraph{Generar informe WPA.}
+\paragrph{Generar informe WPA.}
+
+\begin{figure}[H]
+  \centering
+   \includegraphics[width=1.2\textwidth]{informeWPA.png}
+  \caption{Informe WPA.}
+  \label{fig:i}
+\end{figure} 
 
 CrearInformeWPA()
 \begingroup{}
 	\fontsize{7pt}{7pt}=\selectfont
 	\verbatiminput {CrearInformeWPA().txt}
 \endgroup{}
+
+Como en el caso anterior, el informe WPA se puede desglosar en varias secciones que generan un único informe.
+Se utilizan los mismo programas y el mismo lenguaje de programación por lo que no se volverá a explicar de nuevo, pudiendo leerlo en el ANEXO D, si fuera necesario.
+
 
 
 
@@ -934,7 +944,8 @@ Estas medidas no harán que su red sea invulnerable a cualquier ataque, pues eso 
 \chapter{Informe WEP}\label{anexo.A}
 %\input{informe.tex}
 \chapter{Informe WPA}\label{anexo.B}
-%\chapter{Código}\label{anexo.C}
+\chapter{Código}\label{anexo.C}
+
 \cleardoublepage
 %%BiBLIOGRAFIA%%
 %\addcontentsline{toc}{chapter}{Bibliografía}
@@ -994,5 +1005,3 @@ Madrid, España.
 \end{thebibliography}
 
 \end{document}
-
-
