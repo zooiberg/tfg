@@ -601,6 +601,7 @@ de caja negra automática, que detecte las vulnerabilidades de la red, y que sirv
 
 \section{Creación de una aplicación de detección de las vulnerabilidades}
 Para la creación de la aplicación ha sido utilizado el dispositivo Raspberry Pi 3 Modelo B, que como se aprecia en la imagen anterior (Figura \ref{fig:Ras}), mejora las características de sus predecesoras con un nuevo procesador más rápido integrado para incrementar su velocidad. Cuenta también con una tarjeta de WiFi y Bluetooth BLE integrada para mejorar su funcionalidad y la capacidad de alimentar dispositivos más potentes mediante los puertos USB. Se optó por  este dispositivo por la facilidad que tiene a la hora de instalar un sistema operativo y la movilidad que te proporciona, pudiendo transportarlo sin ningún tipo de impedimento. Contando por supuesto con su gran comunidad y las ventajas de esto a la hora de buscar información y de solucionar los posibles errores. 
+
 \begin{figure}[H]
   \centering
 	\includegraphics[width=0.8\textwidth]{RaspberryPi.png}
@@ -622,6 +623,17 @@ RAM de 1 GB: Es un sistema-en-chip diseñado específicamente para este modelo de 
 	%\item Fuente de alimentación Micro USB actualizada con interruptor de hasta 2.5 A
 \end{itemize}
  En cuanto a la conexión, Raspberry Pi no cuenta con ningún tipo de monitor o pantalla incorporado. Normalmente se conecta a alguna pantalla por la conexión HDMI o VGA. En este proyecto, se ha añadido una nueva tarjeta inalámbrica en la Raspberry Pi para realizar el analisis de vulnerabilidad desde el dispositivo móvil. Esto es posible configurando en el dispositivo móvil un punto de acceso (conexión hostspot) para que haya conectividad con la tarjeta inalambrica y mediante la aplicación VNC (VIirtual Network Computing) se pueda  controlar de forma remota el interfaz de escritorios de Raspberry Pi.
+ 
+ 
+ \begin{figure}[H]
+  \centering
+	\includegraphics[width=0.8\textwidth]{escritorio.png}
+  \caption{Escritorio remoto (VNC)} 
+  \label{fig:escritorio}
+\end{figure}
+ 
+ 
+ 
  
 \begin{figure}[H]
   \centering
@@ -863,7 +875,7 @@ Partiendo de un lenguaje de programación desde el cual se ha desarrollado el cód
   \label{fig:esquema3}
 \end{figure} 
 
-\paragrph{Generar informe WEP.}
+\paragrph{Informe WEP.}
 Se mostrará un gráfico con el fin de facilitar y entender el funcionamiento para la generación del informe WEP
 \begin{figure}[H]
   \centering
@@ -879,7 +891,7 @@ Ahora, se podrá comprobar como son las funciones a la hora de la generación del 
 
 \begin{itemize}
 	\item SECWEP1.py :
-	
+	Este apartado mostrará las cuatro variables básicas de una red WEP. A continuación se observa el archivo \textit{python} para facilitar el entendimiento, se aprecia que se ha empleado la biblioteca \textit{jinja}, mostrando en la linea 17 cual será la estructura que se empleará(Template). En la linea 18 se puede observar la salida con la información ya en el INF-WEP.tex y las  variables que se introducirán.  
 	\begingroup{}
 	\fontsize{7pt}{7pt}=\selectfont
 	\verbatiminput {SECWEP.py.txt}
@@ -902,7 +914,11 @@ Ahora, se podrá comprobar como son las funciones a la hora de la generación del 
 		
 		\end{itemize}
 		
-	\item SUBSDOS.py
+	\item SUBSDOS.py:
+	Este sección, es la encargada de recoger toda la información cuando se realiza el ataque de Denegación de Servicios. Al igual que en el apartado anterior, el programa en \textit{python}  utiliza la biblioteca previamente importada, \textit{jinja2}. Será el mismo procedimiento, llamando al Template para generar el INF-SUBSDOS.tex.
+	
+	
+	Esta sección se utilizará tanto para el protocolo WEP como para el WPA/WPA2.
 	
 		\begingroup{}
 		\fontsize{7pt}{7pt}=\selectfont
@@ -926,7 +942,8 @@ Ahora, se podrá comprobar como son las funciones a la hora de la generación del 
 		\endgroup{}
 		\end{itemize}
 		
-	\item SUBSWEP1.py	
+	\item SUBSWEP1.py	:
+	Por ultimo, se obtendrá toda la información necesaria a la hora de generar el informe automatizado, tras un ataque a una red con cifrado WEP. Los pasos que se han seguido son exactamente los mismos que las secciones anteriores.
 	
 		\begingroup{}
 		\fontsize{7pt}{7pt}=\selectfont
@@ -952,8 +969,15 @@ Ahora, se podrá comprobar como son las funciones a la hora de la generación del 
 	\end{itemize}
 \end{itemize}
 
-
+\\
 \paragrph{Generar informe WPA.}
+
+\begin{figure}[H]
+  \centering
+   \includegraphics[width=1.2\textwidth]{informeWPA.png}
+  \caption{Informe WPA.}
+  \label{fig:informeWPA}
+\end{figure} 
 
 CrearInformeWPA()
 \begingroup{}
@@ -961,7 +985,8 @@ CrearInformeWPA()
 	\verbatiminput {CrearInformeWPA().txt}
 \endgroup{}
 
-
+Como en el caso anterior, el informe WPA se puede desglosar en varias secciones que generan un único informe.
+Se utilizan los mismo programas y el mismo lenguaje de programación por lo que no se volverá a explicar de nuevo, pudiendo leerlo en el ANEXO D, si fuera necesario.
 
 
 

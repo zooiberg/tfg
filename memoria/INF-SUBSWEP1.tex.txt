@@ -3,7 +3,7 @@
 Para obtener la clave WEP de un punto de acceso, necesitamos muchos vectores de inicializacion (IVs). 
 El trafico de red habitual no genera de forma rapida suficientes IVs. 
 Para ello hemos utilizado la tecnica de inyeccion para aumentar la velocidad del proceso de captura. 
-La inyeccion implica que se envíen al punto de acceso (AP) paquetes de forma
+La inyeccion implica que se envien al punto de acceso (AP) paquetes de forma
  continua y rapida permitiendo capturar un gran numero de IV's en un periodo 
 corto de tiempo. Una vez que se han capturado un gran numero de IVs, podemos utilizarlos
  para averiguar la clave WEP.

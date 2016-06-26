@@ -19,7 +19,7 @@ del punto de acceso AP que estamos analizando.
 
 \textbf{airmon-ng start wlan0 11}
 
-Luego hemos realizado el envÌo de difusiÛn de de-autenticacion de paquetes 
+Luego hemos realizado el envio de difusion de de-autenticacion de paquetes 
 (broadcast de-authentication packet) hacia el punto de acceso AP intentando desconectar a 
 todos los clientes.
 
