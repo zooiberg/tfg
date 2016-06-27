@@ -886,81 +886,6 @@ Partiendo de un lenguaje de programación desde el cual se ha desarrollado el cód
 
 \paragraph{Generar informe WEP.}
 
-\begin{figure}[H]
-  \centering
-   \includegraphics[width=1\textwidth]{InformeWEP.png}
-  \caption{Pasos a seguir informe WEP}
-  \label{fig:informeWEP}
-\end{figure}
-CrearInformeWEP()
-\begingroup{}
-	\fontsize{7pt}{7pt}=\selectfont
-	\verbatiminput {CrearInformeWEP().txt}
-\endgroup{}
-
-\paragraph{Generar informe WPA.}
-
-\begin{figure}[H]
-  \centering
-   \includegraphics[width=1.2\textwidth]{informeWPA.png}
-  \caption{Informe WPA.}
-  \label{fig:i}
-\end{figure} 
-
-\begin{figure}[H]
-  \centering
-   \includegraphics[width=1.2\textwidth]{informeWPA.png}
-  \caption{Informe WPA.}
-  \label{fig:i}
-\end{figure} 
-
-CrearInformeWPA()
-\begingroup{}
-	\fontsize{7pt}{7pt}=\selectfont
-	\verbatiminput {CrearInformeWPA().txt}
-\endgroup{}
-
-Como en el caso anterior, el informe WPA se puede desglosar en varias secciones que generan un único informe.
-Se utilizan los mismo programas y el mismo lenguaje de programación por lo que no se volverá a explicar de nuevo, pudiendo leerlo en el ANEXO D, si fuera necesario.
-
-
-
-
-
-
-%%%%%%%%%%%%%%CONCLUSION %%%%%%%%%%
-
-
-\chapter{Conclusiones y propuestas}
-
-\lettrine[lines=2]{E}{n} la actualidad las redes inalámbricas están sustituyendo a los cables de red. Así la conexión no se limita a la longitud de un cable y se puede extender muchos metros alrededor del punto de acceso. 
-
-Con este proyecto se ha tratado de advertir de los distintos problemas con los que cuentan las redes inalámbricas, así como la seguridad que se les aplica.
-Para entender un poco éste funcionamiento se a de tener claro algunos conocimientos básicos que se han explicado a lo largo de la memoria, como las tecnologías WiFi, su distintos modos de funcionamiento y los prácticas necesarias para su buen funcionamiento.
-
-La seguridad en las redes inalámbricas debería ser un objetivo imprescindible para cualquier empresa, dando así la importancia que se merece la seguridad de la información. La motivación de este proyecto, es conseguir concienciar al mayor número posible de empresas, del fácil acceso y las posibles causas económicas e incluso jurídicas que le puede ocasionar un posible ataque. Por ello se pretende concienciar a las empresas en generar de la importancia de hacer auditorias de forma periódica.
-
-Como posible estudios futuros, me gustaría seguir desarrollando la aplicación, ampliando el número de ataques y recogiendo mayor información en el informe automático.
-
-\section{Recomendaciones.}
-\begin{itemize}
-	\item Se debe tener en cuenta el alcance de nuestra red, ya que cuanto menos señal se propague fuera de las instalaciones menor será las posibilidades de que se acceda desde fuera.
-	\item Por muy simple que parezca, es importante cambiar los datos de accesos al router que vienen por defecto.(No olvidar cambiar la contraseña) Utilizar contraseñas de al menos 16 caracteres, empleando mayúsculas minúsculas y caracteres especiales. 
-	\item Ocultar el nombre de la red (SSID), de forma que no se difunda el nombre de la red.
- 	\item Se deben usar los protocolos de seguridad, WPA o WPA2. Ya que, el protocolo WEP no nos aporta ningún tipo de seguridad.
-	\item Es recomendable que se apague el router o punto de acceso una vez que ya no vaya a utilizarse.
-	\item Hacer listas de control de acceso con las direcciones MAC de aquellos dispositivos que quieras que tengan acceso a la red.
-	\item Utilizar IP estáticas, deshabilitando el DHCP (asignación dinámica IP) 
-	\item Realizar auditorías periódicamente ayudará a prevenir ataques, evitando posibles errores.
-	\item Contratar profesionales en la seguridad informática. 
-\end{itemize}	
-Estas medidas no harán que su red sea invulnerable a cualquier ataque, pues eso es imposible, pero garantizará unos niveles altos de seguridad.
-
-%%Para hacer apendices%%
-\appendix
-
-\chapter{Informe WEP}\label{anexo.A}
-
 Se mostrará un gráfico con el fin de facilitar y entender el funcionamiento para la generación del informe WEP
 \begin{figure}[H]
   \centering
@@ -1053,6 +978,74 @@ Ahora, se podrá comprobar como son las funciones a la hora de la generación del 
 		
 	\end{itemize}
 \end{itemize}
+
+\begin{figure}[H]
+  \centering
+   \includegraphics[width=1\textwidth]{InformeWEP.png}
+  \caption{Pasos a seguir informe WEP}
+  \label{fig:informeWEP}
+\end{figure}
+
+CrearInformeWEP()
+\begingroup{}
+	\fontsize{7pt}{7pt}=\selectfont
+	\verbatiminput {CrearInformeWEP().txt}
+\endgroup{}
+
+\paragraph{Generar informe WPA.}
+
+CrearInformeWPA()
+\begingroup{}
+	\fontsize{7pt}{7pt}=\selectfont
+	\verbatiminput {CrearInformeWPA().txt}
+\endgroup{}
+
+\begin{figure}[H]
+  \centering
+   \includegraphics[width=1.2\textwidth]{informeWPA.png}
+  \caption{Informe WPA.}
+  \label{fig:i}
+\end{figure} 
+Como en el caso anterior, el informe WPA se puede desglosar en varias secciones que generan un único informe.
+Se utilizan los mismo programas y el mismo lenguaje de programación por lo que no se volverá a explicar de nuevo, pudiendo leerlo en el ANEXO D, si fuera necesario.
+
+
+
+
+
+
+%%%%%%%%%%%%%%CONCLUSION %%%%%%%%%%
+
+
+\chapter{Conclusiones y propuestas}
+
+\lettrine[lines=2]{E}{n} la actualidad las redes inalámbricas están sustituyendo a los cables de red. Así la conexión no se limita a la longitud de un cable y se puede extender muchos metros alrededor del punto de acceso. 
+
+Con este proyecto se ha tratado de advertir de los distintos problemas con los que cuentan las redes inalámbricas, así como la seguridad que se les aplica.
+Para entender un poco éste funcionamiento se a de tener claro algunos conocimientos básicos que se han explicado a lo largo de la memoria, como las tecnologías WiFi, su distintos modos de funcionamiento y los prácticas necesarias para su buen funcionamiento.
+
+La seguridad en las redes inalámbricas debería ser un objetivo imprescindible para cualquier empresa, dando así la importancia que se merece la seguridad de la información. La motivación de este proyecto, es conseguir concienciar al mayor número posible de empresas, del fácil acceso y las posibles causas económicas e incluso jurídicas que le puede ocasionar un posible ataque. Por ello se pretende concienciar a las empresas en generar de la importancia de hacer auditorias de forma periódica.
+
+Como posible estudios futuros, me gustaría seguir desarrollando la aplicación, ampliando el número de ataques y recogiendo mayor información en el informe automático.
+
+\section{Recomendaciones.}
+\begin{itemize}
+	\item Se debe tener en cuenta el alcance de nuestra red, ya que cuanto menos señal se propague fuera de las instalaciones menor será las posibilidades de que se acceda desde fuera.
+	\item Por muy simple que parezca, es importante cambiar los datos de accesos al router que vienen por defecto.(No olvidar cambiar la contraseña) Utilizar contraseñas de al menos 16 caracteres, empleando mayúsculas minúsculas y caracteres especiales. 
+	\item Ocultar el nombre de la red (SSID), de forma que no se difunda el nombre de la red.
+ 	\item Se deben usar los protocolos de seguridad, WPA o WPA2. Ya que, el protocolo WEP no nos aporta ningún tipo de seguridad.
+	\item Es recomendable que se apague el router o punto de acceso una vez que ya no vaya a utilizarse.
+	\item Hacer listas de control de acceso con las direcciones MAC de aquellos dispositivos que quieras que tengan acceso a la red.
+	\item Utilizar IP estáticas, deshabilitando el DHCP (asignación dinámica IP) 
+	\item Realizar auditorías periódicamente ayudará a prevenir ataques, evitando posibles errores.
+	\item Contratar profesionales en la seguridad informática. 
+\end{itemize}	
+Estas medidas no harán que su red sea invulnerable a cualquier ataque, pues eso es imposible, pero garantizará unos niveles altos de seguridad.
+
+%%Para hacer apendices%%
+\appendix
+
+\chapter{Informe WEP}\label{anexo.A}
 
 %\input{informe.tex}
 \chapter{Informe WPA}\label{anexo.B}
