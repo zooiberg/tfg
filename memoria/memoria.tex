@@ -9,22 +9,25 @@
 \usepackage{float}%comando [H]
 \usepackage{verbatim}%introducir .txt
 \usepackage{setspace}
-\usepackage{fixme}
+\usepackage[draft]{fixme}
 \usepackage{fancyhdr}
 \usepackage{hyperref}%hipervinculos
 
 \def\thetitle{Seguridad y vulnerabilidad de redes inalámbricas en PYMEs}
 
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[LE,RO]{Share\LaTeX}
-\fancyhead[RE,LO]{Guides and tutorials}
-\fancyfoot[CE,CO]{\leftmark}
-\fancyfoot[LE,RO]{\thepage}
+\fancypagestyle{basicstyle}{%
+  \fancyhf{}
+  \fancyhead[LE,RO]{\rightmark}
+  \fancyhead[LO,RE]{\leftmark}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0.4pt}
+  \renewcommand{\footrulewidth}{0pt}}
+
+\pagestyle{basicstyle}
 
 \begin{document}
 %PORTADA%
-\pagestyle{empty}       %Pagina sin encabezado ni pie
+\thispagestyle{empty}       %Pagina sin encabezado ni pie
 
 \begin{center}
     \includegraphics[scale=0.85]{escudo.png}     %Escudo de la Universidad
@@ -887,7 +890,7 @@ CrearInformeWEP()
 	\verbatiminput {CrearInformeWEP().txt}
 \endgroup{}
 
-\paragrph{Generar informe WPA.}
+\paragraph{Generar informe WPA.}
 
 \begin{figure}[H]
   \centering

@@ -6,7 +6,7 @@ DenegacionServicio (){
 	ESSID=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $9 '})
 	
 	TARJETA_SELECCIONADA_MAC=$(head -1 "$LOG_TARJETA" | tail -1)
-	echo "MAC:$TARJETA_SELECCIONADA_MAC”# Tarjeta MAC seleccionada.
+	echo "MAC:$TARJETA_SELECCIONADA_MAC"# Tarjeta MAC seleccionada.
 	
 	TARJETA_MODO_MONITOR=$(head -2 "$ARCHIVO_TARJETA_MONITOR" | tail -1) 
 	sudo airmon-ng stop $TARJETA_MODO_MONITOR
