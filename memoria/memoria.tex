@@ -17,7 +17,7 @@
 
 \fancypagestyle{basicstyle}{%
   \fancyhf{}
-  \fancyhead[LE,RO]{\nouppercase{\rightmark}}
+  \fancyhead[LE,RO]{\nouppercase { \rightmark }}
   \fancyhead[LO,RE]{\leftmark}
   \fancyfoot[C]{\thepage}
   \renewcommand{\headrulewidth}{0.4pt}
@@ -96,7 +96,7 @@ $\ $
 %\noindent Copyright \copyright\ \\ % Copyright notice
 \doublespace\noindent\textsc{\thetitle}
 
-%\noindent \textsc{github.com/.......}\\ % URL
+%\noindent \textsc{https://github.com/zooiberg/tfg/tree/master/memoria}\\ % URL
 
 \noindent Memoria realizada durante el Trabajo Final de Carrera del alumno Luis Ramírez de Diego en el año lectivo 2015/2016 y supervisado por el profesor y tutor del proyecto, Francisco Moya Fernandez\\ % License information
 
@@ -120,7 +120,7 @@ $\ $
 \cleardoublepage
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%RESUMEN%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%RESUMEN%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \phantomsection
 \addcontentsline{toc}{chapter}{Resumen}
@@ -182,10 +182,20 @@ En un segundo lugar, pero no por ello menos importante, dispongo de una serie de
 	\item Recoger de forma sistemática todos los datos del análisis realizado por el dispositivo, que se plasmará en un informe de manera automatizada. 
 	\item Generar un informe con posibles vulnerabilidades, según el estándar NIST SP 800-115\cite{SP}. Con un lenguaje sencillo y no demasiado técnico que permita una fácil comprensión.
 	
-	
 \end{enumerate}
+
 %%%%%%%ESTRUCTURA DE LA MEMORIA%%%%%%%%
 \section{Estructura de la memoria}
+\begin{itemize}
+
+	\item Capitulo 1. En este capitulo se desarrollará una pequeña introducción acerca  del tema que se tratará a lo largo de la memoria, así como una serie de objetivos que se tienen que cumplir al finalizar la aplicación.
+	\item Capitulo 2. Antecedentes. En él, se detallará un estudio previo de lo ya conocido y analizado sobre este tema, tanto su relación con las pymes, las generalidades de las redes WiFi y temas más específicos como las auditorias y la automatización, tanto de dispositivos como para la creación de informes.
+	\item Capitulo 3. Proyecto: Se analiza específicamente cada proceso y fase del proyecto. Se secciona en función de los objetivos y su cumplimiento. Además, se detalla tanto los componentes y procesos de software como de hardware que intervienen en cada fase.
+	\item Capitulo 4. Bibliografía. Conjunto de reseñas bibliográficas estudiadas, analizadas o citadas para la elaboración del proyecto y la memoria.
+	
+\end{itemize}
+
+
 
 
 %%%%%%%%%%%%%%%% CAPITULO 2 ANTECEDENTES%%%%%%%%%%%
@@ -676,7 +686,8 @@ Se descargó la versión para la Raspberry Pi 2/3 para instalarlo en la SD. Para h
 Las instalaciones se pueden hacer de dos maneras dependiendo del sistema operativo que se disponga para la instalación.
 
 \begin{enumerate}
-	\item Desde Linux o Mac OS: Con el comando ``dd if=kali-1.0.9-rpi.img of=/dev/sdb bs=512k'', siendo /dev/sdb la partición correspondiente a la SD y kali-1.0.9-rpi.img la imagen del sistema operativo. Se debe tener especial cuidado al utilizar este comando, ya que se tiene que tener claro que dispositivo estas volcando para que no se tenga problemas de borrado de disco.
+	\item Desde Linux o Mac OS: Con el comando ``dd if=/Users/luis/Desktop/kali-2.1.2-rpi2.img of=/dev/disk2
+ bs=512k'', siendo /dev/sdb la partición correspondiente a la SD y kali-1.0.9-rpi.img la imagen del sistema operativo. Se debe tener especial cuidado al utilizar este comando, ya que se tiene que tener claro que dispositivo estas volcando para que no se tenga problemas de borrado de disco.
 	\item Desde Windows: Con el programa Win32DiskImager, seleccionando la imagen de Kali Linux y la unidad correspondiente a la SD. Este método dio algunos problemas a la hora de montar la tarjeta SD, por lo que se empleo por el primer de los métodos.
 \end{enumerate}
 
@@ -791,12 +802,12 @@ Si se escoge ATACAR WPA se realizan los siguientes análisis:
 
 %%%ATAQUES%%%
 \section[Análisis de vulnerabilidades]{Ejecución de análisis de vulnerabilidades. Realización de ataques.}
-Para la detección de las vulnerabilidades de la red seleccionada se llevará acabo la iniciación de ataques a la misma, para así poder recoger la información y analizarla. 
-El lenguaje empleado para la automatización de los ataques es bash, dependiendo del tipo de protocolo que utilice la red seleccionada, se empleará una serie de ataques distintos. A continuación se emplea un gráfico \ref{fig:ataque}, para facilitar el entendimiento de los posibles ataques y la sucesión de ellos. Comenzaremos ejecutando la aplicación. Ésta, hará una búsqueda de las posibles tarjetas de red que encuentre conectadas a nuestro dispositivo. Una vez que encuentre la tarjeta de red disponible la pondrá en modo monitor para posteriormente escanear las redes a su alcance. Cuando se disponga del listados de las posibles redes, se seleccionara la que se quiere analizar. Siendo posible dos soluciones: 
+Para la detección de las vulnerabilidades de la red seleccionada se llevará a cabo la iniciación de ataques a la misma, para así poder recoger la información y analizarla. 
+El lenguaje empleado para la automatización de los ataques es bash, dependiendo del tipo de protocolo que utilice la red seleccionada, se empleará una serie de ataques distintos. A continuación se emplea un gráfico \ref{fig:ataque}, para facilitar el entendimiento de los posibles ataques y la sucesión de ellos. Comenzaremos ejecutando la aplicación. Ésta, hará una búsqueda de las posibles tarjetas de red que se encuentren conectadas a nuestro dispositivo. Una vez que encuentre la tarjeta de red disponible, la pondrá en modo monitor para posteriormente escanear las redes a su alcance. Cuando se disponga del listados de las posibles redes, se seleccionara la que se quiere analizar. Siendo posible dos soluciones: 
 
 \begin{itemize}
 	\item Si el protocolo de cifrado que encuentra es WEP, el primer ataque a realizar será una denegación de servicios (DOS), una vez se haya dejado sin internet al punto de acceso por el exceso de paquetes recibidos se intentará un ataque de fuerza bruta. Utilizando la herramienta \textit{aireplay-ng} para capturar un numero determinado de IV, se terminará consiguiendo la contraseña utilizando \textit{aircrack-ng}.
-	\item Si fuera WPA o WPA2 se empezará con un ataque de denegación de servicios como en el caso de WEP. Se comprobará si dispone de WPS activado, si fuera así se atacaría con el comando \textit{reaver} y \textit{pixiewps}. Si no, se trataría de un ataque en diccionario, es el ataque que más tiempo necesita, ya que comprueba una por una las palabras del diccionario del que se disponga. Para ello utiliza \textit{aireplay-ng} para desautenticar e inyectar y generar así tráfico para la captura del \textit{handshake}. Una vez se disponga de el, se utilizará \textit{aircrack} para hacer la búsqueda. Al cabo de un tiempo determinado se completará el análisis
+	\item Si fuera WPA o WPA2 se empezará con un ataque de denegación de servicios como en el caso de WEP. Se comprobará si dispone de WPS activado, si fuera así se atacaría con el comando \textit{reaver} y \textit{pixiewps}. Si no, se trataría de un ataque en diccionario, es el ataque que más tiempo necesita, ya que comprueba una por una las palabras del diccionario del que se disponga. Para ello utiliza \textit{aireplay-ng} para desautenticar e inyectar y generar así tráfico para la captura del \textit{handshake}. Una vez se disponga de él, se utilizará \textit{aircrack} para hacer la búsqueda. Al cabo de un tiempo determinado se completará el análisis
 \end{itemize}
 
 \begin{figure}[H]
@@ -809,7 +820,7 @@ El lenguaje empleado para la automatización de los ataques es bash, dependiendo 
 \subsubsection{Ataque red WEP}
 Como ya se ha comentado, las redes WEP tienen muchas debilidades criptográficas, por lo que se ha utilizado las herramientas necesarias para intentare romper la encriptación WEP.
 Lo primero, será configurar la tarjeta como modo monitor para un posterior escaneo de las redes cercanas empleando el comando \textit{airodump-ng}. Así, se comenzará a volcar todo el tráfico que hay en el aire en un archivo determinado (LOG\_CAP). En este punto, se detectará el cifrado WEP de la red seleccionada y si existe cliente asociado a dicha red. Si existe cliente asociado, el crackeo será más sencillo, sino, se hará una falsa autenticación con una MAC aleatoria.
-Una vez elegida la red, se comienza a inyectar con dos objetivos distintos, el primero será deautenticar el cliente asociado con el fin de que vuelva a autenticarse y genere un paquete ARP válido, y el segundo para capturar el paquete ARP y reinyectarlo para generar un gran volumen de paquetes de datos. Como ya se habló en la parte teórica, es importante obtener una gran cantidad de IVs y así poder predecir y atacar la clave que descifran los paquetes, obteniendo la clave de red.
+Una vez elegida la red, se comienza a inyectar con dos objetivos distintos, el primero será desautenticar el cliente asociado con el fin de que vuelva a autenticarse y genere un paquete ARP válido, y el segundo para capturar el paquete ARP y reinyectarlo para generar un gran volumen de paquetes de datos. Como ya se habló en la parte teórica, es importante obtener una gran cantidad de IVs y así poder predecir y atacar la clave que descifran los paquetes, obteniendo la clave de red.
 
 \begingroup{}
 	\fontsize{7pt}{7pt}=\selectfont
@@ -817,8 +828,8 @@ Una vez elegida la red, se comienza a inyectar con dos objetivos distintos, el p
 \endgroup{}
 
 \subsubsection{Denegación de servicios.}
-El objetivo de este ataque es dejar a los usuarios legítimos de una red Wi-Fi sin poder acceder a internet. Por lo tanto, se inunda con paquetes de deautenticación al punto de acceso o al cliente que decida.
-Como siempre, la tarjeta inalámbrica debe estar en modo monitor y escuchando en el canal específico. Así se deautenticará en un bucle infinito (-0 0) al cliente o al punto de acceso que se seleccione.
+El objetivo de este ataque es dejar a los usuarios legítimos de una red Wi-Fi sin poder acceder a internet. Por lo tanto, se inunda con paquetes de desautenticación al punto de acceso o al cliente que decida.
+Como siempre, la tarjeta inalámbrica debe estar en modo monitor y escuchando en el canal específico. Así se desautenticará en un bucle infinito (-0 0) al cliente o al punto de acceso que se seleccione.
 
 \begingroup{}
 	\fontsize{7pt}{7pt}=\selectfont
@@ -838,7 +849,7 @@ Una vez detectado WPS en el punto de acceso se prueba mediante la herramienta \t
 \endgroup{}
 
 \paragraph{Pixiewps:}
-Este ataque \textit{Pixiewps} también conocido como \textit{polvo mágico}. Lo primero que hará es comprobar si el router al que se le realiza el ataque es vulnerable. Si así lo fuera, se podrá obtener la clave en segundos. Continuando los pasos de los ataques anteriores y utilizando la tarjeta en modo monitor y escaneando el tráfico, se atacará a una de las redes disponibles que disponga de WPS activado. Primero utilizaremos el comando \textit{reaver} para recoger la PKE (clave pública de la persona inscrita), PKR (clave pública del registrador),e-hash 1 (hash  de la primera mitad del PIN WPS, fuerza bruta) y E-2 de hash (hash  de la segunda mitad del PIN WPS, fuerza bruta), E-nonce/ R-nonce y la authkey. Una vez se obtenga toda la información, se podrá aplicar pixiewps, para reducir tiempos.
+Este ataque \textit{Pixiewps} es también conocido como \textit{polvo mágico}. Lo primero que hará es comprobar si el router al que se le realiza el ataque es vulnerable. Si así lo fuera, se podrá obtener la clave en segundos. Continuando los pasos de los ataques anteriores y utilizando la tarjeta en modo monitor y escaneando el tráfico, se atacará a una de las redes disponibles que disponga de WPS activado. Primero utilizaremos el comando \textit{reaver} para recoger la PKE (clave pública de la persona inscrita), PKR (clave pública del registrador),e-hash 1 (hash  de la primera mitad del PIN WPS, fuerza bruta) y E-2 de hash (hash  de la segunda mitad del PIN WPS, fuerza bruta), E-nonce/ R-nonce y la authkey. Una vez se obtenga toda la información, se podrá aplicar pixiewps, para reducir tiempos.
 
 \begingroup{}
 	\fontsize{7pt}{7pt}=\selectfont
@@ -857,7 +868,7 @@ El tener que emplear la fuerza bruta es un gran inconveniente, ya que se hará un
 \endgroup{}
 
 \subsubsection{Utilizamos Pyrit}
-Es un herramienta muy potente que facilita la creación de bases de datos para precalcular las claves PSK y así acelerar el pre-procesamiento, aprovechando al máximo las plataformas del mercado(Nvidia CUDA, OpenCL) y así poder descifrar claves WPA o WPA2 mediante ataques de fuerza bruta o diccionario. Es necesario haber capturado con anterioridad el handshake. Se empleará un diccionario con el que cuenta por defecto kali linux (\textit{rockyou}), que se renombrará como wpa.lst.
+Es un herramienta muy potente que facilita la creación de bases de datos para pre-calcular las claves PSK y así acelerar el pre-procesamiento, aprovechando al máximo las plataformas del mercado (Nvidia CUDA, OpenCL) y así poder descifrar claves WPA o WPA2 mediante ataques de fuerza bruta o diccionario. Es necesario haber capturado con anterioridad el handshake. Se empleará un diccionario con el que cuenta por defecto kali linux (\textit{rockyou}), que se renombrará como wpa.lst.
 
 \begingroup{}
 	\fontsize{7pt}{7pt}=\selectfont
@@ -876,7 +887,7 @@ Es un herramienta muy potente que facilita la creación de bases de datos para pr
 %%%%%INFORME%%%%%
 \section{Generación de un informe con posibles vulnerabilidades de la red}
 \subsection{Pautas y seguimiento para la creación del informe} 
-Partiendo de un lenguaje de programación desde el cual se ha desarrollado el código para automatizar el dispositivo, se contará con otro lenguaje de programación (\textit{Python}) para que interactúe, y por medio de una de sus bibliotecas \textit{Jinja2}, genere unas plantillas (templates) donde se irán introduciendo los datos variables. Como se muestra en el gráfico, una vez obtengamos el informeWEP.tex o informeWPA.tex dependiendo del protocolo de la red, se utilizara la aplicación \textit{pdflatex} para generar el informe final.pdf.
+Partiendo de un lenguaje de programación desde el cual se ha desarrollado el código para automatizar el dispositivo, se contará con otro lenguaje de programación (\textit{Python}) para que interactue, y por medio de una de sus bibliotecas \textit{Jinja2}, genere unas plantillas (templates) donde se irán introduciendo los datos variables. Como se muestra en el gráfico, una vez obtengamos el informeWEP.tex o informeWPA.tex dependiendo del protocolo de la red, se utilizara la aplicación \textit{pdflatex} para generar el informe final.pdf.
 \begin{figure}[H]
   \centering
    \includegraphics[width=1\textwidth]{informe.png}
@@ -901,7 +912,7 @@ Ahora, se podrá comprobar como son las funciones a la hora de la generación del 
 
 \begin{itemize}
 	\item SECWEP1.py :
-	Este apartado mostrará las cuatro variables básicas de una red WEP. A continuación se observa el archivo \textit{python} para facilitar el entendimiento, se aprecia que se ha empleado la biblioteca \textit{jinja}, mostrando en la linea 17 cual será la estructura que se empleará(Template). En la linea 18 se puede observar la salida con la información ya en el INF-WEP.tex y las  variables que se introducirán.  
+	Este apartado mostrará las cuatro variables básicas de una red WEP. A continuación se observa el archivo \textit{python} para facilitar el entendimiento, se aprecia que se ha empleado la biblioteca \textit{jinja}, mostrando en la linea 17 cual será la estructura que se empleará (Template). En la linea 18 se puede observar la salida con la información ya en el INF-WEP.tex y las  variables que se introducirán.  
 	\begingroup{}
 	\fontsize{7pt}{7pt}=\selectfont
 	\verbatiminput {SECWEP.py.txt}
@@ -953,7 +964,7 @@ Ahora, se podrá comprobar como son las funciones a la hora de la generación del 
 		\end{itemize}
 		
 	\item SUBSWEP1.py	:
-	Por ultimo, se obtendrá toda la información necesaria a la hora de generar el informe automatizado, tras un ataque a una red con cifrado WEP. Los pasos que se han seguido son exactamente los mismos que las secciones anteriores.
+	Por último, se obtendrá toda la información necesaria a la hora de generar el informe automatizado, tras un ataque a una red con cifrado WEP. Los pasos que se han seguido son exactamente los mismos que las secciones anteriores.
 	
 		\begingroup{}
 		\fontsize{7pt}{7pt}=\selectfont
@@ -1015,9 +1026,9 @@ Se utilizan los mismo programas y el mismo lenguaje de programación por lo que n
 \lettrine[lines=2]{E}{n} la actualidad las redes inalámbricas están sustituyendo a los cables de red. Así la conexión no se limita a la longitud de un cable y se puede extender muchos metros alrededor del punto de acceso. 
 
 Con este proyecto se ha tratado de advertir de los distintos problemas con los que cuentan las redes inalámbricas, así como la seguridad que se les aplica.
-Para entender un poco éste funcionamiento se a de tener claro algunos conocimientos básicos que se han explicado a lo largo de la memoria, como las tecnologías WiFi, su distintos modos de funcionamiento y los prácticas necesarias para su buen funcionamiento.
+Para entender un poco éste funcionamiento se ha de tener claro algunos conocimientos básicos que se han explicado a lo largo de la memoria, como las tecnologías WiFi, su distintos modos de funcionamiento y los prácticas necesarias para su buen funcionamiento.
 
-La seguridad en las redes inalámbricas debería ser un objetivo imprescindible para cualquier empresa, dando así la importancia que se merece la seguridad de la información. La motivación de este proyecto, es conseguir concienciar al mayor número posible de empresas, del fácil acceso y las posibles causas económicas e incluso jurídicas que le puede ocasionar un posible ataque. Por ello se pretende concienciar a las empresas en generar de la importancia de hacer auditorias de forma periódica.
+La seguridad en las redes inalámbricas debería ser un objetivo imprescindible para cualquier empresa, dando así la importancia que se merece la seguridad de la información. La motivación de este proyecto, es conseguir concienciar al mayor número posible de empresas, del fácil acceso y las posibles causas económicas e incluso jurídicas que le puede ocasionar un posible ataque. Por ello, la importancia de hacer auditorias de forma periódica.
 
 Como posible estudios futuros, me gustaría seguir desarrollando la aplicación, ampliando el número de ataques y recogiendo mayor información en el informe automático.
 
