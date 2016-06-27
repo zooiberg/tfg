@@ -12,6 +12,7 @@
 \usepackage[draft]{fixme}
 \usepackage{fancyhdr}
 \usepackage{hyperref}%hipervinculos
+\usepackage{pdfpages}%agregar pdf
 
 \def\thetitle{Seguridad y vulnerabilidad de redes inalámbricas en PYMEs}
 
@@ -1050,9 +1051,10 @@ Estas medidas no harán que su red sea invulnerable a cualquier ataque, pues eso 
 \appendix
 
 \chapter{Informe WEP}\label{anexo.A}
-
+\includepdf[pages=-]{informe_WEP}
 %\input{informe.tex}
 \chapter{Informe WPA}\label{anexo.B}
+\includepdf[pages=-]{informe-WPA}
 \chapter{Código}\label{anexo.C}
 
 \cleardoublepage
