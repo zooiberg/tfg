@@ -960,6 +960,100 @@ Estas medidas no harán que su red sea invulnerable a cualquier ataque, pues eso 
 \appendix
 
 \chapter{Informe WEP}\label{anexo.A}
+
+Se mostrará un gráfico con el fin de facilitar y entender el funcionamiento para la generación del informe WEP
+\begin{figure}[H]
+  \centering
+   \includegraphics[width=1.2\textwidth]{InformeWEP.png}
+  \caption{Pasos a seguir informe WEP}
+  \label{fig:informeWEP}
+\end{figure}
+Ahora, se podrá comprobar como son las funciones a la hora de la generación del informe.
+\begingroup{}
+	\fontsize{7pt}{7pt}=\selectfont
+	\verbatiminput {CrearInformeWEP().txt}
+\endgroup{}
+
+\begin{itemize}
+	\item SECWEP1.py :
+	Este apartado mostrará las cuatro variables básicas de una red WEP. A continuación se observa el archivo \textit{python} para facilitar el entendimiento, se aprecia que se ha empleado la biblioteca \textit{jinja}, mostrando en la linea 17 cual será la estructura que se empleará(Template). En la linea 18 se puede observar la salida con la información ya en el INF-WEP.tex y las  variables que se introducirán.  
+	\begingroup{}
+	\fontsize{7pt}{7pt}=\selectfont
+	\verbatiminput {SECWEP.py.txt}
+	\endgroup{}
+	
+		\begin{itemize}
+		\item SECWEP1-Template.tex
+		
+		\begingroup{}
+		\fontsize{7pt}{7pt}=\selectfont
+		\verbatiminput {SECWEP1-Template.tex.txt}
+		\endgroup{}
+		
+		\item INF-WEP1.tex
+		
+		\begingroup{}
+		\fontsize{7pt}{7pt}=\selectfont
+		\verbatiminput {INF-WEP.tex.txt}
+		\endgroup{}
+		
+		\end{itemize}
+		
+	\item SUBSDOS.py:
+	Este sección, es la encargada de recoger toda la información cuando se realiza el ataque de Denegación de Servicios. Al igual que en el apartado anterior, el programa en \textit{python}  utiliza la biblioteca previamente importada, \textit{jinja2}. Será el mismo procedimiento, llamando al Template para generar el INF-SUBSDOS.tex.
+	
+	
+	Esta sección se utilizará tanto para el protocolo WEP como para el WPA/WPA2.
+	
+		\begingroup{}
+		\fontsize{7pt}{7pt}=\selectfont
+		\verbatiminput {SUBSDOS.py.txt}
+		\endgroup{}
+	
+		\begin{itemize}
+		
+		\item SUBSDOS-Template.tex
+		
+		\begingroup{}
+		\fontsize{7pt}{7pt}=\selectfont
+		\verbatiminput {SUBSDOS-Template.tex.txt}
+		\endgroup{}
+		
+		\item INF-SUBSDOS.tex
+		
+		\begingroup{}
+		\fontsize{7pt}{7pt}=\selectfont
+		\verbatiminput {INF-SUBSDOS.tex.txt}
+		\endgroup{}
+		\end{itemize}
+		
+	\item SUBSWEP1.py	:
+	Por ultimo, se obtendrá toda la información necesaria a la hora de generar el informe automatizado, tras un ataque a una red con cifrado WEP. Los pasos que se han seguido son exactamente los mismos que las secciones anteriores.
+	
+		\begingroup{}
+		\fontsize{7pt}{7pt}=\selectfont
+		\verbatiminput {SUBSWEP1.py.txt}
+		\endgroup{}
+		
+		\begin{itemize}
+		
+		\item SUBSWEP1-Template.tex
+		\begingroup{}
+		\fontsize{7pt}{7pt}=\selectfont
+		\verbatiminput {SUBSWEP1-Template.tex.txt}
+		\endgroup{}
+		
+		
+		\item INF-SUBSWEP1.tex
+		\begingroup{}
+		\fontsize{7pt}{7pt}=\selectfont
+		\verbatiminput {INF-SUBSWEP1.tex.txt}
+		\endgroup{}
+		
+		
+	\end{itemize}
+\end{itemize}
+
 %\input{informe.tex}
 \chapter{Informe WPA}\label{anexo.B}
 \chapter{Código}\label{anexo.C}
