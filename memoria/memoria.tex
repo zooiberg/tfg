@@ -636,6 +636,13 @@ RAM de 1 GB: Es un sistema-en-chip diseñado específicamente para este modelo de 
 \end{itemize}
  En cuanto a la conexión, Raspberry Pi no cuenta con ningún tipo de monitor o pantalla incorporado. Normalmente se conecta a alguna pantalla por la conexión HDMI o VGA. En este proyecto, se ha añadido una nueva tarjeta inalámbrica en la Raspberry Pi para realizar el análisis de vulnerabilidad desde el dispositivo móvil. Esto es posible configurando en el dispositivo móvil un punto de acceso (conexión hostspot) para que haya conectividad con la tarjeta inalámbrica y mediante la aplicación VNC (VIirtual Network Computing) se pueda  controlar de forma remota el interfaz de escritorios de Raspberry Pi.
  
+  \begin{figure}[H]
+  \centering
+	\includegraphics[width=0.8\textwidth]{escritorio.png}
+  \caption{Escritorio remoto (VNC)} 
+  \label{fig:escritorio}
+\end{figure}
+
 \begin{figure}[H]
   \centering
    \includegraphics[width=0.3\textwidth]{conectar.png}
@@ -681,7 +688,7 @@ Para las actualizaciones se emplearan los siguientes comandos:
 	\item \textit{apt-get upgrade}
 	\item\textit{apt-get kali-linux-wireless}
 \end{enumerate}
-El desarrollo de la aplicación que detectara las vulnerabilidades se lleva acabo mediante la programación de la Raspberry Pi con lenguaje de programación bash (Ver código en ANEXO C).
+El desarrollo de la aplicación que detectará las vulnerabilidades se lleva acabo mediante la programación de la Raspberry Pi con lenguaje de programación bash (Ver código en ANEXO C).
 
 \section{Dotación a la aplicación de una interfaz gráfica simple e intuitiva.}
 %%%%INTERFAZ%%%%%
@@ -786,9 +793,10 @@ Si se escoge ATACAR WPA se realizan los siguientes análisis:
 \section[Análisis de vulnerabilidades]{Ejecución de análisis de vulnerabilidades. Realización de ataques.}
 Para la detección de las vulnerabilidades de la red seleccionada se llevará acabo la iniciación de ataques a la misma, para así poder recoger la información y analizarla. 
 El lenguaje empleado para la automatización de los ataques es bash, dependiendo del tipo de protocolo que utilice la red seleccionada, se empleará una serie de ataques distintos. A continuación se emplea un gráfico \ref{fig:ataque}, para facilitar el entendimiento de los posibles ataques y la sucesión de ellos. Comenzaremos ejecutando la aplicación. Ésta, hará una búsqueda de las posibles tarjetas de red que encuentre conectadas a nuestro dispositivo. Una vez que encuentre la tarjeta de red disponible la pondrá en modo monitor para posteriormente escanear las redes a su alcance. Cuando se disponga del listados de las posibles redes, se seleccionara la que se quiere analizar. Siendo posible dos soluciones: 
+
 \begin{itemize}
 	\item Si el protocolo de cifrado que encuentra es WEP, el primer ataque a realizar será una denegación de servicios (DOS), una vez se haya dejado sin internet al punto de acceso por el exceso de paquetes recibidos se intentará un ataque de fuerza bruta. Utilizando la herramienta \textit{aireplay-ng} para capturar un numero determinado de IV, se terminará consiguiendo la contraseña utilizando \textit{aircrack-ng}.
-	\item Si fuera WPA o WPA2 se empezará con un ataque de denegación de servicios como en el caso de WEP. Se comprobará si dispone de WPS activado, si fuera así se atacaría con el comando \textit{reaver} y \textit{pixiewps}. Si no, se trataría de un ataque en diccionario que es el ataque que más tiempo necesita, ya que comprueba una por una las palabras del diccionario del que se disponga. Para ello utiliza \textit{aireplay-ng} para desautenticar e inyectar y generar así tráfico para la captura del \textit{handshake}. Una vez se disponga de el, se utilizará \textit{aircrack} para hacer la búsqueda. Al cabo de un tiempo determinado se completará el análisis
+	\item Si fuera WPA o WPA2 se empezará con un ataque de denegación de servicios como en el caso de WEP. Se comprobará si dispone de WPS activado, si fuera así se atacaría con el comando \textit{reaver} y \textit{pixiewps}. Si no, se trataría de un ataque en diccionario, es el ataque que más tiempo necesita, ya que comprueba una por una las palabras del diccionario del que se disponga. Para ello utiliza \textit{aireplay-ng} para desautenticar e inyectar y generar así tráfico para la captura del \textit{handshake}. Una vez se disponga de el, se utilizará \textit{aircrack} para hacer la búsqueda. Al cabo de un tiempo determinado se completará el análisis
 \end{itemize}
 
 \begin{figure}[H]
