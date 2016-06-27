@@ -608,7 +608,7 @@ Se puede ejecutar en la mayoría de las versiones de Python. Esta biblioteca se u
 %%%%%%%%%PROYECTO%%%%%%%%%%
 
 
-\chapter{Desarrollo del proyecto}
+\chapter[Desarrollo]{Desarrollo del proyecto}
 \lettrine[lines=2]{P}{ara} llegar al fin del proyecto, es decir al cumplimiento del objetivo principal, introducir a las empresas en la importancia de contar con una red inalámbrica segura, y la necesidad de realizar una pre-auditoría
 de caja negra automática, que detecte las vulnerabilidades de la red, y que sirva como argumento de venta de auditorías completas de forma periódica, es necesario desarrollar diferentes fases:
 
@@ -783,7 +783,7 @@ Si se escoge ATACAR WPA se realizan los siguientes análisis:
 \end{itemize}
 
 %%%ATAQUES%%%
-\section{Ejecución de análisis de vulnerabilidades. Realización de ataques.}
+\section[Análisis de vulnerabilidades]{Ejecución de análisis de vulnerabilidades. Realización de ataques.}
 Para la detección de las vulnerabilidades de la red seleccionada se llevará acabo la iniciación de ataques a la misma, para así poder recoger la información y analizarla. 
 El lenguaje empleado para la automatización de los ataques es bash, dependiendo del tipo de protocolo que utilice la red seleccionada, se empleará una serie de ataques distintos. A continuación se emplea un gráfico \ref{fig:ataque}, para facilitar el entendimiento de los posibles ataques y la sucesión de ellos. Comenzaremos ejecutando la aplicación. Ésta, hará una búsqueda de las posibles tarjetas de red que encuentre conectadas a nuestro dispositivo. Una vez que encuentre la tarjeta de red disponible la pondrá en modo monitor para posteriormente escanear las redes a su alcance. Cuando se disponga del listados de las posibles redes, se seleccionara la que se quiere analizar. Siendo posible dos soluciones: 
 \begin{itemize}
