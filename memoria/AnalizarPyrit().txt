@@ -6,8 +6,8 @@ AnalizarPyrit() {
 	ESSID=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $9 '})
 	
 	#Creamos el ESSI real del handshake capturado
-	pyrit –e "$ESSID" create_essid
-	X1="pyrit –e "$ESSID" create_essid"
+	pyrit -e "$ESSID" create_essid
+	X1="pyrit -e "$ESSID" create_essid"
 	sleep 10s
 
 	#utilizamos diccionario rockyou.txt renombrado a wpa.lst

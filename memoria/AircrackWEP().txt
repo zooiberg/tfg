@@ -12,7 +12,7 @@ AircrackWEP() {
 
 	if [ ! `echo $TARJETA_SELECCIONADA_MAC | grep ":"` ]
 	then
-		#Utilizo mi propia interfaz para realizar falsa autenticaciÃ³n
+		#Utilizo mi propia interfaz para realizar falsa autenticación
 		TARJETA_SELECCIONADA_MAC=$(head -1 "$LOG_TARJETA" | tail -1)
 	else
 		TARJETA_SELECCIONADA_MAC=$(echo "$CLIENT" | awk -F "," {' print $1 '})		
