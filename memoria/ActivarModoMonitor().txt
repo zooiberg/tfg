@@ -8,7 +8,7 @@ ActivarModoMonitor(){
   if ! DeshabilitarNetworkManager ON ; then return 1;fi 
   echo "ACTIVANDO MODO MONITOR" > "$ARCHIVO_STATUSBAR"  
   airmon-ng start $TARJETA_SELECCIONADA &> $ARCHIVO_LOG
-  TARJETA_MODO_MONITOR=(`iwconfig 2>/dev/null | grep Mode:Monitor | awk {'print $1'}`)
+  TARJETA_MODO_MONITOR=(`iwconfig 2>/dev/null | grep Mode:Monitor | awk {'print $1’}`)
   echo "$(iwconfig $TARJETA_MODO_MONITOR)" >> "$LOG_AIRMONG"
   if [ ! $TARJETA_MODO_MONITOR ]
   then 
