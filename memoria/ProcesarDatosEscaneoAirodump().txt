@@ -12,7 +12,6 @@ ProcesarDatosEscaneoAirodump() {
 	head -n $HeTa "$ARCHIVO_CAPTURAS-01.csv" &> "$ARCHIVO_CAPTURAS-02.csv"
 	tail -n +$HeTa "$ARCHIVO_CAPTURAS-01.csv" &> "$ARCHIVO_CAPTURAS-clients.csv"
 
-	#sed '/^$/d' "$LOG_VARIOS" > "$LOG_AIRODUMP"
 	LINEAS_LOG=$(cat "$ARCHIVO_CAPTURAS-02.csv" | wc -l | awk {' print$1 '})
     
 	if [ $LINEAS_LOG -eq 0 ] 
@@ -29,11 +28,9 @@ ProcesarDatosEscaneoAirodump() {
 	NUMRED="0"
 	echo "	BSSID			CANAL	ENC	POWER	VEL	CLIENTE		ESSID" >> "$LOG_AIRODUMP"
 	echo "----------------------------------------------" >> "$LOG_AIRODUMP"
-	while IFS=, read MAC FTS LTS CHANNEL SPEED PRIVACY CYPHER AUTH POWER BEACON IV LANIP IDLENGTH ESSID KEY
-	do
-	    #if ! grep -q $MAC "$ARCHIVO_REDES_SCAN"
-	    #then
-
+	while IFS=, read MAC FTS LTS CHANNEL SPEED PRIVACY CYPHER AUTH POWER BEACON IV LANIP IDLENGTH 
+	ESSID KEY
+	do	    
 		v="0"
 		length=${#MAC}
 		PRIVACY=$(echo $PRIVACY| tr -d "^ ")
@@ -68,8 +65,8 @@ ProcesarDatosEscaneoAirodump() {
 			else
 				echo -e -n $BYellow"$MAC\t"
 			fi
-			echo -e -n $BWhite"$CHANNEL\t"
-			echo -e -n $BWhite"$PRIVACY\t"
+				echo -e -n $BWhite"$CHANNEL\t"
+				echo -e -n $BWhite"$PRIVACY\t"
 			if [ $POWER -ge 40 ]
 			then
 				echo -e -n $Green"$POWER%\t"
@@ -118,9 +115,8 @@ ProcesarDatosEscaneoAirodump() {
 				VERWPS="NO"
 			fi
 			echo $MAC$'\t'$CHANNEL$'\t'$PRIVACY$'\t'$POWER$'\t'$SPEED$'\t'$CLIENT$'\t'$ESSID"" >> "$LOG_AIRODUMP"
-			echo $ESTADO"|"$NUMRED"|"$MAC"|"$CHANNEL"|"$PRIVACY"|"$POWER"|"$VERWPS"|"$ESWPS"|"$ESSID"" >> "$ARCHIVO_REDES_SCAN"
+			echo $ESTADO"|"$NUMRED"|"$MAC"|"$CHANNEL"|"$PRIVACY"|"$POWER"|"$VERWPS"|"$ESWPS"|"$ESSID"" >> 			"$ARCHIVO_REDES_SCAN"
 		fi
-	    #fi
 	done < "$ARCHIVO_CAPTURAS-02.csv"
       	
 	if [ $ATAQUE_ACABADO = "NO" ]

@@ -22,9 +22,7 @@ AnalizarPyrit() {
 	#Asumimos que tenemos capturado el handshake
 	X4="pyrit -r captura-01.cap attack_db"
 	pyrit -r "$CAPTURA_AIRCRACK-01.cap" attack_db >> "$LOG_PYRIT" &
-	#Si no deseamos utilizad la Base de Datos utilizamos lo siguiente, pero es mas lento. 
-	#pyrit -r $CAPTURA -i $WPA_LST attack_passthrough
-
+	
 	X5="60"
 	CLAVE=$(cat $LOG_PYRIT | grep "The password is")
 	X6="SI"

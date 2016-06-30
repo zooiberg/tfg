@@ -1,6 +1,6 @@
 CrearInformeWEP() {
 	cd $RUTA_INFORME
-	xterm -hold -e "pdflatex -interaction=nonstopmode informe_WEP.tex" &
+	pdflatex -interaction=nonstopmode informe_WEP.tex" 
 	sleep 20s
 	killall xterm
 	cd $RUTA_BASE

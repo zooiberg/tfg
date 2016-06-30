@@ -8,21 +8,23 @@ ExtraerDatosAp() {
  
   if [ $CLAVE_CONSEGUIDA = "gtk-about" ]     
   then
-    if [ $AUTOMATICO = 0 ]
-    then
-      seguir=$(yad --image "dialog-question" --title "PIN YA CONSEGUIDO" --button=gtk-yes:1 --yes-label "SI" --button=gtk-no:0 --text "<b>PIN YA CONSEGUIDO</b>: Ya se tiene este PIN almacenado. Â¿ Quieres volver a atacar $BSSID ? " --width=450 --on-top --center --window-icon=ICONOS/SCRIPT.png)
+  if [ $AUTOMATICO = 0 ]
+  then
+      seguir=$(yad --image "dialog-question" --title "PIN YA CONSEGUIDO" --button=gtk-yes:1 --yes-label "SI" --button=gtk-no:0 
+      --text "<b>PIN YA CONSEGUIDO</b>: Ya se tiene este PIN almacenado. ¿ Quieres volver a atacar $BSSID ? " --width=450  
+      --on-top --center --window-icon=ICONOS/SCRIPT.png)
       ret=$?
-      if [ $ret = "1" ]
-      then
+  if [ $ret = "1" ]
+  then
 	let vez=1
 	AtacarAP
 	ATAQUE_ACABADO="SI"
-      fi
-    fi
+  fi
+  fi
   else
-    let vez=1
-    AtacarAP
-    ATAQUE_ACABADO="SI"
+        let vez=1
+        AtacarAP
+        ATAQUE_ACABADO="SI"
   fi
   unset seguir ret
 }

