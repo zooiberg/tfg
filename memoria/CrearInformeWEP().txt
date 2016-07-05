@@ -1,9 +1,9 @@
 CrearInformeWEP() {
-	cd $RUTA_INFORME
-	pdflatex -interaction=nonstopmode informe_WEP.tex" 
-	sleep 20s
-	killall xterm
-	cd $RUTA_BASE
-
-	ATAQUE_ACABADO="SI"
-	echo "FIN" > $ARCHIVO_LOG
+    cd $RUTA_INFORME
+      pdflatex -interaction=nonstopmode informe_WEP.tex"
+      sleep 20s
+      killall xterm
+    cd $RUTA_BASE
+      ATAQUE_ACABADO="SI"
+      echo "FIN" > $ARCHIVO_LOG
+}

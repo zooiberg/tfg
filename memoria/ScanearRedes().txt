@@ -8,7 +8,8 @@ ScanearRedes() {
     
     (airodump-ng "$TARJETA_MODO_MONITOR" -a -w "$ARCHIVO_CAPTURAS" &>/dev/null &)
     
-    for A in `seq 1 $TIEMPO_SCANEO` ; do
+    for A in `seq 1 $TIEMPO_SCANEO` ; 
+    do
       sleep 1s
       if [ $A -eq $TIEMPO_SCANEO ]
       then
@@ -18,8 +19,8 @@ ScanearRedes() {
 	kill $PID_AIRODUMP &> /dev/null
 	ProcesarDatosEscaneoAirodump
       else
-	if [ -f  $ARCHIVO_DETENER_SCAN ]
-	then
+        if [ -f  $ARCHIVO_DETENER_SCAN ]
+        then
 	  echo "ESCANEO DETENIDO, PROCESANDO DATOS, ESPERA ..." > $ARCHIVO_STATUSBAR
 	  rm $ARCHIVO_DETENER_SCAN
 	  PID_AIRODUMP=`ps -A | grep airodump-ng | awk '{ print $1}'`
@@ -27,7 +28,7 @@ ScanearRedes() {
 	  ATAQUE_ACABADO="NO"
 	  ProcesarDatosEscaneoAirodump
 	  return
-	fi
+        fi
 	TIEMPO_RESTANTE=`expr $TIEMPO_SCANEO - $A`
 	echo "BUSCANDO REDES, ESPERA $TIEMPO_RESTANTE segundos" > $ARCHIVO_STATUSBAR
       fi
