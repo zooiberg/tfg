@@ -17,21 +17,63 @@
 \usepackage{color}
 \usepackage{xcolor}
 \usepackage{listings}
-
 \usepackage{caption}
+\usepackage{times}
+
 \DeclareCaptionFont{white}{\color{white}}
 \DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
 \captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\renewcommand{\lstlistingname}{Listado}
+
+%% \lstset{
+%%   language = bash,breaklines=true, 
+%%   literate = {\$\#}{{{\$\#}}}2,
+%%   columns  = fullflexible,
+%%  % basicstyle = =\thefontsize\scriptsize,
+%%   showstringspaces=false,
+%%   commentstyle=\color{red},
+%%   keywordstyle=\color{blue}
+%% %  keepspaces,
+%% }
+
+\definecolor{gris30}{gray}{0.30}
+\definecolor{gris85}{gray}{0.85}
+\definecolor{gris20}{gray}{0.20}
+\definecolor{gris50}{gray}{0.50}
+
 \lstset{
-  language = Bash,breaklines=true, 
-  literate = {\$\#}{{{\$\#}}}2,
-  columns  = fullflexible,
- % basicstyle = =\thefontsize\scriptsize,
+  language=Bash,
+  tabsize=4,
+  showspaces=false,
+  showtabs=false,
   showstringspaces=false,
-  commentstyle=\color{red},
-  keywordstyle=\color{blue}
-%  keepspaces,
+  frame=b,
+  framerule=1pt,
+  aboveskip=0.5cm,
+  framextopmargin=3pt,
+  framexbottommargin=3pt,
+  framexleftmargin=18pt,
+  framesep=.4pt,
+  rulesep=.4pt,
+  rulesepcolor=\color{gris20},
+  stringstyle=\ttfamily,
+  basicstyle=\footnotesize\ttfamily\singlespacing,
+  commentstyle=\color{gris30},
+  keywordstyle=\bfseries,
+  numbers=left,
+  numbersep=6pt,
+  numberstyle=\color[cmyk]{0.43,0.35,0.35,0.01}\bfseries\footnotesize\ttfamily,
+  numberfirstline=true,
+  breaklines=true,
+  stepnumber=1,
+  backgroundcolor=\color{white},
+  xleftmargin=18pt,
+  framexrightmargin=0pt,
+  xrightmargin=0pt,
+  texcl=true,
 }
+
+\lstloadlanguages{Bash,Python,TeX}
 
 \def\thetitle{Seguridad y vulnerabilidad de redes inalámbricas en PYMEs}
 
@@ -622,10 +664,7 @@ Python destaca entre otros lenguajes de programación por su sencillez, legibilid
 Jinja2 es una biblioteca de Python diseñada para ser flexible, rápida y segura. Se emplea como un lenguaje de plantillas y es de fácil uso.\footnote{Recuperado de \url{http://jinja.pocoo.org/docs/dev/}} Es uno de los sistemas de plantillas más utilizados para Python. Se inspira en el sistema de plantillas de Django. 
 Se puede ejecutar en la mayoría de las versiones de Python. Esta biblioteca se utilizo para generar los \textit{templates} del informe automatizado. 
 %\paragraph{Ejemplo Jinja2}
-%\begingroup{}
-%	\fontsize{7pt}{7pt}=\selectfont
-%	\verbatiminput {ejemplojinja2.txt}
-%\endgroup{}
+%\lstinputlisting[language=Python]{ejemplojinja2.txt}
 
 \subsubsection{\LaTeX{}}
 \LaTeX{} es un sistema de preparación de documentos. Sirve para organizar y preparar artículos de revistas, libros, cartas, revistas, tesis y cualquier tipo de documento. Se desarrolló con el fin de facilitar y mejorar los textos científicos, sobre todo los matemáticos, y que estos se puedan utilizar entre distintas plataformas. Con él se desarrollo la memoria del proyecto y la generación del informe. 
@@ -752,8 +791,8 @@ La herramienta con la que se ha desarrollado la interfaz ha sido realizada en có
   \label{fig:interfaz1}
 \end{figure}
 	A continuación se muestra el método que se encarga de listar las tarjetas inalámbricas disponibles:
-%\fontsize{7pt}{7pt}=\selectfont
-\begin{lstlisting}	[label=prueba,caption=Listar Tarjetas WiFi]
+
+\begin{lstlisting}[label=prueba,caption=Listar Tarjetas WiFi]
 ListarTarjetasWifi() {   
     INTERFACES_MONITOR=`iwconfig --version | grep "Recommend" | awk '{print $1}' | grep mon`
     let CUANTAS=`echo $INTERFACES_MONITOR | wc -w`
@@ -802,7 +841,6 @@ ListarTarjetasWifi() {
 \end{figure}
 A continuación se muestra el método que se encarga de activar el modo monitor de la tarjeta seleccionada anteriormente:
 
-%\fontsize{7pt}{7pt}=\selectfont
 \begin{lstlisting}	[label=prueba1,caption=Activar Modo Monitor]
 ActivarModoMonitor(){
   TARJETA_SELECCIONADA=`echo $TARJETA_SELECCIONADA | awk {' print $1 '}`
@@ -850,7 +888,6 @@ ActivarModoMonitor(){
 A continuación se muestra el método encargado de buscar las posibles redes inalámbricas en la zona:
 
 
-%\fontsize{7pt}{7pt}=\selectfont
 \begin{lstlisting}	[label=prueba2,caption=Escanear redes]
 ScanearRedes() {
     rm -f "$RUTA_LOGS"CAP* > /dev/null
@@ -904,7 +941,6 @@ ScanearRedes() {
 \end{figure}
 A continuación se muestra el método encargado de listar las redes inalámbricas a nuestro alcance:
 
-%\fontsize{7pt}{7pt}=\selectfont
 \begin{lstlisting}	[label=prueba2,caption=Listar Redes]
 ListarTarjetasWifi() {   
     INTERFACES_MONITOR=`iwconfig --version | grep "Recommend" | awk '{print $1}' | grep mon`
@@ -989,8 +1025,7 @@ Como ya se ha comentado, las redes WEP tienen muchas debilidades criptográficas,
 Lo primero, será configurar la tarjeta como modo monitor para un posterior escaneo de las redes cercanas empleando el comando \textit{airodump-ng}. Así, se comenzará a volcar todo el tráfico que hay en el aire en un archivo determinado (LOG\_CAP). En este punto, se detectará el cifrado WEP de la red seleccionada y si existe cliente asociado a dicha red. Si existe cliente asociado, el crackeo será más sencillo, sino, se hará una falsa autenticación con una MAC aleatoria.
 Una vez elegida la red, se comienza a inyectar con dos objetivos distintos, el primero será desautenticar el cliente asociado con el fin de que vuelva a autenticarse y genere un paquete ARP válido, y el segundo para capturar el paquete ARP y reinyectarlo para generar un gran volumen de paquetes de datos. Como ya se habló en la parte teórica, es importante obtener una gran cantidad de IVs y así poder predecir y atacar la clave que descifran los paquetes, obteniendo la clave de red.
 
-%\fontsize{7pt}{7pt}=\selectfont
-\begin{lstlisting}	[label=prueba3,caption=Aircrack WEP]
+\begin{lstlisting}[label=prueba3,caption=Aircrack WEP]
 AircrackWEP() {
 	echo "***************** Aircrack WEP******************"
 	CambioMacRandom
@@ -1062,7 +1097,6 @@ AircrackWEP() {
 El objetivo de este ataque es dejar a los usuarios legítimos de una red Wi-Fi sin poder acceder a internet. Por lo tanto, se inunda con paquetes de desautenticación al punto de acceso o al cliente que decida.
 Como siempre, la tarjeta inalámbrica debe estar en modo monitor y escuchando en el canal específico. Así se desautenticará en un bucle infinito (-0 0) al cliente o al punto de acceso que se seleccione.
 
-%\fontsize{7pt}{7pt}=\selectfont
 \begin{lstlisting}	[label=prueba4,caption=Denegación de servicios]
 DenegacionServicio (){
      echo "***************** Denegacion de Servicio******************"
@@ -1111,7 +1145,6 @@ Reaver se planteó como un ataque sólido y muy conveniente contra WPS. Se ejecuta
 Como siempre, se activará el modo monitor de la tarjeta inalámbrica y se empezará a capturar el tráfico en el aire con \textit{airodump-ng} para obtener los \textit{beacons} de información del punto de accesos, y así comprobar que el dicho punto esta utilizando WPS.
 Una vez detectado WPS en el punto de acceso se prueba mediante la herramienta \textit{reaver} si el punto es vulnerable. Ésta, realizará fuerza bruta sobre el punto de acceso, enviando distintos PIN hasta encontrar el que le devuelva la credencial de la red con cifrado WPA2.
 
-%\fontsize{7pt}{7pt}=\selectfont
 \begin{lstlisting}	[label=prueba5,caption=Ataque Reaver]
 Atacarreaver(){
   TARJETA_SELECCIONADA=`cat $ARCHIVO_TARJETA_SELECCIONADA` 
@@ -1196,7 +1229,6 @@ Atacarreaver(){
 \paragraph{Pixiewps:}
 Este ataque \textit{Pixiewps} es también conocido como \textit{polvo mágico}. Lo primero que hará es comprobar si el router al que se le realiza el ataque es vulnerable. Si así lo fuera, se podrá obtener la clave en segundos. Continuando los pasos de los ataques anteriores y utilizando la tarjeta en modo monitor y escaneando el tráfico, se atacará a una de las redes disponibles que disponga de WPS activado. Primero utilizaremos el comando \textit{reaver} para recoger la PKE (clave pública de la persona inscrita), PKR (clave pública del registrador),e-hash 1 (hash  de la primera mitad del PIN WPS, fuerza bruta) y E-2 de hash (hash  de la segunda mitad del PIN WPS, fuerza bruta), E-nonce/ R-nonce y la authkey. Una vez se obtenga toda la información, se podrá aplicar pixiewps, para reducir tiempos.
 
-%\fontsize{7pt}{7pt}=\selectfont
 \begin{lstlisting}	[label=prueba7,caption=PixieWPS]
 AnalizarLogPixiewps(){
   lineas_log=$(cat $ARCHIVO_TXT_ATAQUE | wc -l | awk {' print$1 '})
@@ -1317,7 +1349,6 @@ Sabemos que WPA y WPA2 PSK tiene posibles vulnerabilidades a un ataque de diccio
 
 El tener que emplear la fuerza bruta es un gran inconveniente, ya que se hará un uso intensivo del procesador de la Raspberry Pi. Este proceso, si se dejara podrá llegar a durar horas e incluso días comprobando las posibles palabras del diccionario. En nuestro caso se pondrán tiempo cortos para que no se demore en exceso.
 
-\fontsize{7pt}{7pt}=\selectfont
 \begin{lstlisting}	[label=prueba7,caption=AircrackWPA]
 AircrackWPA() {
        echo "***************** Aircrack WPA******************"
@@ -1380,8 +1411,7 @@ AircrackWPA() {
 \subsubsection{Utilizamos Pyrit}
 Es un herramienta muy potente que facilita la creación de bases de datos para pre-calcular las claves PSK y así acelerar el pre-procesamiento, aprovechando al máximo las plataformas del mercado (Nvidia CUDA, OpenCL) y así poder descifrar claves WPA o WPA2 mediante ataques de fuerza bruta o diccionario. Es necesario haber capturado con anterioridad el handshake. Se empleará un diccionario con el que cuenta por defecto kali linux (\textit{rockyou}), que se renombrará como wpa.lst.
 
-\fontsize{7pt}{7pt}=\selectfont
-\begin{lstlisting}	[label=prueba8,caption=Analizar Pyrit]
+\begin{lstlisting}[label=prueba8,caption=Analizar Pyrit]
 AnalizarPyrit() {
      echo "***************** Analizando con Pyrit******************"
      LINEA_ATAQUE=$LINEA_AUX
@@ -1416,10 +1446,7 @@ AnalizarPyrit() {
 \end{lstlisting}
 
 %DenegacionServicio()
-%\begingroup{}
-%	\fontsize{7pt}{7pt}=\selectfont
-%	\verbatiminput {DenegacionServicio().txt}
-%\endgroup{}
+%\lstinputlisting[language=Python] {DenegacionServicio().txt}
 
 
 
@@ -1445,24 +1472,24 @@ Se mostrará un gráfico con el fin de facilitar y entender el funcionamiento para
   \label{fig:informeWEP}
 \end{figure}
 Ahora, se podrá comprobar como son las funciones a la hora de la generación del informe.
-\fontsize{7pt}{7pt}=\selectfont
-\begin{lstlisting}	[label=prueba9,caption=Crear informe WEP]
+
+\begin{lstlisting}[label=prueba9,caption=Crear informe WEP]
 CrearInformeWEP() {
     cd $RUTA_INFORME
-      pdflatex -interaction=nonstopmode informe_WEP.tex"
-      sleep 20s
-      killall xterm
+    pdflatex -interaction=nonstopmode informe_WEP.tex"
+    sleep 20s
+    killall xterm
     cd $RUTA_BASE
-      ATAQUE_ACABADO="SI"
-      echo "FIN" > $ARCHIVO_LOG
+    ATAQUE_ACABADO="SI"
+    echo "FIN" > $ARCHIVO_LOG
 }
 \end{lstlisting}
 
 \begin{itemize}
 	\item SECWEP1.py :
 	Este apartado mostrará las cuatro variables básicas de una red WEP. A continuación se observa el archivo \textit{python} para facilitar el entendimiento, se aprecia que se ha empleado la biblioteca \textit{jinja}, mostrando en la linea 17 cual será la estructura que se empleará (Template). En la linea 18 se puede observar la salida con la información ya en el INF-WEP.tex y las  variables que se introducirán.  
-	\fontsize{7pt}{7pt}=\selectfont
-\begin{lstlisting}	[label=informeWEP,caption=Sección WEP.py]
+
+\begin{lstlisting}[language=Python,label=informeWEP,caption=Sección WEP.py]
 import jinja2
 import sys, os
 from jinja2 import Template
@@ -1485,20 +1512,15 @@ output.write(template.render(sbssid=sys.argv[1],sessid=sys.argv[2],scanal=sys.ar
 output.close()
 }
 \end{lstlisting}
+
 		\begin{itemize}
 		\item SECWEP1-Template.tex
 		
-		\begingroup{}[label=informeWEP1,caption=Sección WEP-Template]
-		\fontsize{7pt}{7pt}=\selectfont
-		\verbatiminput {SECWEP1-Template.tex.txt}
-		\endgroup{}
+		  \lstinputlisting[language={[LaTeX]TeX},label=informeWEP1,caption=Sección WEP-Template] {SECWEP1-Template.tex.txt}
 		
 		\item INF-WEP1.tex
 		
-		\begingroup{}[label=informeWEP2,caption=Sección WEP.tex]
-		\fontsize{7pt}{7pt}=\selectfont
-		\verbatiminput {INF-WEP.tex.txt}
-		\endgroup{}
+		  \lstinputlisting[language={[LaTeX]TeX},label=informeWEP2,caption=Sección WEP.tex] {INF-WEP.tex.txt}
 		
 		\end{itemize}
 		
@@ -1508,68 +1530,48 @@ output.close()
 	
 	Esta sección se utilizará tanto para el protocolo WEP como para el WPA/WPA2.
 	
-		\begingroup{}
-		\fontsize{7pt}{7pt}=\selectfont
-		\verbatiminput {SUBSDOS.py.txt}
-		\endgroup{}
+		\lstinputlisting[language=Python] {SUBSDOS.py.txt}
 	
 		\begin{itemize}
 		
 		\item SUBSDOS-Template.tex
 		
-		\begingroup{}
-		\fontsize{7pt}{7pt}=\selectfont
-		\verbatiminput {SUBSDOS-Template.tex.txt}
-		\endgroup{}
+		\lstinputlisting[language={[LaTeX]TeX}] {SUBSDOS-Template.tex.txt}
 		
 		\item INF-SUBSDOS.tex
 		
-		\begingroup{}
-		\fontsize{7pt}{7pt}=\selectfont
-		\verbatiminput {INF-SUBSDOS.tex.txt}
-		\endgroup{}
+		\lstinputlisting[language={[LaTeX]TeX}] {INF-SUBSDOS.tex.txt}
 		\end{itemize}
 		
 	\item SUBSWEP1.py	:
 	Por último, se obtendrá toda la información necesaria a la hora de generar el informe automatizado, tras un ataque a una red con cifrado WEP. Los pasos que se han seguido son exactamente los mismos que las secciones anteriores.
 	
-		\begingroup{}
-		\fontsize{7pt}{7pt}=\selectfont
-		\verbatiminput {SUBSWEP1.py.txt}
-		\endgroup{}
+		\lstinputlisting[language=Python] {SUBSWEP1.py.txt}
 		
 		\begin{itemize}
 		
 		\item SUBSWEP1-Template.tex
-		\begingroup{}
-		\fontsize{7pt}{7pt}=\selectfont
-		\verbatiminput {SUBSWEP1-Template.tex.txt}
-		\endgroup{}
+		\lstinputlisting[language={[LaTeX]TeX}] {SUBSWEP1-Template.tex.txt}
 		
 		
 		\item INF-SUBSWEP1.tex
-		\begingroup{}
-		\fontsize{7pt}{7pt}=\selectfont
-		\verbatiminput {INF-SUBSWEP1.tex.txt}
-		\endgroup{}
+
+                  \lstinputlisting[%
+                    language={[LaTeX]TeX},
+                    label=INF-SUBWEP1,
+                    caption=INF-SUBWEP1.tex] {INF-SUBSWEP1.tex.txt}
 		
 		
 	\end{itemize}
 \end{itemize}
 
 CrearInformeWEP()
-\begingroup{}
-	\fontsize{7pt}{7pt}=\selectfont
-	\verbatiminput {CrearInformeWEP().txt}
-\endgroup{}
+\lstinputlisting {CrearInformeWEP().txt}
 
 \paragraph{Generar informe WPA.}
 
 CrearInformeWPA()
-\begingroup{}
-	\fontsize{7pt}{7pt}=\selectfont
-	\verbatiminput {CrearInformeWPA().txt}
-\endgroup{}
+\lstinputlisting {CrearInformeWPA().txt}
 
 \begin{figure}[H]
   \centering

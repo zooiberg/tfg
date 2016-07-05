@@ -1,4 +1,4 @@
-\subsection {Denegacion de Servicios (DoS).} 
+\subsection{Denegacion de Servicios (DoS).} 
 
 Las redes WLAN son propensas a los ataques de denegacion de servicio (DoS) usando varias tecnicas, 
 incluyendo pero no limitadas a: 
