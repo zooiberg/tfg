@@ -36,5 +36,5 @@ al punto de acceso.
 
 Es importante tener en cuenta que tan pronto como el cliente se desconecta, 
 intentara volver a conectarse de nuevo al punto de acceso y por lo tanto el ataque de 
-de-autenticacion tiene que llevarse a cabo de manera sostenida para tener un efecto de 
-ataque de denegacion de servicio completo.
+de-autenticacion tiene que llevarse a cabo de manera sostenida para tener un efecto
+de ataque de denegacion de servicio completo. 

