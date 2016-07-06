@@ -354,7 +354,7 @@ De todos estos datos, extraemos que este proyecto se encontrará más enfocado y c
 %%%%%%%ANTECEDENTES WIFI%%%%
 \section{Seguridad informática en redes WiFi}
 
-Hace años cuando se empezaron a utilizar las redes inalámbricas existía un error de incompatibilidad, debido a que cada fabricante usaba un estándar distinto, fue en ese momento cuando las empresas punteras se reunieron para crear WECA (Wireless Ethernet Compability Aliance) que en la actualidad lo llamamos como WIFI Alliance.\footnote{Página oficial de wi-fi alliance. (2016) \url{http://www.wi-fi.org/}}
+Hace años cuando se empezaron a utilizar las redes inalámbricas existía un error de incompatibilidad, debido a que cada fabricante usaba un estándar distinto, fue en ese momento cuando las empresas punteras se reunieron para crear WECA (Wireless Ethernet Compability Aliance) que en la actualidad lo llamamos como WIFI Alliance.\footnote{Página oficial de Wi-Fi Alliance. (2016) \url{http://www.wi-fi.org/}}
 \begin{figure}[H]
   \centering
     \includegraphics{wifi}
@@ -366,7 +366,7 @@ En el año 2000 se implanta la interoperabilidad que permite operar entre todos l
 Gracias a Wi-Fi se pueden crear redes de área local inalámbricas y conectar multitud de equipos mientras no estén muy alejados del punto de acceso a una velocidad elevada.
 
 \subsection{Estándares WI-FI}
-El estándar original se ha ido modificando con el objetivo de ir mejorando la seguridad y la compatibilidad. Esta tabla nos enseña las distintas modificaciones del estándar 802.11 y a lo que se refiere.\cite{802.11}
+El estándar original se ha ido modificando con el objetivo de ir mejorando la seguridad y la compatibilidad. Esta tabla nos enseña las distintas modificaciones del estándar 802.11 y a lo que se refiere~\cite{802.11}.
 %%%TABLAAAAA%%%
 \begin{table}[H]
 \begin{center}
@@ -427,9 +427,9 @@ Disponer de una red inalámbrica segura y de cierta calidad es sin duda una oblig
 Las redes inalámbricas pueden acoger distintas topologías.
 \begin{itemize}
 	\item Modo Ad-Hoc.
-	Es una conexión que comunica una serie de dispositivos entre si, sin usar ningún tipo de Punto de Acceso. Ésta, es una configuración tipo punto a punto (peer-to-peer), así, el área de cobertura se limita por el alcance de cada tarjeta de red propia. Deben trabajar en el mismo rango de frecuencias, de lo contrario no podrán interactuar entre ellas.
+	Es una conexión que comunica una serie de dispositivos entre sí, sin usar ningún tipo de Punto de Acceso. Ésta, es una configuración tipo punto a punto (peer-to-peer).  Así, el área de cobertura se limita por el alcance de cada tarjeta de red propia. Deben trabajar en el mismo rango de frecuencias, de lo contrario no podrán interactuar entre ellas.
 	\item Modo Infraestructura.
-	Éste modo es del tipo cliente-servidor, en el que el cliente son los dispositivos que suelen conectarse al servidor, el punto de acceso. Tiene que haber como mínimo un servidor, por lo tanto los dispositivos no se pueden comunicar entre si y toda la información pasará primero por el Punto de Acceso. Para que varios dispositivos puedan comunicarse entre sí, deben estar todos conectados al mismo punto de acceso, por lo que pueden estar comunicándose entre los dispositivos sin saber nada entre ellos, ya que toda la información que se necesita para la conexión, la tiene el punto de acceso.
+	Este modo es del tipo cliente-servidor, en el que los clientes son los dispositivos que se conectan al servidor, el punto de acceso. Tiene que haber como mínimo un servidor, por lo tanto los dispositivos no se pueden comunicar entre sí y toda la información pasará primero por el Punto de Acceso. Para que varios dispositivos puedan comunicarse entre sí, deben estar todos conectados al mismo punto de acceso, por lo que pueden estar comunicándose entre los dispositivos sin saber nada entre ellos, ya que toda la información que se necesita para la conexión, la tiene el punto de acceso.
 \end{itemize}
 
 \subsection{Protocolos inalámbricos}
@@ -454,7 +454,7 @@ La fase de confidencialidad se encarga de que nadie que estuviera \textit{escuch
 	\begin{itemize}
 	\item RC4, es el algoritmo de cifrado de la información, el cual emplea un sistema que consiste, en que el emisor y el receptor deben saber la clave con anterioridad, y por tanto generar el \textit{keystream} (dos fases: KSA y PRGA). Así, recibe un flujo de bits que debe cifrar, y por otro sitio un flujo de bits codificados. Juntando estos dos flujos y por medio de una operación binaria XOR entre ellos, nos dará un único flujo ya cifrado. El problema es que estos bits codificados son generados por medio de operaciones matemáticas complejas sobre una secuencia de bits que se le llama la "semilla", que es de un único tamaño. Por ello al utilizar siempre la misma "semilla", se demuestra matemáticamente que una persona mal intencionada capturando un numero suficientes de tramas, puede adivinarla.
 	WEP permite utilizar claves de distintos tamaños:  64 bits (40 de la clave del usuario más 24 de los vectores de iniciación) o de 128(104 de la clave del usuario más 24 de los vectores de iniciación)
-		\item IV, son los vectores de inicialización , son la parte dinámica de los \textit{keystream.} Cada trama lleva un IV distinto, aunque al ser generados de forma aleatoria no siempre es posible. Los IV ván en la parte que no se cifra de la trama WEP.
+		\item IV, son los vectores de inicialización, son la parte dinámica de los \textit{keystream.} Cada trama lleva un IV distinto, aunque al ser generados de forma aleatoria no siempre es posible. Los IV van en la parte que no se cifra de la trama WEP.
 	\end{itemize}
 \begin{figure}[H]
   \centering
@@ -462,11 +462,11 @@ La fase de confidencialidad se encarga de que nadie que estuviera \textit{escuch
   \caption{Algoritmo de Encriptación WEP}
   \label{fig:wep}
 \end{figure}
-En esta imagen \footnote{Algoritmo de Encriptación WEP. Recuperado de \url{http://cursoslibres.academica.mx/206/seguridad-en-redes/3-protecciones-y-herramientas-de-seguridad/protocolos-de-seguridad.}} se puede apreciar el proceso que se lleva acabo para formar la trama WEP, ya sea del punto de acceso al cliente, o del cliente al punto de acceso. La \textit{shared key} es estática, es la que configura el dueño de la red en el punto de acceso, o si fuera en la casa de un particular en el router WiFi (5 caracteres o 10 hexadecimales) o (13 caracteres o 26 hexadecimales). Los IV como se ha mencionado  van cambiando aleatoriamente en cada trama. Esta cadena junto con la clave estática es introducida en el algoritmo RC4 como entrada. La salida de este produce el \textit{keystream.}
+En esta imagen \footnote{Algoritmo de Encriptación WEP. Recuperado de \url{http://cursoslibres.academica.mx/206/seguridad-en-redes/3-protecciones-y-herramientas-de-seguridad/protocolos-de-seguridad.}} se puede apreciar el proceso que se lleva acabo para formar la trama WEP, ya sea del punto de acceso al cliente, o del cliente al punto de acceso. La \textit{shared key} es estática, es la que configura el dueño de la red en el punto de acceso, o si fuera en la casa de un particular en el router WiFi (5 caracteres o 10 hexadecimales) o (13 caracteres o 26 hexadecimales). Los IV como se ha mencionado  van cambiando aleatoriamente en cada trama. Esta cadena junto con la clave estática es introducida en el algoritmo RC4 como entrada. La salida de éste produce el \textit{keystream.}
 
 \paragraph{Integridad}
 
- Por último, la integridad de los datos, pretende garantizar que el mensaje que recibimos es exactamente el que se envió. WEP emplea un algoritmo de comprobación de integridad CRC32. Éste, es un algoritmo de control de errores que empleando operaciones matemáticas sobre una secuencia de bits de datos, obtiene unos bits de control. Posteriormente los añade otra vez a los bits de datos formando una secuencia "protegida". El destinatario de los datos sabrá de que tipo es cada bits, por lo tanto si no recibe lo esperado, tendrá una secuencia errónea y la descartará. 
+ Por último, la integridad de los datos, pretende garantizar que el mensaje que recibimos es exactamente el que se envió. WEP emplea un algoritmo de comprobación de integridad CRC32. Éste es un algoritmo de control de errores que empleando operaciones matemáticas sobre una secuencia de bits de datos, obtiene unos bits de control. Posteriormente los añade otra vez a los bits de datos formando una secuencia ``protegida''. El destinatario de los datos sabrá de que tipo es cada bits, por lo tanto si no recibe lo esperado, tendrá una secuencia errónea y la descartará. 
  
  
 Por tanto, el problema del cifrado WEP, es el uso de la clave estática, ya que se pueden realizar ataques de observación y gracias a la estadística conseguir sacar el patrón de la clave, y así conseguir descifrarla.
@@ -475,7 +475,7 @@ Por tanto, el problema del cifrado WEP, es el uso de la clave estática, ya que s
 \subsubsection{Protocolo WPA/WPA2}
 WPA, \textit{Wi-Fi Protected Access}, surgió como una solución temporal de la Wi-Fi Alliance, para hacer las redes más seguras. Ambas soluciones, WPA y WPA2, soportan el protocolo 802.11 para la autenticación en ámbitos empresariales y la autentificación mediante clave compartida PSK (\textit{Pre-Shared Key}) para los entornos SOHO \textit{Small Office and Home Office}, y ámbitos  domésticos.
 
-Estos dos métodos de cifrado se diferencian en muy poco y su diferencia principal es en el algoritmo de cifrado que emplean. Mientras que WPA basa el cifrado de las comunicaciones en el uso del algoritmo TKIP (\textit{Temporary Key Integrity Protocol}), que esta basado en RC4 al igual WEP, WPA2 utiliza CCMP (\textit{Counter-mode/CBC-MAC Protocol}) basado en AES/\textit{Advanced Encrytion System.}
+Estos dos métodos de cifrado se diferencian en muy poco, fundamentalmente en el algoritmo de cifrado que emplean. Mientras que WPA basa el cifrado de las comunicaciones en el uso del algoritmo TKIP (\textit{Temporary Key Integrity Protocol}), que esta basado en RC4 al igual WEP, WPA2 utiliza CCMP (\textit{Counter-mode/CBC-MAC Protocol}) basado en AES/\textit{Advanced Encrytion System.}
 
 Otra diferencia a tener en cuenta es el algoritmo que utiliza para controlar la integridad del mensaje. Mientras WPA usa una versión más pobre para generar el código MIC (\textit{Message Integryty Code}), WPA2 emplea una versión mejorada de MIC.
 En la fase de intercambio de claves el cliente y el punto de acceso emplean las PSK para generar una clave llamada PMK(\textit{Pairwise Master Key}). Ésta es una derivada cuando el sistema es WPA/WPA2 empresarial pero es la misma PSK en los entornos WPA/WPA2 PSK.
@@ -487,10 +487,11 @@ En la fase de intercambio de claves el cliente y el punto de acceso emplean las 
   \label{fig:wpa}
 \end{figure}
 
-Con la PMK se genera una clave de cifrado para cada proceso de autenticación de un cliente llamada PTK que básicamente se genera a partir de dos números aleatorios, uno de ellos obtenidos del cliente y el otro por el punto de acceso para obtener ambos la misma clave PTK. Esto es el famoso \textit{4-way-Handshake}~\cite{backtrack5}.
+Con la PMK se genera una clave de cifrado para cada proceso de autenticación de un cliente llamada PTK que básicamente se genera a partir de dos números aleatorios, uno de ellos obtenidos del cliente y el otro por el punto de acceso para obtener ambos la misma clave PTK.  Esto es el famoso \textit{4-way-handshake}~\cite{backtrack5}.
 
-Cuando el cliente está autenticado, el protocolo TKIP utiliza seis claves de cifrado por cada sesión, 4 de ellas son utilizadas para comunicaciones \textit{unicast} y dos para comunicaciones \textit{multicast}. Estas claves son únicas para cliente y sesión y se cambian periódicamente, siendo generadas de las direcciones MAC, ESSID y la PTK.
+Cuando el cliente está autenticado el protocolo TKIP utiliza seis claves de cifrado por cada sesión.   Cuatro de ellas son utilizadas para comunicaciones \textit{unicast} y dos para comunicaciones \textit{multicast}.  Estas claves son únicas para cliente y sesión y se cambian periódicamente, siendo generadas de las direcciones MAC, ESSID y la PTK.
 Un atacante que quiera vulnerar una red WPA-PSK va a tratar de capturar ese intercambio de números aleatorios, para que una vez conocidos éstos, junto al SSID y la direcciones MAC del cliente y del punto de acceso de la red, obtener la frase o secreto compartido que se empleó.
+
 \paragraph{WPA2 Personal}
 
 Como ya ha sido explicado anteriormente, es utilizar WPA2 con clave precompartida por los terminales y el punto de acceso.
@@ -503,7 +504,8 @@ Este método es más utilizado para empresas, ya que su configuración es de mayor 
 Estos usuarios no tratan con el código de encriptación. Son asignados de forma segura por sesiones de usuario en un segundo plano, no obstante el usuario ha tenido que dar sus credenciales de acceso con anterioridad. Así, se evita que los empleados dispongan de las claves de red.
 
 \paragraph{WPS} 
-\textit{Wi-Fi Protected Setup} es un estándar 2007, promovido por la Wi-Fi Alliance \footnote{Recuperado de Página oficial de wi-fi alliance. (2016) \url{http://www.wi-fi.org/}} para facilitar al usuario  doméstico la configuración y creación de redes WLAN.  WPS no es un mecanismo de seguridad por sí mismo, sino que se trata de la definición de diversos mecanismos para facilitar la configuración de una red WLAN segura con el protocolo WPA2. Los métodos que utilizan WPS son:
+
+\textit{Wi-Fi Protected Setup} es un estándar 2007, promovido por la Wi-Fi Alliance \footnote{Recuperado de la página oficial de Wi-Fi Alliance. (2016) \url{http://www.wi-fi.org/}} para facilitar al usuario  doméstico la configuración y creación de redes WLAN.  WPS no es un mecanismo de seguridad por sí mismo, sino que se trata de la definición de diversos mecanismos para facilitar la configuración de una red WLAN segura con el protocolo WPA2. Los métodos que utilizan WPS son:
 \begin{itemize}
 	\item PIN(código numérico): La credencial se intercambia después de introducir un PIN. Este método es de los más distribuidos con WPS y el más inseguro.
 	\item PBC(Push-Button Configuration): La generación e intercambio de las credenciales ocurren después de que el usuario ejecute una acción física, como es presionar un botón incluido en el dispositivo.
@@ -511,8 +513,10 @@ Estos usuarios no tratan con el código de encriptación. Son asignados de forma s
 	\item USB: Las credenciales se transfieren por un dispositivo de memoria flash.
 \end{itemize}
 %%%%%ANTECEDENTES DEL PENTEST%%%%
+
 \section{Pentest de WiFi}
-Cuando se habla de pentest de WiFi, se trata de atacar distintos entornos con el fin de descubrir fallos o vulnerabilidades de seguridad y así prevenir futuros ataques externos en los equipos o sistemas. Estas pruebas suelen concentrar sus esfuerzos en adivinar las contraseñas o tratar de acceder a una red, ya sea  para analizar datos que ésta contiene o para utilizar esta red como origen de futuros ataques.
+
+Cuando se habla de pentest de WiFi se trata de atacar distintos entornos con el fin de descubrir fallos o vulnerabilidades de seguridad y así prevenir futuros ataques externos en los equipos o sistemas.  Estas pruebas suelen concentrar sus esfuerzos en adivinar las contraseñas o tratar de acceder a una red, ya sea  para analizar datos que ésta contiene o para utilizar esta red como origen de futuros ataques.
 
 La mayoría de los casos en los que las empresas u organizaciones sufren incidentes podrían ser evitados si los mecanismos de protección estuvieran actualizados e implantados en su momento. Estos incidentes comprenden accesos no autorizados, pérdida de información, fuga de información, entre otros. 
 
@@ -530,25 +534,26 @@ Cuando se realiza una de estas pruebas, lo más probable es que se entregue un in
 
 Un pentesting de forma continua permite que los procesos de las auditorías de seguridad dispongan de las mismas posibilidades de conseguir privilegios que una persona mal intencionada.  Aún así se debe seguir manteniendo la seguridad en todas las fases de gestión de la seguridad.
 
-``\textit{El pentesting no debería ser un proceso puntual que se contrata, sino un servicio de ataque 24x7 durante todo el ciclo de vida de tu sistema.}'' \footnote{ Recuperado de Un informático en el lado del mal. \url{http://www.elladodelmal.com/2013/05/pentesting-by-desing.html}}
+``\textit{El pentesting no debería ser un proceso puntual que se contrata, sino un servicio de ataque 24x7 durante todo el ciclo de vida de tu sistema.}'' \footnote{Recuperado de \emph{Un informático en el lado del mal} \url{http://www.elladodelmal.com/2013/05/pentesting-by-desing.html}.}
 
 %%%%%ANTECEDENTES DEL PROYECTO%%%%
-\section{Antecedentes de proyecto}
+\section{Antecedentes del proyecto}
 
-\subsection{Automatización de dispositivos}
-Para la automatización de dispositivos al tratarse de un proceso informático se compone de dos componentes importantes como hardware, software.
+\subsection{Dispositivos para la automatización}
+
+Al tratarse de un proceso informático se compone de dos componentes importantes: hardware, software.
+
 \subsubsection{Hardware}
 %Se ha intentó reducir al máximo el precio y por ende todos los sistemas hardware para el desarrollo de la aplicación, teniendo en cuenta que uno de los objetivos, es su flexibilidad y que fuera fácil de transportar.
 
-Hardware, es el conjunto de elementos físicos que componen un sistema informático. En el caso de la automatización de dispositivos podemos encontrar numerosos hardware con esta funcionalidad.
-
-La automatización es la sistematización de un dispositivo con el fin de aprovechar la electrónica para controlar las operaciones sin la intervención del personal. 
+Hardware, es el conjunto de elementos físicos que componen un sistema informático. En el caso de la automatización del análisis podemos encontrar numerosos dispositivos hardware qe pueden realizar esta funcionalidad.  La automatización es la sistematización de un proceso con el fin de aprovechar la electrónica para controlar las operaciones sin la intervención del personal. 
 
 El perfeccionamiento de los programas y dispositivos es lo que esta permitiendo una mayor automatización consiguiendo unificar distintos procesos. Como hardware para una automatización podemos considerar un conjunto de elementos que trabajan en unidad para dar respuesta a una función.
 Cualquier elemento electrónico que puede ser programado, pude trabajar de forma automatizada si así se implementa. 
 
 \paragraph{Raspberry Pi}
- Raspberry Pi es un hardware que nos permite con gran facilidad automatizarlo y emplearlo para múltiples fines. Se trata de un mini-ordenador que se desarrolló en el Reino Unido, por un grupo del Computer Lab de la Universidad de Cambridge, que empezó a preocuparse por el nivel de conocimientos sobre tecnologías informáticas con los que los estudiantes llegaban a la universidad.
+
+Raspberry Pi es un dispositivo hardware que nos permite con gran facilidad emplearlo para múltiples fines.  Se trata de un mini-ordenador que se desarrolló en el Reino Unido, por un grupo del Computer Lab de la Universidad de Cambridge, que empezó a preocuparse por el nivel de conocimientos sobre tecnologías informáticas con los que los estudiantes llegaban a la universidad.
 Apareció como una iniciativa para fomentar el aprendizaje de la programación desde edades más tempranas~\cite{Raspberry}.
 
 En los pocos años que lleva en funcionamiento \textit{Raspberry Pi Foundation} se han creado distintos modelos:
@@ -559,44 +564,51 @@ En los pocos años que lleva en funcionamiento \textit{Raspberry Pi Foundation} s
   \label{fig:Ras}
 \end{figure}
 
-La gran ventaja de este dispositivo radica en la gran comunidad de usuarios que presenta, así dispone de mucha información y ayuda. En cuanto al sistema operativo, ofrece una gran utilidad ya que al instalarse en la tarjeta SD, se podrá contar con varios SO en distintas tarjetas. El más utilizado será ``Raspbian'' que se trata de un Debian(Linux) optimizado para este dispositivo.
-La gran comunidad que se comento con anterioridad, ha permitido la interoperabilidad con otros productos. Se han creado periféricos específicos para Raspberry Pi (cámaras, paneles táctiles con pantalla  TFT, teclados, etc). 
+La gran ventaja de este dispositivo radica en la gran comunidad de usuarios que presenta, así dispone de mucha información y ayuda. En cuanto al sistema operativo, ofrece una gran utilidad ya que al instalarse en la tarjeta SD, se podrá contar con varios SO en distintas tarjetas. El más utilizado será ``Raspbian'' que se trata de un \emph{Debian GNU/Linux} optimizado para este dispositivo.
+La gran comunidad que se comentó con anterioridad, ha permitido la interoperabilidad con otros productos. Se han creado periféricos específicos para Raspberry Pi (cámaras, paneles táctiles con pantalla  TFT, teclados, etc). 
 
 
 
 \subsubsection{Detalles del Software}
 En cuanto al software se pueden emplear una serie de programas informáticos, que harán posible la realización de este proyecto.
+
 \paragraph{GNU/Linux}
-Las siglas GNU quiere decir GNU's Not Unix, es decir GNU no es Unix. Se refiere a que no contiene ni una linea del código de Unix, el cual es un sistema operativo portable, multitarea y multiusuario de AT\&T,  y que vendió a SCO (Santa Cruz Operation) en 1995.
-El sufijo Linux se refiere al kernel (núcleo) que utiliza del sistema operativo. GNU esta desarrollando su propio kernel pero todavía no lo tienen disponible.\footnote{Recuperado de \url{http://www.gnu.org/gnu/manifesto.html}}
+
+Las siglas GNU quieren decir GNU's Not Unix, es decir \emph{GNU no es Unix}. Se refiere a que no contiene ni una línea del código de Unix, el cual es un sistema operativo portable, multitarea y multiusuario de AT\&T, que vendió a SCO (Santa Cruz Operation) en 1995.
+El sufijo Linux se refiere al kernel (núcleo) que utiliza del sistema operativo.  GNU esta desarrollando su propio kernel pero todavía no lo tienen disponible.\footnote{Recuperado de \url{http://www.gnu.org/gnu/manifesto.html}.}
+
 \subparagraph{Kali Linux}
+
 Sabemos que el mundo de la seguridad informática avanza cada día a gran velocidad. Es por ello que es necesario que las personas que se dedican a ello siempre estén ampliando conocimiento. 
-\textit{BackTrack}  era una gran distribución de seguridad y la distribución de pruebas de penetración mas popular, ya que contenía cientos de herramientas de seguridad. La empresa que gestionaba esta distribución, Offensive Security\footnote{Página oficial de la empresa offensive security \url{https://www.offensive-security.com/}}, evolucionó su distribución para proporcionar mejoras importantes. Kali Linux siguió con los pasos creando una distribución Linux basada en Debian orientado a las auditorías de seguridad a pruebas de penetración en el 2013. Ésta ofrece al usuario un gran número de herramientas para cada rama del pentesting, como análisis forense, explotación de vulnerabilidades del sistema web o wireless. 
-Según \cite{kali} Kali Linux 2.0 contiene un nuevo kernel en su versión 4.0 y esta basada en Debian Jessie, mejorando la integración con el hardware y el uso de los drivers Wireless. Tiene soporte actualizado para un mayor número de escritorios (gnome, kde, xfce, mate, e17, lxde o i3wm). Una de las grandes mejoras fue el sistema de actualizaciones que presenta. Generalmente, las actualizaciones serán llevadas a cabo vía \textit{Git}. El \textit{script} se ejecuta diariamente sobre un listado de herramientas comunes en la distribución y mantendrá alerta al usuario ante posibles nuevas actualizaciones.\footnote{Página oficial Kali Linux.(2016). Recuperado de \url{https://www.kali.org/}}
+\textit{BackTrack}  era una gran distribución de seguridad y la distribución de pruebas de penetración mas popular, ya que contenía cientos de herramientas de seguridad. La empresa que gestionaba esta distribución, Offensive Security\footnote{Página oficial de la empresa offensive security \url{https://www.offensive-security.com/}}, evolucionó su distribución para proporcionar mejoras importantes. Kali Linux siguió con los pasos creando una distribución Linux basada en Debian orientada a las auditorías de seguridad mediante pruebas de penetración en el 2013. Ésta ofrece al usuario un gran número de herramientas para cada rama del pentesting, como análisis forense, explotación de vulnerabilidades del sistema web o wireless. 
+Según \cite{kali} Kali Linux 2.0 contiene un nuevo kernel en su versión 4.0 y está basada en \emph{Debian Jessie}, mejorando la integración con el hardware y el uso de los drivers Wireless. Tiene soporte actualizado para un mayor número de escritorios (gnome, kde, xfce, mate, e17, lxde o i3wm). Una de las grandes mejoras fue el sistema de actualizaciones que presenta.  Generalmente, las actualizaciones serán llevadas a cabo vía \textit{Git}.  El \textit{script} se ejecuta diariamente sobre un listado de herramientas comunes en la distribución y mantendrá alerta al usuario ante posibles nuevas actualizaciones\footnote{Página oficial Kali Linux.(2016). Recuperado de \url{https://www.kali.org/}.}.
+
 \begin{figure}[H]
   \centering
 	\includegraphics[width=0.7\textwidth]{kali_linux.jpg}%%ajusta el tamaño de la imagen.  %\caption{Logo de Kali Linux}
   \caption{Logotipo de kali linux.}
   \label{fig:kali}
 \end{figure}
-ARM (Advanced RISC Machine) se ha visto favorecido con el lanzamiento de Kali Linux 2.0 ya que sigue proporcionando soporte para Rasberry Pi, Chromebooks, Odroids,etc. Esto es importante ya que se utilizará una Rasberry Pi para automatizar todos los ataques.\\
+
+ARM (Advanced RISC Machine) se ha visto favorecido con el lanzamiento de Kali Linux 2.0 ya que sigue proporcionando soporte para Rasberry Pi, Chromebooks, Odroids,etc. Esto es importante ya que se utilizará una Rasberry Pi para automatizar todos los ataques.
 
 \paragraph{Suite aircrack-ng}
+
 La suite de herramientas \textit{``air''} proporciona todo lo necesario para llevar a cabo auditorías a redes wireless. También disponemos de más herramientas, como son GUIs o \textit{scripts}, que por debajo utilizan las propias herramientas de la suite. 
 Las más utilizadas en el proyecto son:
 \begin{itemize}
-	\item Airmon-ng: Sirve para cambiar el modo de trabajo de la tarjeta inalámbrica, siempre y cuando el chipset lo permita. Este modo de trabajo cambiará a modo monitor.
-	\item Airodump-ng: Es la encargada de esnifar(\textit{sniffing}) o escuchar todo lo que circula por el aire, independientemente de su cifrado  o su red. Evidentemente si el trafico va sin cifrar, es decir redes abiertas se puede visualizar dicho tráfico y se podrá capturar información sensible que circula por el aire.
+	\item \emph{Airmon-ng}: Sirve para cambiar el modo de trabajo de la tarjeta inalámbrica, siempre y cuando el chipset lo permita. Este modo de trabajo cambiará a modo monitor.
+	\item \emph{Airodump-ng}: Es la encargada de esnifar (\textit{sniffing}) o escuchar todo lo que circula por el aire, independientemente de su cifrado  o su red. Evidentemente si el trafico va sin cifrar, es decir redes abiertas se puede visualizar dicho tráfico y se podrá capturar información sensible que circula por el aire.
+
 \begin{table}[H]
 \begin{center}
 \begin{tabular}{| p{2.2cm} | p{6.6cm} | }
 \hline
 Parámetros & Descripción \\
-
 \hline \hline
 \\ \hline
 Bssid & Identifica la dirección MAC de un punto de acceso. \\ \hline
-PWR &Intensidad de la señal   \\ \hline
+PWR & Intensidad de la señal   \\ \hline
 \#/s & Número de paquetes de datos por segundos.  \\ \hline
 Data &  Número de paquetes de datos. En WEP solo cuentan los IVS. \\ \hline
 CH & Canal   \\ \hline
@@ -606,20 +618,21 @@ CIPHER & Tipo de cifrado de datos. Puede ser WEP, TKIP (WPA) o CCMP (WPA2) \\ \h
 AUTH & Método de autenticación. Generalmente suele visualizarse PSK en entornos de clave compartida.  \\ \hline
 ESSID & Nombre de la red Wireless   \\ \hline
 Station & Dirección MAC de un cliente asociado al punto de acceso.  \\ \hline
-Probe & Paquetes en los que el cliente intenta identificar una red wireless. Por lo que se puede obtener el nombre de redes que un cliente esta buscando e intenta verificar que se encuentran en su radio de acción.   \\ \hline
+Probe & Paquetes en los que el cliente intenta identificar una red wireless. Por lo que se puede obtener el nombre de redes que un cliente esta buscando e intenta verificar que se encuentran en su radio de acción.   \\
+\hline
 \end{tabular}
-\caption{Parámetros básicos Aerodump-ng.}
+\caption{Parámetros básicos Airodump-ng.}
 \label{Airodump}
 \end{center}
 \end{table}
 	
 	
-	\item Airbase-ng: Esta herramienta sirve para atacar a los clientes asociados a un punto de acceso. Es una aplicación versátil y flexible , disponiendo de distintos modos de trabajo. Con ella también es posible habilitar un punto de acceso normal. Esto sirve para engañar a un usuario para que se conecte al punto de acceso falso y capturar así todo el tráfico.
+	\item \emph{Airbase-ng}: Esta herramienta sirve para atacar a los clientes asociados a un punto de acceso. Es una aplicación versátil y flexible , disponiendo de distintos modos de trabajo. Con ella también es posible habilitar un punto de acceso normal. Esto sirve para engañar a un usuario para que se conecte al punto de acceso falso y capturar así todo el tráfico.
 
-	\item Aircrack-ng: Sirve para realizar ataques de fuerza bruta, diccionario. En función del tipo de cifrado de la red que se quiera crackear se realizara un tipo de ataque u otro. El problema de realizar este tipo de ataques es la cantidad de tiempo y de recursos que se emplean para conseguir descifrar una clave WPA, llegando a quedar inutilizado este dispositivo mientras se realiza el ataque. 
+	\item \emph{Aircrack-ng}: Sirve para realizar ataques de fuerza bruta por diccionario. En función del tipo de cifrado de la red que se quiera crackear se realizara un tipo de ataque u otro. El problema de realizar este tipo de ataques es la cantidad de tiempo y de recursos que se emplean para conseguir descifrar una clave WPA, llegando a quedar inutilizado este dispositivo mientras se realiza el ataque. 
 	%		 pyrit: Es un herramienta muy potente que facilita la creación de bases de datos para precalcular las claves PSK y así acelerar el pre-procesamiento, aprovechando al máximo las plataformas del mercado(Nvidia CUDA, OpenCL) y poder descifrar claves WPA o WPA2 mediante ataques de fuerza bruta o diccionario. 
 
-	\item Aireplay-ng: Permite desautentificar e inyectar paquetes ARP a clientes asociados y así generar tráfico. 
+	\item \emph{Aireplay-ng}: Permite desautenticar e inyectar paquetes ARP a clientes asociados y así generar tráfico. 
 	
 \begin{table}[H]
 \begin{center}
@@ -628,15 +641,15 @@ Probe & Paquetes en los que el cliente intenta identificar una red wireless. Por
 Parámetros & Descripción \\
 \hline \hline
 \\ \hline
--0, --deauth & Desautentifica. \\ \hline
--1, --fakeauth  & Falsa autenticación con el Punto de Acceso.  \\ \hline
--2, --interactive &   \\ \hline
--3, --arpreplay & Estándar de repetición ARP. \\ \hline
--4, --chopchop & Ataque Chopchop.   \\ \hline
--5, --fragment & Genera una cadena de claves válidas.  \\ \hline
--9, --test & Pruebas de inyección.   \\ \hline
+\verb|-0|, \verb|--deauth| & Desautentica. \\ \hline
+\verb|-1|, \verb|--fakeauth|  & Falsa autenticación con el punto de acceso.  \\ \hline
+\verb|-2|, \verb|--interactive| &   \\ \hline
+\verb|-3|, \verb|--arpreplay| & Estándar de repetición ARP. \\ \hline
+\verb|-4|, \verb|--chopchop| & Ataque Chopchop.   \\ \hline
+\verb|-5|, \verb|--fragment| & Genera una cadena de claves válidas.  \\ \hline
+\verb|-9|, \verb|--test| & Pruebas de inyección.   \\ \hline
 \end{tabular}
-\caption{Parámetros Aireplay-ng.}
+\caption{Parámetros \emph{aireplay-ng}.}
 \label{Aireplay}
 \end{center}
 \end{table}	
@@ -645,24 +658,29 @@ Parámetros & Descripción \\
 \end{itemize}
 
 \paragraph{Lenguaje Bash}
-El lenguaje Bash, es un lenguaje de programación en linea de comandos y además se trata de uno de los lenguajes que se empleará para el desarrollo de la aplicación. Normalmente es utilizado para la gestión de archivos, y la consola de Linux fomenta su desarrollo, permitiendo programar \textit{scripts} dependiendo de las necesidades. Se refiere con \textit{script} a un archivo que contiene código escrito en un lenguaje de programación y que el dispositivo usa para un cometido establecido.
-Además este lenguaje utiliza como intérprete, la \textit{shell}, que es un entorno de trabajo que nos permite ejecutar programas por medio de órdenes. Dichas órdenes deben formarse con el nombre de un programa y una serie de parámetros.
-A pesar del conocimiento de múltiples lenguajes de programación informática, se empleó este lenguaje porque es el lenguaje de programación utilizado en linux, y por tanto, nos brinda la oportunidad de aprender.
 
-Este lenguaje interpretado cuenta con muchas ventajas como son rapidez de ejecución, sintaxis clara y sencilla, y su portabilidad, pudiéndose ejecutar además en múltiples plataformas. Bash no solo reconoce comandos, nos ayuda a agruparlos para realizar programas completos, sobretodo para la automatización (como es el caso de esta aplicación). 
+El lenguaje Bash, es un lenguaje de programación de línea de órdenes y además se trata de uno de los lenguajes que se empleará para el desarrollo de la aplicación.  Normalmente es utilizado para la gestión de archivos, y la consola de Linux fomenta su desarrollo, permitiendo programar \textit{scripts} dependiendo de las necesidades.  Se refiere con \textit{script} a un archivo que contiene código escrito en un lenguaje de programación y que el dispositivo usa para un cometido establecido.
+Además este lenguaje utiliza como intérprete, \textit{shell}, que es el entorno de trabajo que nos permite ejecutar programas por medio de órdenes. Dichas órdenes deben formarse con el nombre de un programa y una serie de parámetros.
+% FMF: En GNU/Linux no se usa bash, es solo una de las múltiples shells que se usan y en Debian ni siquiera es la shell por defecto
+% FMF: Así que quito esta frase.
+%A pesar del conocimiento de múltiples lenguajes de programación informática, se empleó este lenguaje porque es el lenguaje de programación utilizado en linux, y por tanto, nos brinda la oportunidad de aprender.
+Se utiliza para automatizar los ataques en el proyecto porque permite una incorporación directa y gradual de las órdenes ejecutadas de forma interactiva por un \emph{pentester}.
+
+Este lenguaje interpretado cuenta con muchas ventajas como son rapidez de ejecución, sintaxis clara y sencilla, y su portabilidad, pudiéndose ejecutar además en múltiples plataformas. Bash no solo reconoce órdenes, nos ayuda a agruparlos para realizar programas completos, sobretodo para la automatización (como es el caso de esta aplicación). 
 
 %%%%%%ANTECEDENTES INFORME ATOMATIZADO%%%%
 \subsection{Sistemas de generación automática de informes}
-Para la generación de un informe automatizado se debe contar con un dispositivo previamente programado, que realice acciones controladas para recolectar la información y así realizar una posterior implementación en algún tipo de informe. Se pueden emplear la mayoría de los lenguajes de programación, pero \textit{Python} cuenta con varias bibliotecas de plantillas facilitando el trabajo.
+Para la generación de un informe automatizado se debe contar con un dispositivo previamente programado, que realice acciones controladas para recolectar la información y así realizar una posterior implementación en algún tipo de informe. Se pueden emplear la mayoría de los lenguajes de programación, pero \textit{Python} cuenta con varias bibliotecas de plantillas que facilitan el trabajo.
 
 \subsubsection{Python}
-Se empleará este lenguaje de programación como herramienta de enlace entre el informe, generado en \LaTeX{} y los \textit{Templates} empleando una librería de python:  \textit{jinja2}.
-Python es un lenguaje de programación creado por Guido van Rossum a comienzo de los 90. Es un lenguaje interpretado o de script, es decir necesita un intérprete. Existen multitud de intérpretes, que pueden ser utilizados en la mayoría de plataformas (UNIX, Linux, Windows, MAC OS,etc), por lo que se podría decir que es multiplataforma. 
-Python destaca entre otros lenguajes de programación por su sencillez, legibilidad y su precisión de sintaxis. 
+Se empleará este lenguaje de programación como herramienta de enlace entre el informe, generado en \LaTeX{} y las plantillas (\textit{templates}) empleando una librería de python:  \textit{jinja2}.
+Python es un lenguaje de programación creado por Guido van Rossum a comienzos de los 90.  Es un lenguaje interpretado o de \emph{script}, es decir necesita un intérprete. Existen multitud de intérpretes, que pueden ser utilizados en la mayoría de plataformas (UNIX, Linux, Windows, MAC OS,etc), por lo que se podría decir que es multiplataforma. 
+Python destaca entre otros lenguajes de programación por su sencillez, legibilidad y su sintaxis minimalista.
+% FMF: Decía precisión de sintaxis.  Es muy raro un lenguaje de programación con sintaxis no precisa
 
 \paragraph{Jinja2}
-Jinja2 es una biblioteca de Python diseñada para ser flexible, rápida y segura. Se emplea como un lenguaje de plantillas y es de fácil uso.\footnote{Recuperado de \url{http://jinja.pocoo.org/docs/dev/}} Es uno de los sistemas de plantillas más utilizados para Python. Se inspira en el sistema de plantillas de Django. 
-Se puede ejecutar en la mayoría de las versiones de Python. Esta biblioteca se utilizo para generar los \textit{templates} del informe automatizado. 
+Jinja2 es una biblioteca de Python diseñada para ser flexible, rápida y segura. Se emplea como un lenguaje de plantillas y es de fácil uso.\footnote{Recuperado de \url{http://jinja.pocoo.org/docs/dev/}.} Es uno de los sistemas de plantillas más utilizados para Python. Se inspira en el sistema de plantillas de Django. 
+Se puede ejecutar en la mayoría de las versiones de Python. Esta biblioteca se utiliza para generar las plantillas (\textit{templates}) del informe automatizado. 
 %\paragraph{Ejemplo Jinja2}
 %\lstinputlisting[language=Python]{ejemplojinja2.txt}
 
@@ -681,10 +699,12 @@ Se puede ejecutar en la mayoría de las versiones de Python. Esta biblioteca se u
 
 
 \chapter[Desarrollo]{Desarrollo del proyecto}
+
 \lettrine[lines=2]{P}{ara} llegar al fin del proyecto, es decir al cumplimiento del objetivo principal, introducir a las empresas en la importancia de contar con una red inalámbrica segura, y la necesidad de realizar una pre-auditoría
 de caja negra automática, que detecte las vulnerabilidades de la red, y que sirva como argumento de venta de auditorías completas de forma periódica, es necesario desarrollar diferentes fases:
 
 \section[Creación de una aplicación]{Creación de una aplicación de detección de las vulnerabilidades}
+
 Para la creación de la aplicación ha sido utilizado el dispositivo Raspberry Pi 3 Modelo B, que como se aprecia en la imagen anterior (Figura \ref{fig:Ras}), mejora las características de sus predecesoras con un nuevo procesador más rápido integrado para incrementar su velocidad. Cuenta también con una tarjeta de WiFi y Bluetooth BLE integrada para mejorar su funcionalidad y la capacidad de alimentar dispositivos más potentes mediante los puertos USB. Se optó por  este dispositivo por la facilidad que tiene a la hora de instalar un sistema operativo y la movilidad que te proporciona, pudiendo transportarlo sin ningún tipo de impedimento. Contando por supuesto con su gran comunidad y las ventajas de esto a la hora de buscar información y de solucionar los posibles errores. 
 \begin{figure}[H]
   \centering
@@ -692,10 +712,10 @@ Para la creación de la aplicación ha sido utilizado el dispositivo Raspberry Pi 
   \caption{Imagen Raspberry Pi 3}
   \label{fig:RaspberryPi2}
 \end{figure}
-Las características principales del modelo de Raspberry Pi\footnote{Recuerado de \url{https://www.raspberrypi.org/wp-content/uploads/2016/03/pi3.jpg}} utilizados son las siguientes:
+
+Las características principales del modelo de Raspberry Pi\footnote{Recuperado de \url{https://www.raspberrypi.org/wp-content/uploads/2016/03/pi3.jpg}} utilizados son las siguientes:
 \begin{itemize}
-	\item CPU BCM2837 de 64 Bits de Núcleo Cuádruple de 1.2 GHz de Broadcom
-RAM de 1 GB: Es un sistema-en-chip diseñado específicamente para este modelo de Raspberry Pi. Cuenta con cuatro cores Cortex-A53 de 64 bits, y una GPU Videocore IV. Esto, es una gran ventaja porque se trata de una de las pocas GPUs con documentación pública del fabricante.
+	\item CPU BCM2837 de 64 Bits de cuádruple núcleo a 1.2 GHz de Broadcom y RAM de 1 GB. Es un sistema-en-chip diseñado específicamente para este modelo de Raspberry Pi. Cuenta con cuatro cores Cortex-A53 de 64 bits, y una GPU Videocore IV. Esto, es una gran ventaja porque se trata de una de las pocas GPUs con documentación pública del fabricante.
 	\item BCM43143 con WiFi y Bluetooth BLE incorporados
 	\item GPIO ampliado de 40 pines
 	\item 4x puertos USB 2
