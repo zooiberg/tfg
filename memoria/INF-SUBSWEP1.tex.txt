@@ -23,7 +23,7 @@ A continuacion se ha utilizado el comando airodump-ng en el canal del AP con
 
 
 Con el comando aireplay-ng se procede a desautenticar a un cliente asociado 
-con el fin  de que vuelva a autenticarse y genera un paquete ARP v·lido.
+con el fin  de que vuelva a autenticarse y genera un paquete ARP valido.
 
 \textbf{aireplay-ng -0 5 -a 80:B6:86:D5:F9:4B -c 00:08:06:4F:86:EC wlan0mon}
 
@@ -32,13 +32,11 @@ Con el fin de generar mucho paquetes y conseguir gran cantidad de IVs se lanza
 
 \textbf{aireplay-ng -3 -b 80:B6:86:D5:F9:4B -h 00:08:06:4F:86:EC wlan0mon}
 
-Finalmente y si hemos conseguido una gran cantidad de IVs intentamos probar
- conseguir la clave WEP utilizando el comando aricrack-ng.
+Finalmente y si hemos conseguido una gran cantidad de IVs intentamos probar conseguir la clave WEP utilizando el comando aricrack-ng.
 
 \textbf{aircrack-ng -a 1 -s output-01.cap}
 
-En este analisis de red se ha conseguido \textbf{} IVs y \textbf{NO} se ha
- podido obtener la clave.
+En este analisis de red se ha conseguido \textbf{} IVs y \textbf{NO} se ha podido obtener la clave.
 
 \textbf{}\\
 

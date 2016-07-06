@@ -12,7 +12,6 @@ podemos utilizarlos para averiguar la clave WEP.
 Para tratar de obtener la clave se ha realizado el ataque estandar utilizando 
 los siguientes pasos:
 
-
 Hemos colocado nuestra tarjeta en modo monitor y fijado al canal del AP.
 
 \textbf{\VAR{x1}}
@@ -48,5 +47,3 @@ El detalle de la salida de Aircrack-ng es el siguiente:
         \fontsize{7pt}{7pt}=\selectfont
         \verbatiminput{../AIRCRACK/\VAR{x9}}
 \endgroup
-
-
