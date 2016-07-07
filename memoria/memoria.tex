@@ -656,7 +656,67 @@ Parámetros & Descripción \\
 
 	
 \end{itemize}
+\paragraph{PixieScript}
 
+En la primera etapa del proyecto, en la que es llevada a cabo la investigación sobre el tema escogido, es hallado el programa PixieScript\footnote{\url{https://sourceforge.net/projects/pixiescript/files/?source=navbar}}, el cual se utilizara como plantilla para el desarrollo del proyecto, facilitando la creación del código y la interfaz, y adecuando lo hallado según las necesidades del proyecto, añadiendo y modificando las funciones.
+El código encontrado ha sido analizado, y debido a su adecuación con el objetivo del proyecto, se ha decidido tomarlo como base, ya que facilitaría el trabajo y cumplía muchos de los propósitos del proyecto. Aun así, se ha realizado una labor de análisis y modificación de la misma, ya que no respondía exactamente a lo buscado en este proyecto en concreto, y han tenido que ser añadidas nuevas herramientas que eran objeto de este proyecto.
+A continuación se detallara un listado de aquellas funciones que han sido modificadas y adecuadas para el proyecto y aquellas que han sido creadas para funciones determinadas de las que el origen carecía.
+
+Las funciones que han sido creadas o modificadas parcial o casi totalmente son las siguientes:
+\begin{itemize}
+	\item ScanearRedes()
+	\item ProcesarDatosEscaneoAirodump()
+	\item EsperarAcabarAircrack()
+	\item BuscarClienteConectado()
+	\item AircrackWEP()
+	\item AircrackWPA()
+	\item AnalizarPyrit()
+	\item DenegacionServicio()
+	\item CrearInformeWEP()
+	\item CrearInformeWPA()
+\end{itemize}
+
+Ademas, dentro de la interfaz PixieScript, tomada como base, se han añadido botones según necesidades del proyecto, y del mismo modo han sido eliminados los que para este caso no eran necesarios.
+Los botones creados son los siguientes:
+\begin{lstlisting}[label=nvinterfaz,caption=Botón aircrack]
+	<button>
+		<input file>'$ICONO_START_ATACK'</input>
+		<sensitive>false</sensitive>
+		<label>ATAQUE AIRCRACK</label>
+		<variable>BOTON_ATAQUE_AIRCRACK</variable>
+		<action>disable:BOTON_ATAQUE_AIRCRACK</action>
+		<action>disable:BOTON_INICIAR_ESCANEO</action>
+		<action>disable:BOTON_INICIAR_ATAQUE</action>
+		<action>disable:TABLA_SCAN</action>
+		<action>enable:BOTON_DETENER_ATAQUE</action>
+		<action function="command">nohup '$SCRIPT_FUNCIONES' 11 $TIEMPO_ATAQUE $TABLA_SCAN &> /dev/null & </action>
+		<action>enable:TimerAtaque</action>
+	</button>
+\end{lstlisting}
+
+\begin{lstlisting}[label=nvinterfaz1,caption=Ataque WPA]
+	<button>
+		<input file>'$ICONO_START_ATACK'</input>
+		<sensitive>false</sensitive>
+		<label>ATAQUE WPA</label>
+		<variable>BOTON_INICIAR_ATAQUE</variable>
+		<action>disable:BOTON_INICIAR_ATAQUE</action>
+		<action>disable:BOTON_INICIAR_ESCANEO</action>
+		<action>disable:BOTON_ATAQUE_AIRCRACK</action>
+		<action>disable:TABLA_SCAN</action>
+		<action>enable:BOTON_DETENER_ATAQUE</action>
+		<action function="command">nohup '$SCRIPT_FUNCIONES' 3 $TIEMPO_ATAQUE $TABLA_SCAN &> /dev/null & </action>
+		<action>enable:TimerAtaque</action>
+	</button>
+\end{lstlisting}	
+También, respecto a la interfaz, se ha añadido y adaptado la table principal donde se muestran las redes disponibles.
+\begin{lstlisting}[label=nvinterfaz2,caption=Tabla de redes]
+	<tree auto-refresh="false" selected-row="0"  column-sort-function="func1|func1|func1|func1|func1|func1|func1|func1" vscrollbar-policy="1">
+		<variable>TABLA_SCAN</variable>
+		<input file icon-column="0">"'"$ARCHIVO_REDES_SCAN"'"</input>
+		<label>N?  |BSSID                      |Channel    |ENC    |SE?AL |WPS Version| Locked    |ESSID                  </label>
+	</tree>
+\end{lstlisting}
 \paragraph{Lenguaje Bash}
 
 El lenguaje Bash, es un lenguaje de programación de línea de órdenes y además se trata de uno de los lenguajes que se empleará para el desarrollo de la aplicación.  Normalmente es utilizado para la gestión de archivos, y la consola de Linux fomenta su desarrollo, permitiendo programar \textit{scripts} dependiendo de las necesidades.  Se refiere con \textit{script} a un archivo que contiene código escrito en un lenguaje de programación y que el dispositivo usa para un cometido establecido.
@@ -667,6 +727,7 @@ Además este lenguaje utiliza como intérprete, \textit{shell}, que es el entorno 
 Se utiliza para automatizar los ataques en el proyecto porque permite una incorporación directa y gradual de las órdenes ejecutadas de forma interactiva por un \emph{pentester}.
 
 Este lenguaje interpretado cuenta con muchas ventajas como son rapidez de ejecución, sintaxis clara y sencilla, y su portabilidad, pudiéndose ejecutar además en múltiples plataformas. Bash no solo reconoce órdenes, nos ayuda a agruparlos para realizar programas completos, sobretodo para la automatización (como es el caso de esta aplicación). 
+Este lenguaje ha sido utilizado, ademas de por sus multiples ventajas ya citadas, por el hallazgo de PixieScript, ya que al estar realizado en este lenguaje, su aprendizaje nos facilitaba la posibilidad de modificar y poder utilizarlo como plantilla.
 
 %%%%%%ANTECEDENTES INFORME ATOMATIZADO%%%%
 \subsection{Sistemas de generación automática de informes}
@@ -787,7 +848,7 @@ El desarrollo de la aplicación que detecta las vulnerabilidades se llevó a cabo 
 
 \section[Interfaz gráfica]{Interfaz gráfica simple e intuitiva para la aplicación.}
 %%%%INTERFAZ%%%%%
-Como se ha comentado con anterioridad, se pretende que la interfaz sea ejecutada por un comercial sin conocimientos informáticos previos, por ello se realiza un diseño sencillo de la misma.
+Se pretende que la interfaz sea ejecutada por un comercial sin conocimientos informáticos previos, por ello se realiza un diseño sencillo de la misma.
 
 
 \begin{figure}[H]
@@ -801,6 +862,7 @@ Como se ha comentado con anterioridad, se pretende que la interfaz sea ejecutada
 \subsection{Descripción de la interfaz}
 
 La herramienta con la que se ha desarrollado la interfaz ha sido realizada en código bash.  Utiliza la biblioteca \textit{GTK dialog} para la gestión de pantalla, como interfaz gráfica. Pudiendo interactuar con diferentes botones que realizarán la tarea de análisis. 
+Esto conformaba como objetivo inicial del proyecto, pero gracias a PixieSript esta tarea se ha podido llevar a cabo con mayor facilidad.
 
 \begin{enumerate}
     \item Se inicia la aplicación \emph{SeguridadWifi}, se muestra la pantalla principal de la aplicación y se listan las interfaces WiFi disponibles para utilizar en el análisis de vulnerabilidades WiFi.
@@ -812,7 +874,7 @@ La herramienta con la que se ha desarrollado la interfaz ha sido realizada en có
   \label{fig:interfaz1}
 \end{figure}
 
-A continuación se muestra el método que se encarga de listar las tarjetas inalámbricas disponibles:
+%A continuación se muestra el método que se encarga de listar las tarjetas inalámbricas disponibles:
 
 \begin{lstlisting}[label=prueba,caption=Listar Tarjetas WiFi]
 ListarTarjetasWifi() {   
@@ -856,7 +918,7 @@ ListarTarjetasWifi() {
   \caption{Interfaz gráfica. Activa el modo monitor}
    \label{fig:int2}
 \end{figure}
-A continuación se muestra el método que se encarga de activar el modo monitor de la tarjeta seleccionada anteriormente:
+%A continuación se muestra el método que se encarga de activar el modo monitor de la tarjeta seleccionada anteriormente:
 
 \begin{lstlisting}[label=prueba1,caption=Activar Modo Monitor]
 ActivarModoMonitor(){
@@ -891,7 +953,7 @@ ActivarModoMonitor(){
 \end{lstlisting}
 
 
-        \item En esta pantalla se presiona el botón \emph{ESCANEAR REDES} para el escaneo de las redes que se encuentran en nuestro alcance en un tiempo determinado.
+        \item En la interfaz se presiona el botón \emph{ESCANEAR REDES} para buscar las redes que se encuentran a nuestro alcance en un tiempo determinado.
 
 \begin{figure}[H]
   \centering
@@ -900,7 +962,7 @@ ActivarModoMonitor(){
    \label{fig:int3}
 \end{figure}
 
-A continuación se muestra el método encargado de buscar las posibles redes inalámbricas en la zona:
+%A continuación se muestra el método encargado de buscar las posibles redes inalámbricas en la zona:
 
 \begin{lstlisting}[label=prueba12,caption=Escanear redes]
 ScanearRedes() {
@@ -946,7 +1008,7 @@ ScanearRedes() {
    \label{fig:int4}
 \end{figure}
 
-A continuación se muestra el método encargado de listar las redes inalámbricas a nuestro alcance:
+%A continuación se muestra el método encargado de listar las redes inalámbricas a nuestro alcance:
 
 \begin{lstlisting}	[label=prueba2,caption=Listar Redes]
 ListarTarjetasWifi() {   
@@ -1091,7 +1153,7 @@ AircrackWEP() {
 El objetivo de este ataque es dejar a los usuarios legítimos de una red Wi-Fi sin poder acceder a internet. Por lo tanto, se inunda con paquetes de desautenticación al punto de acceso o al cliente que decida.
 Como siempre, la tarjeta inalámbrica debe estar en modo monitor y escuchando en el canal específico. Así se desautenticará en un bucle infinito  al cliente o al punto de acceso que se seleccione.
 
-\begin{lstlisting}        [label=prueba4,caption=Denegación de servicios]
+\begin{lstlisting}    [label=prueba4,caption=Denegación de servicios]
 DenegacionServicio (){
     echo "***************** Denegacion de Servicio******************"
     LINEA_ATAQUE=$(head -$LINEA_ATAQUE "$ARCHIVO_REDES_SCAN" | tail -1)
@@ -1253,7 +1315,7 @@ Sabemos que WPA y WPA2 PSK tiene posibles vulnerabilidades a un ataque de diccio
 
 El tener que emplear la fuerza bruta es un gran inconveniente, ya que se hará un uso intensivo del procesador de la Raspberry Pi. Este proceso, si se dejara podrá llegar a durar horas e incluso días comprobando las posibles palabras del diccionario.  En nuestro caso se pondrán tiempo cortos para que no se demore en exceso.
 
-\begin{lstlisting}        [label=prueba7,caption=AircrackWPA]
+\begin{lstlisting} [label=prueba7,caption=AircrackWPA]
 AircrackWPA() {
     echo "***************** Aircrack WPA******************"
     CambioMacRandom
@@ -1536,14 +1598,21 @@ Estas medidas no harán que su red sea invulnerable a cualquier ataque, pues eso 
 \appendix
 
 \chapter{Informe WEP}\label{anexo.A}
-%\includepdf[pages=-]{informe_WEP}
+\includepdf[pages=-]{informe_WEP}
 %\input{informe.tex}
 \chapter{Informe WPA}\label{anexo.B}
-%\includepdf[pages=-]{informe-WPA}
+\includepdf[pages=-]{informe-WPA}
 
 \chapter{Código}\label{anexo.C}
-%\lstinputlisting[label=INF-SUBSDOS.tex,
-   %                    caption=INF-SUBSDOS.tex] {SeguridadWifi}
+%\lstinputlisting[label=Seguridad,
+   %               caption=SeguridadWifi]{SeguridadWifi}
+%\lstinputlisting[language=Bash,
+	%	label=SeguridadF,
+      %         caption=Funciones]{FUNCIONES-tfg}
+%\begin{lstlisting}[label=funciones,caption=Funciones-tfg]
+
+
+%\end{lstlisting}
 \cleardoublepage
 %%BiBLIOGRAFIA%%
 %\addcontentsline{toc}{chapter}{Bibliografía}
