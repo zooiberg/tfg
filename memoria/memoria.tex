@@ -11,9 +11,10 @@
 \usepackage{fancyhdr}
 \usepackage{fancyvrb}
 \usepackage{hyperref}%hipervinculos
-\usepackage{pdfpages}%agregar pdf
 \usepackage{color}
 \usepackage{xcolor}
+\pagecolor{white}
+\usepackage{pdfpages}%agregar pdf
 \usepackage{listings}
 \usepackage{caption}
 \usepackage{times}
@@ -37,6 +38,7 @@
 
 \definecolor{gris30}{gray}{0.30}
 \definecolor{gris85}{gray}{0.85}
+\definecolor{gris95}{gray}{0.95}
 \definecolor{gris20}{gray}{0.20}
 \definecolor{gris50}{gray}{0.50}
 
@@ -1603,10 +1605,10 @@ Estas medidas no harán que su red sea invulnerable a cualquier ataque, pues eso 
 \appendix
 
 \chapter{Informe WEP}\label{anexo.A}
-\includepdf[pages=-]{informe_WEP}
-%\input{informe.tex}
+\includepdf[pages=-,frame,scale=0.8,clip,pagecommand={}]{informe_WEP}
+
 \chapter{Informe WPA}\label{anexo.B}
-\includepdf[pages=-]{informe-WPA}
+\includepdf[pages=-,frame,scale=0.8,clip,pagecommand={}]{informe-WPA}
 
 \chapter{Código}\label{anexo.C}
 %\lstinputlisting[label=Seguridad,
