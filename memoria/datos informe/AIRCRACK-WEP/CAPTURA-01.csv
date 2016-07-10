@@ -1,0 +1,7 @@
+
+BSSID, First time seen, Last time seen, channel, Speed, Privacy, Cipher, Authentication, Power, # beacons, # IV, LAN IP, ID-length, ESSID, Key
+80:B6:86:D5:F9:4B, 2016-07-09 19:45:22, 2016-07-09 19:47:09,  6,  54, WEP, WEP, OPN, -53,      512,    47549,   0.  0.  0.  0,  16, laboratorio wifi, 
+
+Station MAC, First time seen, Last time seen, Power, # packets, BSSID, Probed ESSIDs
+AC:38:70:25:ED:62, 2016-07-09 19:45:26, 2016-07-09 19:47:01, -44,    73218, 80:B6:86:D5:F9:4B,laboratorio wifi
+

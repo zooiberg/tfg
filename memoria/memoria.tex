@@ -1,10 +1,8 @@
 \RequirePackage{fix-cm}
 \documentclass[a4paper,openright,10pt]{report}
-\usepackage[spanish]{babel} 
 \usepackage[latin1]{inputenc}
 \usepackage{graphicx} % graficos
 \usepackage{multirow} % para las tablas
-\usepackage[spanish]{babel}%tablas en español
 \usepackage{lettrine}%letras capitales
 \usepackage{float}%orden [H]
 \usepackage{verbatim}%introducir .txt
@@ -13,12 +11,14 @@
 \usepackage{fancyhdr}
 \usepackage{fancyvrb}
 \usepackage{hyperref}%hipervinculos
-\usepackage{pdfpages}%agregar pdf
 \usepackage{color}
 \usepackage{xcolor}
+\pagecolor{white}
+\usepackage{pdfpages}%agregar pdf
 \usepackage{listings}
 \usepackage{caption}
 \usepackage{times}
+\usepackage[spanish]{babel} 
 
 \DeclareCaptionFont{white}{\color{white}}
 \DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
@@ -38,6 +38,7 @@
 
 \definecolor{gris30}{gray}{0.30}
 \definecolor{gris85}{gray}{0.85}
+\definecolor{gris95}{gray}{0.95}
 \definecolor{gris20}{gray}{0.20}
 \definecolor{gris50}{gray}{0.50}
 
@@ -313,7 +314,7 @@ Debido a los avances tecnológicos e informáticos, tanto los ataques como las pro
   \label{fig:medidas}
 \end{figure}
 
-\subsection{Limitaciones de seguridad.}
+\subsection{Limitaciones de seguridad}
 
 El nivel de importancia de la seguridad de las empresas también esta reflejado en este estudio. En él, se resumen las principales razones aportadas por las pymes para justificar la falta de herramientas de seguridad que se emplean en su día a día.
 La gran mayoría de las empresas que acusan no tener alguna de las soluciones, lo justifican exponiendo no disponer de la necesidad o del desconocimiento de ellas. También exponen una falta de presupuesto o la impresión de ineficiencia, aunque en menor medida.
@@ -327,7 +328,7 @@ Aún así, en las pymes se muestra inconsciencia, desinterés y falta de capital a 
 \end{figure}
 En la Figura \ref{fig:limitaciones} se enumeran una serie de posibles soluciones básicas y los posibles motivos por los que las empresas no se decantan por alguno de ellos.
 
-\subsection{Personal encargado de la seguridad de la información.}
+\subsection{Personal encargado de la seguridad de la información}
 No se debería delegar toda la responsabilidad de los datos o de la información en una sola persona, ni si quiera en un grupo de empleados. Todos los individuos deberían estar concienciados y formados para una mejora en este ámbito. No obstante siempre es importante contar con profesionales, que sepan manejar las herramientas de seguridad, y sepan actuar ante un posible ataque.
 
 \begin{figure}[H]
@@ -454,7 +455,7 @@ La fase de confidencialidad se encarga de que nadie que estuviera \textit{escuch
 	\begin{itemize}
 	\item RC4, es el algoritmo de cifrado de la información, el cual emplea un sistema que consiste, en que el emisor y el receptor deben saber la clave con anterioridad, y por tanto generar el \textit{keystream} (dos fases: KSA y PRGA). Así, recibe un flujo de bits que debe cifrar, y por otro sitio un flujo de bits codificados. Juntando estos dos flujos y por medio de una operación binaria XOR entre ellos, nos dará un único flujo ya cifrado. El problema es que estos bits codificados son generados por medio de operaciones matemáticas complejas sobre una secuencia de bits que se le llama la "semilla", que es de un único tamaño. Por ello al utilizar siempre la misma "semilla", se demuestra matemáticamente que una persona mal intencionada capturando un numero suficientes de tramas, puede adivinarla.
 	WEP permite utilizar claves de distintos tamaños:  64 bits (40 de la clave del usuario más 24 de los vectores de iniciación) o de 128(104 de la clave del usuario más 24 de los vectores de iniciación)
-		\item IV, son los vectores de inicialización, son la parte dinámica de los \textit{keystream.} Cada trama lleva un IV distinto, aunque al ser generados de forma aleatoria no siempre es posible. Los IV van en la parte que no se cifra de la trama WEP.
+		\item IV, son los vectores de inicialización, son la parte dinámica de los \textit{keystream}. Cada trama lleva un IV distinto, aunque al ser generados de forma aleatoria no siempre es posible. Los IV van en la parte que no se cifra de la trama WEP.
 	\end{itemize}
 \begin{figure}[H]
   \centering
@@ -462,7 +463,7 @@ La fase de confidencialidad se encarga de que nadie que estuviera \textit{escuch
   \caption{Algoritmo de Encriptación WEP}
   \label{fig:wep}
 \end{figure}
-En esta imagen \footnote{Algoritmo de Encriptación WEP. Recuperado de \url{http://cursoslibres.academica.mx/206/seguridad-en-redes/3-protecciones-y-herramientas-de-seguridad/protocolos-de-seguridad.}} se puede apreciar el proceso que se lleva acabo para formar la trama WEP, ya sea del punto de acceso al cliente, o del cliente al punto de acceso. La \textit{shared key} es estática, es la que configura el dueño de la red en el punto de acceso, o si fuera en la casa de un particular en el router WiFi (5 caracteres o 10 hexadecimales) o (13 caracteres o 26 hexadecimales). Los IV como se ha mencionado  van cambiando aleatoriamente en cada trama. Esta cadena junto con la clave estática es introducida en el algoritmo RC4 como entrada. La salida de éste produce el \textit{keystream.}
+En esta imagen \footnote{Algoritmo de Encriptación WEP. Recuperado de \url{http://cursoslibres.academica.mx/206/seguridad-en-redes/3-protecciones-y-herramientas-de-seguridad/protocolos-de-seguridad}.} se puede apreciar el proceso que se lleva acabo para formar la trama WEP, ya sea del punto de acceso al cliente, o del cliente al punto de acceso. La \textit{shared key} es estática, es la que configura el dueño de la red en el punto de acceso, o si fuera en la casa de un particular en el router WiFi (5 caracteres o 10 hexadecimales) o (13 caracteres o 26 hexadecimales). Los IV como se ha mencionado  van cambiando aleatoriamente en cada trama. Esta cadena junto con la clave estática es introducida en el algoritmo RC4 como entrada. La salida de éste produce el \textit{keystream}.
 
 \paragraph{Integridad}
 
@@ -475,7 +476,7 @@ Por tanto, el problema del cifrado WEP, es el uso de la clave estática, ya que s
 \subsubsection{Protocolo WPA/WPA2}
 WPA, \textit{Wi-Fi Protected Access}, surgió como una solución temporal de la Wi-Fi Alliance, para hacer las redes más seguras. Ambas soluciones, WPA y WPA2, soportan el protocolo 802.11 para la autenticación en ámbitos empresariales y la autentificación mediante clave compartida PSK (\textit{Pre-Shared Key}) para los entornos SOHO \textit{Small Office and Home Office}, y ámbitos  domésticos.
 
-Estos dos métodos de cifrado se diferencian en muy poco, fundamentalmente en el algoritmo de cifrado que emplean. Mientras que WPA basa el cifrado de las comunicaciones en el uso del algoritmo TKIP (\textit{Temporary Key Integrity Protocol}), que esta basado en RC4 al igual WEP, WPA2 utiliza CCMP (\textit{Counter-mode/CBC-MAC Protocol}) basado en AES/\textit{Advanced Encrytion System.}
+Estos dos métodos de cifrado se diferencian en muy poco, fundamentalmente en el algoritmo de cifrado que emplean. Mientras que WPA basa el cifrado de las comunicaciones en el uso del algoritmo TKIP (\textit{Temporary Key Integrity Protocol}), que esta basado en RC4 al igual WEP, WPA2 utiliza CCMP (\textit{Counter-mode/CBC-MAC Protocol}) basado en AES/\textit{Advanced Encrytion System}.
 
 Otra diferencia a tener en cuenta es el algoritmo que utiliza para controlar la integridad del mensaje. Mientras WPA usa una versión más pobre para generar el código MIC (\textit{Message Integryty Code}), WPA2 emplea una versión mejorada de MIC.
 En la fase de intercambio de claves el cliente y el punto de acceso emplean las PSK para generar una clave llamada PMK(\textit{Pairwise Master Key}). Ésta es una derivada cuando el sistema es WPA/WPA2 empresarial pero es la misma PSK en los entornos WPA/WPA2 PSK.
@@ -654,70 +655,21 @@ Parámetros & Descripción \\
 \end{center}
 \end{table}	
 
-	
 \end{itemize}
+
 \paragraph{PixieScript}
 
+<<<<<<< HEAD
 En la primera etapa del proyecto, en la que es llevada a cabo la investigación sobre el tema escogido, es hallado el programa PixieScript\footnote{\url{https://sourceforge.net/projects/pixiescript/files/?source=navbar}}, el cual se utilizara como plantilla para el desarrollo del proyecto, facilitando la creación del código y la interfaz, y adecuando lo hallado según las necesidades del proyecto, añadiendo y modificando las funciones.
 El código encontrado ha sido analizado, y debido a su adecuación con el objetivo del proyecto, se ha decidido tomarlo como base, ya que facilitaría el trabajo y cumplía muchos de los propósitos del proyecto. Aun así, se ha realizado una labor de análisis y modificación de la misma, ya que no respondía exactamente a lo buscado en este proyecto en concreto, y han tenido que ser añadidas nuevas herramientas que eran objeto de este proyecto.
 Además, PixieScript cuenta con licencia Apache, la cual permite realizar modificaciones de software y distribuir las versiones modificadas del software bajo los términos de la licencia.
 A continuación se detallara un listado de aquellas funciones que han sido modificadas y adecuadas para el proyecto y aquellas que han sido creadas para funciones determinadas de las que el origen carecía.
+=======
+En la primera etapa del proyecto se llevó a cabo una búsqueda sobre el tema escogido.  En esta búsqueda es hallado el programa PixieScript\footnote{\url{https://sourceforge.net/projects/pixiescript/}}, que se utilizará como plantilla para el desarrollo del proyecto.  De esta forma se facilitará la creación del código y la interfaz.  La licencia de distribución de este software permite su adecuación a las necesidades del proyecto, añadiendo y modificando las funciones necesarias.
+>>>>>>> 9f3abe6741f614e7a241e016eea3e87d422b2de9
 
-Las funciones que han sido creadas o modificadas parcial o casi totalmente son las siguientes:
-\begin{itemize}
-	\item ScanearRedes()
-	\item ProcesarDatosEscaneoAirodump()
-	\item EsperarAcabarAircrack()
-	\item BuscarClienteConectado()
-	\item AircrackWEP()
-	\item AircrackWPA()
-	\item AnalizarPyrit()
-	\item DenegacionServicio()
-	\item CrearInformeWEP()
-	\item CrearInformeWPA()
-\end{itemize}
+Pixiescript ofrece una interfaz relativamente sencilla para la ejecución de un buen número de ataques a redes WiFi y es relativamente sencillo incorporar nuevos ataques.
 
-Ademas, dentro de la interfaz PixieScript, tomada como base, se han añadido botones según necesidades del proyecto, y del mismo modo han sido eliminados los que para este caso no eran necesarios.
-Los botones creados son los siguientes:
-\begin{lstlisting}[label=nvinterfaz,caption=Botón aircrack]
-	<button>
-		<input file>'$ICONO_START_ATACK'</input>
-		<sensitive>false</sensitive>
-		<label>ATAQUE AIRCRACK</label>
-		<variable>BOTON_ATAQUE_AIRCRACK</variable>
-		<action>disable:BOTON_ATAQUE_AIRCRACK</action>
-		<action>disable:BOTON_INICIAR_ESCANEO</action>
-		<action>disable:BOTON_INICIAR_ATAQUE</action>
-		<action>disable:TABLA_SCAN</action>
-		<action>enable:BOTON_DETENER_ATAQUE</action>
-		<action function="command">nohup '$SCRIPT_FUNCIONES' 11 $TIEMPO_ATAQUE $TABLA_SCAN &> /dev/null & </action>
-		<action>enable:TimerAtaque</action>
-	</button>
-\end{lstlisting}
-
-\begin{lstlisting}[label=nvinterfaz1,caption=Ataque WPA]
-	<button>
-		<input file>'$ICONO_START_ATACK'</input>
-		<sensitive>false</sensitive>
-		<label>ATAQUE WPA</label>
-		<variable>BOTON_INICIAR_ATAQUE</variable>
-		<action>disable:BOTON_INICIAR_ATAQUE</action>
-		<action>disable:BOTON_INICIAR_ESCANEO</action>
-		<action>disable:BOTON_ATAQUE_AIRCRACK</action>
-		<action>disable:TABLA_SCAN</action>
-		<action>enable:BOTON_DETENER_ATAQUE</action>
-		<action function="command">nohup '$SCRIPT_FUNCIONES' 3 $TIEMPO_ATAQUE $TABLA_SCAN &> /dev/null & </action>
-		<action>enable:TimerAtaque</action>
-	</button>
-\end{lstlisting}	
-También, respecto a la interfaz, se ha añadido y adaptado la table principal donde se muestran las redes disponibles.
-\begin{lstlisting}[label=nvinterfaz2,caption=Tabla de redes]
-	<tree auto-refresh="false" selected-row="0"  column-sort-function="func1|func1|func1|func1|func1|func1|func1|func1" vscrollbar-policy="1">
-		<variable>TABLA_SCAN</variable>
-		<input file icon-column="0">"'"$ARCHIVO_REDES_SCAN"'"</input>
-		<label>N?  |BSSID                      |Channel    |ENC    |SE?AL |WPS Version| Locked    |ESSID                  </label>
-	</tree>
-\end{lstlisting}
 \paragraph{Lenguaje Bash}
 
 El lenguaje Bash, es un lenguaje de programación de línea de órdenes y además se trata de uno de los lenguajes que se empleará para el desarrollo de la aplicación.  Normalmente es utilizado para la gestión de archivos, y la consola de Linux fomenta su desarrollo, permitiendo programar \textit{scripts} dependiendo de las necesidades.  Se refiere con \textit{script} a un archivo que contiene código escrito en un lenguaje de programación y que el dispositivo usa para un cometido establecido.
@@ -728,7 +680,7 @@ Además este lenguaje utiliza como intérprete, \textit{shell}, que es el entorno 
 Se utiliza para automatizar los ataques en el proyecto porque permite una incorporación directa y gradual de las órdenes ejecutadas de forma interactiva por un \emph{pentester}.
 
 Este lenguaje interpretado cuenta con muchas ventajas como son rapidez de ejecución, sintaxis clara y sencilla, y su portabilidad, pudiéndose ejecutar además en múltiples plataformas. Bash no solo reconoce órdenes, nos ayuda a agruparlos para realizar programas completos, sobretodo para la automatización (como es el caso de esta aplicación). 
-Este lenguaje ha sido utilizado, ademas de por sus multiples ventajas ya citadas, por el hallazgo de PixieScript, ya que al estar realizado en este lenguaje, su aprendizaje nos facilitaba la posibilidad de modificar y poder utilizarlo como plantilla.
+Este lenguaje ha sido utilizado, además de por sus múltiples ventajas ya citadas, por el hallazgo de PixieScript, ya que al estar realizado en este lenguaje, su aprendizaje nos facilitaba la posibilidad de modificar y poder utilizarlo como plantilla.
 
 %%%%%%ANTECEDENTES INFORME ATOMATIZADO%%%%
 \subsection{Sistemas de generación automática de informes}
@@ -847,7 +799,7 @@ Para las actualizaciones se emplearon las siguientes órdenes:
 
 El desarrollo de la aplicación que detecta las vulnerabilidades se llevó a cabo mediante la programación de la Raspberry Pi con lenguaje de programación bash (Ver código en ANEXO C).
 
-\section[Interfaz gráfica]{Interfaz gráfica simple e intuitiva para la aplicación.}
+\section[Interfaz gráfica]{Interfaz gráfica simple e intuitiva para la aplicación}
 %%%%INTERFAZ%%%%%
 Se pretende que la interfaz sea ejecutada por un comercial sin conocimientos informáticos previos, por ello se realiza un diseño sencillo de la misma.
 
@@ -864,6 +816,67 @@ Se pretende que la interfaz sea ejecutada por un comercial sin conocimientos inf
 
 La herramienta con la que se ha desarrollado la interfaz ha sido realizada en código bash.  Utiliza la biblioteca \textit{GTK dialog} para la gestión de pantalla, como interfaz gráfica. Pudiendo interactuar con diferentes botones que realizarán la tarea de análisis. 
 Esto conformaba como objetivo inicial del proyecto, pero gracias a PixieSript esta tarea se ha podido llevar a cabo con mayor facilidad.
+
+El código de Pixiescript ha sido analizado, y debido a su alineamiento con los objetivos del proyecto, se ha decidido tomarlo como base.  Aún así, se ha realizado una labor de análisis y modificación de Pixiescript, ya que no respondía exactamente a lo buscado en este proyecto, y han tenido que ser añadidas nuevas herramientas que eran objeto de este proyecto.
+
+A continuación se ofrece un listado de aquellas funciones que han sido modificadas y adecuadas para el proyecto y aquellas que han sido creadas para funciones determinadas de las que el origen carecía.
+
+Las funciones que han sido creadas o modificadas parcial o casi totalmente son las siguientes:
+\begin{itemize}
+	\item ScanearRedes()
+	\item ProcesarDatosEscaneoAirodump()
+	\item EsperarAcabarAircrack()
+	\item BuscarClienteConectado()
+	\item AircrackWEP()
+	\item AircrackWPA()
+	\item AnalizarPyrit()
+	\item DenegacionServicio()
+	\item CrearInformeWEP()
+	\item CrearInformeWPA()
+\end{itemize}
+
+Ademas, dentro de la interfaz PixieScript, tomada como base, se han añadido botones según necesidades del proyecto, y del mismo modo han sido eliminados los que para este caso no eran necesarios.
+Los botones creados son los siguientes:
+\begin{lstlisting}[label=nvinterfaz,caption=Botón aircrack]
+	<button>
+		<input file>'$ICONO_START_ATACK'</input>
+		<sensitive>false</sensitive>
+		<label>ATAQUE AIRCRACK</label>
+		<variable>BOTON_ATAQUE_AIRCRACK</variable>
+		<action>disable:BOTON_ATAQUE_AIRCRACK</action>
+		<action>disable:BOTON_INICIAR_ESCANEO</action>
+		<action>disable:BOTON_INICIAR_ATAQUE</action>
+		<action>disable:TABLA_SCAN</action>
+		<action>enable:BOTON_DETENER_ATAQUE</action>
+		<action function="command">nohup '$SCRIPT_FUNCIONES' 11 $TIEMPO_ATAQUE $TABLA_SCAN &> /dev/null & </action>
+		<action>enable:TimerAtaque</action>
+	</button>
+\end{lstlisting}
+
+\begin{lstlisting}[label=nvinterfaz1,caption=Ataque WPA]
+	<button>
+		<input file>'$ICONO_START_ATACK'</input>
+		<sensitive>false</sensitive>
+		<label>ATAQUE WPA</label>
+		<variable>BOTON_INICIAR_ATAQUE</variable>
+		<action>disable:BOTON_INICIAR_ATAQUE</action>
+		<action>disable:BOTON_INICIAR_ESCANEO</action>
+		<action>disable:BOTON_ATAQUE_AIRCRACK</action>
+		<action>disable:TABLA_SCAN</action>
+		<action>enable:BOTON_DETENER_ATAQUE</action>
+		<action function="command">nohup '$SCRIPT_FUNCIONES' 3 $TIEMPO_ATAQUE $TABLA_SCAN &> /dev/null & </action>
+		<action>enable:TimerAtaque</action>
+	</button>
+\end{lstlisting}	
+También, respecto a la interfaz, se ha añadido y adaptado la tabla principal donde se muestran las redes disponibles.
+\begin{lstlisting}[label=nvinterfaz2,caption=Tabla de redes]
+	<tree auto-refresh="false" selected-row="0"  column-sort-function="func1|func1|func1|func1|func1|func1|func1|func1" vscrollbar-policy="1">
+		<variable>TABLA_SCAN</variable>
+		<input file icon-column="0">"'"$ARCHIVO_REDES_SCAN"'"</input>
+		<label>N?  |BSSID                      |Channel    |ENC    |SE?AL |WPS Version| Locked    |ESSID                  </label>
+	</tree>
+\end{lstlisting}
+
 
 \begin{enumerate}
     \item Se inicia la aplicación \emph{SeguridadWifi}, se muestra la pantalla principal de la aplicación y se listan las interfaces WiFi disponibles para utilizar en el análisis de vulnerabilidades WiFi.
@@ -911,7 +924,7 @@ ListarTarjetasWifi() {
 }
 \end{lstlisting}
 
-\item En esta pantalla se muestra las tarjetas WiFi disponibles y se activa el modo monitor de la tarjeta seleccionada.
+\item En esta pantalla se muestran las tarjetas WiFi disponibles y se activa el modo monitor de la tarjeta seleccionada.
 
 \begin{figure}[H]
   \centering
@@ -1150,7 +1163,7 @@ AircrackWEP() {
 \end{lstlisting}
 
 
-\subsubsection{Denegación de servicios.}
+\subsubsection{Denegación de servicios}
 El objetivo de este ataque es dejar a los usuarios legítimos de una red Wi-Fi sin poder acceder a internet. Por lo tanto, se inunda con paquetes de desautenticación al punto de acceso o al cliente que decida.
 Como siempre, la tarjeta inalámbrica debe estar en modo monitor y escuchando en el canal específico. Así se desautenticará en un bucle infinito  al cliente o al punto de acceso que se seleccione.
 
@@ -1581,7 +1594,7 @@ La seguridad en las redes inalámbricas debería ser un objetivo imprescindible pa
 
 Como posibles estudios futuros, me gustaría seguir desarrollando la aplicación, ampliando el número de ataques y recogiendo mayor información en el informe automático.
 
-\section{Recomendaciones.}
+\section{Recomendaciones}
 \begin{itemize}
         \item Se debe tener en cuenta el alcance de nuestra red, ya que cuanto menos señal se propague fuera de las instalaciones menor será las posibilidades de que se acceda desde fuera.
         \item Por muy simple que parezca, es importante cambiar los datos de acceso al router que vienen por defecto. No olvidar cambiar la contraseña y utilizar contraseñas de al menos 16 caracteres, empleando mayúsculas minúsculas y caracteres especiales. 
@@ -1599,10 +1612,10 @@ Estas medidas no harán que su red sea invulnerable a cualquier ataque, pues eso 
 \appendix
 
 \chapter{Informe WEP}\label{anexo.A}
-\includepdf[pages=-]{informe_WEP}
-%\input{informe.tex}
+\includepdf[pages=-,frame,scale=0.8,clip,pagecommand={}]{informe_WEP}
+
 \chapter{Informe WPA}\label{anexo.B}
-\includepdf[pages=-]{informe-WPA}
+\includepdf[pages=-,frame,scale=0.8,clip,pagecommand={}]{informe-WPA}
 
 \chapter{Código}\label{anexo.C}
 %\lstinputlisting[label=Seguridad,

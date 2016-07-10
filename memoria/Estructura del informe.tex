@@ -1,0 +1,137 @@
+\chapter{Estructura del informe de pentest}
+Para la generación del informe,  del modelo NIST SP 800-115\footnote{\url{http://csrc.nist.gov/publications/nistpubs/800-115/SP800-115.pdf}}. El NIST es una agencia de la administración de tecnológia de Estados Unidos, que se encarga de promover la innovación y la competencia industrial. Este informe no obliga la utilización de ninguna estructura en concreto. 
+\section{Introducción}
+intriducción de la estrctura del informe.
+
+\subsection{Auditoría}\index{Auditoría etiqueta}
+Una auditoría de seguridad informática es una evaluación de los sistemas informáticos cuyo fin es detectar errores y fallas y que mediante un informe detallado entregamos al responsable con el propósito de garantizar el buen funcionamiento de los sistemas ,  en esta auditoria nos centraremos en los posibles fallos de la red wifi que seleccionemos y así descubrir:
+\begin{itemize}
+    	\item Redes disponibles a nuestro alcance.
+	\item Tipo de cifrado de estas redes y en canal que se encuentras.
+	\item Vulnerabilidades que pudieran presentarse en una revisión de las estaciones de trabajo, redes sin ningún tipo de cifrado, puntos de acceso falso.
+\end{itemize}
+     Además, una buena auditoría de seguridad, si es llevada a cabo por una consultora externa, señalará las brechas en sus defensas existentes.
+
+\subsection{Objectivo y alcance}\index{Objectivo y alcance}
+
+El propósito de este documento es proporcionar unas serie de pautas y directrices para la mayoría de las organizaciones en la planificación y la realización de la seguridad de la información y así comprender la situación aproximada de sus activos de información en cuanto a protección , control y medidas de seguridad. Uno de los objetivos principales es la búsqueda de vulnerabilidades en las redes wifi y verificar el cumplimiento de algún tipo de política de seguridad.
+Este informe no pretende presentar una seguridad de la información completa , sino más bien una visión general de los elementos  de seguridad técnica y la posibles fallas de seguridad y recomendaciones para su uso.
+Con este informe no pretendo que se tome como medida de seguridad, ni para remplazar algún tipo de auditoria de seguridad, sino más bien como medida para comprobar posibles vulnerabilidades importante en la red inalámbrica.
+
+
+\subsection{Audiencia}\index{Audiencia}
+
+El informe que se pretende generar irá dirigido al responsable de la empresa o al personal contratante de esta aplicación, siempre y cuando el mayor responsable esté de acuerdo.
+El material contenido en el documento no presentará un lenguaje muy específico y será de fácil comprensión para cualquier persona, aunque no disponga de conocimientos previos en este ámbito.
+
+%----------------------------------------------------------------------------------------
+%	seccion2
+%----------------------------------------------------------------------------------------
+
+\section{Pruebas de seguridad y examen general}
+Hay que tener en cuenta que una evaluación de seguridad de la información es el proceso de determinar la eficacia con que se evalúa una entidad. Según el modelo que estoy siguiendo,  se pueden encontrar tres tipos de métodos de evaluación para lograr esto : pruebas, el examen o la entrevista.
+\subsection{Metodología de evaluación de seguridad de la información}\index{Metodología de evaluación de seguridad de la información}
+Una metodología de evaluación de seguridad y documentación es muy beneficiosa, ya que gracias a ella se pueden :
+ \begin{itemize}
+   	\item Reducir al mínimo los riesgos de la prueba.
+	%\item Acelerar la transición del nuevo personal de evolución.
+	\item Limitar los recursos de direcciones asociadas con dicha evaluación.
+ \end{itemize}
+ Estas evaluaciones requieren de una serie de recursos como pueden ser el tiempo, el personal, el hardware y el software, y por tanto la disponibilidad de ellos a menudo es un factor limitante.
+
+\subsection{Técnicas de evaluación}\index{Técnicas de evaluación}
+Podemos contar con una gran cantidad de técnicas de evaluación, exámenes técnicos que se pueden utilizar para evaluar distintos niveles de seguridad de los sistemas o redes.
+\begin{itemize}
+   	\item Técnicas de revisión. 
+	\item Identificación de objetivos y técnicas de análisis.
+	\item Técnicas de vulnerabilidad. Estas técnicas de prueba corroboran la existencia de vulnerabilidades, y se pueden realizar de forma manual o como en este caso con herramientas automatizadas. Pueden ser pruebas de penetración, crackeo de contraseñas, ingeniería social \ldots
+\end{itemize}
+%----------------------------------------------------------------------------------------
+%	seccion3
+%----------------------------------------------------------------------------------------
+
+
+\section{Técnicas de Identificación y objetivos de vulnerabilidad}
+
+Con las técnicas de identificación me refiero al análisis de dispositivos activos, servicios asociados y analizarlos en busca de vulnerabilidades potenciales. Las empresas o organizaciones suelen utilizar técnicas, no técnicos para identificar los activos que deben ser analizados.
+
+\subsection{Análisis de vulnerabilidad}
+Muchos escáneres de vulnerabilidad están equipados para aceptar resultados de descubrimiento de red y el puerto de la red y la identificación del servicio, lo que reduce la
+cantidad de trabajo necesaria para el análisis de vulnerabilidades. Analizándolas, se puede ayudar a identificar versiones de software obsoletas, parches faltantes y errores de configuración, y validar el cumplimiento o desviaciones
+de la política de seguridad de una organización. Esto se realiza mediante la identificación de los sistemas operativos y las principales aplicaciones de software que se ejecutan en los hosts y emparejarlos con información sobre vulnerabilidades conocidas almacenadas en bases de datos de vulnerabilidad de los escáneres.
+Gracias a la búsqueda de vulnerabilidades podemos:
+ \begin{itemize}
+	 \item Verificar el cumplimiento del uso de las aplicaciones host y las políticas de seguridad.
+	\item Proporcionar información sobre los objetivos de las pruebas de penetración.
+	\item Proporcionar información sobre la manera de mitigar las vulnerabilidades descubiertas.
+   \end{itemize}
+    	
+\subsection{Escaneo inalámbrico}
+Las tecnologías inalámbricas, en su sentido más simple, permiten a uno o más dispositivos para comunicarse sin la
+la necesidad de conexiones físicas, tales como cables de red o periféricos. Se extienden de tecnologías sencillas como teclados y ratones inalámbricos a las redes de telefonía  y redes de área local inalámbrica. Como ya hemos dicho, disponer de una red inalámbrica segura debería de ser una obligación  para cualquier empresa. Las exploraciones inalámbricos pueden ayudar a las organizaciones a determinar las acciones correctivas para mitigar los riesgos y posibles futuros ataques.
+A la hora de planificar las evaluaciones técnicas de seguridad inalámbrica debemos tener en cuenta:
+ \begin{itemize}
+	\item La ubicación de la instalación que está siendo escaneada, ya que las proximidades de algún edificio colindante puede llevar a equivoco. 
+	\item La zona pública (por ejemplo, calles y áreas públicas comunes) o su ubicación en un área metropolitana ocupado puede aumentar el riesgo de amenazas inalámbricas
+	\item El nivel de seguridad de los datos que se transmiten a través de tecnologías inalámbricas.
+	\item Con qué frecuencia los dispositivos inalámbricos se conecten y desconecten, y los niveles de tráfico.
+ \end{itemize}
+ 
+\subsubsection{Escaneo pasivo inalámbrico}
+
+Este tipo de exploración pasiva se debe llevar a cabo periódicamente y así aumentar las medidas de seguridad inalámbricas que no transmiten datos, estas herramientas no afectaran al correcto funcionamiento de los dispositivos inalámbricos que estén en funcionamiento. Este examen dispone de una gran ventaja, al ser un escaneo pasivo no es detectado por algún tipo  de persona malintencionada u otros dispositivos. Esto reduce la probabilidad de que los individuos puedan evitar la detección mediante la desconexión o desactivación de los dispositivos inalámbricos no autorizados.
+
+\subsubsection{Escaneo activo inalámbrico}
+La información se recoge durante las exploraciones pasivas, buscando acoplarse a los dispositivos descubiertos donde pudiera haber algún tipo de vulnerabilidad. Estas técnicas de exploración deben realizarse con sumo cuidado, ya que se debe garantizar que no se analizaran dispositivos de organizaciones distintas que están dentro del alcance.
+Es importante evaluar la ubicación física de los dispositivos antes de empezar el escaneo activamente. Las organizaciones también deben tener cuidado en realizar búsquedas activas de dispositivos no autorizados que parecen estar operando dentro de las instalaciones de la organización.
+Tales dispositivos podrían pertenecer a un visitante a dicha empresa que sin darse cuenta con acceso inalámbrico habilitado,o para una organización vecina con un dispositivo que está cerca, pero no dentro, instalaciones de la organización.
+
+\subsubsection{Escaneo inalámbrico de localización}
+El personal de seguridad debe intentar localizar dispositivos sospechosos. Las señales de RF se propagan por el espacio, lo que es importante para entender cómo la tecnología inalámbrica es compatible con este proceso. Las capacidades de identificar procesos son útiles aquí, pero los principales factores necesarios para soportar esta capacidad son un operador experto y una adecuada antena inalámbrica.
+
+\subsection{Contraseña Cracking}
+
+Al introducir cualquier tipo de contraseña, debemos saber que se genera un hash de esta contraseña introducida para su posterior comprobación con un hash almacenado de las contraseñas del usuario. Al coincidir es cuando se autentica. Podemos decir, que el descifrado de contraseñas es un proceso de recuperar los hash de contraseñas almacenadas en algún sistema informático. Por lo general, se lleva a cabo durante las evaluaciones para saber si cuentas con contraseñas débiles.
+\subsection{Pruebas de Penetración}
+Las pruebas de penetración es la prueba de seguridad en el que los evaluadores imitan los posibles ataques del mundo real para identificar posibles métodos. Analizando así, las características de seguridad de una aplicación, sistema o red. A menudo implica el lanzamiento de algunos ataques a los sistemas reales y los datos que utilizan.
+ \subsubsection {Fases de la prueba de penetración.}
+ Podemos distinguir cuatro fases importantes:
+ \begin{itemize}
+	\item Planificación.
+	\item Descubrimiento
+	\item Ataque
+	\item Informe
+  \end{itemize}
+ 
+\subsubsection {Logística de Penetración} 
+Estas pruebas deben centrarse  y orientarse en cuanto a posibles defectos explotables en la implementación de la red inalámbrica, en mi caso, como a la gestión de aplicaciones,sistemas o redes. Estas pruebas reproducirán ataques dirigidos de una forma externa. Un escenario de prueba de penetración puede ser diseñado para simular un ataque en el interior, un ataque exterior, o ambos, se consideran métodos de pruebas de seguridad externas e internas.  
+
+
+%----------------------------------------------------------------------------------------
+%	seccion 4
+%----------------------------------------------------------------------------------------
+
+
+\section{Planificación de la evaluación de seguridad}
+Una planificación adecuada es fundamental para una evaluación de seguridad exitosa. En esta sección se proporciona orientación sobre la creación de una política de evaluación, priorización y programación de las evaluaciones, y hacer frente a las consideraciones logísticas. También proporciona recomendaciones para desarrollar una plan de evaluación y describe las consideraciones legales relacionadas con la evaluación de que las organizaciones pueden necesitar de la dirección.
+
+\subsection{Desarrollo de una política de evaluación}
+Las organizaciones deben desarrollar una política de evaluación de seguridad de la información para proporcionar la dirección y orientación para las evaluaciones de seguridad. Esta política debe identificar los requisitos de evaluación de la seguridad,
+y obedecer a los individuos responsables de garantizar que las evaluaciones cumplen con los requisitos. Debe abordar:
+ \begin{itemize}
+	\item Requisitos de la organización con la que las evaluaciones deben cumplir.	
+	\item Los roles y responsabilidades apropiadas (como mínimo, para aquellas personas que se aprueba y la ejecución de las evaluaciones)
+	\item Tiempos fijados de evaluación
+  \end{itemize}
+\subsection{Consideraciones legales}
+Los posibles problemas legales deben abordarse antes de que dicha evaluación comience. Si la organización correspondiente autoriza a una entidad externa llevar a cabo una evaluación de seguridad, los departamentos legales de cada organización deben estar involucrados y fijar las pautas correspondientes.
+%----------------------------------------------------------------------------------------
+%	seccion 5
+%----------------------------------------------------------------------------------------
+\section{Ejecución de la evaluación de seguridad}
+
+
+
+%\subsubsection{Recopilación  de datos}
+%\subsubsection{Almacenamiento de datos}
+%\subsubsection{Datos Transmitidos}

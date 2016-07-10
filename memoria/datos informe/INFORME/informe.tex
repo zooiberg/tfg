@@ -1,0 +1,178 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PAQUETES Y OTROS DOCUMENTOS DE CONFIGURACION
+%----------------------------------------------------------------------------------------
+\documentclass[a4paper,openright,12pt, spanish]{report} % Tamaño de letra predeterminado y ecuaciones - justificado a la izquierda
+\usepackage[top=3cm,bottom=3cm,left=3.2cm,right=3.2cm,headsep=10pt,letterpaper]{geometry} % Margenes de las Paginas
+%\usepackage[spanish,activeacute]{babel}
+%\usepackage[spanish]{label}
+%\usepackage{ucs}
+%\usepackage[utf-8]{inputenc}
+\usepackage{graphicx} 
+% configuración de la fuente
+\usepackage{bookman} %bookman
+\usepackage{microtype} % Ligeramente ajustar el espaciado de letra para la estética
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc} % Requerido para la inclusión de letras con acentos
+\usepackage{fancyhdr}
+\usepackage{verbatim}
+\usepackage{import}
+
+% Bibliography
+%\begin{thebibliography}{99} 
+%\bibitem{ref1} Technical Guide to Information Security Testing and Assessment, Karen Scarfone, Murugiah Souppaya, Amanda Cody, Angela Orebaugh, Recommendations of the National Institute of Standards and Technology, September 2008.
+%\end{thebibliography}
+\usepackage[style=alphabetic,sorting=nyt,sortcites=true,autopunct=true,autolang=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
+\addbibresource{bibliography.bib} % BibTeX bibliography file
+\defbibheading{bibempty}{}
+
+%\input{structure} % insertar el archivo commands.tex que contiene la mayoría de la estructura detrás de la plantilla
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\begingroup
+\thispagestyle{empty}
+\begin{picture}(18,4)
+\put(50,-80){\includegraphics[width=4cm,height=4cm]{icono.jpeg}}
+\put(-150,-80){\includegraphics[width=4cm,height=4cm]{uclm.png}}
+\end{picture}\centering
+\vspace*{5cm}
+\par\normalfont\fontsize{35}{35}\sffamily\selectfont
+\textbf{Informe de seguridad informática PYMES}\\
+{\LARGE Redes Wifi}\par % Titulo del libro
+\vspace*{1cm}
+{\Huge Luis Ramírez de Diego}\par % Nombre del Autor
+\date{\today}
+\endgroup
+
+%----------------------------------------------------------------------------------------
+%	COPYRIGHT PAGE
+%----------------------------------------------------------------------------------------
+
+\newpage
+~\vfill
+\thispagestyle{empty}
+
+%\noindent Copyright \copyright\ 2014 Andrea Hidalgo\\ % Copyright notice
+
+\noindent \textsc{Informe de Seguridad Informática en la pequeña y mediana empresa.}\\
+
+%\noindent \textsc{github.com/.......}\\ % URL
+
+\noindent Informe de seguridad informática realizado durante el Trabajo Final de Carrera del alumno Luis Ramírez de Diego en el año lectivo 2015/2016 y supervisado por el profesor y tutor del proyecto, Francisco Moya Fernandez\\ % License information
+
+\noindent \textit{Primera actualización, Junio 2016} % Printing/edition date
+
+%----------------------------------------------------------------------------------------
+%	TABLA DE CONTENIDOS	
+%----------------------------------------------------------------------------------------
+
+%\chapterimage{head1.png} % Tabla de contenido. Titulo de la imagen
+
+\pagestyle{empty} % No titulos
+
+\tableofcontents % Imprimir la tabla de contenidos en sí
+
+%\cleardoublepage % Obliga el primer capítulo se empieza en una página impar por lo que está a la derecha
+
+\pagestyle{fancy} % Imprimir encabezados de nuevo
+
+%----------------------------------------------------------------------------------------
+%	CAPITULO 1
+%----------------------------------------------------------------------------------------
+
+
+\chapter{Resumen ejecutivo.}
+Wireless Cloud Security  fue contratado para llevar a cabo una prueba de penetración con el fin de determinar su exposición a un ataque dirigido, a una red inalámbrica y así analizar las posibles vulnerabilidades. El objetivo es estudiar las prestaciones,  limitaciones y seguridades de las tecnologías de red WIFI de la empresa (PYMEs). Así realizar pruebas para demostrar la vulnerabilidad de acceso a los protocolos de seguridad y proporcionar un diseño y una configuración de red inalámbrica segura. Alguno de los objetivos que se pretende conseguir son:
+\begin{itemize}
+    	\item Identificar si un atacante podría penetrar las defensas de esta empresa.
+	\item Determinar el impacto de un fallo de seguridad.
+	\item Confidencialidad de los datos privados de la compañía.
+	\item La infraestructura interna y la disponibilidad de los sistemas de información.
+\end{itemize}
+Los esfuerzos fueron colocados en la identificación y explotación de las debilidades de seguridad que podría permitir a un atacante obtener acceso no autorizado a datos de la organización. Los ataques se llevaran a cabo con el nivel de acceso mínimo, es decir sin información previa. De esta forma se asemejara a los ataques realizados por parte de una persona externa a la organización y con ello poder señalar las brechas existentes. La evaluación se llevó a cabo de acuerdo con las recomendaciones formuladas en el NIST SP 800 a 115\footnote{\url{http://csrc.nist.gov/publications/nistpubs/800-115/SP800-115.pdf}} con todas las pruebas y las acciones que se realizan en condiciones controladas
+
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER 2
+%----------------------------------------------------------------------------------------
+
+\chapter{Resumen de Resultados}
+
+\section{Fase de descubrimiento.}
+Generamos información acerca de las redes que están presentes en la empresa Ficticia para llevar a cabo un test de penetración. Esta fase es muy importante porque definimos los objetivos previos de las pruebas y generamos la información acerca de las posibles vulnerabilidades potenciales.  Nuestro objetivo en particular es conseguir la siguiente información: 
+
+ \begin{itemize}
+   	\item Identificar redes ocultas.
+	\item Identificar que tipo de clientes hay conectados a la red.
+	\item Tipos de autentificación utilizadas por las redes.  Intentando encontrar las redes abiertas o que utilizan autentificación WEP y otras redes vulnerables.
+ \end{itemize}
+
+Para descubrir las redes realizamos un escaneo de la red inalámbrica activa y pasiva.
+La activa implica enviar paquetes a puntos de acceso visibles y la pasiva capturar y analizar el trafico de la red inalámbrica permitiendo descubrir los puntos de accesos ocultos.
+\section{Configurar tarjeta inalambrica.}
+Para configurar nuestra tarjeta en modo monitor confirmaremos que nuestra tarjeta inalámbrica se ha detectado y que el controlador se ha cargado correctamente.
+
+\begingroup
+	\fontsize{10pt}{10pt}=\selectfont
+	\verbatiminput{../LOGS/LOG_TARJETA_WIFI.LOG}
+\endgroup
+
+Una vez se ha detectado la interfaz wifi, procedemos a activarlo en modo monitor utilizando la utilidad "airmon-ng" disponible en la distribución Kali Linux. Esta aplicación inicializará la interfaz wifi anteriormente detectada con el fín de poder capturar las redes y paquetes inalambricas de la zona.\\
+
+\begingroup
+	\fontsize{9pt}{9pt}=\selectfont
+	\verbatiminput{../LOGS/AIRMONG.LOG}
+\endgroup
+
+
+Con estos pasos hemos creado con éxito un interfaz en modo monitor llamado wlan0mon. Esta interfaz nos ayudara a rastrear los paquetes inalámbricos de la zona.
+
+\section{Captura de paquetes inalámbricos.}
+Para poder escanear las redes y clientes wifi en el alcace de nuestra zona utilizaremos la utilidad "airodump-ng" también disponible en la distribución kali Linux. Con esta exploración hemos identificado las siguientes redes y clientes con los que procederemos a detectar posibles vulnerabilidades.\\
+
+\begingroup
+	\fontsize{10pt}{10pt}=\selectfont
+	\verbatiminput{../LOGS/AIRODUMP.LOG}
+\endgroup
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER 3
+%----------------------------------------------------------------------------------------
+
+
+\chapter{Defecto de cifrado WLAN.}
+
+Con las técnicas de identificación me refiero al análisis de dispositivos activos, sus puertos y servicios asociados y analizarlos en busca de vulnerabilidades potenciales. Las empresas o organizaciones suelen utilizar técnicas, no técnicos para identificar los activos que deben ser analizados.
+En los últimos tiempos, los ataques son dirigidos poco a poco a WPA. A pesar de que no hay ningún ataque disponible al público en la actualidad para romper WPA en todas las condiciones hay ataques que son factibles bajo circunstancias especiales. 
+	Las WLAN transmiten datos a través del aire y por lo tanto hay una necesidad inherente a la protección de los datos para que sean confidenciales. Esto se logra mediante los siguientes  cifrados.\\
+
+\begin{itemize}
+   	\item Wired Equivalent Privacy (WEP) 
+	\item WiFi Protected Access (WPA) 
+	\item WiFi Protetion Access v2 (WPA2)
+\end{itemize}
+
+\input{INF-WEP}
+
+\input{INF-SUBSWEP1}
+
+\input{INF-SUBSDOS}
+
+
+\section{Conclusión}
+
+\section{Recomendaciones}
+
+\vfill
+\textit{"Preguntarse cuándo los ordenadores podrán pensar es como preguntarse cuándo los submarinos podrán nadar"-- Edsger W. Dijkstra}
+\end{document}
+
+
+

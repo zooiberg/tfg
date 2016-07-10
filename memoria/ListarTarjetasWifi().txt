@@ -17,16 +17,16 @@ ListarTarjetasWifi() {
     
     if [ "$TARJETAS_WIFI_DISPONIBLES" = "" ]
     then
-	exit 1
+        exit 1
     else
-	let x=1
-	while [ $x -le $N_TARJETAS_WIFI ]
-	do
-		INTERFAZ=`echo $TARJETAS_WIFI_DISPONIBLES | awk '{print $'$x'}'`
-		DRIVER=`ls -l /sys/class/net/$INTERFAZ/device/driver | sed 's/^.*\/\	([a-zA-Z0-9_-]*\)$/\1/'`
-		echo '<item>'$INTERFAZ' '$DRIVER'</item>'
-		x=$((x+1))
-	done
+        let x=1
+        while [ $x -le $N_TARJETAS_WIFI ]
+        do
+                INTERFAZ=`echo $TARJETAS_WIFI_DISPONIBLES | awk '{print $'$x'}'`
+                DRIVER=`ls -l /sys/class/net/$INTERFAZ/device/driver | sed 's/^.*\/\	([a-zA-Z0-9_-]*\)$/\1/'`
+                echo '<item>'$INTERFAZ' '$DRIVER'</item>'
+                x=$((x+1))
+        done
     fi
    echo "</comboboxtext>"
    unset INTERFACES_MONITOR CONT CUANTAS MON TARJETAS_WIFI_DISPONIBLES

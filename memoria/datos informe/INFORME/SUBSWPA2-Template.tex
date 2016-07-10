@@ -1,0 +1,27 @@
+\subsection{Rompiendo Contraseña.}
+
+Buscamos descifrar la contraseña de acceso al dispositivo emisor de la señal inalámbrica. Con ello podremos realizar conexión fraudulenta al mismo, para tener acceso a la red inalámbrica y servicios adicionales presentes como por ejemplo, Bases de Datos e Intranet Corporativa, u obtener información sensible. La prueba comprende cuatro etapas: Exploración, Interceptación, Inyección y Descifrado. Para llevarla a cabo, se requiere una tarjeta de red inalámbrica con capacidad de inyección, así como la suite de aplicaciones de Aircrack, incluida en la distribución Kali Linux.
+
+Primeramente iniciamos nuestra interfaz wifi sobre el canal AP que analizamos.\\
+
+\textbf{\VAR{x1}}\\
+
+A continuación intentamos capturar los 4 paquetes del handshake en el momento que un cliente se autentifica con el AP que estamos analizando.\\
+
+\textbf{\VAR{x2}}\\
+
+Luego utilizamos aireplay-ng para deauntetificar al cliente conectado. Intentamos enviar un mensaje al cliente para desasociarlo de la AP que estamos analizando.\\
+
+\textbf{\VAR{x3}}\\
+
+Finalmente intentamos conseguir la clave WPA/WPA2 pre-compartida utilizando aircrack-ng y con la ayuda de un diccionario de posibles palabras. Básicamente aircrack-ng compruena cada una de las palabras si coincide con la clave.\\
+
+\textbf{\VAR{x4}}\\
+
+Este análisis se ha realizado en un tiempo de \textbf{\VAR{x5}} segundos, y \textbf{\VAR{x6}} se ha podido encontrar la clave. El detalle es el siguiente.\\
+
+\begingroup
+        \fontsize{7pt}{7pt}=\selectfont
+        \verbatiminput{../AIRCRACK/\VAR{x7}}
+\endgroup
+

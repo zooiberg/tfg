@@ -1,0 +1,73 @@
+\select@language {spanish}
+\contentsline {chapter}{Lista de figuras}{III}{chapter*.1}
+\contentsline {chapter}{Lista de tablas}{V}{chapter*.2}
+\contentsline {chapter}{Resumen}{I}{section*.4}
+\contentsline {chapter}{\numberline {1}Introducci\'on}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Motivaci\'on}{1}{section.1.1}
+\contentsline {section}{\numberline {1.2}Objetivos}{2}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Objetivo general}{2}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}Objetivos secundarios}{2}{subsection.1.2.2}
+\contentsline {section}{\numberline {1.3}Estructura de la memoria}{3}{section.1.3}
+\contentsline {chapter}{\numberline {2}Antecedentes}{4}{chapter.2}
+\contentsline {section}{\numberline {2.1}Seguridad inform\'atica de las PYMEs}{4}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Herramientas de seguridad}{6}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Limitaciones de seguridad}{8}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}Personal encargado de la seguridad de la informaci\'on}{9}{subsection.2.1.3}
+\contentsline {section}{\numberline {2.2}Seguridad inform\'atica en redes WiFi}{11}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Est\'andares WI-FI}{12}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Comunicaciones Inal\'ambricas}{15}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Protocolos inal\'ambricos}{16}{subsection.2.2.3}
+\contentsline {subsubsection}{Protocolo WEP}{16}{section*.15}
+\contentsline {paragraph}{Autenticaci\'on}{16}{section*.16}
+\contentsline {paragraph}{Confidencialidad}{16}{section*.17}
+\contentsline {paragraph}{Integridad}{18}{section*.19}
+\contentsline {subsubsection}{Protocolo WPA/WPA2}{18}{section*.20}
+\contentsline {paragraph}{WPA2 Personal}{20}{section*.22}
+\contentsline {paragraph}{WPA2 Enterprise}{20}{section*.23}
+\contentsline {paragraph}{WPS}{20}{section*.24}
+\contentsline {section}{\numberline {2.3}Pentest de WiFi}{20}{section.2.3}
+\contentsline {section}{\numberline {2.4}Antecedentes del proyecto}{22}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Dispositivos para la automatizaci\'on}{22}{subsection.2.4.1}
+\contentsline {subsubsection}{Hardware}{22}{section*.25}
+\contentsline {paragraph}{Raspberry Pi}{22}{section*.26}
+\contentsline {subsubsection}{Detalles del Software}{23}{section*.28}
+\contentsline {paragraph}{GNU/Linux}{23}{section*.29}
+\contentsline {subparagraph}{Kali Linux}{24}{section*.30}
+\contentsline {paragraph}{Suite aircrack-ng}{25}{section*.32}
+\contentsline {paragraph}{PixieScript}{27}{section*.35}
+\contentsline {paragraph}{Lenguaje Bash}{28}{section*.36}
+\contentsline {subsection}{\numberline {2.4.2}Sistemas de generaci\'on autom\'atica de informes}{28}{subsection.2.4.2}
+\contentsline {subsubsection}{Python}{29}{section*.37}
+\contentsline {paragraph}{Jinja2}{29}{section*.38}
+\contentsline {subsubsection}{\LaTeX {}}{29}{section*.39}
+\contentsline {chapter}{\numberline {3}Desarrollo}{30}{chapter.3}
+\contentsline {section}{\numberline {3.1}Creaci\'on de una aplicaci\'on}{30}{section.3.1}
+\contentsline {paragraph}{Soporte de tarjetas inal\'ambricas}{33}{section*.43}
+\contentsline {subsection}{\numberline {3.1.1}Instalaci\'on y configuraci\'on del sistema operativo}{34}{subsection.3.1.1}
+\contentsline {section}{\numberline {3.2}Interfaz gr\'afica}{35}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Descripci\'on de la interfaz}{36}{subsection.3.2.1}
+\contentsline {section}{\numberline {3.3}An\'alisis de vulnerabilidades}{45}{section.3.3}
+\contentsline {subsubsection}{Ataque red WEP}{47}{section*.52}
+\contentsline {subsubsection}{Denegaci\'on de servicios}{48}{section*.53}
+\contentsline {subsubsection}{Ataque WPA con WPS activado}{49}{section*.54}
+\contentsline {paragraph}{reaver:}{49}{section*.55}
+\contentsline {paragraph}{Pixiewps:}{52}{section*.56}
+\contentsline {subsubsection}{Ataque por fuerza bruta WPA/WPA2 }{54}{section*.57}
+\contentsline {subsubsection}{Utilizamos Pyrit}{56}{section*.58}
+\contentsline {section}{\numberline {3.4}Generaci\'on de informe}{57}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Pautas y seguimiento para la creaci\'on del informe}{57}{subsection.3.4.1}
+\contentsline {paragraph}{Generar informe WEP.}{57}{section*.60}
+\contentsline {subsection}{\numberline {3.4.2}SECWEP1.py}{58}{subsection.3.4.2}
+\contentsline {subsubsection}{SECWEP1-Template.tex}{59}{section*.62}
+\contentsline {subsubsection}{INF-WEP1.tex}{59}{section*.63}
+\contentsline {subsection}{\numberline {3.4.3}SUBSDOS.py}{60}{subsection.3.4.3}
+\contentsline {subsubsection}{SUBSDOS-Template.tex}{60}{section*.64}
+\contentsline {subsubsection}{INF-SUBSDOS.tex}{61}{section*.65}
+\contentsline {subsection}{\numberline {3.4.4}SUBSWEP1.py}{62}{subsection.3.4.4}
+\contentsline {subsubsection}{SUBSWEP1-Template.tex}{63}{section*.66}
+\contentsline {subsubsection}{INF-SUBSWEP1.tex}{64}{section*.67}
+\contentsline {chapter}{\numberline {4}Conclusiones y propuestas}{67}{chapter.4}
+\contentsline {section}{\numberline {4.1}Recomendaciones}{68}{section.4.1}
+\contentsline {chapter}{\numberline {A}Informe WEP}{69}{appendix.Alph1}
+\contentsline {chapter}{\numberline {B}Informe WPA}{80}{appendix.Alph2}
+\contentsline {chapter}{\numberline {C}C\'odigo}{95}{appendix.Alph3}

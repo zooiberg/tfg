@@ -1,0 +1,23 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {1}Resumen ejecutivo}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {2}Resultados}{5}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.1}Fase de descubrimiento}{5}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.2}Configurar tarjeta inal\'ambrica}{5}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.3}Puntos de Acceso.}{6}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {3}Defecto de cifrado WLAN}{7}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.1}Cifrado WPA-WPA2}{7}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1.1}Ataque Reaver-Pixiewps}{8}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1.2}Rompiendo Contrase\~na.}{9}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1.3}Denegacion de Servicios (DoS).}{10}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.2}Recomendaciones}{11}

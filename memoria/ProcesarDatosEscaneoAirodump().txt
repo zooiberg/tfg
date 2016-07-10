@@ -1,124 +1,123 @@
 ProcesarDatosEscaneoAirodump() {
-        echo "***************** ProcesarDatosScaneo airodump-ng"
-     if [ ! -f "$ARCHIVO_CAPTURAS-01.csv" ] 
-     then 
+    echo "***************** ProcesarDatosScaneo airodump-ng"
+    if [ ! -f "$ARCHIVO_CAPTURAS-01.csv" ] 
+    then 
         echo "ERROR: Ha ocurrido un error escaneando redes" > "$ARCHIVO_STATUSBAR"
         echo "1" > "$ARCHIVO_LOG"
         return
-      fi
-          Line_CSV=`wc -l "$ARCHIVO_CAPTURAS-01.csv" | awk '{print $1}'`
-          HeTa=`cat "$ARCHIVO_CAPTURAS-01.csv" | egrep -a -n '(Station|CLIENT)' | awk -F : '{print $1}'`
-          HeTa=`expr $HeTa - 1`
-          head -n $HeTa "$ARCHIVO_CAPTURAS-01.csv" &> "$ARCHIVO_CAPTURAS-02.csv"
-          tail -n +$HeTa "$ARCHIVO_CAPTURAS-01.csv" &> "$ARCHIVO_CAPTURAS-clients.csv"
+    fi
+    Line_CSV=`wc -l "$ARCHIVO_CAPTURAS-01.csv" | awk '{print $1}'`
+    HeTa=`cat "$ARCHIVO_CAPTURAS-01.csv" | egrep -a -n '(Station|CLIENT)' | awk -F : '{print $1}'`
+    HeTa=`expr $HeTa - 1`
+    head -n $HeTa "$ARCHIVO_CAPTURAS-01.csv" &> "$ARCHIVO_CAPTURAS-02.csv"
+    tail -n +$HeTa "$ARCHIVO_CAPTURAS-01.csv" &> "$ARCHIVO_CAPTURAS-clients.csv"
 
-          LINEAS_LOG=$(cat "$ARCHIVO_CAPTURAS-02.csv" | wc -l | awk {' print$1 '})
+    LINEAS_LOG=$(cat "$ARCHIVO_CAPTURAS-02.csv" | wc -l | awk {' print$1 '})
     
-       if [ $LINEAS_LOG -eq 0 ] 
-       then 	
-           echo "ERROR: No se han detectado redes con WPS activo" > "$ARCHIVO_STATUSBAR"
-           echo "1" > "$LOG_ESTADO_ESCANEO"
-           return
-        fi
-          rm $ARCHIVO_REDES_SCAN
-          touch $ARCHIVO_REDES_SCAN
-          i="0"
-          NUMRED="0"
-          echo "	BSSID			CANAL	ENC	POWER	VEL	CLIENTE		ESSID" >> "$LOG_AIRODUMP"
-          echo "----------------------------------------------" >> "$LOG_AIRODUMP"
-          while IFS=, read MAC FTS LTS CHANNEL SPEED PRIVACY CYPHER AUTH POWER BEACON IV LANIP IDLENGTH 
-          ESSID KEY
-       do	    
-           v="0"
-           length=${#MAC}
-           PRIVACY=$(echo $PRIVACY| tr -d "^ ")
-           PRIVACY=${PRIVACY:0:4}
-          if [ $length -ge 17 ]
-          then
-              i=$(($i+1))
-                if [ $i != 0 ]
-                then
-                   d=1
-                else
-                   d=0
-                 fi 
-               POWER=`expr $POWER + 100`
-               CLIENT=`cat $ARCHIVO_CAPTURAS-clients.csv | grep $MAC`
-                Ver_vun=`echo $MAC | cut -c 1-8`
-                  if [ "$CLIENT" != "" ]
-                  then
-                     CLIENT="Yes"
-                  else
-                     CLIENT="No"
-                  fi
-                  if [ "$i" -lt "10" ]
-                  then
-                     echo $i
-                  else
-                     echo $i
-                  fi
-                  if [ "$CLIENT" == "Yes" ]
-                  then
-                     echo -e -n $BGreen"$MAC\t"
-                  else
-                     echo -e -n $BYellow"$MAC\t"
-                  fi
-                     echo -e -n $BWhite"$CHANNEL\t"
-                     echo -e -n $BWhite"$PRIVACY\t"
-                  if [ $POWER -ge 40 ]
-                  then
-                     echo -e -n $Green"$POWER%\t"
-                     elif [ $POWER -ge 30 ]
-                  then
-                     echo -e -n $Yellow"$POWER%\t"
-                  else
-                     echo -e -n $Red"$POWER%\t"
-                  fi
-                  if [ "$CLIENT" == "Yes" ]
-                  then
-                      echo -e -n $Green"$CLIENT\t"
-                  else
-                      echo -e -n $Red"$CLIENT\t"
-                  fi
-                      echo -e $BWhite"$ESSID\t"
-	              IDLENGTH=$IDLENGTH
-                      ESSID[$i]=$ESSID
-                      CHANNEL[$i]=$CHANNEL
-                      BSSID[$i]=$MAC
-                      PRIVACY[$i]=$PRIVACY
-                      SPEED[$i]=$SPEED
-                      CHANNEL=$(echo $CHANNEL|tr -d [:space:])
-                      SPEED=$(echo $SPEED|tr -d [:space:])
-	          if [ "$ESSID" == " " ]
-	          then
-                       ESSID="<length:0>"
-                   else
-                        X=$(echo $ESSID | grep 'x00')
-                   if [ "$X" != " " ]
-                   then
-                        ESSID=$(echo $ESSID | awk -F 'x00' '{print $1}' | awk -F '\' '{print $1}')
-                        echo "ESSID1: $ESSID"
-                   fi
-                        ESSID=$(echo $ESSID|sed 's/^ //g')
-           fi
-                    ESTADO="gtk-apply"
-                    NUMRED=`expr $NUMRED + 1`
-                    VERWPS="1.0"
-                    ESWPS="NO"
-                    if [ $PRIVACY == "WEP" ] 
-                    then
-                          VERWPS="NO"
-                    fi
-                       echo $MAC$'\t'$CHANNEL$'\t'$PRIVACY$'\t'$POWER$'\t'$SPEED$'\t'$CLIENT$'\t'$ESSID"" >> "$LOG_AIRODUMP"
-                       echo $ESTADO"|"$NUMRED"|"$MAC"|"$CHANNEL"|"$PRIVACY"|"$POWER"|"$VERWPS"|"$ESWPS"|"$ESSID"" >>
-                       "$ARCHIVO_REDES_SCAN"  
+    if [ $LINEAS_LOG -eq 0 ] 
+    then 	
+        echo "ERROR: No se han detectado redes con WPS activo" > "$ARCHIVO_STATUSBAR"
+        echo "1" > "$LOG_ESTADO_ESCANEO"
+        return
+    fi
+    rm $ARCHIVO_REDES_SCAN
+    touch $ARCHIVO_REDES_SCAN
+    i="0"
+    NUMRED="0"
+    echo "	BSSID			CANAL	ENC	POWER	VEL	CLIENTE		ESSID" >> "$LOG_AIRODUMP"
+    echo "----------------------------------------------" >> "$LOG_AIRODUMP"
+    while IFS=, read MAC FTS LTS CHANNEL SPEED PRIVACY CYPHER AUTH POWER BEACON IV LANIP IDLENGTH ESSID KEY
+    do	    
+        v="0"
+        length=${#MAC}
+        PRIVACY=$(echo $PRIVACY| tr -d "^ ")
+        PRIVACY=${PRIVACY:0:4}
+        if [ $length -ge 17 ]
+        then
+            i=$(($i+1))
+            if [ $i != 0 ]
+            then
+                d=1
+            else
+                d=0
             fi 
-          done < "$ARCHIVO_CAPTURAS-02.csv"
-      	
-	  if [ $ATAQUE_ACABADO = "NO" ]
-          then 
-               echo "DATOS PROCESADOS CON EXITO, ESCANEO FINALIZADO" > $ARCHIVO_STATUSBAR
-               echo "0" > $ARCHIVO_LOG
-               echo -n true > $ARCHIVO_RADIOBUTT
-          fi
+            POWER=`expr $POWER + 100`
+            CLIENT=`cat $ARCHIVO_CAPTURAS-clients.csv | grep $MAC`
+            Ver_vun=`echo $MAC | cut -c 1-8`
+            if [ "$CLIENT" != "" ]
+            then
+                CLIENT="Yes"
+            else
+                CLIENT="No"
+            fi
+            if [ "$i" -lt "10" ]
+            then
+                echo $i
+            else
+                echo $i
+            fi
+            if [ "$CLIENT" == "Yes" ]
+            then
+                echo -e -n $BGreen"$MAC\t"
+            else
+                echo -e -n $BYellow"$MAC\t"
+            fi
+            echo -e -n $BWhite"$CHANNEL\t"
+            echo -e -n $BWhite"$PRIVACY\t"
+            if [ $POWER -ge 40 ]
+            then
+                echo -e -n $Green"$POWER%\t"
+            elif [ $POWER -ge 30 ]
+            then
+                echo -e -n $Yellow"$POWER%\t"
+            else
+                echo -e -n $Red"$POWER%\t"
+            fi
+            if [ "$CLIENT" == "Yes" ]
+            then
+                echo -e -n $Green"$CLIENT\t"
+            else
+                echo -e -n $Red"$CLIENT\t"
+            fi
+            echo -e $BWhite"$ESSID\t"
+	    IDLENGTH=$IDLENGTH
+            ESSID[$i]=$ESSID
+            CHANNEL[$i]=$CHANNEL
+            BSSID[$i]=$MAC
+            PRIVACY[$i]=$PRIVACY
+            SPEED[$i]=$SPEED
+            CHANNEL=$(echo $CHANNEL|tr -d [:space:])
+            SPEED=$(echo $SPEED|tr -d [:space:])
+	    if [ "$ESSID" == " " ]
+	    then
+                ESSID="<length:0>"
+            else
+                X=$(echo $ESSID | grep 'x00')
+                if [ "$X" != " " ]
+                then
+                    ESSID=$(echo $ESSID | awk -F 'x00' '{print $1}' | awk -F '\' '{print $1}')
+                    echo "ESSID1: $ESSID"
+                fi
+                ESSID=$(echo $ESSID|sed 's/^ //g')
+            fi
+            ESTADO="gtk-apply"
+            NUMRED=`expr $NUMRED + 1`
+            VERWPS="1.0"
+            ESWPS="NO"
+            if [ $PRIVACY == "WEP" ] 
+            then
+                VERWPS="NO"
+            fi
+            echo $MAC$'\t'$CHANNEL$'\t'$PRIVACY$'\t'$POWER$'\t'$SPEED$'\t'$CLIENT$'\t'$ESSID"" >> "$LOG_AIRODUMP"
+            echo $ESTADO"|"$NUMRED"|"$MAC"|"$CHANNEL"|"$PRIVACY"|"$POWER"|"$VERWPS"|"$ESWPS"|"$ESSID"" >>
+            "$ARCHIVO_REDES_SCAN"  
+        fi 
+    done < "$ARCHIVO_CAPTURAS-02.csv"
+    
+    if [ $ATAQUE_ACABADO = "NO" ]
+    then 
+        echo "DATOS PROCESADOS CON EXITO, ESCANEO FINALIZADO" > $ARCHIVO_STATUSBAR
+        echo "0" > $ARCHIVO_LOG
+        echo -n true > $ARCHIVO_RADIOBUTT
+    fi
 }
