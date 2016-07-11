@@ -5,7 +5,7 @@
 \contentsline {section}{\numberline {2.2}Configuraci\'on en modo monitor}{5}{section.2.2}
 \contentsline {section}{\numberline {2.3}Puntos de Acceso}{6}{section.2.3}
 \contentsline {chapter}{\numberline {3}Defecto de cifrado WLAN}{7}{chapter.3}
-\contentsline {section}{\numberline {3.1}Encriptacion WEP}{7}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Ataque a red Wifi con cifrado WEP}{8}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Denegacion de Servicios (DoS).}{9}{subsection.3.1.2}
+\contentsline {section}{\numberline {3.1}Encriptaci\'on WEP}{7}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Ataque a red WiFi con cifrado WEP}{8}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Denegaci\'on de Servicios (DoS).}{9}{subsection.3.1.2}
 \contentsline {section}{\numberline {3.2}Recomendaciones}{10}{section.3.2}

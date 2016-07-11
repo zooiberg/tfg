@@ -1,0 +1,417 @@
+#!/bin/bash
+# VERSION DEL SCRIPT
+VERSION="v1.0"
+
+#CARPETAS
+RUTA_BASE=`pwd`
+RUTA_ICONOS=$RUTA_BASE"/ICONOS/"
+RUTA_LOGS=$RUTA_BASE"/LOGS/"
+RUTA_SCRIPTS=$RUTA_BASE"/SCRIPTS/"
+RUTA_AIRCRACK="$RUTA_BASE/AIRCRACK"
+RUTA_INFORME="$RUTA_BASE/INFORME"
+
+export RUTA_AIRCRACK
+export RUTA_INFORME
+
+
+# Logs
+ARCHIVO_STATUSBAR=$RUTA_LOGS"STATUSBAR.LOG"
+ARCHIVO_LOG=$RUTA_LOGS"VARIOS.LOG"
+ARCHIVO_REDES_SCAN=$RUTA_LOGS"SCAN.LOG"
+ARCHIVO_DETENER_SCAN=$RUTA_LOGS"DETENER_SCAN"
+ARCHIVO_DETENER_ATAQUE=$RUTA_LOGS"DETENER_ATAQUE"
+ARCHIVO_TIPO_ATAQUE=$RUTA_LOGS"TIPO_ATAQUE"
+ARCHIVO_TXT_ATAQUE=$RUTA_LOGS"TXT_ATAQUE"
+ARCHIVO_RADIOBUTTON=$RUTA_LOGS"RADIOBUTTON"
+LOG_AIRODUMP=$RUTA_LOGS"AIRODUMP.LOG"
+LOG_TARJETA_WIFI="$RUTA_LOGS/LOG_TARJETA_WIFI.LOG"
+
+rm -rf $RUTA_LOGS &> /dev/null 
+mkdir $RUTA_LOGS &> /dev/null
+sudo rm -rf $RUTA_AIRCRACK
+mkdir $RUTA_AIRCRACK
+
+export ARCHIVO_STATUSBAR
+export ARCHIVO_LOG
+export ARCHIVO_REDES_SCAN
+export ARCHIVO_DETENER_SCAN
+export ARCHIVO_DETENER_ATAQUE
+export ARCHIVO_TXT_ATAQUE
+export ARCHIVO_RADIOBUTTON
+export LOG_AIRODUMP
+
+
+touch $ARCHIVO_STATUSBAR
+touch $ARCHIVO_LOG
+touch $ARCHIVO_REDES_SCAN
+touch $ARCHIVO_TXT_ATAQUE
+touch $ARCHIVO_RADIOBUTTON
+touch $LOG_AIRODUMP
+
+# Scripts
+
+SCRIPT_FUNCIONES=$RUTA_SCRIPTS"FUNCIONES-tesis"
+
+# ARCHIVO ALMACENAR PID
+
+ARCHIVO_PID=$RUTA_LOGS"PIDS"
+
+# ICONOS
+
+ICONO_SCRIPT=$RUTA_ICONOS"ICONO.png"
+ICONO_MENU=$RUTA_ICONOS"MENU.png"
+ICONO_CLAVES=$RUTA_ICONOS"CLAVES.png"
+ICONO_VER=$RUTA_ICONOS"VER.png"
+ICONO_EXPORTAR=$RUTA_ICONOS"EXPORT.png"
+ICONO_UPDATE=$RUTA_ICONOS"UPDATE.png"
+ICONO_DATABASE=$RUTA_ICONOS"DATABASE.png"
+ICONO_SOFT=$RUTA_ICONOS"SCRIPT.png"
+ICONO_MONITOR=$RUTA_ICONOS"MONITOR.png"
+ICONO_SCAN=$RUTA_ICONOS"SCAN.png"
+ICONO_STOP_SCAN=$RUTA_ICONOS"STOP_SCAN.png"
+ICONO_START_ATACK=$RUTA_ICONOS"ATACAR.png"
+ICONO_STOP_ATACK=$RUTA_ICONOS"STOP_ATACK.png"
+ICONO_MACHANGER=$RUTA_ICONOS"MACHANGER.png"
+ICONO_RANDOM=$RUTA_ICONOS"RANDOM.png"
+ICONO_MANUAL=$RUTA_ICONOS"MANUAL.png"
+
+
+ListarTarjetasWifi() {   
+    INTERFACES_MONITOR=`iwconfig --version | grep "Recommend" | awk '{print $1}' | grep mon`
+    let CUANTAS=`echo $INTERFACES_MONITOR | wc -w`
+    let CONT=1
+    while [ $CONT -le $CUANTAS ]
+    do
+	MON=`echo $INTERFACES_MONITOR | awk '{print $'$CONT'}'`
+	airmon-ng stop $MON > /dev/null 2>&1
+	let CONT=$CONT+1
+    done
+    
+    echo '<comboboxtext active="0" button-sensitivity="1">'
+    echo '<variable>TARJETA_SELECCIONADA</variable>'
+    
+    TARJETAS_WIFI_DISPONIBLES=`iwconfig --version | grep "Recommend" | awk '{print $1}' | sort`
+    echo "$(iwconfig)" >> "$LOG_TARJETA_WIFI"
+    N_TARJETAS_WIFI=`echo $TARJETAS_WIFI_DISPONIBLES | awk '{print NF}'`
+    if [ "$TARJETAS_WIFI_DISPONIBLES" = "" ]
+    then
+	yad --image "error" --title "ERROR" --button=gtk-accept:0 --text "<b>ERROR</b>: No se detectó ninguna tarjeta WiFi" --fixed --on-top --center --window-icon=ICONOS/SCRIPT.png
+	exit 1
+    else
+	let x=1
+	while [ $x -le $N_TARJETAS_WIFI ]
+	do
+		INTERFAZ=`echo $TARJETAS_WIFI_DISPONIBLES | awk '{print $'$x'}'`
+		DRIVER=`ls -l /sys/class/net/$INTERFAZ/device/driver | sed 's/^.*\/\([a-zA-Z0-9_-]*\)$/\1/'`
+		echo '<item>'$INTERFAZ' '$DRIVER'</item>'
+		x=$((x+1))
+	done
+    fi
+    echo "</comboboxtext>"
+    unset INTERFACES_MONITOR CONT CUANTAS MON TARJETAS_WIFI_DISPONIBLES N_TARJETAS_WIFI INTERFAZ DRIVER x
+}
+
+export MENU='
+<window title="ANALISIS DE VULNERABILIDADES WIFI" resizable="true" window_position="1" width-request="850" height-request="600"  border-width="6" image-name="'"$ICONO_SCRIPT"'" variable="MIMENU">
+	<vbox spacing="0">
+		<menubar>
+			<menu image-name="'"$ICONO_MENU"'" label="MENU" use-underline="false">
+				<menu image-name="'"$ICONO_MACHANGER"'" label="CAMBIAR MAC ADRESS">
+					<menuitem image-name="'"$ICONO_MANUAL"'" label="CAMBIO MANUAL">
+					<action> nohup '$SCRIPT_FUNCIONES' 9 &> /dev/null & </action>
+					</menuitem>
+					<menuitemseparator></menuitemseparator>
+					<menuitem image-name="'"$ICONO_RANDOM"'" label="CAMBIO AUTOMATICO">
+					<action> nohup '$SCRIPT_FUNCIONES' 10 &> /dev/null & </action>
+					</menuitem>
+				</menu>
+				<menu image-name="'"$ICONO_CLAVES"'" label="CLAVES">
+					<menuitem image-name="'"$ICONO_VER"'" label="VER">
+					  <action>gtkdialog -c --program=DUMP_KEYS &</action>
+					</menuitem>
+					<menuitemseparator></menuitemseparator>
+					<menuitem image-name="'"$ICONO_EXPORTAR"'" label="EXPORTAR">
+					<action>nohup '$SCRIPT_FUNCIONES' 6 &> /dev/null &</action>
+					</menuitem>
+					<height>16</height><width>16</width>
+				</menu>
+				<menu image-name="'"$ICONO_UPDATE"'" label="ACTUALIZAR">
+					<menuitem image-name="'"$ICONO_DATABASE"'" label="BASE DE DATOS DE APs AFECTADOS">
+					<variable>ITEM_ACTUALIZAR_DATABASE</variable>
+					<action>echo "ACTUALIZANDO, ESPERA ..." > '$ARCHIVO_STATUSBAR'</action>
+					<action>Refresh:stb</action>
+					<action>nohup '$SCRIPT_FUNCIONES' 8 &> /dev/null &</action>
+					
+					</menuitem>
+					<menuitemseparator></menuitemseparator>
+					<menuitem image-name="'"$ICONO_SOFT"'" label="ACTUALIZAR PIXIESCRIPT">
+					<variable>ITEM_ACTUALIZAR_SCRIPT</variable>
+					<action>echo "ACTUALIZANDO, ESPERA ..." > '$ARCHIVO_STATUSBAR'</action>
+					<action>Refresh:stb</action>
+					<action>nohup '$SCRIPT_FUNCIONES' 7 &> /dev/null &</action>
+					</menuitem>
+					<height>16</height><width>16</width>
+				</menu>
+			</menu>
+			<menu icon-name="gtk-help" label="LEYENDA SCANEO" use-underline="false">
+				<menuitem icon-name="gtk-about" label="Pin conseguido"></menuitem>
+				<menuitem icon-name="gtk-apply" label="AP Vulnerable"></menuitem>
+				<menuitem icon-name="gtk-dialog-error" label="AP NO vulnerable"></menuitem>
+				<menuitem icon-name="gtk-dialog-warning" label="No se han conseguido datos para realizar el ataque"></menuitem>
+				<menuitem icon-name="gtk-dialog-question" label="AP no probado"></menuitem>
+			</menu>
+
+		</menubar>
+		<notebook space-expand="true" space-fill="true" tab-labels="REDES|ATAQUE" tab-pos="3">
+		<tree auto-refresh="false" selected-row="0"  column-sort-function="func1|func1|func1|func1|func1|func1|func1|func1" vscrollbar-policy="1">
+			<variable>TABLA_SCAN</variable>
+			<input file icon-column="0">"'"$ARCHIVO_REDES_SCAN"'"</input>
+			<label>Nº  |BSSID                      |Channel    |ENC    |SEÑAL |WPS Version| Locked    |ESSID                  </label>
+		</tree>
+		<tree vscrollbar-policy="1" column-header-active="0" selection-mode="0" width="200">
+			<label>LOG ATAQUE</label>
+			<variable>TXT_ATAQUE</variable>
+			<input file>"'"$ARCHIVO_TXT_ATAQUE"'"</input>
+		</tree>
+		</notebook>
+		<vbox homogeneous="true" space-expand="false" space-fill="false">
+		<hbox homogeneous="true" space-expand="false" space-fill="false">
+			<frame>
+			<hbox>
+			<vbox>
+				'"`ListarTarjetasWifi`"'
+				<button>
+				  <input file>'$ICONO_MONITOR'</input>
+				  <variable>BOTON_MODO_MONITOR</variable>
+				  <label>MODO MONITOR</label>
+				  <action function="disable">BOTON_MODO_MONITOR</action>
+				  <action function="disable">TARJETA_SELECCIONADA</action>
+				  <action> echo "COMPROBANDO ESTADO DE LA INTERFACE" > '$ARCHIVO_STATUSBAR'</action>
+				  <action function="Refresh">stb</action>
+				  <action>enable:TimerMonitor</action>
+				  <action function="command">nohup '$SCRIPT_FUNCIONES' 1 $TARJETA_SELECCIONADA &> /dev/null & </action>
+				</button>
+				
+				<timer visible="false" milliseconds="true" interval="200">
+				    <sensitive>false</sensitive>
+				    <variable>TimerMonitor</variable>
+				    <action function="Refresh">stb</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'1'"' 2> /dev/null ]; then echo true; fi)">enable:BOTON_MODO_MONITOR</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'1'"' 2> /dev/null ]; then echo true; fi)">enable:TARJETA_SELECCIONADA</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'1'"' 2> /dev/null ]; then echo true; fi)">disable:TimerMonitor</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'0'"' 2> /dev/null ]; then echo true; fi)">disable:TimerMonitor</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'0'"' 2> /dev/null ]; then echo true; fi)">enable:BOTON_INICIAR_ESCANEO</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'0'"' 2> /dev/null ]; then echo true; fi)">disable:BOTON_INICIAR_ATAQUE</action>
+				   <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'0'"' 2> /dev/null ]; then echo true; fi)">disable:BOTON_ATAQUE_AIRCRACK</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'0'"' 2> /dev/null ]; then echo true; fi)">disable:RADIOBUTTON3</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'0'"' 2> /dev/null ]; then echo true; fi)">activate:RADIOBUTTON1</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'0'"' 2> /dev/null ]; then echo true; fi)">enable:TIEMPO_SCANEO</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'0'"' 2> /dev/null ]; then echo true; fi)">enable:TIEMPO_ATAQUE</action>
+				    <action function="Refresh">stb</action>
+				</timer>
+				
+				<vseparator height-request="0"></vseparator>
+			      <text xalign="2">
+				<label>TIEMPO MAX. DE ESCANEO</label>
+			      </text>
+			</vbox>
+			
+			<vbox>
+				<button>
+				  <input file>'$ICONO_SCAN'</input>
+				  <label>ESCANEAR REDES</label>
+				  <sensitive>false</sensitive>
+				  <variable>BOTON_INICIAR_ESCANEO</variable>
+				  <action function="disable">BOTON_INICIAR_ESCANEO</action>
+				  <action function="clear">TABLA_SCAN</action>
+				  <action> echo "BUSCANDO REDES, ESPERA $TIEMPO_SCANEO segundos" > '$ARCHIVO_STATUSBAR'</action>
+				  <action function="Refresh">stb</action>
+				  <action>disable:RADIOBUTTON1</action>
+				  <action>disable:RADIOBUTTON2</action>
+				  <action>disable:RADIOBUTTON3</action>
+				  <action>enable:TimerScaneo</action>
+				  <action function="command">nohup '$SCRIPT_FUNCIONES' 2 $TIEMPO_SCANEO &> /dev/null & </action>
+				  <action>enable:BOTON_DETENER_ESCANEO</action>
+				  <action>disable:BOTON_INICIAR_ATAQUE</action>
+				  <action>disable:BOTON_ATAQUE_AIRCRACK</action>
+				</button>
+
+				<timer visible="false">
+				    <sensitive>false</sensitive>
+				    <variable>TimerScaneo</variable>
+				    <action function="Refresh">stb</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'0'"' 2> /dev/null ]; then echo true; fi)">disable:TimerScaneo</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'1'"' 2> /dev/null ]; then echo true; fi)">disable:TimerScaneo</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'0'"' 2> /dev/null ]; then echo true; fi)">Refresh:TABLA_SCAN</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'0'"' 2> /dev/null ]; then echo true; fi)">enable:BOTON_INICIAR_ESCANEO</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'0'"' 2> /dev/null ]; then echo true; fi)">disable:BOTON_DETENER_ESCANEO</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'1'"' 2> /dev/null ]; then echo true; fi)">disable:BOTON_DETENER_ESCANEO</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'0'"' 2> /dev/null ]; then echo true; fi)">enable:RADIOBUTTON1</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'0'"' 2> /dev/null ]; then echo true; fi)">enable:RADIOBUTTON2</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'0'"' 2> /dev/null ]; then echo true; fi)">enable:BOTON_INICIAR_ATAQUE</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'1'"' 2> /dev/null ]; then echo true; fi)">enable:BOTON_INICIAR_ATAQUE</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'0'"' 2> /dev/null ]; then echo true; fi)">enable:BOTON_ATAQUE_AIRCRACK</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'1'"' 2> /dev/null ]; then echo true; fi)">enable:BOTON_ATAQUE_AIRCRACK</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'0'"' 2> /dev/null ]; then echo true; fi)">enable:TIEMPO_ATAQUE</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'0'"' 2> /dev/null ]; then echo true; fi)">Refresh:RADIOBUTTON1</action>
+				</timer>
+				
+				<button>
+				  <sensitive>false</sensitive>
+				  <variable>BOTON_DETENER_ESCANEO</variable>
+				  <input file>'$ICONO_STOP_SCAN'</input>
+				  <label>DETENER SCANEO</label>
+				  <action>disable:BOTON_DETENER_ESCANEO</action>
+				  <action>touch '$ARCHIVO_DETENER_SCAN'</action>
+				</button>
+				<spinbutton range-value="30" xalign="1" primary-icon-name="appointment-soon" editable="true">
+				  <sensitive>false</sensitive>
+				  <variable>TIEMPO_SCANEO</variable>
+			        </spinbutton>
+		    	</vbox>
+		    	<vbox>
+			      <radiobutton active="false">
+				<sensitive>false</sensitive>
+				<label>ATACAR AP SELECCIONADO</label>
+				<variable>RADIOBUTTON1</variable>
+				<action>if true echo "1" > '$ARCHIVO_TIPO_ATAQUE'</action>
+			      </radiobutton>
+			      <radiobutton active="false">
+			      <sensitive>false</sensitive>
+				<label>ATACAR TODOS LOS APs</label>
+				<variable>RADIOBUTTON2</variable>
+				<input file>'$ARCHIVO_RADIOBUTTON'</input>
+				<action>if true echo "2" > '$ARCHIVO_TIPO_ATAQUE'</action>
+			      </radiobutton>
+			      <radiobutton active="false">
+			      <sensitive>false</sensitive>
+				<label>ATAQUE MANUAL</label>
+				<variable>RADIOBUTTON3</variable>
+				<action>if true echo "3" > '$ARCHIVO_TIPO_ATAQUE'</action>
+			      </radiobutton>
+			      <vseparator height-request="7.5"></vseparator>
+			      <text xalign="1">
+				<label>"
+				"</label>
+			      </text>
+			      <text xalign="1">
+				<label>TIEMPO MAX. DE ATAQUE</label>
+			      </text>
+			</vbox>
+		    	<vbox>
+				<button>
+				  <input file>'$ICONO_START_ATACK'</input>
+				  <sensitive>false</sensitive>
+				  <label>ATAQUE AIRCRACK</label>
+				  <variable>BOTON_ATAQUE_AIRCRACK</variable>
+				  <action>disable:BOTON_ATAQUE_AIRCRACK</action>
+				  <action>disable:BOTON_INICIAR_ESCANEO</action>
+				  <action>disable:BOTON_INICIAR_ATAQUE</action>
+				  <action>disable:TABLA_SCAN</action>
+				  <action>enable:BOTON_DETENER_ATAQUE</action>
+				  <action function="command">nohup '$SCRIPT_FUNCIONES' 11 $TIEMPO_ATAQUE $TABLA_SCAN &> /dev/null & </action>
+				  <action>enable:TimerAtaque</action>
+			      </button>
+
+			      <button>
+				  <input file>'$ICONO_START_ATACK'</input>
+				  <sensitive>false</sensitive>
+				  <label>ATAQUE WPA</label>
+				  <variable>BOTON_INICIAR_ATAQUE</variable>
+				  <action>disable:BOTON_INICIAR_ATAQUE</action>
+				  <action>disable:BOTON_INICIAR_ESCANEO</action>
+				  <action>disable:BOTON_ATAQUE_AIRCRACK</action>
+				  <action>disable:TABLA_SCAN</action>
+				  <action>enable:BOTON_DETENER_ATAQUE</action>
+				  <action function="command">nohup '$SCRIPT_FUNCIONES' 3 $TIEMPO_ATAQUE $TABLA_SCAN &> /dev/null & </action>
+				  <action>enable:TimerAtaque</action>
+			      </button>
+			      <timer visible="false">
+				    <sensitive>false</sensitive>
+				    <variable>TimerAtaque</variable>
+				    <action function="Refresh">stb</action>
+				    <action function="clear">TXT_ATAQUE</action>
+				    <action function="Refresh">TXT_ATAQUE</action>
+				    <action function="clear">TABLA_SCAN</action>
+				    <action function="Refresh">TABLA_SCAN</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'FIN'"' 2> /dev/null ]; then echo true; fi)">disable:TimerAtaque</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'FIN'"' 2> /dev/null ]; then echo true; fi)">disable:BOTON_DETENER_ATAQUE</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'FIN'"' 2> /dev/null ]; then echo true; fi)">enable:BOTON_INICIAR_ATAQUE</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'FIN'"' 2> /dev/null ]; then echo true; fi)">enable:BOTON_ATAQUE_AIRCRACK</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'FIN'"' 2> /dev/null ]; then echo true; fi)">enable:BOTON_INICIAR_ESCANEO</action>
+				    <action condition="command_is_true(if [ `head -n1 '$ARCHIVO_LOG'` = '"'FIN'"' 2> /dev/null ]; then echo true; fi)">enable:TABLA_SCAN</action>
+			      </timer>
+			      <button>
+				  <input file>'$ICONO_STOP_ATACK'</input>
+				  <sensitive>false</sensitive>
+				  <variable>BOTON_DETENER_ATAQUE</variable>
+				  <label>DETENER ATAQUE</label>
+				  <action>disable:BOTON_DETENER_ATAQUE</action>
+				  <action>touch '$ARCHIVO_DETENER_ATAQUE'</action>
+			      </button>
+			      <spinbutton range-value="60" xalign="1" primary-icon-name="appointment-soon" editable="true">
+			      <variable>TIEMPO_ATAQUE</variable>
+			      <sensitive>false</sensitive>
+			      </spinbutton>
+			</vbox>
+			</hbox>
+			</frame>
+		</hbox>
+		</vbox>
+		<vseparator height-request="4"></vseparator>
+		<statusbar auto-refresh="true" has-resize-grip="false">
+			<label>Análisis para Seguridad Wireless</label>
+			<variable>stb</variable>
+			<sensitive>true</sensitive>
+			<input file>'"$ARCHIVO_STATUSBAR"'</input>
+		</statusbar>
+		
+	</vbox>	
+<action signal="destroy-event">echo Window: destroy-event</action>
+<action signal="delete-event">'$SCRIPT_FUNCIONES' 4 $TARJETA_SELECCIONADA</action>
+</window>
+'
+ARCHIVO_DATABASE_KEYS=`pwd`"/DATABASES/DATABASE_KEYS"
+export ARCHIVO_DATABASE_KEYS
+export DUMP_KEYS='
+<window title="[ KEYS ALMACENADAS ]" resizable="true" window_position="1" width-request="1300" height-request="600"  border-width="6" image-name="'"$ICONO_SCRIPT"'">
+	<vbox spacing="0">
+		<vbox space-expand="true" space-fill="true">
+			<tree auto-refresh="false" selected-row="1" >
+				<variable>TABLA_KEYS</variable>
+				<input file>"'"$ARCHIVO_DATABASE_KEYS"'"</input>
+				<label>ESSID           |BSSID                     |PIN WPS   |WPA KEY           |FABRICANTE              |MODELO               |Nº MODELO      |Nº SERIE       |DEVICE NAME</label>
+			</tree>
+		</vbox>
+		
+	
+		<vbox homogeneous="true" space-expand="false" space-fill="false">
+		<frame>
+			<hbox homogeneous="false" space-expand="false" space-fill="false">
+				<button>
+				  <input file stock="gtk-paste"></input>
+				  <label>COPIAR FILA</label>
+				  <action>nohup '$SCRIPT_FUNCIONES' 5 $TABLA_KEYS TODO  &> /dev/null &</action>
+				</button>
+				<button>
+				  <input file stock="gtk-paste"></input>
+				  <label>COPIAR PIN WPS</label>
+				  <action>nohup '$SCRIPT_FUNCIONES' 5 $TABLA_KEYS WPS  &> /dev/null &</action>
+				</button>
+				<button>
+				  <input file stock="gtk-paste"></input>
+				  <label>COPIAR WPA KEY</label>
+				  <action>nohup '$SCRIPT_FUNCIONES' 5 $TABLA_KEYS WPA &> /dev/null &</action>
+				</button>
+				<button>
+				  <input file stock="gtk-close"></input>
+				  <label>CERRAR</label>
+				  <action>exit:Quit</action>
+				</button>
+			</hbox>
+		</frame>
+		</vbox>
+	</vbox>
+</window>
+'
+gtkdialog -c --program=MENU

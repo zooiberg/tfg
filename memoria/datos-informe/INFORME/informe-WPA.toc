@@ -8,5 +8,5 @@
 \contentsline {section}{\numberline {3.1}Cifrado WPA-WPA2}{7}{section.3.1}
 \contentsline {subsection}{\numberline {3.1.1}Ataque Reaver-Pixiewps}{8}{subsection.3.1.1}
 \contentsline {subsection}{\numberline {3.1.2}Rompiendo Contrase\~na.}{9}{subsection.3.1.2}
-\contentsline {subsection}{\numberline {3.1.3}Denegacion de Servicios (DoS).}{11}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.3}Denegaci\'on de Servicios (DoS).}{11}{subsection.3.1.3}
 \contentsline {section}{\numberline {3.2}Recomendaciones}{12}{section.3.2}

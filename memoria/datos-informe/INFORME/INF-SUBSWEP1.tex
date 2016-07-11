@@ -1,4 +1,4 @@
-\subsection{Ataque a red Wifi con cifrado WEP}
+\subsection{Ataque a red WiFi con cifrado WEP}
 
 Para obtener la clave WEP de un punto de acceso, necesitamos muchos vectores de inicialización (IVs). El tráfico de red habitual no genera de forma rápida suficientes IVs. Para ello hemos utilizado la técnica de inyección para aumentar la velocidad del proceso de captura. La inyección implica que se envíen al punto de acceso (AP) paquetes de forma continua y rápida permitiendo capturar un gran número de IV's en un periodo corto de tiempo. Una vez que se han capturado un gran número de IVs, podemos utilizarlos para averiguar la clave WEP.
 
@@ -22,7 +22,7 @@ Para generar mucho paquetes y conseguir gran cantidad de IVs se lanza una reinye
 
 \textbf{aireplay-ng -3 -b 80:B6:86:D5:F9:4B -h AC:38:70:25:ED:62 wlan0mon}\\
 
-Finalmente y si hemos conseguido una gran cantidad de IVs intentamos probar conseguir la clave WEP utilizando el comando \textit{`aricrack-ng'}.\\
+Finalmente y si hemos conseguido una gran cantidad de IVs intentamos obtener la clave WEP utilizando el comando \textit{`aricrack-ng'}.\\
 
 \textbf{aircrack-ng -a 1 -s output-01.cap}\\
 
