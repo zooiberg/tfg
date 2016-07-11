@@ -1,0 +1,24 @@
+Opening /root/tesis/AIRCRACK/CAPTURA-01.cap
+Reading packets, please wait...
+Read 1638 packets.
+
+   #  BSSID              ESSID                     Encryption
+
+   1  80:B6:86:D5:F9:4B  laboratorio wifi          WPA (1 handshake)
+
+Choosing first network as target.
+
+Opening /root/tesis/AIRCRACK/CAPTURA-01.cap
+Reading packets, please wait...
+Aircrack-ng 1.2 rc4
+[00:00:00] 3/3 keys tested (18.25 k/s)
+Time left: 0 seconds                                     100.00%
+Current passphrase: 0123456789                 
+Master Key     : 95 7B E2 D3 1F 77 07 08 E7 9D 7F CD 3E 67 80 8B 
+                 8C 2D CE 1E 6B E4 FC AF CC 90 6A E0 40 7C 5B F4
+Transient Key  : C8 58 DC B8 BF 28 43 08 6D 0A 52 6C B2 56 0B 92 
+                 55 AD 0A FC 63 09 6E 62 3F BE 74 1F 0B B8 2E 83 
+                 8D 88 E4 99 E0 87 58 26 EC 9C 6D 5A E9 5D A6 6F 
+                 C2 0A 8C F3 17 AC 6F 6F 40 F6 DB B1 3B 52 77 EE
+EAPOL HMAC     : 2F FD DD 7D 79 7F 80 4F E9 83 68 6A 01 4C 6C 39 
+KEY FOUND! [ 0123456789 ]

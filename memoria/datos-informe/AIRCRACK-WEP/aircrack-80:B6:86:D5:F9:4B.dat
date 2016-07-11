@@ -1,0 +1,16 @@
+Opening CAPTURA-01.cap
+Reading packets, please wait...
+Read 124432 packets.
+
+   #  BSSID              ESSID                     Encryption
+
+   1  80:B6:86:D5:F9:4B  laboratorio wifi          WEP (39885 IVs)
+
+Choosing first network as target.
+
+Opening CAPTURA-01.cap
+Reading packets, please wait...
+Attack will be restarted every 5000 captured ivs.
+Starting PTW attack with 42507 ivs.
+KEY FOUND! [ 31:32:33:34:35 ] (ASCII: 12345 )
+	Decrypted correctly: 100%

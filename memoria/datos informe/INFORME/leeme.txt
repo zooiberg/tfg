@@ -1,2 +1,0 @@
----SECCION WEP
-python WEP.py

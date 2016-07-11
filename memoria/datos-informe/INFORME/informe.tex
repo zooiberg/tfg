@@ -1,0 +1,266 @@
+%----------------------------------------------------------------------------------------
+%	PAQUETES Y OTROS DOCUMENTOS DE CONFIGURACION
+%----------------------------------------------------------------------------------------
+\documentclass[a4paper,openright,12pt, spanish]{report} % Tamaño de letra predeterminado y ecuaciones - justificado a la izquierda
+\usepackage[top=3cm,bottom=3cm,left=3.2cm,right=3.2cm,headsep=10pt,letterpaper]{geometry} % Margenes de las Paginas
+\usepackage[spanish,activeacute]{babel}
+%\usepackage[spanish]{label}
+\usepackage{graphicx} 
+% configuración de la fuente
+\usepackage{bookman} %bookman
+\usepackage{microtype} % Ligeramente ajustar el espaciado de letra para la estética
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc} % Requerido para la inclusión de letras con acentos
+\usepackage{fancyhdr}
+\usepackage{verbatim}
+\usepackage{import}
+\usepackage{hyperref}
+%\usepackage[style=alphabetic,sorting=nyt,sortcites=true,autopunct=true,autolang=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
+%\addbibresource{bibliography.bib} % BibTeX bibliography file
+%\defbibheading{bibempty}{}
+
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\begingroup
+\thispagestyle{empty}
+\begin{picture}(18,4)
+\put(-50,-80){\includegraphics[width=4cm,height=4cm]{icono.jpeg}}
+%\put(-150,-80){\includegraphics[width=4cm,height=4cm]{uclm.png}}
+\end{picture}\centering
+\vspace*{5cm}
+\par\normalfont\fontsize{35}{35}\sffamily\selectfont
+\textbf{Informe de seguridad informática PYMES}\\
+{\LARGE Redes Wifi}\par % Titulo del libro
+\vspace*{1cm}
+{\Huge Luis Ramírez de Diego}\par % Nombre del Autor
+\date{\today}
+\endgroup
+
+%----------------------------------------------------------------------------------------
+%	COPYRIGHT PAGE
+%----------------------------------------------------------------------------------------
+
+\newpage
+~\vfill
+\thispagestyle{empty}
+
+\noindent Copyright \copyright{} 2016 Luis Ramírez\\ % Copyright notice
+
+\noindent\textsc{Informe de Seguridad Informática en la pequeña y mediana empresa}\\
+
+\noindent \textit{https://github.com/zooiberg/tfg/tree/master/memoria} % URL
+
+\noindent Informe de seguridad informática realizado durante el Trabajo Fin de Grado del alumno Luis Ramírez de Diego en el año lectivo 2015/2016 y supervisado por el profesor y tutor del proyecto, Francisco Moya Fernández.\\ % License information
+
+\noindent \textit{Primera actualización, Junio 2016} % Printing/edition date
+
+%----------------------------------------------------------------------------------------
+%	TABLA DE CONTENIDOS	
+%----------------------------------------------------------------------------------------
+
+%\chapterimage{head1.png} % Tabla de contenido. Titulo de la imagen
+
+\pagestyle{empty} % No titulos
+
+\tableofcontents % Imprimir la tabla de contenidos en sí
+
+%\cleardoublepage % Obliga el primer capítulo se empieza en una página impar por lo que está a la derecha
+
+\pagestyle{fancy} % Imprimir encabezados de nuevo
+
+%----------------------------------------------------------------------------------------
+%	CAPITULO 1
+%----------------------------------------------------------------------------------------
+
+
+\chapter{Resumen ejecutivo}
+
+Este documento describe un análisis automático de seguridad realizado
+sobre la red WiFi de la empresa.  Se trata de un análisis que explora
+exclusivamente vulnerabilidades ampliamente conocidas y emplea
+herramientas disponibles de forma gratuita en Internet.  Por tanto no
+debe verse como un análisis exhaustivo de la seguridad de la red WiFi
+de la empresa, sino más bien como una pre-auditoría que podría
+identificar situaciones de muy alto riesgo.
+
+Independientemente de los resultados del análisis se recomienda
+realizar de forma periódica un análisis exhaustivo de pruebas de
+penetración (\emph{pentest}) ejecutado por personal cualificado.
+
+El análisis llevado a cabo persigue los siguientes objetivos:
+\begin{itemize}
+\item Determinar si un atacante inexperto podría penetrar a la red
+  de la empresa.
+\item Determinar si la red de la empres proporciona los mecanismos
+  básicos de confidencialidad y protección de los datos privados.
+\item Determinar si un atacante inexperto podría afectar a la
+  disponibilidad de los sistemas de información de la empresa.
+\end{itemize}
+
+Los ataques se llevaron a cabo con un nivel de acceso mínimo, es decir
+sin información previa de ningún tipo.  De esta forma se asemeja a los
+ataques que podría realizar una persona ajena a la empresa.  El
+procedimiento sigue las recomendaciones formuladas en el documento
+NIST SP
+800-115\footnote{\url{http://csrc.nist.gov/publications/nistpubs/800-115/SP800-115.pdf}}.
+Todas las pruebas y las acciones se realizan en condiciones
+controladas.
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER 2
+%----------------------------------------------------------------------------------------
+
+\chapter[Resultados]{Resumen de Resultados}
+
+\section{Fase de descubrimiento}
+
+Búsqueda de información acerca de las redes que pueden estar
+conectadas en el ámbito seleccionado para llevar a cabo la
+pre-auditoria. Esta fase es muy importante porque definimos los
+objetivos previos de las pruebas y generamos la información acerca de
+las posibles vulnerabilidades potenciales.  Nuestro objetivo en
+particular es conseguir la siguiente información:
+
+\begin{itemize}
+\item Identificar redes ocultas.
+\item Identificar qué tipo de clientes hay conectados a la red.
+\item Identificar los tipos de cifrado utilizados por las redes
+  identificadas.  En particular se pretende idenificar las redes
+  abiertas o que utilizan WEP y otras redes vulnerables.
+ \end{itemize}
+
+Para descubrir las redes se realiza un escaneo activo y pasivo de la
+red inalámbrica.  El escaneo activo implica enviar paquetes a puntos
+de acceso visibles mientras que el pasivo simplemente captura y
+analiza el tráfico de la red inalámbrica permitiendo descubrir los
+puntos de acceso ocultos.
+
+\section{Configuración en modo monitor}
+
+Para poder capturar tráfico se configura la interfaz de red del equipo
+de análisis en \emph{modo monitor}.  Para ello se emplea la utilidad
+\emph{airmon-ng} disponible en el paquete \emph{aircrack}, de
+amplia difusión en Internet.
+
+Antes de ejecutar la utilidad el equipo de análisis dispone de las
+siguientes interfaces de red inalámbricas:
+
+\begingroup
+\fontsize{10pt}{10pt}=\selectfont
+\verbatiminput{../LOGS/LOG_TARJETA_WIFI.LOG}
+\endgroup
+
+Al ejecutar \emph{airmon-ng} disponemos de una interfaz virtual
+adicional:
+
+\begingroup
+\fontsize{9pt}{9pt}=\selectfont
+\verbatiminput{../LOGS/AIRMONG.LOG}
+\endgroup
+
+La interfaz \textit{`wlan0mon'} nos ayudara a rastrear los paquetes
+inalámbricos de la zona.
+
+\section{Puntos de Acceso}
+
+Para poder escanear las redes y clientes WiFi en el alcance de nuestra
+zona utilizaremos la utilidad \textit{airodump-ng}, disponible también
+en el paquete \emph{aircrack}. Con esta exploración se han identificado
+las siguientes redes y clientes con los que procederemos a detectar
+posibles vulnerabilidades.
+
+\begingroup
+\fontsize{7pt}{7pt}=\selectfont
+\verbatiminput{../LOGS/AIRODUMP.LOG}
+\endgroup
+
+%----------------------------------------------------------------------------------------
+%	CHAPTER 3
+%----------------------------------------------------------------------------------------
+
+
+\chapter{Defecto de cifrado WLAN}
+
+%% FMF: No lo entiendo ni entiendo qué pinta aquí, por eso lo comento
+
+%% Con las técnicas de identificación nos referimos al análisis de
+%% dispositivos activos, sus puertos y servicios asociados y analizarlos
+%% en busca de vulnerabilidades potenciales. Las empresas u
+%% organizaciones suelen utilizar técnicas, no técnicos para identificar
+%% los activos que deben ser analizados.
+
+Las redes inalámbricas transmiten datos a través del aire y por lo
+tanto hay una necesidad inherente de cifrar los datos para garantizar
+la confidencialidad.  Esto se logra mediante los siguientes
+mecanismos.
+
+\begin{itemize}
+\item Wired Equivalent Privacy (WEP). 
+\item WiFi Protected Access (WPA).
+\item WiFi Protected Access v2 (WPA2).
+\end{itemize}
+
+WEP es considerado obsoleto e inseguro.  WPA es el objetivo de la
+mayoría de los ataques actuales.  A pesar de que en la actualidad no
+hay ningún ataque conocido para romper WPA de forma genérica,
+hay ataques que son factibles bajo circunstancias especiales.
+
+\input{\tipoinforme}
+
+
+\section{Recomendaciones}
+
+Para finalizar se enumeran algunas recomendaciones básicas.
+
+\begin{itemize}
+\item Se debe tener en cuenta el alcance de la red, ya que cuanto
+  menos señal se propague fuera de las instalaciones menores serán las
+  posibilidades de que se acceda desde fuera.
+  
+\item Debe deshabilitarse el soporte de WPS en el punto de acceso.
+
+\item Debe actualizase el software del punto de acceso a la última
+  versión disponible por el fabricante.
+
+\item Por muy simple que parezca, es importante cambiar los datos de
+  accesos al router que vienen por defecto. (No olvidar cambiar la
+  contraseña).
+
+\item Se deben usar el protocolo de seguridad WPA2 con cifrado AES y
+  contraseñas fuertes.  El protocolo WEP no aporta ningún tipo de
+  seguridad.
+
+\item Si es posible se debe apagar el router o punto de acceso una vez
+  que haya terminado de utilizarse.
+
+\item Deben realizarse periódicamente auditorias mediante pruebas de
+  penetración (\emph{pentest}) ejecutadas por personal especializado.
+
+\item Sería deseable disponer de personal especializado en seguridad
+  informática para monitorizar la red de forma continua.
+
+  
+  %% No es más seguro por esto
+  %% http://www.fixedbyvonnie.com/2014/08/3-reasons-why-hiding-wireless-ssid-bad-idea/
+  %% http://www.pcworld.com/article/2052158/5-wi-fi-security-myths-you-must-abandon-now.html
+%% \item Ocultar el nombre de la red (SSID), de forma que no se difunda
+%%   el nombre de la red.
+  
+%% \item Hacer listas de control de acceso con las direcciones MAC de
+%%  aquellos dispositivos que quieras que tengan acceso a la red.
+\end{itemize}
+
+Estas medidas no harán que la red sea invulnerable a cualquier ataque,
+pero garantizará unos niveles altos de seguridad.
+
+\vfill
+\textit{"Preguntarse cuándo los ordenadores podrán pensar es como preguntarse cuándo los submarinos podrán nadar"-- Edsger W. Dijkstra}
+\end{document}
+
+
+
