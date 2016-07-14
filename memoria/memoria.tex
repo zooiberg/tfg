@@ -13,6 +13,7 @@
 \usepackage{hyperref}%hipervinculos
 \usepackage{color}
 \usepackage{xcolor}
+\usepackage{longtable}
 \pagecolor{white}
 \usepackage{pdfpages}%agregar pdf
 \usepackage{listings}
@@ -299,7 +300,7 @@ En un segundo lugar, pero no por ello menos importante, dispongo de una serie de
 Para cualquier empresa plantear un buen uso de las TIC (Tecnologías de la Información y la Comunicación) es un punto clave que se debe tener en cuenta y aprovechar al máximo para aumentar la productividad y la eficiencia. Existe una gran inversión en cuanto a equipamiento informático y servicios básicos de comunicación que emplean las empresas, para su posible interconexión.
 
 En la actualidad las tecnologías inalámbricas y móviles tienen cada vez más peso en las empresas. Según un informe de 2012 realizado conjuntamente por Fundetec y el ONTSI\cite{ipyme} sobre el análisis de implantación de las TIC en las pymes españolas, el 99,9\% de ellas disponen de ordenadores.   
-\begin{figure}[H]
+\begin{figure}
   \centering
    \includegraphics[width=1\textwidth]{equipamiento.png}
   \caption{Equipamiento informático presente en las empresas.}
@@ -310,7 +311,7 @@ En esta Figura \ref{figura:eq} apreciamos el gran uso por parte de las empresas 
 
 A medida que aumenta la implantación de dispositivos informáticos individuales en las empresas como método de trabajo, es necesaria la conexión entre ellos para compartir los datos y poder llevar a cabo un trabajo colectivo. La interconexión de estos dispositivos se lleva a cabo mediante la creación de una red interna, pudiendo ser inalámbrica o cableada. Asegurar la red es de igual importancia que la protección de los dispositivos.
 
-\begin{figure}[H]
+\begin{figure}
   \centering
    \includegraphics[width=1\textwidth]{servicios.png}
   \caption{Servicios de red inalámbrica o wifi declarados por las empresas (\%)}
@@ -323,7 +324,7 @@ Como indica el gráfico anterior, a pesar de la disponibilidad de varios tipos de
 
 En 2012 INTECO realizó una encuesta a mas de 1000 empresas españolas para posteriormente elaborar un informe~\cite{INTECO}.  Podemos destacar un notable grado de implicación en cuanto a las medidas básicas aplicables. Un gran número de las empresas encuestadas utilizan medidas paquetizadas, conocidas por todos (antivirus, antiespias, cortafuegos). No obstante, no deberían conformarse con estas soluciones tan elementales, ya que un gasto inicial en seguridad puede paliar futuros gastos de pérdida de información. Sin personalizar en una empresa, ni en su posible capital, cualquier robo de información por un fallo en la seguridad, obligará a invertir tiempo y dinero en la investigación de las posibles causas y la magnitud de los daños causados, tanto a nivel económico como en la reputación de la empresa.
 
-\begin{figure}[H]
+\begin{figure}
   \centering
    \includegraphics[width=1\textwidth]{inteco1.png}
   \caption{Nivel de implantación declarado de soluciones de seguridad en la empresa.}
@@ -335,7 +336,7 @@ Como ha sido comentado anteriormente, igual de importante que la protección de l
 La seguridad informática debe ser entendida como un proceso, no como una propiedad del sistema.  Por tanto es tan importante la revisión periódica por personal especializado como el diseño inicial.  La implantación de un cifrado o sistema de seguridad en un inicio, no garantiza una seguridad permanente. En la actualidad podemos elegir entre distintos protocolos de seguridad para las redes WiFi (WEP, WPA, WPA/WPA2), de los que se deben elegir WPA/WPA2 por los niveles de robustez en su cifrado.  Sin embargo el informe de INTECO destaca que un 27,4\% de los encuestados emplea WEP, debido a la falta de información de la diferencia de niveles de seguridad que aportan cada uno de ellos. 
 
 Debido a los avances tecnológicos e informáticos, tanto los ataques como las protecciones evolucionan a diario, por ello es igual de importante que la buena elección de un protocolo de seguridad, llevar a cabo un control periódico, que podría tratarse de auditorías informáticas.
-\begin{figure}[H]
+\begin{figure}
   \centering
    \includegraphics[width=1\textwidth]{medidas.png}
   \caption{Medidas de seguridad de las redes WiFi}
@@ -348,7 +349,7 @@ El nivel de importancia de la seguridad de las empresas también esta reflejado e
 La gran mayoría de las empresas que acusan no tener alguna de las soluciones, lo justifican exponiendo no disponer de la necesidad o del desconocimiento de ellas. También exponen una falta de presupuesto o la impresión de ineficiencia, aunque en menor medida.
 Aún así, en las pymes se muestra inconsciencia, desinterés y falta de capital a la hora de aplicar medidas que no sean las tradicionales. Es por ello que se debe trabajar en ampliar estas medidas, sensibilizando los organismos que trabajan con las empresas.
 
-\begin{figure}[H]
+\begin{figure}
   \centering
    \includegraphics[width=1\textwidth]{inteco2.png}
   \caption{Motivos señalados por las empresas para no utilizar las herramientas y soluciones de seguridad.}
@@ -359,7 +360,7 @@ En la Figura \ref{fig:limitaciones} se enumeran una serie de posibles soluciones
 \subsection{Personal encargado de la seguridad de la información}
 No se debería delegar toda la responsabilidad de los datos o de la información en una sola persona, ni si quiera en un grupo de empleados. Todos los individuos deberían estar concienciados y formados para una mejora en este ámbito. No obstante siempre es importante contar con profesionales, que sepan manejar las herramientas de seguridad, y sepan actuar ante un posible ataque.
 
-\begin{figure}[H]
+\begin{figure}
   \centering
    \includegraphics[width=1\textwidth]{inteco3.png}
   \caption{Disponibilidad de personal dedicado a la seguridad de la información.}
@@ -368,7 +369,7 @@ No se debería delegar toda la responsabilidad de los datos o de la información e
 
 Gracias al estudio citado con anterioridad, sabemos que las empresas no suelen tener contratado profesionales internos que se dediquen exclusivamente a la seguridad. Normalmente externalizan estas funciones o en menor medida compatibilizan las tareas de seguridad con tareas relacionadas con la informática. Entre todas ellas apreciamos un 43,1\% las cuales ni siquiera consideran importante la contratación de algún tipo de profesional que se encargue de temas relacionados con la seguridad de la información. 
 
-\begin{figure}[H]
+\begin{figure}
   \centering
    \includegraphics[width=1\textwidth]{personal.png}
   \caption{Disponibilidad de personal dedicado a la seguridad según tamaño de empresa (\%).}
@@ -384,7 +385,7 @@ De todos estos datos, extraemos que este proyecto se encontrará más enfocado y c
 \section{Seguridad informática en redes WiFi}
 
 Hace años cuando se empezaron a utilizar las redes inalámbricas existía un error de incompatibilidad, debido a que cada fabricante usaba un estándar distinto, fue en ese momento cuando las empresas punteras se reunieron para crear WECA (Wireless Ethernet Compability Aliance) que en la actualidad lo llamamos como WIFI Alliance.\footnote{Página oficial de Wi-Fi Alliance. (2016) \url{http://www.wi-fi.org/}}
-\begin{figure}[H]
+\begin{figure}
   \centering
     \includegraphics{wifi}
   \caption{Imagen wifi}
@@ -397,9 +398,9 @@ Gracias a Wi-Fi se pueden crear redes de área local inalámbricas y conectar mult
 \subsection{Estándares Wi-Fi}
 El estándar original se ha ido modificando con el objetivo de ir mejorando la seguridad y la compatibilidad. Esta tabla nos enseña las distintas modificaciones del estándar 802.11 y a lo que se refiere~\cite{802.11}.
 %%%TABLAAAAA%%%
-\begin{table}[H]
-\begin{center}
-\begin{tabular}{| p{2cm} | p{3.3cm} | p{7.6 cm} | }
+
+{\singlespacing
+\begin{longtable}{|p{2cm}|p{3.3cm}|p{7.7cm}|}
 \hline
 Nombre del estándar & Nombre& Descripción \\
 \hline \hline
@@ -409,34 +410,18 @@ Nombre del estándar & Nombre& Descripción \\
 802.11d & Internacionalización & El estándar 802.11d es un complemento del estándar 802.11 que está pensado para permitir el uso internacional de las redes 802.11 locales. Permite que distintos dispositivos intercambien información en rangos de frecuencia según lo que se permite en el país de origen del dispositivo. \\ \hline
 802.11e & Mejora de la calidad del servicio  & El estándar 802.11e está destinado a mejorar la calidad del servicio en el nivel de la capa de enlace de datos. El objetivo del estándar es definir los requisitos de diferentes paquetes en cuanto al ancho de banda y al retardo de transmisión para permitir mejores transmisiones de audio y vídeo. \\ \hline
 802.11f & Itinerancia  & El 802.11f es una recomendación para proveedores de puntos de acceso que permite que los productos sean más compatibles. Utiliza el protocolo IAPP que le permite a un usuario itinerante cambiarse claramente de un punto de acceso a otro mientras está en movimiento sin importar qué marcas de puntos de acceso se usan en la infraestructura de la red. También se conoce a esta propiedad simplemente como itinerancia.  \\ \hline
-\end{tabular}
-\caption{Estándar 802.11.}
-\label{tabla:802.11}
-\end{center}
-\end{table}
-
-\begin{table}[htbp]
-\begin{center}
-\begin{tabular}{| p{2cm} | p{3.3cm} | p{7.6 cm} | }
-%\hline
-%Nombre del estándar & Nombre& Descripción \\
-\hline \hline
 802.11g & & El estándar 802.11g ofrece un ancho de banda elevado (con un rendimiento total máximo de 54 Mbps pero de 30 Mpbs en la práctica) en el rango de frecuencia de 2,4 GHz. El estándar 802.11g es compatible con el estándar anterior, el 802.11b, lo que significa que los dispositivos que admiten el estándar 802.11g también pueden funcionar con el 802.11b. \\ \hline
 802.11h & & El estándar 802.11h tiene por objeto unir el estándar 802.11 con el estándar europeo (HiperLAN 2, de ahí la h de 802.11h) y cumplir con las regulaciones europeas relacionadas con el uso de las frecuencias y el rendimiento energético.\\ \hline
 802.11i & &El estándar 802.11i está destinado a mejorar la seguridad en la transferencia de datos (al administrar y distribuir claves, y al implementar el cifrado y la autenticación). Este estándar se basa en el AES (estándar de cifrado avanzado) y puede cifrar transmisiones que se ejecutan en las tecnologías 802.11a, 802.11b y 802.11g.  \\ \hline
 802.11Ir &  & El estándar 802.11r se elaboró para que pueda usar señales infrarrojas. Este estándar se ha vuelto tecnológicamente obsoleto. \\ 
-\par
 \hline
 802.11j &  & El estándar 802.11j es para la regulación japonesa lo que el 802.11h es para la regulación europea. \\ \hline
 802.11k & & El 802.11k ayuda a gestionar las redes. El estándar IEEE 802.11k permite a los conmutadores y puntos de acceso inalámbricos calcular y valorar los recursos de radiofrecuencia de los clientes de una red WLAN, mejorando así su gestión. \\ \hline
 802.11m & & El estándar 802.11m ha sido propuesto para el mantenimiento de las redes inalámbricas. \\ \hline
 802.11n &  & El estándar 802.11n trabaja tanto en la banda de 2.4GHz como en la de 5GHz, que es mucho más estable y segura, pero de momento mucho más cara de implementar. Además aumenta la velocidad máxima de transmisión de 54 Mbps a un máximo de 600 Mbps. \\ 
-\par
 \hline
-\end{tabular}
 \caption{Estándar 802.11.}
-\end{center}
-\end{table}
+\end{longtable}}
 
 %\section{TCP-IP}
 %Es un protocolo para comunicaciones por red de datos para sistemas UNIX. A veces se pueden referir a el como conjunto de protocolos TCP/IP (\textit{Transmission Control Protocol/ Internet Protocol}). Es un protocolo DARPA que facilita transmision fiable y paquetes de datos sobre red. Este protocolo es la base del Internet con el que comunicamos varios dispositivos con diferente sistema operativos . Este protocolo fue desarrollado en Estados Unidos en 1972, ejecutandolo en ARPANET un departamento de defensa.
@@ -485,7 +470,7 @@ La fase de confidencialidad se encarga de que nadie que estuviera \textit{escuch
 	WEP permite utilizar claves de distintos tamaños:  64 bits (40 de la clave del usuario más 24 de los vectores de iniciación) o de 128(104 de la clave del usuario más 24 de los vectores de iniciación)
 		\item IV, son los vectores de inicialización, son la parte dinámica de los \textit{keystream}. Cada trama lleva un IV distinto, aunque al ser generados de forma aleatoria no siempre es posible. Los IV van en la parte que no se cifra de la trama WEP.
 	\end{itemize}
-\begin{figure}[H]
+\begin{figure}
   \centering
     \includegraphics[width=1\textwidth]{WEP1.png}
   \caption{Algoritmo de Encriptación WEP}
@@ -586,7 +571,7 @@ Raspberry Pi es un dispositivo hardware que nos permite con gran facilidad emple
 Apareció como una iniciativa para fomentar el aprendizaje de la programación desde edades más tempranas~\cite{Raspberry}.
 
 En los pocos años que lleva en funcionamiento \textit{Raspberry Pi Foundation} se han creado distintos modelos:
-\begin{figure}[H]
+\begin{figure}
   \centering
 	\includegraphics[width=1\textwidth]{Raspberry.png}
   \caption{Diferentes modelos de Raspberry Pi.}
@@ -612,7 +597,7 @@ Sabemos que el mundo de la seguridad informática avanza cada día a gran velocida
 \textit{BackTrack}  era una gran distribución de seguridad y la distribución de pruebas de penetración mas popular, ya que contenía cientos de herramientas de seguridad. La empresa que gestionaba esta distribución, Offensive Security\footnote{Página oficial de la empresa offensive security \url{https://www.offensive-security.com/}}, evolucionó su distribución para proporcionar mejoras importantes. Kali Linux siguió con los pasos creando una distribución Linux basada en Debian orientada a las auditorías de seguridad mediante pruebas de penetración en el 2013. Ésta ofrece al usuario un gran número de herramientas para cada rama del pentesting, como análisis forense, explotación de vulnerabilidades del sistema web o wireless. 
 Según \cite{kali} Kali Linux 2.0 contiene un nuevo kernel en su versión 4.0 y está basada en \emph{Debian Jessie}, mejorando la integración con el hardware y el uso de los drivers Wireless. Tiene soporte actualizado para un mayor número de escritorios (gnome, kde, xfce, mate, e17, lxde o i3wm). Una de las grandes mejoras fue el sistema de actualizaciones que presenta.  Generalmente, las actualizaciones serán llevadas a cabo vía \textit{Git}.  El \textit{script} se ejecuta diariamente sobre un listado de herramientas comunes en la distribución y mantendrá alerta al usuario ante posibles nuevas actualizaciones\footnote{Página oficial Kali Linux.(2016). Recuperado de \url{https://www.kali.org/}.}.
 
-\begin{figure}[H]
+\begin{figure}
   \centering
 	\includegraphics[width=0.7\textwidth]{kali_linux.jpg}%%ajusta el tamaño de la imagen.  %\caption{Logo de Kali Linux}
   \caption{Logotipo de kali linux.}
@@ -629,7 +614,7 @@ Las más utilizadas en el proyecto son:
 	\item \emph{Airmon-ng}: Sirve para cambiar el modo de trabajo de la tarjeta inalámbrica, siempre y cuando el chipset lo permita. Este modo de trabajo cambiará a modo monitor.
 	\item \emph{Airodump-ng}: Es la encargada de esnifar (\textit{sniffing}) o escuchar todo lo que circula por el aire, independientemente de su cifrado  o su red. Evidentemente si el trafico va sin cifrar, es decir redes abiertas se puede visualizar dicho tráfico y se podrá capturar información sensible que circula por el aire.
 
-\begin{table}[H]
+\begin{table}
 \begin{center}
 \begin{tabular}{| p{2.2cm} | p{6.6cm} | }
 \hline
@@ -663,13 +648,12 @@ Probe & Paquetes en los que el cliente intenta identificar una red wireless. Por
 
 	\item \emph{Aireplay-ng}: Permite desautenticar e inyectar paquetes ARP a clientes asociados y así generar tráfico. 
 	
-\begin{table}[H]
+\begin{table}
 \begin{center}
 \begin{tabular}{| p{3.5cm} | p{5.5cm} | }
 \hline
 Parámetros & Descripción \\
 \hline \hline
-\\ \hline
 \verb|-0|, \verb|--deauth| & Desautentica. \\ \hline
 \verb|-1|, \verb|--fakeauth|  & Falsa autenticación con el punto de acceso.  \\ \hline
 \verb|-2|, \verb|--interactive| &   \\ \hline
@@ -682,7 +666,6 @@ Parámetros & Descripción \\
 \label{Aireplay}
 \end{center}
 \end{table}	
-
 \end{itemize}
 
 \paragraph{PixieScript}
@@ -723,7 +706,7 @@ Se puede ejecutar en la mayoría de las versiones de Python. Esta biblioteca se u
 \subsubsection{\LaTeX{}}
 \LaTeX{} es un sistema de preparación de documentos. Sirve para organizar y preparar artículos de revistas, libros, cartas, revistas, tesis y cualquier tipo de documento. Se desarrolló con el fin de facilitar y mejorar los textos científicos, sobre todo los matemáticos, y que estos se puedan utilizar entre distintas plataformas. Con él se desarrolló la memoria del proyecto y la generación del informe. 
 
-%\begin{figure}[H]
+%\begin{figure}
   %\centering
     %\includegraphics[width=1\textwidth]{ejemplo_latex.png}
   %\caption{Ejemplo \LaTeX{}.}
@@ -742,7 +725,7 @@ de caja negra automática, que detecte las vulnerabilidades de la red, y que sirv
 \section[Creación de una aplicación]{Creación de una aplicación de detección de las vulnerabilidades}
 
 Para la creación de la aplicación ha sido utilizado el dispositivo Raspberry Pi 3 Modelo B, que como se aprecia en la imagen anterior (Figura \ref{fig:Ras}), mejora las características de sus predecesoras con un nuevo procesador más rápido integrado para incrementar su velocidad. Cuenta también con WiFi y Bluetooth BLE integrados para mejorar su funcionalidad y la capacidad de alimentar dispositivos más potentes mediante los puertos USB. Se optó por  este dispositivo por la facilidad que tiene a la hora de instalar un sistema operativo y la movilidad que proporciona, pudiendo transportarlo sin ningún tipo de impedimento. Contando por supuesto con su gran comunidad y las ventajas de esto a la hora de buscar información y de solucionar los posibles errores. 
-\begin{figure}[H]
+\begin{figure}
   \centering
 	\includegraphics[width=0.8\textwidth]{RaspberryPi.png}
   \caption{Imagen Raspberry Pi 3}
@@ -765,16 +748,16 @@ Las características principales del modelo de Raspberry Pi\footnote{Recuperado d
 
  En cuanto a la conexión, Raspberry Pi no cuenta con ningún tipo de monitor o pantalla incorporado. Normalmente se conecta a alguna pantalla por la conexión HDMI o VGA.  En este proyecto, se ha añadido una nueva tarjeta inalámbrica en la Raspberry Pi para realizar el análisis de vulnerabilidad desde el dispositivo móvil. Esto es posible configurando en el dispositivo móvil un punto de acceso (conexión hostspot) para que haya conectividad con la tarjeta inalámbrica y mediante la aplicación VNC (Virtual Network Computing) se pueda  controlar de forma remota la interfaz de escritorio de Raspberry Pi.
  
-  \begin{figure}[H]
+  \begin{figure}
   \centering
-	\includegraphics[width=0.8\textwidth]{escritorio.png}
+	\includegraphics[width=0.65\textwidth]{escritorio.png}
   \caption{Escritorio remoto (VNC)} 
   \label{fig:escritorio}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}
   \centering
-   \includegraphics[width=0.3\textwidth]{conectar.png}
+   \includegraphics[height=0.9\textheight]{conectar.png}
   \caption{Conexión Raspberry Pi}
   \label{fig:conectar}
 \end{figure}
@@ -789,7 +772,7 @@ Para conseguir incorporar el modo monitor se realizó una búsqueda completa en el
 \item Conector r-SMA para conexión de antena externa.
 \item Chipset Atheros AR9271.
 \end{itemize}
-\begin{figure}[H]
+\begin{figure}
   \centering
 	\includegraphics[width=0.2\textwidth]{alfa.png}
   \caption{Tarjeta Inalámbrica alfa}
@@ -801,12 +784,12 @@ Para conseguir incorporar el modo monitor se realizó una búsqueda completa en el
 
 Como ya se ha comentado con anterioridad, se empleará el sistema operativo Kali Linux, ya que es uno de los sistemas operativos con herramientas de seguridad más completo que se puede encontrar y de libre acceso. Cuenta con la ventaja que también dispone de versiones para ARM.
                                                                   
-Se descargó la versión para la Raspberry Pi 2/3 para instalarlo en la SD. \footnote{Recuperado de  \url{http://docs.kali.org/kali-on-arm/install-kali-arm-on-a-beaglebone-black}}. Para hacer esto, previamente se instaló el sistema operativo Raspbian ya que cuenta con una incompatibilidad de la versión para la Raspberry Pi, y se debe cambiar la partición de arranque de la SD. En primer lugar se instala la versión Raspbian guardando la partición de arranque, y así se instala el sistema operativo Kali Linux.
+Se descargó la versión para la Raspberry Pi 2/3 para instalarlo en la SD. \footnote{Recuperado de \href{http://docs.kali.org/kali-on-arm/install-kali-arm-on-a-beaglebone-black}{docs.kali.org}.}. Para hacer esto, previamente se instaló el sistema operativo Raspbian ya que cuenta con una incompatibilidad de la versión para la Raspberry Pi, y se debe cambiar la partición de arranque de la SD. En primer lugar se instala la versión Raspbian guardando la partición de arranque, y así se instala el sistema operativo Kali Linux.
 
 Las instalaciones se pueden hacer de dos maneras dependiendo del sistema operativo que se disponga para la instalación.
 
 \begin{enumerate}
-	\item Desde Linux o Mac OS: Con la orden \texttt{dd if=/Users/luis/Desktop/kali-2.1.2-rpi2.img of=/dev/disk2}, siendo \texttt{/dev/disk2} el dispositivo de bloques correspondiente a la tarjeta SD y \texttt{kali-2.1.2-rpi2.img} la imagen del sistema operativo.  Se debe tener especial cuidado al utilizar esta orden, ya que se tiene que tener claro sobre qué dispositivo se vuelca información para que no se tenga problemas de borrado de disco.
+	\item Desde Linux o Mac OS: Con la orden \texttt{dd if=kali-2.1.2-rpi2.img of=/dev/disk2}, siendo \texttt{/dev/disk2} el dispositivo de bloques correspondiente a la tarjeta SD y \texttt{kali-2.1.2-rpi2.img} la imagen del sistema operativo.  Se debe tener especial cuidado al utilizar esta orden, ya que se tiene que tener claro sobre qué dispositivo se vuelca información para que no se tenga problemas de borrado de disco.
 	\item Desde Windows: Con el programa Win32DiskImager, seleccionando la imagen de Kali Linux y la unidad correspondiente a la SD. Este método dió algunos problemas a la hora de montar la tarjeta SD, por lo que se empleo por el primer de los métodos.
 \end{enumerate}
 
@@ -825,10 +808,9 @@ El desarrollo de la aplicación que detecta las vulnerabilidades se llevó a cabo 
 %%%%INTERFAZ%%%%%
 Se pretende que la interfaz sea ejecutada por un comercial sin conocimientos informáticos previos, por ello se realiza un diseño sencillo de la misma.
 
-
-\begin{figure}[H]
+\begin{figure}
   \centering
-   \includegraphics[width=0.55\textwidth]{interfaz.png}
+   \includegraphics[height=0.9\textheight]{interfaz.png}
   \caption{Pautas de seguimiento}
   \label{fig:esquemainterfaz}
 \end{figure}
@@ -903,7 +885,7 @@ También, respecto a la interfaz, se ha añadido y adaptado la tabla principal don
 \begin{enumerate}
     \item Se inicia la aplicación \emph{SeguridadWifi}, se muestra la pantalla principal de la aplicación y se listan las interfaces WiFi disponibles para utilizar en el análisis de vulnerabilidades WiFi.
 
-\begin{figure}[H]
+\begin{figure}
   \centering
    \includegraphics[width=1\textwidth]{Interfaz1.png}
   \caption{Interfaz gráfica. Lista tarjetas WiFi}
@@ -948,7 +930,7 @@ ListarTarjetasWifi() {
 
 \item En esta pantalla se muestran las tarjetas WiFi disponibles y se activa el modo monitor de la tarjeta seleccionada.
 
-\begin{figure}[H]
+\begin{figure}
   \centering
         \includegraphics[width=1\textwidth]{Interfaz2.png}
   \caption{Interfaz gráfica. Activa el modo monitor}
@@ -991,7 +973,7 @@ ActivarModoMonitor(){
 
         \item En la interfaz se presiona el botón \emph{ESCANEAR REDES} para buscar las redes que se encuentran a nuestro alcance en un tiempo determinado.
 
-\begin{figure}[H]
+\begin{figure}
   \centering
         \includegraphics[width=1\textwidth]{Interfaz3.png}
   \caption{Interfaz gráfica. Escaner de redes}
@@ -1037,7 +1019,7 @@ ScanearRedes() {
 
 	\item Se muestran las redes escanedas y se listan con la siguiente información. bssid, intensidad, tipo red, essid, etc.
 
-\begin{figure}[H]
+\begin{figure}
   \centering
 	\includegraphics[width=1\textwidth]{Interfaz4.png}
   \caption{Interfaz gráfica. Muestra información relevante.}
@@ -1082,7 +1064,7 @@ ListarTarjetasWifi() {
 \end{enumerate}
 
 
-\begin{figure}[H]
+\begin{figure}
   \centering
 	\includegraphics[width=1\textwidth]{Interfaz5.png}
   \caption{Interfaz gráfica. Selección de red que se vaya analizar.}
@@ -1114,7 +1096,7 @@ El lenguaje empleado para la automatización de los ataques es bash, dependiendo 
 	\item Si fuera WPA o WPA2 se empezará con un ataque de denegación de servicios como en el caso de WEP. Se comprobará si dispone de WPS activado, si fuera así se atacaría con la orden \textit{reaver} y \textit{pixiewps}. Si no, se trataría de un ataque en diccionario, es el ataque que más tiempo necesita, ya que comprueba una por una las palabras del diccionario del que se disponga. Para ello utiliza \textit{aireplay-ng} para desautenticar e inyectar y generar así tráfico para la captura del \textit{handshake}. Una vez se disponga de él, se utilizará \textit{aircrack} para hacer la búsqueda. Al cabo de un tiempo determinado se completará el análisis
 \end{itemize}
 
-\begin{figure}[H]
+\begin{figure}
   \centering
    \includegraphics[width=0.7\textwidth]{ataque.png}
   \caption{Pasos a seguir para el ataque.}
@@ -1452,7 +1434,7 @@ AnalizarPyrit() {
 \section[Generación de informe]{Generación de un informe con posibles vulnerabilidades de la red}
 \subsection{Pautas y seguimiento para la creación del informe} 
 Partiendo de un lenguaje de programación desde el cual se ha desarrollado el código para automatizar el dispositivo, se contará con otro lenguaje de programación (\textit{Python}) para que interactue, y por medio de una de sus bibliotecas \textit{Jinja2}, genere unas plantillas (templates) donde se irán introduciendo los datos variables. Como se muestra en el gráfico, una vez obtengamos el informeWEP.tex o informeWPA.tex dependiendo del protocolo de la red, se utilizara la aplicación \textit{pdflatex} para generar el informe final.pdf.
-\begin{figure}[H]
+\begin{figure}
   \centering
    \includegraphics[width=0.6\textwidth]{informe.png}
   \caption{Pasos a seguir para generar el informe.}
@@ -1462,7 +1444,7 @@ Partiendo de un lenguaje de programación desde el cual se ha desarrollado el cód
 \paragraph{Generar informe WEP.}
 
 Se mostrará un gráfico con el fin de facilitar y entender el funcionamiento para la generación del informe WEP
-\begin{figure}[H]
+\begin{figure}
   \centering
    \includegraphics[width=\textwidth]{InformeWEP.png}
   \caption{Pasos a seguir informe WEP}
@@ -1591,7 +1573,7 @@ output.close()
   label=CrearInformeWPA(),
   caption=CrearInformeWPA()] {CrearInformeWPA().txt}
 
-\begin{figure}[H]
+\begin{figure}
   \centering
    \includegraphics[width=\textwidth]{informeWPA.png}
   \caption{Informe WPA.}
