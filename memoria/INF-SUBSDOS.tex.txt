@@ -1,7 +1,8 @@
 \subsection {Denegacion de Servicios (DoS).} 
 
-Las redes WLAN son propensas a los ataques de denegacion de servicio
-(DoS) usando varias tecnicas,incluyendo pero no limitadas a:
+Las redes WLAN son propensas a los ataques de denegacion de
+servicio (DoS) usando varias tecnicas,incluyendo pero no limitadas
+a:
 
  \begin{itemize}
  \item Ataque de de-autenticacion 
@@ -10,33 +11,33 @@ Las redes WLAN son propensas a los ataques de denegacion de servicio
  \item Ataque de interferencia del espectro de la senal. 
  \end{itemize}
 
-El objetivo de una Denegacion de Servicio a una Red Wi-fi es dejar a
-los usuarios legitimos de una red Wi-fi sin poder acceder a Internet,
-esto se logra inundando con paquetes de deautenticacion al punto de
-acceso AP y/o al cliente.
+El objetivo de una Denegacion de Servicio a una Red Wi-fi es dejar
+a los usuarios legitimos de una red Wi-fi sin poder acceder a
+Internet, esto se logra inundando con paquetes de deautenticacion
+al punto de acceso AP y/o al cliente.
 
-Continuamos trabajando con la tarjeta en modo monitor, hemos asignando
-el canal del punto de acceso AP que estamos analizando.
+Continuamos trabajando con la tarjeta en modo monitor, hemos
+asignando el canal del punto de acceso AP que estamos analizando.
 
 \textbf{airmon-ng start wlan0 11}
 
 Luego hemos realizado el envio de difusion de de-autenticacion de
-paquetes (broadcast de-authentication packet) hacia el punto de acceso
-AP intentando desconectar a todos los clientes.
+paquetes (broadcast de-authentication packet) hacia el punto de
+acceso AP intentando desconectar a todos los clientes.
 
 \textbf{aireplay-ng -0 0 -a 80:B6:86:D5:F9:4B wlan0mon}
 
 \textbf{aireplay-ng -0 0 -a 80:B6:86:D5:F9:4B -c 00:08:06:4F:86:EC wlan0mon}
 
 Si hemos conseguido enviar con exito frames de de-autenticacion al
-punto de acceso y el cliente. Esto se ha traducido en conseguir que se
-desconecte y una perdida completa de comunicacion entre ellos.
-Tambien hemos enviado paquetes de difusion de de-autenticacion, que
-asegurar que ningun cliente en las cercanias se pueda conectar
-correctamente al punto de acceso.
+punto de acceso y el cliente. Esto se ha traducido en conseguir
+que se desconecte y una perdida completa de comunicacion entre
+ellos.  Tambien hemos enviado paquetes de difusion de
+de-autenticacion, que asegurar que ningun cliente en las cercanias
+se pueda conectar correctamente al punto de acceso.
 
 Es importante tener en cuenta que tan pronto como el cliente se
-desconecta, intentar volver a conectarse de nuevo al punto de acceso y
-por lo tanto el ataque de de-autenticacion tiene que llevarse a cabo
-de manera sostenida para tener un efecto de ataque de denegacion de
-servicio completo.
+desconecta, intentar volver a conectarse de nuevo al punto de
+acceso y por lo tanto el ataque de de-autenticacion tiene que
+llevarse a cabo de manera sostenida para tener un efecto de ataque
+de denegacion de servicio completo.
