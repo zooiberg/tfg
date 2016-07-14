@@ -18,7 +18,13 @@ latex_jinja_env = jinja2.Environment
 )
 template = latex_jinja_env.get_template('INFORME/SUBSWEP1-Template.tex')
 output = file('INFORME/INF-SUBSWEP1.tex', 'w')
-output.write(template.render(x1=sys.argv[1],x2=sys.argv[2],x3=sys.argv[3],
-x4=sys.argv[4],x5=sys.argv[5],x6=sys.argv[6],x7=sys.argv[7],x8=sys.argv[8],
-x9=sys.argv[9]).encode("iso-8859-1"))
+output.write(template.render(x1=sys.argv[1],
+                             x2=sys.argv[2],
+                             x3=sys.argv[3],
+                             x4=sys.argv[4],
+                             x5=sys.argv[5],
+                             x6=sys.argv[6],
+                             x7=sys.argv[7],
+                             x8=sys.argv[8],
+                             x9=sys.argv[9]).encode("iso-8859-1"))
 output.close()

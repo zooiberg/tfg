@@ -1,5 +1,5 @@
 \RequirePackage{fix-cm}
-\documentclass[a4paper,openright,10pt]{report}
+\documentclass[a4paper,openright,12pt,twoside]{report}
 \usepackage[latin1]{inputenc}
 \usepackage{graphicx} % graficos
 \usepackage{multirow} % para las tablas
@@ -19,6 +19,17 @@
 \usepackage{caption}
 \usepackage{times}
 \usepackage[spanish]{babel} 
+\usepackage{geometry}
+
+\def\thetitle{Seguridad y vulnerabilidad de redes inalámbricas en PYMEs}
+
+\geometry{
+ a4paper,
+ left=35mm,
+ top=30mm,
+ bottom=25mm,
+ right=25mm,
+}
 
 \DeclareCaptionFont{white}{\color{white}}
 \DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
@@ -76,12 +87,27 @@
 
 \lstloadlanguages{Bash,Python,TeX}
 
-\def\thetitle{Seguridad y vulnerabilidad de redes inalámbricas en PYMEs}
+\makeatletter
+\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+\hbox{}
+\vspace*{\fill}
+\thispagestyle{empty}
+\newpage
+\if@twocolumn\hbox{}\newpage\fi\fi\fi}
+\makeatother
 
 \fancypagestyle{basicstyle}{%
   \fancyhf{}
-  \fancyhead[R]{\nouppercase { \rightmark }}
-  \fancyhead[L]{\leftmark}
+  \fancyhead[RE,LO]{\nouppercase { \rightmark }}
+  \fancyhead[LE,RO]{\leftmark}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0.4pt}
+  \renewcommand{\footrulewidth}{0pt}}
+
+\fancypagestyle{resumen}{%
+  \fancyhf{}
+  \fancyhead[RE,LO]{\nouppercase}
+  \fancyhead[LE,RO]{RESUMEN}
   \fancyfoot[C]{\thepage}
   \renewcommand{\headrulewidth}{0.4pt}
   \renewcommand{\footrulewidth}{0pt}}
@@ -156,7 +182,7 @@ $\ $
 
 ~\vfill
 
-\noindent Copyright \copyright\ \\ % Copyright notice
+\noindent Copyright \copyright{} 2016 Luis Ramírez de Diego\\ % Copyright notice
 \doublespace\noindent\textsc{\thetitle}
 
 \noindent \textit{https://github.com/zooiberg/tfg/tree/master/memoria}\\ % URL
@@ -189,6 +215,8 @@ $\ $
 \addcontentsline{toc}{chapter}{Resumen}
 
 \begin{abstract}
+
+\pagestyle{resumen}
   
 \lettrine[lines=2]{E}{ste} proyecto consiste en la implementación de un dispositivo para generar posibles ataques básicos y conocidos a una red WiFi determinada, con el fin de generar un informe de manera automatizada con algunas de las posibles vulnerabilidades.
 
@@ -209,7 +237,7 @@ Desde hace años se ha intentando concienciar a la población de este serio proble
 
 \end{abstract}
 
-
+\pagestyle{basicstyle}
 
 %%%%%%%%%%%%%%%%%%CAPITULO 1: INTRODUCCION%%%%%%%%%%%%%%%
 \chapter{Introducción}\label{cap.introduccion}
@@ -366,12 +394,12 @@ Hace años cuando se empezaron a utilizar las redes inalámbricas existía un error
 En el año 2000 se implanta la interoperabilidad que permite operar entre todos los dispositivos Wi-Fi bajo la especificación IEE 802.11b. Es por ello que sabemos que todos equipos que dispongan del sello de Wi-Fi pueden interactuar independientemente del fabricante.
 Gracias a Wi-Fi se pueden crear redes de área local inalámbricas y conectar multitud de equipos mientras no estén muy alejados del punto de acceso a una velocidad elevada.
 
-\subsection{Estándares WI-FI}
+\subsection{Estándares Wi-Fi}
 El estándar original se ha ido modificando con el objetivo de ir mejorando la seguridad y la compatibilidad. Esta tabla nos enseña las distintas modificaciones del estándar 802.11 y a lo que se refiere~\cite{802.11}.
 %%%TABLAAAAA%%%
 \begin{table}[H]
 \begin{center}
-\begin{tabular}{| p{2.2cm} | p{4cm} | p{6.6 cm} | }
+\begin{tabular}{| p{2cm} | p{3.3cm} | p{7.6 cm} | }
 \hline
 Nombre del estándar & Nombre& Descripción \\
 \hline \hline
@@ -389,7 +417,7 @@ Nombre del estándar & Nombre& Descripción \\
 
 \begin{table}[htbp]
 \begin{center}
-\begin{tabular}{| p{2.2cm} | p{4cm} | p{6.6 cm} | }
+\begin{tabular}{| p{2cm} | p{3.3cm} | p{7.6 cm} | }
 %\hline
 %Nombre del estándar & Nombre& Descripción \\
 \hline \hline
@@ -637,7 +665,7 @@ Probe & Paquetes en los que el cliente intenta identificar una red wireless. Por
 	
 \begin{table}[H]
 \begin{center}
-\begin{tabular}{| p{2.5cm} | p{5.5cm} | }
+\begin{tabular}{| p{3.5cm} | p{5.5cm} | }
 \hline
 Parámetros & Descripción \\
 \hline \hline
@@ -1436,7 +1464,7 @@ Partiendo de un lenguaje de programación desde el cual se ha desarrollado el cód
 Se mostrará un gráfico con el fin de facilitar y entender el funcionamiento para la generación del informe WEP
 \begin{figure}[H]
   \centering
-   \includegraphics[width=1.2\textwidth]{InformeWEP.png}
+   \includegraphics[width=\textwidth]{InformeWEP.png}
   \caption{Pasos a seguir informe WEP}
   \label{fig:informeWEP}
 \end{figure}
@@ -1565,7 +1593,7 @@ output.close()
 
 \begin{figure}[H]
   \centering
-   \includegraphics[width=1.2\textwidth]{informeWPA.png}
+   \includegraphics[width=\textwidth]{informeWPA.png}
   \caption{Informe WPA.}
   \label{fig:i}
 \end{figure} 
