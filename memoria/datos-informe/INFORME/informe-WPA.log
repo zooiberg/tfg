@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.1)  12 JUL 2016 00:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.1)  12 JUL 2016 10:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1125,8 +1125,15 @@ LaTeX Info: Redefining \% on input line 24.
 )
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 263.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 263.
-Package rerunfilecheck Info: File `informe-WPA.out' has not changed.
-(rerunfilecheck)             Checksum: E2C8CF8300F888901CB9B47680BD0FED;728.
+
+
+Package rerunfilecheck Warning: File `informe-WPA.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `informe-WPA.out':
+(rerunfilecheck)             Before: E2C8CF8300F888901CB9B47680BD0FED;728
+(rerunfilecheck)             After:  CA57D09FD18ADCA83A03556BE133E770;726.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 263.
  ) ) 
 Here is how much of TeX's memory you used:
@@ -1146,7 +1153,7 @@ t/fonts/type1/urw/bookman/ubkl8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/
 type1/urw/bookman/ubkl8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/ur
 w/bookman/ubkli8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/couri
 er/ucrr8a.pfb>
-Output written on informe-WPA.pdf (12 pages, 131053 bytes).
+Output written on informe-WPA.pdf (12 pages, 131047 bytes).
 PDF statistics:
  159 PDF objects out of 1000 (max. 8388607)
  134 compressed objects within 2 object streams
